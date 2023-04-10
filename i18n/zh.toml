@@ -1,0 +1,12 @@
+[WordCount]
+other = '{{.WordCount}} 字'
+[ReadingTime]
+other = '{{.ReadingTime}} 分钟'
+[categories]
+other = "分类"
+[Categories]
+other = "分类"
+[tags]
+other = "标签"
+[Tags]
+other = "标签"

@@ -1,0 +1,8 @@
+node_modules
+public
+resources
+themes
+
+.hugo_build.lock
+# 需要了解
+assets/jsconfig.json

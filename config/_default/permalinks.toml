@@ -1,0 +1,4 @@
+# 配置分区永链
+log = '/:year/:month/:day/:slug'
+toss = ':slug'
+reference = ':slug'

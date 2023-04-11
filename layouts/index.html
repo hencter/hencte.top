@@ -1,10 +1,18 @@
 {{ define "main" }}
-<main text-center>
+<main h-full text-center all:transition-400>
+  <header>
+  <h1 fw100>
     {{ .Title }}
+  </h1>
+  </header>
+  <article prose ma>
     {{- .Content -}}
-    <div>
-      <a class="i-simple-icons:github" href="https://github.com/hencter" target="_blank">Github</a>
-      <a class="i-simple-icons:gitee"  href="https://gitee.com/hencter" target="_blank">Gitee</a>
-    </div>
+  </article>
+  <div>
+    <a class="i-simple-icons:github" href="https://github.com/hencter" target="_blank">Github</a>
+    <i i-simple-icons:gitee color-#C71D23>
+      <a href="https://gitee.com/hencter" target="_blank">Gitee</a>
+    </i>
+  </div>
 </main>
 {{ end }}

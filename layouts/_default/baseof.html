@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
+<html class="" lang="{{ .Site.LanguageCode }}">
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    {{ block "meta" . }}{{ end }}
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}
     </title>
     {{ partial "head.html" . }}
 </head>
 
-
-<body>
-    {{ block "header" . }}{{ end }}
+<body class="m-0 text-dark dark=(text-light bg-neutral-100 dark:bg-dark all:transition-250">
+    {{ partial "header" . }}
     {{ block "main" . }}{{ end }}
     {{ block "footer" . }}{{ end }}
 </body>

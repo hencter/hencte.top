@@ -1,3 +1,32 @@
 {{ define "main" }}
-  {{ .Content }}
+<main id="main" px-10 py-10>
+
+  <article prose ma>
+    <header>
+      <h1 id="{{.Title}}" text-center>
+        <a decoration-none text-gray-700 dark:text-light
+          href="{{ if .IsPage }}#{{.Title}}{{ else }}{{.Permalink}}{{ end }}">{{
+          .Title }}</a>
+      </h1>
+      <section my5 text-sm text-center>
+        <span>{{ i18n "WordCount" . }}</span>
+        <span>·</span>
+        <span>
+          <time>{{- i18n "ReadingTime" . -}}</time>
+        </span>
+      </section>
+    </header>
+    {{ if .IsPage }} {{ partial "toc.html" . }} {{ else }} {{ end }}
+    {{ .Content }}
+    <footer class="m-t-8">
+      {{ with .PrevInSection }}
+      <a decoration-none text-dark dark="text-light" op60 hover="op100" href="{{.Permalink}}">{{.Title}}</a>
+      {{ end }}
+      {{ with .NextInSection }}
+      <a decoration-none text-dark dark="text-light" op60 hover="op100" float-right href="{{.Permalink}}">{{.Title}}</a>
+      {{ end }}
+    </footer>
+  </article>
+
+</main>
 {{ end }}

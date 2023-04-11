@@ -1,0 +1,42 @@
+<article class="my-1 border-rd-2 my5 shadow">
+  
+  <a href="{{.Permalink}}" title="{{ .Params.Description }}">
+
+  {{ range .Params.images }}
+  <img class="w-full " src="{{ . }}" alt="">
+  {{ end }}
+  </a>
+  <header class="px2 py2">
+    <h3 id="{{.Title}}">
+      <a href="{{.Permalink}}" title="{{ .Params.Description }}">
+        {{- .Title -}}
+      </a>
+    </h3>
+    <p>
+      <time text-sm text-dark dark:text-light>
+        {{- .Date | time.Format ":date_full" -}}
+      </time>
+
+      {{ with .Params.categories -}}
+      {{ range . -}}
+      [<a decoration-none text-rose dark:text-rose href='{{ "categories/" | absURL }}{{ . | urlize }}'
+        title="{{.}}">{{- . -}}</a>]
+      {{ end -}}
+      {{ end -}}
+      </span>
+      <span>
+        {{ with .Params.tags -}}
+        {{ range . -}}
+        <a class="decoration-none op80 hover:op100 text-pink dark:text-pink"
+          href='{{ "tags/" | absURL }}{{ . | urlize }}' title="{{.}}">#{{- . -}}</a>
+        {{ end -}}
+        {{ end -}}
+      </span>
+    </p>
+    <p class="overflow-auto">
+      <a href="{{.Permalink}}" title="{{ .Params.Description }}">
+        {{ .Summary }}···
+      </a>
+    </p>
+  </header>
+</article>

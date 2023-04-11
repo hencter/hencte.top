@@ -1,0 +1,7 @@
+  {{ if or (gt .WordCount 400 )}}
+  <details open>
+    <summary>目录</summary>
+    {{/* 当字数超过 400 开启目录 */}}
+    {{.TableOfContents}}
+  </details>
+  {{ end }}

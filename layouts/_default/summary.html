@@ -2,8 +2,10 @@
 bg="light op60 dark:dark dark:op70" text="dark:light" active:scale-96>
   <header>
     <h3 id="{{.Title}}">
-
       {{- .Title -}}
+      {{ if .Site.IsServer }}
+      {{- if .Draft }}<sup><span text-rose>&nbsp;&nbsp;[草稿]</span></sup>{{- end }}
+      {{ end }}
     </h3>
     <p>
       <time>

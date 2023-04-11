@@ -6,7 +6,7 @@ description = '关于 lazy-nvim 的一份备份记录' # 文章描述
 tags = ["Neovim"] # 标签
 categories = ["文本编辑器"] # 分类
 images = [''] # 文章封面
-draft = false # 是否为草稿
+draft = true # 是否为草稿
 +++
 
 

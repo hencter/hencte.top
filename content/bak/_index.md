@@ -1,6 +1,7 @@
 +++
 title = "备忘"
 weight = 3
+layout = "bak"
 +++
 
 

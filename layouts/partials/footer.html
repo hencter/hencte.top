@@ -1,8 +1,10 @@
 {{ define "footer" }}
 <footer>
+
   <div flex justify-center>
-    <div i-logos:hugo text-xl w30>Hugo</div>
-    <div text="xl rose">强力驱动</div>
+    <div i-simple-icons:github text-xl w30px href="https://github.com/hencter" target="_blank">Github</div>
+    <div i-simple-icons:gitee text-xl w30px text="#C71D23" href="https://gitee.com/hencter" target="_blank">Gitee</div>
+    <div i-logos:hugo text-xl w30></div>
   </div>
 </footer>
 {{ partial "dev.html" . }}
@@ -18,14 +20,11 @@
       localStorage.setItem("color-mode", 'dark');
     }
   })
-  {{/*  自动匹配暗黑模式  */}}
-  {{/*  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  /*  自动匹配暗黑模式  */
+  /*
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     root.classList.toggle("dark", true)
-  }  */}}
+  }
+  */
 </script>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js"></script>
-<script src='{{ "js/search.js" | absURL }}'></script>
 {{ end }}

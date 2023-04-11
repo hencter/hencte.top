@@ -1,1 +1,3 @@
-home = ["HTML", "RSS", "JSON"]
+log = ["HTML", "RSS"]
+bak = ["HTML", "RSS"]
+about = ["HTML", "RSS"]

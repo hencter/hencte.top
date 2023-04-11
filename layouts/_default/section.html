@@ -1,12 +1,12 @@
 {{ define "main" }}
-<main id="main" class="px-10 py-10 md-w-prose lg-w-prose xl-w-prose m-a">
+<main id="main" px-10 py-10>
 
-  <article>
+  <article prose ma p2 rd-2 bg="light op60 dark:dark dark:op70" text="dark dark:light">
     {{ .Content }}
   </article>
 
   {{ range .Pages.GroupByDate "2006" }}
-  <section class="">
+  <section>
     {{/*  <h2 class="text-dark op100 dark:text-light text-center">{{ .Key }}</h2>  */}}
     {{ range .Pages }}
     {{ .Render "summary"}}

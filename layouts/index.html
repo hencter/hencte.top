@@ -1,18 +1,21 @@
 {{ define "main" }}
-<main h-full text-center all:transition-400>
+<main text-center all:transition-400>
   <header>
-  <h1 fw100>
-    {{ .Title }}
-  </h1>
+    <h1 fw100>
+      {{ .Title }}
+    </h1>
   </header>
   <article prose ma>
     {{- .Content -}}
   </article>
   <div>
-    <a class="i-simple-icons:github" href="https://github.com/hencter" target="_blank">Github</a>
-    <i i-simple-icons:gitee color-#C71D23>
-      <a href="https://gitee.com/hencter" target="_blank">Gitee</a>
-    </i>
+    {{/* TODO:后期采用 shotcodes 以便在 markdown 中直接使用图标 */}}
+    <a i-simple-icons:github href="https://github.com/hencter" target="_blank">Github</a>
+    <a i-simple-icons:gitee text="#C71D23" href="https://gitee.com/hencter" target="_blank">Gitee</a>
+
+    
   </div>
+
+
 </main>
 {{ end }}

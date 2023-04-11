@@ -1,28 +1,13 @@
-[un-cloak] {
-  display: none;
-}
-
-* {
+html {
   /* 平滑滚动样式 */
   scroll-behavior: smooth;
 }
 
 
-
 /* 文章样式 */
 article {
   a {
-    color: rosybrown;
-    text-decoration: none;
-  }
-
-  a:visited {
-    color: gray;
-  }
-
-  a:hover {
-    color: rosybrown;
-    text-decoration: underline dotted;
+    color: red;
   }
 
   img {
@@ -31,18 +16,14 @@ article {
     vertical-align: middle;
   }
 
-  del {
-    background-color: black;
-  }
-
-  del:hover {
-    color: white;
-  }
 }
 
 /*  脚注样式 */
-.footnotes hr {
-  border-style: dotted;
+.footnotes {
+
+  >hr {
+    border: 1px dotted palevioletred;
+  }
 }
 
 pre,
@@ -54,20 +35,10 @@ pre,
 
 code {
   opacity: 0.8;
+  word-wrap: break-word;
 }
 
-/*  目录样式  */
-#TableOfContents a {
+/*  目录样式 TODO */
+#TableOfContents {
   text-decoration: none;
-  color: rosybrown;
-}
-
-#TableOfContents a:visited {
-  text-decoration: none;
-  color: gray;
-}
-
-#TableOfContents a:hover {
-  text-decoration: none;
-  color: black;
 }

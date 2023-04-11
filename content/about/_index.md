@@ -44,6 +44,7 @@ title = '关于'
 - [Hugo 中文帮助文档](https://hugo.aiaide.com/)
 - [UnoCSS: The instant on-demand Atomic CSS engine](https://unocss.dev/)
 - [UnoCSS Interactive Docs](https://unocss.dev/interactive/)
+- [Icons](https://icones.js.org/)
 
 ### MD 文档编辑工具
 
@@ -60,14 +61,12 @@ title = '关于'
 
 - Visual Studio Code
 
-
 ## 社区
 
 [Github](https://github.com/hencter) ·
 [Gitlab](https://gitlab.com/hencter) ·
 [V2EX](https://www.v2ex.com/member/hencte) ·
 [Steam](https://steamcommunity.com/id/hencter/)
-{.text-center}
 
 [码云](https://gitee.com/hencter) ·
 [哔哩哔哩](https://space.bilibili.com/62466232) ·

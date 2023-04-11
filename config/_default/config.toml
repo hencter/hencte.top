@@ -1,9 +1,9 @@
 # 站点
-baseURL = 'http://localhost:1313' # 请保证其链接完整性（即带有 htts://）
+baseURL = 'http://localhost' # 请保证其链接完整性（即带有 htts://）
 title = "亦幸小阁"
 copyright = "版权所有"
-sectionPagesMenu = "main"
 languageCode = 'zh'
+sectionPagesMenu = "main"
 
 # 内容
 defaultContentLanguage = 'zh'
@@ -20,5 +20,5 @@ paginate = 3
 proxy = 'https://goproxy.cn'
 #                                                         Vendor Name (Shorthand)
 # Icon https://hugomods.com/zh-hans/icons/
-[[module.imports]]
-path = 'github.com/hugomods/icons/vendors/simple-icons' # simple
+# [[module.imports]]
+# path = 'github.com/hugomods/icons/vendors/simple-icons' # simple

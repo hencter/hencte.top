@@ -1,3 +1,28 @@
 {{ define "footer" }}
+<footer>
+  <div flex justify-center>
+    <div i-logos:hugo text-xl w30>Hugo</div>
+    <div text="xl rose">强力驱动</div>
+  </div>
+</footer>
 {{ partial "dev.html" . }}
+<script>
+  const root = document.body.parentElement;
+
+
+  root.classList.toggle(localStorage.getItem("color-mode"), true)
+  document.getElementById("toggle").addEventListener("click", () => {
+    if (localStorage.getItem("color-mode") == "dark") {
+      root.classList.remove('dark');
+      localStorage.setItem("color-mode", 'light');
+    } else {
+      root.classList.add('dark');
+      localStorage.setItem("color-mode", 'dark');
+    }
+  })
+  {{/*  自动匹配暗黑模式  */}}
+  {{/*  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    root.classList.toggle("dark", true)
+  }  */}}
+</script>
 {{ end }}

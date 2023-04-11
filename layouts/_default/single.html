@@ -1,7 +1,18 @@
 {{ define "main" }}
 <main id="main" px-10 py-10>
-
-  <article prose ma>
+  {{/* <header>
+    {{- range site.Menus.main }}
+    <a href="{{ .URL }}">
+      {{ .Name }}
+      {{- with .Page }}
+      {{- with .Params.version -}}
+      ({{ . }})
+      {{- end }}
+      {{- end }}
+    </a>
+    {{- end }}
+  </header> */}}
+  <article prose ma rd-2 p2 bg="light op60 dark:dark dark:op70" text="dark:light">
     <header>
       <h1 id="{{.Title}}" text-center>
         <a decoration-none text-gray-700 dark:text-light
@@ -18,12 +29,24 @@
     </header>
     {{ if .IsPage }} {{ partial "toc.html" . }} {{ else }} {{ end }}
     {{ .Content }}
-    <footer class="m-t-8">
+    <footer flex justify-between>
       {{ with .PrevInSection }}
-      <a decoration-none text-dark dark="text-light" op60 hover="op100" href="{{.Permalink}}">{{.Title}}</a>
+      <div relative flex active:scale-96>
+        <i i-simple-line-icons:arrow-left hfull></i>
+        <span text-xl>
+          {{.Title}}
+        </span>
+        <a absolute left-0 right-0 top-0 bottom-0  href="{{.Permalink}}" title="{{.Title}}"></a>
+      </div>
       {{ end }}
       {{ with .NextInSection }}
-      <a decoration-none text-dark dark="text-light" op60 hover="op100" float-right href="{{.Permalink}}">{{.Title}}</a>
+      <div relative flex active:scale-96>
+        <span text-xl>
+          {{.Title}}
+        </span>
+        <i i-simple-line-icons:arrow-right hfull></i>
+        <a absolute left-0 right-0 top-0 bottom-0  href="{{.Permalink}}" title="{{.Title}}"></a>
+      </div>
       {{ end }}
     </footer>
   </article>

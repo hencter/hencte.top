@@ -1,13 +1,13 @@
 {{ if .Site.IsServer }}
-<div fixed bottom-0 right-0 p-r-5 op10 hover="op80">
+<div fixed bottom-0 right-0 p-r-5 rd-t-2 p2 op50 bg="light  dark:dark dark:op70" text="dark:light">
     <div flex items-center justify-center mt5>
-        <button rounded-full uppercase block sm:hidden>all</button>
-        <button rounded-full uppercase b-0 bg-orange hidden sm:block md:hidden>sm</button>
-        <button rounded-full uppercase b-0 bg-green hidden md:block lg:hidden>md</button>
-        <button rounded-full uppercase b-0 bg-purple hidden lg:block xl:hidden>lg</button>
-        <button rounded-full uppercase b-0 bg-rose hidden xl:block>xl</button>
+        <button rd-full uppercase block sm:hidden>all</button>
+        <button rd-full uppercase b-0 bg-orange hidden sm:block md:hidden>sm</button>
+        <button rd-full uppercase b-0 bg-green hidden md:block lg:hidden>md</button>
+        <button rd-full uppercase b-0 bg-purple hidden lg:block xl:hidden>lg</button>
+        <button rd-full uppercase b-0 bg-rose hidden xl:block>xl</button>
     </div>
-    <a decoration-none c-dark dark:text-light hover:op90 i-carbon-sun dark="i-carbon-moon">mode</a>
+    <a id="toggle" decoration-none dark:text-light hover:op90 i-carbon-sun dark="i-carbon-moon">mode</a>
     <div></div>
     <ul>
         <h2>Git</h2>
@@ -26,12 +26,6 @@
                 {{.GitInfo.AbbreviatedHash }}
             </a>
         </li>
-    </ul>
-
-    <ul>
-        <h2>File</h2>
-        <li>{{.File.Path}}</li>
-        <li>{{.File.Dir}}</li>
     </ul>
 </div>
 {{ end }}

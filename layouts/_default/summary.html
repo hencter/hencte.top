@@ -1,42 +1,35 @@
-<article class="my-1 border-rd-2 my5 shadow">
-  
-  <a href="{{.Permalink}}" title="{{ .Params.Description }}">
-
-  {{ range .Params.images }}
-  <img class="w-full " src="{{ . }}" alt="">
-  {{ end }}
-  </a>
-  <header class="px2 py2">
+<article relative prose ma my-5 shadow rd-2 p2 
+bg="light op60 dark:dark dark:op70" text="dark:light" active:scale-96>
+  <header>
     <h3 id="{{.Title}}">
-      <a href="{{.Permalink}}" title="{{ .Params.Description }}">
-        {{- .Title -}}
-      </a>
+
+      {{- .Title -}}
     </h3>
     <p>
-      <time text-sm text-dark dark:text-light>
+      <time>
         {{- .Date | time.Format ":date_full" -}}
       </time>
 
-      {{ with .Params.categories -}}
-      {{ range . -}}
-      [<a decoration-none text-rose dark:text-rose href='{{ "categories/" | absURL }}{{ . | urlize }}'
-        title="{{.}}">{{- . -}}</a>]
-      {{ end -}}
-      {{ end -}}
-      </span>
-      <span>
-        {{ with .Params.tags -}}
-        {{ range . -}}
-        <a class="decoration-none op80 hover:op100 text-pink dark:text-pink"
-          href='{{ "tags/" | absURL }}{{ . | urlize }}' title="{{.}}">#{{- . -}}</a>
-        {{ end -}}
-        {{ end -}}
-      </span>
-    </p>
-    <p class="overflow-auto">
-      <a href="{{.Permalink}}" title="{{ .Params.Description }}">
-        {{ .Summary }}···
-      </a>
     </p>
   </header>
+  <p>
+    {{ .Summary }}···
+  </p>
+  <a absolute left-0 right-0 top-0 bottom-64px href="{{.Permalink}}" title="{{ .Params.Description }}"></a>
+  <div prose ma my-5>
+    <span>
+      {{ with .Params.categories -}}
+      {{ range . -}}
+      [<a href='{{ "categories/" | absURL }}{{ . | urlize }}' title="{{.}}">{{- . -}}</a>]
+      {{ end -}}
+      {{ end -}}
+    </span>
+    <span>
+      {{ with .Params.tags -}}
+      {{ range . -}}
+      <a href='{{ "tags/" | absURL }}{{ . | urlize }}' title="{{.}}">#{{- . -}}</a>
+      {{ end -}}
+      {{ end -}}
+    </span>
+  </div>
 </article>

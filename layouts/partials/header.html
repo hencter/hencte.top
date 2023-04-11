@@ -1,7 +1,7 @@
 <header>
-  <nav flex flex-wrap justify-between m8>
+  <nav  flex flex-wrap justify-between p8>
     <div class="spacer">
-      <a decoration-none text-dark dark:text-light hover:op80 {{ if .IsHome }} op60 {{ else }} op30 {{ end }} href="/">
+      <a decoration-none hover:op80 {{ if .IsHome }} op60 {{ else }} op30 {{ end }} href="/">
         <h1>
           {{ .Site.Title }}
         </h1>
@@ -11,12 +11,11 @@
     <div self-center>
       {{ $currentPage := . }}
       {{ range .Site.Menus.main }}
-      <a decoration-none text-dark dark:text-light hover:op90 {{if or ($currentPage.IsMenuCurrent "main" .)
+      <a decoration-none  hover:op90 {{if or ($currentPage.IsMenuCurrent "main" .)
         ($currentPage.HasMenuCurrent "main" .) }} op60 {{ else }} op30 {{end}} href="{{ .URL }}" title="{{ .Title }}">{{
         .Name }}</a>
       {{ end }}
-      <a mt-0px h-full lt-md:hidden decoration-none c-dark dark:text-light hover:op90 i-carbon-sun
-        dark="i-carbon-moon" onclick="changeMode()">mode</a>
+      
     </div>
   </nav>
 </header>

@@ -1,6 +1,5 @@
 +++
 date = '2022-07-12T23:48:54+08:00'
 title = '搜索'
-weight = 4
+layout = 'search'
 +++
-

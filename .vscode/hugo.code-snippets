@@ -1,0 +1,391 @@
+{
+	// Place your hencte.top 工作区 snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"hugo-description": {
+		"prefix": "description",
+		"body": [
+			"{{ .Description }}"
+		],
+		"description": "描述页面"
+	},
+	"hugo-lastmod": {
+		"prefix": "lastmod",
+		"body": [
+			"{{ .Lastmod }}"
+		],
+		"description": "内容最近修改日期"
+	},
+	"hugo-params": {
+		"prefix": "params",
+		"body": [
+			"{{ .Params.${1:date} }}"
+		],
+		"description": "参数"
+	},
+	"hugo-publish-date": {
+		"prefix": "publish-date",
+		"body": [
+			"{{ .PublishDate }}"
+		],
+		"description": "推送日期"
+	},
+	"hugo-reading-time": {
+		"prefix": "reading-time",
+		"body": [
+			"{{ .ReadingTime }}"
+		],
+		"description": "阅读内容所需的估计时间（分钟）"
+	},
+	"hugo-summary": {
+		"prefix": "summary",
+		"body": [
+			"{{ .Summary }}"
+		],
+		"description": "摘要页面变量"
+	},
+	"hugo-table-of-contents": {
+		"prefix": "table-of-contents",
+		"body": [
+			"{{ .TableOfContents }}"
+		],
+		"description": "页面目录变量"
+	},
+	"hugo-title": {
+		"prefix": "title",
+		"body": [
+			"{{ .Title }}"
+		],
+		"description": "页面标题"
+	},
+	"hugo-word-count": {
+		"prefix": "word-count",
+		"body": [
+			"{{ .WordCount }}"
+		],
+		"description": "字数统计,若有中文字，请在 config.toml 中添加 hasCJKLanguage=true 配置 "
+	},
+	// Site Variables List 
+	"hugo .Site.AllPages": {
+		"prefix": "site-allpages",
+		"body": [
+			"{{ .Site.AllPages }}"
+		],
+		"description": "所有页面数组，不理会翻译"
+	},
+	"hugo .Site.BaseURL": {
+		"prefix": "site-baseurl",
+		"body": [
+			"{{ .Site.BaseURL }}"
+		],
+		"description": "config 文件下的 baseURL 配合"
+	},
+	"hugo .Site.BuildDrafts": {
+		"prefix": "site-builddrafts",
+		"body": [
+			"{{ .Site.BuildDrafts }}"
+		],
+		"description": "a boolean (default: false) to indicate whether to build drafts as defined in the site configuration."
+	},
+	"hugo .Site.Copyright": {
+		"prefix": "site-copyright",
+		"body": [
+			"{{ .Site.Copyright }}"
+		],
+		"description": "a string representing the copyright of your website as defined in the site configuration."
+	},
+	"hugo .Site.Data": {
+		"prefix": "site-data",
+		"body": [
+			"{{ .Site.Data }}"
+		],
+		"description": "custom data, see Data Templates.https://gohugo.io/templates/data-templates/"
+	},
+	"hugo .Site.DisqusShortname": {
+		"prefix": "site-disqusshortname",
+		"body": [
+			"{{ .Site.DisqusShortname }}"
+		],
+		"description": "a string representing the shortname of the Disqus shortcode as defined in the site configuration."
+	},
+	"hugo .Site.GoogleAnalytics": {
+		"prefix": "site-disqusshortname",
+		"body": [
+			"{{ .Site.GoogleAnalytics }}"
+		],
+		"description": "a string representing your tracking code for Google Analytics as defined in the site configuration."
+	},
+	"hugo .Site.Home": {
+		"prefix": "site-home",
+		"body": [
+			"{{ .Site.Home }}"
+		],
+		"description": "    reference to the homepage’s page object https://gohugo.io/variables/page/"
+	},
+	"hugo .Site.IsMultiLingual": {
+		"prefix": "site-ismultilingual",
+		"body": [
+			"{{ .Site.IsMultiLingual }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.IsServerX": {
+		"prefix": "site-xisserverx",
+		"body": [
+			"{{ .Site.IsServer }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Language.Lang": {
+		"prefix": "site-language.lang",
+		"body": [
+			"{{ .Site.Language.Lang }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Language.LanguageName": {
+		"prefix": "site-language.languagename",
+		"body": [
+			"{{ .Site.Language.LanguageName }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Language.Weight": {
+		"prefix": "site-language.weight",
+		"body": [
+			"{{ .Site.Language.Weight }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Language": {
+		"prefix": "site-language",
+		"body": [
+			"{{ .Site.Language }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.LanguageCode": {
+		"prefix": "site-languagecode",
+		"body": [
+			"{{ .Site.LanguageCode }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Languageprefix": {
+		"prefix": "site-languageprefix",
+		"body": [
+			"{{ .Site.Languageprefix }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Languages": {
+		"prefix": "site-languages",
+		"body": [
+			"{{ .Site.Languages }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.LastChange": {
+		"prefix": "site-lastchange",
+		"body": [
+			"{{ .Site.LastChange }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Menus": {
+		"prefix": "site-menus",
+		"body": [
+			"{{ .Site.Menus }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Pages": {
+		"prefix": "site-pages",
+		"body": [
+			"{{ .Site.Pages }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.RegularPages": {
+		"prefix": "site-regularpages",
+		"body": [
+			"{{ .Site.RegularPages }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Sections": {
+		"prefix": "site-sections",
+		"body": [
+			"{{ .Site.Sections }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Taxonomies": {
+		"prefix": "site-taxonomies",
+		"body": [
+			"{{ .Site.Taxonomies }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Title": {
+		"prefix": "site-title",
+		"body": [
+			"{{ .Site.Title }}"
+		],
+		"description": ""
+	},
+	"hugo .Site.Params": {
+		"prefix": "site-Params",
+		"body": [
+			"{{ .Site.Params. }}"
+		],
+		"description": ""
+	},
+	// Page Variables 
+	"hugo .Aliases": {
+		"prefix": "Aliases",
+		"body": [
+			"{{ .Aliases }}"
+		],
+		"description": ""
+	},
+	"hugo .BundleType": {
+		"prefix": "BundleType",
+		"body": [
+			"{{ .BundleType }}"
+		],
+		"description": ""
+	},
+	"hugo .Content": {
+		"prefix": "content",
+		"body": [
+			"{{ .Content }}"
+		],
+		"description": ""
+	},
+	"hugo .Data": {
+		"prefix": "Data",
+		"body": [
+			"{{ .Data }}"
+		],
+		"description": ""
+	},
+	"hugo .Date": {
+		"prefix": "Date",
+		"body": [
+			"{{ .Date }}"
+		],
+		"description": ""
+	},
+	"hugo .Description": {
+		"prefix": "Description",
+		"body": [
+			"{{ .Description }}"
+		],
+		"description": ""
+	},
+	"hugo .Draft": {
+		"prefix": "Draft",
+		"body": [
+			"{{ .Draft }}"
+		],
+		"description": ""
+	},
+	"hugo .ExpiryDate": {
+		"prefix": "ExpiryDate",
+		"body": [
+			"{{ .ExpiryDate }}"
+		],
+		"description": ""
+	},
+	"hugo .File": {
+		"prefix": "File",
+		"body": [
+			"{{ .File }}"
+		],
+		"description": ""
+	},
+	"hugo .Fragments": {
+		"prefix": "Fragments",
+		"body": [
+			"{{ .Fragments }}"
+		],
+		"description": ""
+	},
+	"hugo .FuzzyWordCount": {
+		"prefix": "FuzzyWordCount",
+		"body": [
+			"{{ .FuzzyWordCount }}"
+		],
+		"description": ""
+	},
+	"hugo .IsHome": {
+		"prefix": "IsHome",
+		"body": [
+			"{{ .IsHome }}"
+		],
+		"description": ""
+	},
+	"hugo .IsNode": {
+		"prefix": "IsNode",
+		"body": [
+			"{{ .IsNode }}"
+		],
+		"description": ""
+	},
+	"hugo .IsPage": {
+		"prefix": "IsPage",
+		"body": [
+			"{{ .IsPage }}"
+		],
+		"description": ""
+	},
+	"hugo .IsSection": {
+		"prefix": "IsSection",
+		"body": [
+			"{{ .IsSection }}"
+		],
+		"description": ""
+	},
+	"hugo .IsTranslated": {
+		"prefix": "IsTranslated",
+		"body": [
+			"{{ .IsTranslated }}"
+		],
+		"description": ""
+	},
+	"hugo .Keywords": {
+		"prefix": "Keywords",
+		"body": [
+			"{{ .Keywords }}"
+		],
+		"description": ""
+	},
+
+	"hugo .Language": {
+		"prefix": "Language",
+		"body": [
+			"{{ .Language }}"
+		],
+		"description": ""
+	},"hugo .Lastmod": {
+		"prefix": "Lastmod",
+		"body": [
+			"{{ .Lastmod }}"
+		],
+		"description": ""
+	},
+}

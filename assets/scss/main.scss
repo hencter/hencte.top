@@ -1,0 +1,73 @@
+[un-cloak] {
+  display: none;
+}
+
+* {
+  /* 平滑滚动样式 */
+  scroll-behavior: smooth;
+}
+
+
+
+/* 文章样式 */
+article {
+  a {
+    color: rosybrown;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: gray;
+  }
+
+  a:hover {
+    color: rosybrown;
+    text-decoration: underline dotted;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 5px;
+    vertical-align: middle;
+  }
+
+  del {
+    background-color: black;
+  }
+
+  del:hover {
+    color: white;
+  }
+}
+
+/*  脚注样式 */
+.footnotes hr {
+  border-style: dotted;
+}
+
+pre,
+.highlight pre {
+  overflow-x: auto;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+code {
+  opacity: 0.8;
+}
+
+/*  目录样式  */
+#TableOfContents a {
+  text-decoration: none;
+  color: rosybrown;
+}
+
+#TableOfContents a:visited {
+  text-decoration: none;
+  color: gray;
+}
+
+#TableOfContents a:hover {
+  text-decoration: none;
+  color: black;
+}

@@ -32,7 +32,6 @@ title = '关于'
 2. [ ] 引入[赫蹏](https://sivan.github.io/heti/) 添加了赫蹏的简码
 3. [ ] [整理 Hugo]({{< ref "hugo" >}})：亦幸自己写的一些关于 Hugo 文档教程，里面含有一些内容的测试。
 4. [ ] 参考 [HTML 元素参考](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element "MDN Web Docs")
-{.list-none}
 
 ## 工具/教程
 
@@ -43,6 +42,8 @@ title = '关于'
   - [UnoCSS Interactive](https://unocss.dev/interactive/ "UnoCSS Interactive Docs")
 - [Hugo 实战](https://hugo-in-action.foofun.cn/zh "Hugo In Action")
 - [Hugo 中文帮助文档](https://hugo.aiaide.com/)
+- [UnoCSS: The instant on-demand Atomic CSS engine](https://unocss.dev/)
+- [UnoCSS Interactive Docs](https://unocss.dev/interactive/)
 
 ### MD 文档编辑工具
 
@@ -59,21 +60,17 @@ title = '关于'
 
 - Visual Studio Code
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbMjg2NDA1MjY2XX0=
--->
 
-## 社区{.text-center .text-gray}
+## 社区
 
 [Github](https://github.com/hencter) ·
 [Gitlab](https://gitlab.com/hencter) ·
 [V2EX](https://www.v2ex.com/member/hencte) ·
 [Steam](https://steamcommunity.com/id/hencter/)
-{.text-center .hover:transform-scale-110}
+{.text-center}
 
 [码云](https://gitee.com/hencter) ·
 [哔哩哔哩](https://space.bilibili.com/62466232) ·
 [掘金](https://juejin.cn/user/78820569790024) ·
 [博客园](https://www.cnblogs.com/hencter/) ·
 [CSDN](https://blog.csdn.net/hencter)
-{.text-center .hover:transform-scale-110}

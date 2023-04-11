@@ -1,0 +1,9 @@
+{{ $main := resources.Get "scss/main.scss"}}
+{{ $style := $main | resources.ToCSS }}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" {{ if hugo.IsProduction }}
+    integrity="{{ $style.Data.Integrity }}" {{ end }} />
+
+    {{/*  unocss 需要 @unocss/cli 为模版文件生成 css 文件  */}}
+{{ $unocss := resources.Get "css/uno.css" }}
+<link rel="stylesheet" href="{{ $unocss.RelPermalink }}" {{ if hugo.IsProduction }}
+    integrity="{{ $unocss.Data.Integrity }}" {{ end }} />

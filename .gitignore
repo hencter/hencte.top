@@ -4,5 +4,6 @@ resources
 themes
 
 .hugo_build.lock
+package-lock.json
 # 需要了解
 assets/jsconfig.json

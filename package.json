@@ -1,0 +1,13 @@
+{
+  "comments": {
+    "dependencies": {},
+    "devDependencies": {}
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.2.48",
+    "@unocss/preset-icons": "^0.51.2",
+    "unocss": "^0.51.2"
+  },
+  "name": "hencte.top",
+  "version": "0.1.0"
+}

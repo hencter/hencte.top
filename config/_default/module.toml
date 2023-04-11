@@ -1,8 +1,0 @@
-proxy = 'https://goproxy.cn'
-
-# hugo mod get -u
-
-[[imports]]
-path = 'github.com/hugomods/icons/vendors/simple-icons'
-[[imports]]
-path = 'github.com/hugomods/images'

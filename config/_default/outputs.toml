@@ -1,3 +1,20 @@
-log = ["HTML", "RSS"]
-bak = ["HTML", "RSS"]
-about = ["HTML", "RSS"]
+# Default Output Formats 
+# ============================
+# Kind          Default Output Formats
+# page	        HTML
+# home	        HTML, RSS
+# section	      HTML, RSS
+# taxonomy	    HTML, RSS
+# term	        HTML, RSS
+
+
+# home = ["HTML", "RSS", "JSON"]
+log = ["HTML", "RSS", "JSON"]
+bak = ["HTML", "RSS", "JSON"]
+about = ["HTML", "RSS", "JSON"]
+
+
+# SECTION  = []
+# posts = ["HTML", "RSS"]
+# taxonomy = ["HTML", "RSS", "JSON"]
+# term = ["HTML", "RSS", "JSON"]

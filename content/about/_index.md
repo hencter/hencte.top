@@ -44,7 +44,7 @@ title = '关于'
 - [Hugo 中文帮助文档](https://hugo.aiaide.com/)
 - [UnoCSS: The instant on-demand Atomic CSS engine](https://unocss.dev/)
 - [UnoCSS Interactive Docs](https://unocss.dev/interactive/)
-- [Icons](https://icones.js.org/)
+- [Icônes](https://icones.js.org/) 查找需要的图标
 
 ### MD 文档编辑工具
 

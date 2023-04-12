@@ -27,7 +27,7 @@ Available Commands:
   config      打印站点配置
   convert     将内容转换为不同格式（执行后参考帮助信息）
   deploy      将站点部署到云提供商。（参考 https://gohugo.io/hosting-and-deployment/hugo-deploy/）
-  env         打印雨果版本和环境信息
+  env         打印 Hugo 版本和环境信息
   gen         几个有用的生成器的集合。（执行后参考帮助信息）
   help        关于任何命令的帮助
   import      从其他网站导入您的网站。
@@ -86,7 +86,7 @@ Flags:
 使用 "hugo [command] --help" 查看该命令的更多信息
 ```
 
-## hugo config mounts
+## `hugo config mounts`
 
 改命令会打印出 Hugo 的对应挂载（输出的格式为：`JSON`），例如我的
 

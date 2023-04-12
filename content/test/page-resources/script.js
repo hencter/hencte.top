@@ -1,0 +1,1 @@
+console.log("我是页面的资源 script.js")

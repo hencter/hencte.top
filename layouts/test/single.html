@@ -1,10 +1,10 @@
-{{/* {{ define "style" }}
+{{ define "style" }}
 
 {{ with .Resources.GetMatch "style.css" }}
-{{ .Content | safeCSS }}
+<style>{{ .Content | safeCSS }}</style>
 {{ end }}
 
-{{ end }} */}}
+{{ end }}
 
 {{ define "main" }}
 
@@ -12,8 +12,7 @@
 
   <header>
     <h1 id="{{.Title}}" text="center">
-      <a text-dark dark:text-light hover:decoration-underline
-        href="{{ if .IsPage }}#{{.Title}}{{ else }}{{.Permalink}}{{ end }}">{{
+      <a text-dark dark:text-light hover:decoration-underline href="{{ if .IsPage }}#{{.Title}}{{ else }}{{.Permalink}}{{ end }}">{{
         .Title }}</a>
     </h1>
     <section my5 text-sm text-center>
@@ -39,32 +38,6 @@
     {{ end }}
   </article>
 
-  {{/* <aside flex>
-    <div>
-      <a i-carbon:expand-categories text-xl></a>
-      {{ with .Params.categories -}}
-      {{ range . -}}
-      <span shadow bg="white op10" ml-1 rd-1>
-        <a decoration-none href='{{ "categories/" | absURL }}{{ . | urlize }}' title="{{.}}">{{- . -}}</a>
-      </span>
-      {{ end -}}
-      {{ end -}}
-    </div>
-    <div>
-      {{ with .Params.tags -}}
-      {{ range . -}}
-      <span text-green>
-        <a decoration-none href='{{ "tags/" | absURL }}{{ . | urlize }}' title="{{.}}">{{- . -}}</a>
-      </span>
-      {{ end -}}
-      {{ end -}}
-    </div>
-  </aside> */}}
-
-  <aside prose ma>
-    {{ partial "related.html" . }}
-  </aside>
-
   <footer prose ma flex justify-between>
 
     {{ with .PrevInSection }}
@@ -89,15 +62,16 @@
 
   </footer>
 
-
-
+  <aside prose ma>
+  {{ partial "related.html" . }}
+  </aside>
 </main>
 {{ end }}
 
-{{/* {{ define "script" }}
+{{ define "script" }}
 
 {{ with .Resources.GetMatch "script.js" }}
-{{ .Content | safeJS }}
+<script>{{ .Content | safeJS }}</script>
 {{ end }}
 
-{{ end }} */}}
+{{ end }}

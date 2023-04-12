@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="" lang="{{ .Site.LanguageCode }}">
+<html lang="{{ .Site.LanguageCode }}" all:transition-400>
 
 <head>
     <meta charset="utf-8">
@@ -14,13 +14,16 @@
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}
     </title>
     {{ partial "head.html" . }}
+    {{ block "link" . }}{{ end }}
+    {{ block "style" . }}{{ end }}
 </head>
 
-<body m0 h-full bg="fixed cover no-repeat center clip-border #ffffffce dark:#00000055 dark:bg-blend-darken"
-    all:transition-250>
+<body m0 text-dark dark="text-light bg-black">
     {{ partial "header.html" . }}
     {{ block "main" . }}{{ end }}
     {{ block "footer" . }}{{ end }}
+    {{ partial "dev.html" . }}
+    {{ block "script" . }}{{ end }}
 </body>
 
 </html>

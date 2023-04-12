@@ -1,2 +1,6 @@
-github.com/adityatelange/hugo-PaperMod v0.0.0-20230401190456-031e2ba57ea2 h1:9U8EQBYoNHOcWrH7l979FwEVRjDPungusgey5BGxFHY=
-github.com/adityatelange/hugo-PaperMod v0.0.0-20230401190456-031e2ba57ea2/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
+github.com/bep/gallerydeluxe v0.9.3 h1:+m0eEzt+NUdHeXUozVjM4ppoDO5ecVn6Eoa8q33E2hI=
+github.com/bep/gallerydeluxe v0.9.3/go.mod h1:sUfRcjREo6DwxPo0sMp0TAxNZiGreOY6DY2dWGpSeR8=
+github.com/julmot/mark.js v0.0.0-20221116182818-7f7e9820514e h1:EZl5226VdgA6DxtbGRgEODgmvT845TKZ1Sl7uZOFT/U=
+github.com/julmot/mark.js v0.0.0-20221116182818-7f7e9820514e/go.mod h1:aAyDyl2EhNPiZbFqqURsAmxYwwTHslrIxZErXMO3pJQ=
+github.com/krisk/Fuse v6.6.2+incompatible h1:laigOpZFs/xUi9zGjVu5t19bcvzRVufoXCnPSgQZmYI=
+github.com/krisk/Fuse v6.6.2+incompatible/go.mod h1:3moWv8rDjwoKic9nwiPLgZjldkbdTAbtzJHCu/Vsj4A=

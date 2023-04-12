@@ -8,8 +8,13 @@ import {
 import presetIcons from "@unocss/preset-icons";
 
 export default defineConfig({
+  shortcuts: {
+
+  },
   presets: [
-    presetUno(),
+    presetUno({
+      /* options */
+    }),
     presetAttributify({
       /* options */
     }),
@@ -17,8 +22,11 @@ export default defineConfig({
       /* options */
     }),
     presetIcons({
-      scale: 1.2,
-      cdn: "https://esm.sh/",
+      extraProperties: {
+        'display': 'inline-block', // 行内标签大小比较好调整，
+        'vertical-align': 'middle',
+        /* options */
+      },
     }),
   ],
 });

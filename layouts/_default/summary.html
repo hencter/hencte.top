@@ -1,5 +1,4 @@
-<article relative prose ma my-5 shadow rd-2 p2 
-bg="light op60 dark:dark dark:op70" text="dark:light" active:scale-96>
+<article relative mt-5 shadow bg="white op10" dark:bg="black op20 shadow-2xl" rd-2 p2 active:scale-96>
   <header>
     <h3 id="{{.Title}}">
       {{- .Title -}}
@@ -14,24 +13,8 @@ bg="light op60 dark:dark dark:op70" text="dark:light" active:scale-96>
 
     </p>
   </header>
-  <p>
+  <p break-all>
     {{ .Summary }}···
   </p>
-  <a absolute left-0 right-0 top-0 bottom-64px href="{{.Permalink}}" title="{{ .Params.Description }}"></a>
-  <div prose ma my-5>
-    <span>
-      {{ with .Params.categories -}}
-      {{ range . -}}
-      [<a href='{{ "categories/" | absURL }}{{ . | urlize }}' title="{{.}}">{{- . -}}</a>]
-      {{ end -}}
-      {{ end -}}
-    </span>
-    <span>
-      {{ with .Params.tags -}}
-      {{ range . -}}
-      <a href='{{ "tags/" | absURL }}{{ . | urlize }}' title="{{.}}">#{{- . -}}</a>
-      {{ end -}}
-      {{ end -}}
-    </span>
-  </div>
+  <a absolute left-0 right-0 top-0 bottom-0px href="{{.Permalink}}" title="{{ .Params.Description }}"></a>
 </article>

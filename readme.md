@@ -11,7 +11,7 @@ Just my personnal site.
 
 ```sh
 npm install -g @unocss/cli
-cargo install pagefind
+# cargo install pagefind
 # just run
 sh ./dev.sh
 ```

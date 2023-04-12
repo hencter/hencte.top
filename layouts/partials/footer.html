@@ -1,30 +1,27 @@
 {{ define "footer" }}
-<footer>
-
-  <div flex justify-center>
-    <div i-simple-icons:github text-xl w30px href="https://github.com/hencter" target="_blank">Github</div>
-    <div i-simple-icons:gitee text-xl w30px text="#C71D23" href="https://gitee.com/hencter" target="_blank">Gitee</div>
-    <div i-logos:hugo text-xl w30></div>
+<footer py10>
+  <div flex justify-center text-xl>
+    <a m2 i-simple-icons:gitee w30px text="#C71D23" href="https://gitee.com/hencter" target="_blank"></a>
+    <a m2 i-simple-icons:github w30px href="https://github.com/hencter" target="_blank"></a>
+    <a m2 i-logos:hugo w21 href="https://github.com/gohugoio/hugo" target="_blank"></a>
+    <a m2 i-logos:cloudflare w13 href="https://cloudflare.com" target="_blank"></a>
+  </div>
   </div>
 </footer>
-{{ partial "dev.html" . }}
-<script>
-  const root = document.body.parentElement;
-  root.classList.toggle(localStorage.getItem("color-mode"), true)
-  document.getElementById("toggle").addEventListener("click", () => {
-    if (localStorage.getItem("color-mode") == "dark") {
-      root.classList.remove('dark');
-      localStorage.setItem("color-mode", 'light');
-    } else {
-      root.classList.add('dark');
-      localStorage.setItem("color-mode", 'dark');
-    }
-  })
-  /*  自动匹配暗黑模式  */
-  /*
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    root.classList.toggle("dark", true)
-  }
-  */
-</script>
+{{ end }}
+
+
+{{ define "script" }}
+
+{{ $mainJs := resources.Get "js/main.js" }}
+<script src="{{ $mainJs.RelPermalink }}" integrity="{{ $mainJs.Data.Integrity }}"></script>
+
+
+{{ if .Page.Store.Get "hasMermaid" }}
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+{{ end }}
+
 {{ end }}

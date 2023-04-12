@@ -1,9 +1,15 @@
-{{/* 对内置内容的 CSS 处理 */}}
+{{ define "link" }}
 
-{{ $main := resources.Get "scss/main.scss"}}
-{{ $style := $main | resources.ToCSS }}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}" {{ if hugo.IsProduction }}
-    integrity="{{ $style.Data.Integrity }}" {{ end }} />
+{{ range .AlternativeOutputFormats -}}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+{{ end -}}
+
+
+{{/* 对 Markdown 的 CSS 处理 */}}
+{{ $mainSCSS := resources.Get "scss/main.scss"}}
+{{ $mainCSS := $mainSCSS | resources.ToCSS }}
+<link rel="stylesheet" href="{{ $mainCSS.RelPermalink }}" {{ if hugo.IsProduction }}
+    integrity="{{ $mainCSS.Data.Integrity }}" {{ end }} />
 
 {{/* unocss 需要 @unocss/cli 为模版文件生成 css 文件 */}}
 
@@ -11,16 +17,24 @@
 <link rel="stylesheet" href="{{ $unocss.RelPermalink }}" {{ if hugo.IsProduction }}
     integrity="{{ $unocss.Data.Integrity }}" {{ end }} />
 
-{{/* JS */}}
+{{ end }}
 
-{{ $index := resources.Get "js/main.js" | js.Build "index.js" |
-resources.Minify }}
-<script src="{{- $index.RelPermalink -}}" defer></script>
-
-{{ $background := resources.GetRemote "https://r2.hencte.top/background-light.jpg" }}\
-{{/* */}}
 <style>
-    body {
-        background: url({{$background.RelPermalink}});
+    body:before {
+        content: 'hello';
+        position: fixed;
+        z-index: -99999;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: url(/imgs/bg.jpg);
+        filter: blur(20px);
+        opacity: .45;
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+        /*
+        background-blend-mode: darken,luminosity;
+        */
     }
 </style>

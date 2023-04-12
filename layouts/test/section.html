@@ -1,0 +1,24 @@
+{{ define "main" }}
+<main prose ma>
+
+  {{ partial "test/unocss-icon.html" . }}
+
+  {{/*  简单获取所有页面  */}}
+  <ul>
+    {{ range .Pages }}
+    <li>
+      <a href="{{ .Permalink }}">{{ .Title }}</a> {{- if .Draft }}<sup><span text-rose>&nbsp;&nbsp;[草稿：待完善]</span></sup>{{- end }}
+    </li>
+    {{ end }}
+  </ul>
+
+
+</main>
+
+{{ end }}
+
+{{ define "footer" }}
+<p text="center red6">
+  测试页面本页面仅用来测试各组件和相应模版的，每个模块单独放在 layout/particals/test/ 目录下面
+</p>
+{{ end }}

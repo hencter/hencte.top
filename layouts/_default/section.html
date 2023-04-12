@@ -1,17 +1,26 @@
 {{ define "main" }}
 <main id="main" px-10 py-10>
-
-  <article prose ma p2 rd-2 bg="light op60 dark:dark dark:op70" text="dark dark:light">
-    {{ .Content }}
+  <aside prose ma>
+    {{ partial "breadcrumb.html" . }}
+  </aside>
+  {{ with .Content }}
+  <article mt-10 prose ma p2 rd-2 shadow bg="white op10" dark:bg="black op20 shadow-2xl" box-border>
+    {{ . }}
   </article>
+  {{ end }}
 
   {{ range .Pages.GroupByDate "2006" }}
-  <section>
-    {{/*  <h2 class="text-dark op100 dark:text-light text-center">{{ .Key }}</h2>  */}}
+
+  <section prose m-auto>
+    <div relative h15 pointer-events-none ma>
+      <span absolute left--2rem top-1rem op10 text-8em font-bold>{{ .Key }}</span>
+    </div>
     {{ range .Pages }}
     {{ .Render "summary"}}
     {{ end }}
+    </ul>
   </section>
+
   {{ end }}
 
 </main>

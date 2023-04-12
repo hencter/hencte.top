@@ -1,0 +1,12 @@
+{{/* 面包屑导航
+面包屑导航通过提供返回起始页面的面包屑轨迹，帮助用户了解他们在网站中所处的位置。
+这些项通常以内联方式显示，并带有分隔符，以指示各个页面之间的层次结构。
+Hugo 如下实现
+https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_cookbook/Breadcrumb_Navigation */}}
+<nav aria-label="breadcrumb">
+  {{ range .Ancestors.Reverse }}
+  <a decoration-none href="{{ .Permalink }}">{{ .LinkTitle }}</a> -> 
+  {{ end }}
+  <a decoration-none text-rose aria-current="page" href="{{ .Permalink }}">{{ .LinkTitle }}</a>
+  </ol>
+</nav>

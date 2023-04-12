@@ -2,6 +2,7 @@
 title = 'Arch Linux 踩坑记录'
 slug = 'arch-linux'
 date = '2022-10-01T22:10:01+08:00' 
+keywords = ["中文","个人"]
 categories = ["系统", "极简主义"]
 tags = ["ArchLinux", "Linux", "KISS"]
 +++

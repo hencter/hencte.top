@@ -1,6 +1,6 @@
 +++
 categories = ['编辑器', '工具','问题']
-tags = ['Editor','Tool']
+tags = ['Editor','Tool','Code']
 date = '2022-07-27T21:01:31+08:00'
 slug = 'visual-studio-code'
 title = 'Visual Studio Code'

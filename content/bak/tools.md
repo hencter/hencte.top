@@ -14,4 +14,3 @@ draft = true # 是否为草稿
 - bat[^bat], cat 的替代品
 
 [^bat]: https://github.com/sharkdp/bat "A cat(1) clone with wings."
-

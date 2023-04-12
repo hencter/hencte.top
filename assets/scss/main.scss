@@ -3,12 +3,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* 超链接 */
+
+a {
+  text-decoration: none;
+  word-wrap: break-word; // 由于长链接在 hugo 中并没有自动换航
+  :hover {
+    text-decoration: dotted;
+  }
+}
 
 /* 文章样式 */
 article {
-  a {
-    color: red;
-  }
 
   img {
     max-width: 100%;

@@ -5,7 +5,6 @@ date = '{{ .Date }}'
 description = ''
 tags = [""]
 categories = [""]
-images = ['']
 draft = true
 +++
 

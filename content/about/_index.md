@@ -4,7 +4,7 @@ slug = "about"
 title = '关于'
 +++
 
-![亦幸的头像](https://s2.loli.net/2023/03/08/fmZLkahTXizeN6x.jpg "亦幸 DELETE ME")
+![avatar](/img/avatar.jpg)
 
 ## whoami?
 

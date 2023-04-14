@@ -1,0 +1,25 @@
+{{/* unocss 需要 @unocss/cli 为模版文件生成 css 文件 */}}
+
+{{ with resources.Get "css/uno.css" }}
+  {{ $unocss := . | minify }}
+  <link
+    rel="stylesheet"
+    href="{{ $unocss.RelPermalink }}"
+    {{ if hugo.IsProduction }}
+      integrity={{ $unocss.Data.Integrity }}
+    {{ end }}
+  />
+{{ end }}
+
+{{/* 对 Markdown 的 CSS 处理 */}}
+
+{{ with resources.Get "scss/main.scss" }}
+  {{ $mainCSS := . | resources.ExecuteAsTemplate "main.scss" . | toCSS | minify }}
+  <link
+    rel="stylesheet"
+    href="{{ $mainCSS.RelPermalink }}"
+    {{ if hugo.IsProduction }}
+      integrity={{ $mainCSS.Data.Integrity }}
+    {{ end }}
+  />
+{{ end }}

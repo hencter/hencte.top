@@ -4,13 +4,27 @@
   <ul>
     {{ range $i, $p := . }}
       <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <a
+          text-dark
+          dark:text-light
+          hover="decoration-underline"
+          href="{{ .RelPermalink }}"
+          >{{ .Title }}</a
+        >
         {{ with .HeadingsFiltered }}
+        {{/*  这里关联的是由内容中有相同的标题的文章  */}}
           <ul>
             {{ range . }}
               {{ $link := printf "%s#%s" $p.RelPermalink .ID | safeURL }}
               <li>
-                <a href="{{ $link }}">{{ .Title }}</a>
+                <a
+                  text-dark
+                  dark:text-light
+                  hover="decoration-underline"
+                  href="{{ $link }}"
+                >
+                  #{{ .Title }}
+                </a>
               </li>
             {{ end }}
           </ul>

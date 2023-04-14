@@ -1,27 +1,6 @@
-{{ define "footer" }}
-<footer py10>
-  <div flex justify-center text-xl>
-    <a m2 i-simple-icons:gitee w30px text="#C71D23" href="https://gitee.com/hencter" target="_blank"></a>
-    <a m2 i-simple-icons:github w30px href="https://github.com/hencter" target="_blank"></a>
-    <a m2 i-logos:hugo w21 href="https://github.com/gohugoio/hugo" target="_blank"></a>
-    <a m2 i-logos:cloudflare w13 href="https://cloudflare.com" target="_blank"></a>
-  </div>
-  </div>
+<footer max-wprose ma>
+  <section shadow rd-2 p2 bg="white op10" dark:bg="black op20 shadow-2xl">
+    {{ partial "menu.html" (dict "menuID" "footer" "page" .) }}
+  </section>
 </footer>
-{{ end }}
-
-
-{{ define "script" }}
-
-{{ $mainJs := resources.Get "js/main.js" }}
-<script src="{{ $mainJs.RelPermalink }}" integrity="{{ $mainJs.Data.Integrity }}"></script>
-
-
-{{ if .Page.Store.Get "hasMermaid" }}
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: true });
-  </script>
-{{ end }}
-
-{{ end }}
+{{ partial "dev.html" . }}

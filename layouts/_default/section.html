@@ -1,20 +1,20 @@
 {{ define "main" }}
-<main id="main" px-10 py-10>
-  <aside prose ma>
+<main id="main"  max-wprose ma px-10 py-10>
+  <header>
     {{ partial "breadcrumb.html" . }}
-  </aside>
+  </header>
   {{ with .Content }}
-  <article mt-10 prose ma p2 rd-2 shadow bg="white op10" dark:bg="black op20 shadow-2xl" box-border>
-    {{ . }}
-  </article>
+    <article mt-10 p2 box-border  shadow rd-2 bg="white op10" dark:bg="black op20 shadow-2xl">
+      {{ . }}
+    </article>
   {{ end }}
 
   {{ range .Pages.GroupByDate "2006" }}
 
-  <section prose m-auto>
-    <div relative h15 pointer-events-none ma>
-      <span absolute left--2rem top-1rem op10 text-8em font-bold>{{ .Key }}</span>
-    </div>
+  <section>
+    <h2 relative h15 pointer-events-none ma>
+      <span absolute -left-2rem -top-2rem op-15  text-8em font-bold>{{ .Key }}</span>
+    </h2>
     {{ range .Pages }}
     {{ .Render "summary"}}
     {{ end }}

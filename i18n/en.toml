@@ -10,3 +10,5 @@ other = "Categories"
 other = "Tags"
 [Tags]
 other = "Tags"
+[log]
+other = "Log"

@@ -1,3 +1,4 @@
 <div flex justify-between>
-    <a href="{{ .Permalink }}">{{ .Title }}</a> <span>{{ .Date.Format "Mon, Jan 2, 2006" }}</span>
+    {{/*  通过 title 函数将 tags 小写的分类转换文大写字母开头  */}}
+    <a href="{{ .Permalink }}">{{ .Title | title }}</a> <span>{{ .Date.Format "Mon, Jan 2, 2006" }}</span>
 </div>

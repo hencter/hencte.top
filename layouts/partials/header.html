@@ -1,26 +1,6 @@
-<header>
-  <nav flex flex-wrap justify-between p8>
-    <div class="spacer"> 
-      
-      <a text-dark href="/">
-        <h1 dark:text-light  {{ if .IsHome }} op100 {{else}} op50 {{ end }} hover:op80 hover:scale-120>
-          {{ .Site.Title }}
-        </h1>
-      </a>
-      
-    </div>
-    {{/* Menus */}}
-    <div self-center>
-
-      {{ $currentPage := . }}
-
-      {{ range .Site.Menus.main }}
-      <a mx8 hover:op90 text-dark dark:text-light {{if or
-        ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} op580 {{ else }} op50 {{end}}
-        href="{{ .URL }}" title="{{ .Title }}">{{
-        .Name }}</a>
-      {{ end }}
-      <div id="toggle" text-3xl hover:op90 i-carbon-sun dark="i-carbon-moon"></div>
-    </div>
-  </nav>
+<header max-wprose ma shadow rd-2 bg="white op10" dark:bg="black op20 shadow-2xl">
+  <section>
+    {{ $currentPage := . }}
+    {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  </section>
 </header>

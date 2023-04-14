@@ -1,8 +1,6 @@
 +++
-aliases = ['post', 'posts', 'life', 'articles']
 slug = 'log'
 title = '日志'
-weight = 1
 +++
 
 日常折腾记录

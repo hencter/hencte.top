@@ -10,6 +10,8 @@
     "@unocss/preset-typography": "^0.51.2",
     "fuse.js": "^6.6.2",
     "mark.js": "^8.11.1",
+    "prettier": "^2.8.7",
+    "prettier-plugin-go-template": "^0.0.13",
     "unocss": "^0.51.2"
   },
   "name": "hencte.top",

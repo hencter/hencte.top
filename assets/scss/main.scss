@@ -1,16 +1,57 @@
+// 在 SCSS 重视
+// 
+// {{ $light := resources.Get "img/2265276667.png"}}
+// {{ $light := $light |  resources.Copy "img/day.jpg"}} // 复制并且重新命名
+// {{ $light := $light | images.Filter (images.GaussianBlur 50) (images.Brightness 10)}}
+
+// {{ $dark := resources.Get "img/bg.jpg"}}
+// {{ $dark := $dark |  resources.Copy "img/night.jpg"}} // 复制并且重新命名
+// {{ $dark := $dark | images.Filter (images.GaussianBlur 50) (images.Brightness 0)}}
+
+$light: "{{ $light.Permalink }}";
+$dark: "{{ $dark.Permalink }}";
+
 html {
   /* 平滑滚动样式 */
   scroll-behavior: smooth;
+
 }
+
+.light {
+  // 背景
+  background: url($light);
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: darken, luminosity;
+}
+
+
+/* 菜单 */
+.menu :hover {
+
+  .child-menu,
+  ul {
+    // display: block;
+    display: flex;
+
+    >li {
+      margin-top: .25em;
+      margin-right: .25em;
+    }
+  }
+}
+
 
 /* 超链接 */
 
 a {
   text-decoration: none;
   word-wrap: break-word; // 由于长链接在 hugo 中并没有自动换航
-  :hover {
-    text-decoration: dotted;
-  }
+
 }
 
 /* 文章样式 */
@@ -47,4 +88,35 @@ code {
 /*  目录样式 TODO */
 #TableOfContents {
   text-decoration: none;
+
+}
+
+
+
+.dark {
+  background: url($dark);
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-blend-mode: darken, luminosity;
+
+  #TableOfContents {
+
+    a {
+
+      // color: white;
+
+      :hover {
+        text-decoration: underline;
+      }
+
+      :visited {
+        color: pink;
+      }
+    }
+
+  }
 }

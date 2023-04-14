@@ -1,10 +1,12 @@
-<article relative mt-5 shadow bg="white op10" dark:bg="black op20 shadow-2xl" rd-2 p2 active:scale-96>
+<article relative mt-5 shadow bg="white op10" dark:bg="black op20 shadow-2xl" rd-2 p2 hover:scale-96>
   <header>
     <h3 id="{{.Title}}">
-      {{- .Title -}}
-      {{ if .Site.IsServer }}
-      {{- if .Draft }}<sup><span text-rose>&nbsp;&nbsp;[草稿]</span></sup>{{- end }}
-      {{ end }}
+      <a href="{{ .RelPermalink }}">
+        {{- .Title -}}
+        {{ if .Site.IsServer }}
+        {{- if .Draft }}<sup><span text-rose>&nbsp;&nbsp;[草稿]</span></sup>{{- end }}
+        {{ end }}
+      </a>
     </h3>
     <p>
       <time>
@@ -14,7 +16,12 @@
     </p>
   </header>
   <p break-all>
-    {{ .Summary }}···
+    {{ .Summary }}
   </p>
-  <a absolute left-0 right-0 top-0 bottom-0px href="{{.Permalink}}" title="{{ .Params.Description }}"></a>
+  {{ if .Truncated }}
+  <div>
+    <a href="{{ .RelPermalink }}">阅读更多...</a>
+  </div>
+  {{ end }}
+  {{/* <a absolute left-0 right-0 top-0 bottom-0px href="{{.Permalink}}" title="{{ .Params.Description }}"></a> */}}
 </article>

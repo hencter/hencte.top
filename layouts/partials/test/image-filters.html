@@ -1,0 +1,198 @@
+{{/* https://gohugo.io/functions/images/ */}}
+
+{{/* https://gitee.com/mirrors/lxgw-wenkai/raw/main/fonts/TTF/LXGWWenKai-Regular.ttf */}}
+
+{{/*
+中文开源字体：https://lxgw.github.io/2021/01/15/Lxgw-Opensource-Chinese-Fonts/#%E8%87%AA%E6%94%B9%E5%85%8D%E8%B4%B9%E5%BC%80%E6%BA%90%E5%AD%97%E4%BD%93%E4%B8%80%E8%A7%88
+*/}}
+{{ $LXGWWenKai := resources.Get "font/LXGWWenKai-Regular.ttf" }}
+{{ $XiaolaiMonoSC := resources.Get "font/XiaolaiMonoSC-Regular.ttf" }}
+{{ $background := resources.Get "img/2265276667.png"}}
+{{ $background := $background.Resize "x400" }}
+{{ $logo := resources.Get "img/hugo-logo.png"}}
+{{ $logo := $logo.Resize "x50" }}
+<h2 text-center>图像滤镜</h2>
+<div class="image-filters.html">
+  <p>
+  <h2>原图</h2>
+  <img max-w-95% src={{ $background.Permalink }} alt="">
+  </p>
+  <p>
+    <h2>Overlay | 覆盖</h2>
+    <p>
+      这个功能最大的实现就是加水印，防止图片资源被盗用！
+      当然需要你自己制作一张 png 图片，并且调整其透明度，
+      这里我用的就是 png 图片添加上去的，你甚至可以重复添加。
+    </p>
+    {{/*  {{ $logoFilter := (images.Overlay $logo 50 50 ) }}  */}}
+    {{/*  {{ $img := $background | images.Filter $logoFilter }}  */}}
+    {{ $img := $background.Filter (images.Overlay $logo 0 250 ) (images.Overlay $logo 0 200 )}}
+    <img max-w-95% src={{ $logo.Permalink }} alt="">
+    <img max-w-95% src={{ $img.Permalink }} alt="">
+  <h2>
+    图片内添加文字
+  </h2>
+  <p>
+    Hugo 原生处理的时候市不支持中文的，所以需要自己添加字体
+    个人认为这里可以用来加图片描述，会比用 Html 和渲染钩子加的要好处理
+  </p>
+  {{ $img := $background.Filter (images.Text "落霞与孤鹜齐飞，秋水共长天一色" (dict
+  "color" "#ffffff"
+  "size" 40
+  "linespacing" 2
+  "x" 10
+  "y" 200
+  "font" $LXGWWenKai
+  ))}}
+
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    Brightness | 亮度 | 范围 (-100, 100).
+  </h2>
+  {{ $img := $background | images.Filter (images.Brightness 10)}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    ColorBalance | 色彩平衡
+  </h2>
+  <p>三个参数(red, green, blue) 对应红绿蓝三个通道| 每个参数范围 (-100, 500)</p>
+  {{ $img := $background | images.Filter (images.ColorBalance 10 10 500 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    Colorize | 着色
+  </h2>
+  <p>
+    Colorize 创建一个滤镜，生成图像的彩色版本。
+    色相、饱和度、百分比
+    色调（色相）参数是色轮上的角度，通常在 (0, 360) 范围内。
+    饱和度参数必须在范围 (0, 100) 内。
+    百分比参数指定效果的强度，它必须在范围 (0, 100) 内。</p>
+  {{ $img := $background | images.Filter (images.Colorize 360 50 50 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    Contrast | 对比度
+  </h2>
+  <p></p>
+  {{ $img := $background | images.Filter (images.Contrast -35 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+
+  {{/* */}}
+  <p>
+  <h2>
+    高斯模糊
+  </h2>
+  {{ $img := $background | images.Filter (images.GaussianBlur 50)}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    Grayscale | 灰度
+  </h2>
+  <p>目前没看到参数</p>
+  {{ $img := $background | images.Filter (images.Grayscale )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    Hue | 色调
+  </h2>
+  <p>Hue creates a filter that rotates the hue of an image. The hue angle shift is typically in range -180 to 180.</p>
+  {{ $img := $background | images.Filter (images.Hue 50 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+
+  <p>
+  <h2>
+    Invert | 反色
+  </h2>
+  <p>反色过滤器</p>
+  {{ $img := $background | images.Filter (images.Invert )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+
+  <p>
+  <h2>
+    Pixelate | 像素化
+  </h2>
+  <p>一个参数</p>
+  {{ $img := $background | images.Filter (images.Pixelate 30 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    Saturation | 饱和度
+  </h2>
+  <p>一个参数 range 0 to 100</p>
+  {{ $img := $background | images.Filter (images.Saturation 30 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    Saturation | 饱和度
+  </h2>
+  <p>一个参数</p>
+  {{ $img := $background | images.Filter (images.Saturation 30 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    Sepia |
+  </h2>
+  <p>一个参数</p>
+  {{ $img := $background | images.Filter (images.Sepia 1000 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    Sigmoid |
+  </h2>
+  <p>Sigmoid 创建一个过滤器，使用 Sigmoid 函数更改图像的对比度并返回调整后的图像。这是一种非线性对比度变化，可用于照片调整，因为它保留了高光和阴影细节。</p>
+  {{ $img := $background | images.Filter (images.Sigmoid 0 -10 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  <p>
+  <h2>
+    UnsharpMask | 锐化
+  </h2>
+  <p>UnsharpMask 创建一个锐化图像的过滤器。
+    sigma 参数用于高斯函数并影响效果半径。Sigma 必须为正。
+    锐化半径大致等于 3 * sigma。
+    amount 参数控制边缘边界变得更暗和更亮的程度。通常在 0.5 和 1.5 之间。
+    阈值参数控制将被锐化的最小亮度变化。通常介于 0 和 0.05 之间。</p>
+  {{ $img := $background | images.Filter (images.UnsharpMask 5 200 1.2 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+  {{/* */}}
+  <p>
+  <h2>
+    滤镜叠加
+  </h2>
+  <p></p>
+  {{ $img := $background | images.Filter (images.Pixelate 40 ) (images.UnsharpMask 20 60 1 )}}
+  <img max-w-95% src={{$img.Permalink }} alt="">
+  </p>
+  {{/* */}}
+
+</div>

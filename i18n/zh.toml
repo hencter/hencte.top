@@ -10,3 +10,10 @@ other = "分类"
 other = "标签"
 [Tags]
 other = "标签"
+# 菜单
+[log]
+other = "日志"
+[about]
+other = "关于"
+[note]
+other = "笔记"

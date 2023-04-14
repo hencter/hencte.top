@@ -1,10 +1,10 @@
 +++
-aliases = ['me']
-slug = "about"
 title = '关于'
+slug = "about"
+aliases = ['me']
 +++
 
-![avatar](/img/avatar.jpg)
+<!-- ![avatar](img/avatar.jpg) -->
 
 ## whoami?
 
@@ -30,7 +30,7 @@ title = '关于'
 
 1. [X] 目前已经完成站点的基本布局
 2. [ ] 引入[赫蹏](https://sivan.github.io/heti/) 添加了赫蹏的简码
-3. [ ] [整理 Hugo]({{< ref "hugo" >}})：亦幸自己写的一些关于 Hugo 文档教程，里面含有一些内容的测试。
+3. [ ] [整理 Hugo]({{< ref "note/hugo" >}})：亦幸自己写的一些关于 Hugo 文档教程，里面含有一些内容的测试。
 4. [ ] 参考 [HTML 元素参考](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element "MDN Web Docs")
 
 ## 工具/教程
@@ -44,7 +44,13 @@ title = '关于'
 - [Hugo 中文帮助文档](https://hugo.aiaide.com/)
 - [UnoCSS: The instant on-demand Atomic CSS engine](https://unocss.dev/)
 - [UnoCSS Interactive Docs](https://unocss.dev/interactive/)
+- [iconify](http://iconify.design/) 推荐这个，Icônes 加载太慢了，除非你本地运行它
 - [Icônes](https://icones.js.org/) 查找需要的图标
+
+## VS Code 插件
+
+- [UnoCSS](https://github.com/unocss/unocss/tree/main/packages/vscode)
+- [VS Code 补全提示](https://github.com/antfu/vscode-iconify) 图标可视化
 
 ### MD 文档编辑工具
 

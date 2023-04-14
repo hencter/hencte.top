@@ -1,0 +1,22 @@
+{{/* 这里是一些全局（公共）的脚本加载区域，如果需要局部加载，请使用 define 实现 */}}
+{{/* 例如：页面暗黑模式脚本 */}}
+
+{{ with resources.Get "js/main.js" }}
+  {{ $mainJs := . | js.Build | minify | fingerprint }}
+  <script
+    rel="preload"
+    as="script"
+    src="{{ $mainJs.RelPermalink }}"
+    {{ if hugo.IsProduction }}
+      integrity="{{ $mainJs.Data.Integrity }}"
+    {{ end }}
+    defer
+  ></script>
+{{ end }}
+
+{{ if .Page.Store.Get "hasMermaid" }}
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+{{ end }}

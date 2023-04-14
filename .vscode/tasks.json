@@ -1,0 +1,65 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"group": "test",
+			"label": "unocss cli watch",
+			"type": "shell",
+			"detail": "运行 unocss cli(带有监视 CSS 生成), 输出到 assets/csss/uno.css",
+			"icon": {
+				"color": "terminal.ansiGreen",
+				"id": "debug"
+			},
+			// https://unocss.dev/integrations/cli
+			// "command": "unocss \"layouts/**/*.html\" \"config/**/*.toml\" \"content/**/**.md\" --watch --out-file assets/css/uno.css",
+			"command": "unocss",
+			"args": [
+				"\"config/**/*.toml\"",
+				"\"content/**/*.md\"",
+				"\"layouts/**/*.html\"",
+				"-w", // "--watch",
+				"-o", // "--out-file",
+				"assets/css/uno.css"
+			],
+			"presentation": {
+				"echo": true,
+				"reveal": "silent",
+				"focus": false, // 默认不聚焦，
+			},
+		
+		},
+		{
+			"group": "test",
+			"type": "hugo",
+			"task": "server draft",
+			"detail": "运行 Hugo 服务器（带草稿)",
+			"label": "hugo server draft",
+			"icon": {
+				"color": "terminal.ansiMagenta",
+				"id": "server"
+			},
+			"presentation": {
+				"echo": true,
+				// "reveal": "always",
+				"focus": true,
+			}
+		},
+		// 下方任务批量执行
+		{
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"label": "dev: debug",
+			"detail": "调试整个 Hugo 站点",
+			"icon": {
+				"color": "terminal.ansiRed",
+				"id": "debug-all"
+			},
+			"dependsOn": [
+				"unocss cli watch",
+				"hugo server draft"
+			],
+		}
+	]
+}

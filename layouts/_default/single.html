@@ -8,11 +8,11 @@
 
 {{ define "main" }}
 
-<main id="main" px-10 py-10>
+<main id="main" max-wprose ma  my-10 shadow rd-2 bg="white op10" dark:bg="black op20 shadow-2xl">
 
   <header>
-    <h1 id="{{.Title}}" text="center">
-      <a text-dark dark:text-light hover:decoration-underline
+    <h1 id="{{.Title}}" text="center" >
+      <a  text-dark dark="text-light" hover:decoration-underline
         href="{{ if .IsPage }}#{{.Title}}{{ else }}{{.Permalink}}{{ end }}">{{
         .Title }}</a>
     </h1>
@@ -26,14 +26,11 @@
   </header>
 
   {{ if .IsPage }}
-  <aside prose ma>
     {{ partial "toc.html" . }}
-  </aside>
   {{ else }}
   {{ end }}
 
-  <article prose ma rd-2 p2>
-
+  <article rd-2 p2 prose dark:prose-invert>
     {{ with .Content }}
     {{ . }}
     {{ end }}
@@ -41,7 +38,7 @@
 
   {{/* <aside flex>
     <div>
-      <a i-carbon:expand-categories text-xl></a>
+      <a text-xl></a>
       {{ with .Params.categories -}}
       {{ range . -}}
       <span shadow bg="white op10" ml-1 rd-1>
@@ -61,11 +58,11 @@
     </div>
   </aside> */}}
 
-  <aside prose ma>
+  <aside>
     {{ partial "related.html" . }}
   </aside>
 
-  <footer prose ma flex justify-between>
+  <footer flex justify-between>
 
     {{ with .PrevInSection }}
     <div relative flex active:scale-96>

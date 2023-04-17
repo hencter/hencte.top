@@ -13,6 +13,7 @@ enableInlineShortcodes = true # 行内简码 Default value: false
 enableGitInfo = true
 paginate = 10
 
+relativeURLs = true # 为内容开启，相对路径，而不是直接生成绝对路径，这对需要在多个域名下部署很有帮助 默认为：false
 # 分类
 
 

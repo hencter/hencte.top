@@ -1,1 +1,0 @@
-unocss "layouts/**/*.html" --watch --out-file assets/css/uno.css & hugo server -D

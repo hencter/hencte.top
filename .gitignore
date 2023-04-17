@@ -3,6 +3,7 @@ public
 resources
 themes
 
+uno.css
 .hugo_build.lock
 package-lock.json
 # 需要了解

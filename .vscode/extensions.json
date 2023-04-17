@@ -5,6 +5,8 @@
     "fivethree.vscode-hugo-snippets",
     "eliostruyf.vscode-hugo-themer",
     "kaellarkin.hugo-shortcode-syntax",
-    "davidanson.vscode-markdownlint"
+    "davidanson.vscode-markdownlint",
+    "antfu.unocss",
+    "tamasfe.even-better-toml"
   ]
 }

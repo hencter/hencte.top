@@ -10,8 +10,6 @@ Just my personnal site.
 ## Dev
 
 ```sh
+# unocss
 npm install -g @unocss/cli
-# cargo install pagefind
-# just run
-sh ./dev.sh
 ```

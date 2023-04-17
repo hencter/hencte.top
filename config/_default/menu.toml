@@ -10,7 +10,7 @@ title = "日志"
 weight = 2
 [[main]]
 name = "Note"
-identifier = "note"        # 标识符，用于翻译
+identifier = "note"                        # 标识符，用于翻译
 pre = 'i-material-symbols:edit-note-sharp' # 图标（可选）
 pageRef = "/note"
 title = "笔记"
@@ -18,26 +18,32 @@ weight = 2
 [[main]]
 name = "about"
 title = "关于"
-identifier = "about"              # 标识符，用于翻译
+identifier = "about"               # 标识符，用于翻译
 pre = 'i-mdi-about-circle-outline' # 图标（可选）
 pageRef = "/about"
 weight = 0
 
 [[footer]]
-title="Github"
-name="Github"
-pre = 'i-simple-icons:github'
-url = 'https://github.com/hencter/'
-weight = 0
-[[footer]]
-title="Gitee"
-name="Gitee"
-pre = 'i-simple-icons:gitee text-#DA0000'
-url = 'https://gitee.com/hencter'
+title = "本站点由 Hugo 强力支持"
+name = "Hugo"
+pre = 'i-simple-icons:hugo'
+url = 'https://gohugo.io/'
 weight = 1
 [[footer]]
-title="Hugo"
-name="Hugo"
-pre = 'i-logos-hugo w21'
-url = 'https://gohugo.io/'
+title = "备忘录"
+name = "Memos"
+pre = 'i-twemoji:feather'
+url = 'https://memos.hencte.top/'
+weight = 1
+[[footer]]
+title = "感谢 Github 的免费代码托管"
+name = "Github"
+pre = 'i-simple-icons:github'
+url = 'https://github.com/hencter/'
 weight = 2
+[[footer]]
+title = "感谢 Gitee 的免费代码托管"
+name = "Gitee"
+pre = 'i-simple-icons:gitee text-#DA0000'
+url = 'https://gitee.com/hencter'
+weight = 3

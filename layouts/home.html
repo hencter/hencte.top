@@ -1,7 +1,17 @@
 {{ define "main" }}
-<main text-center all:transition-400>
-  <article prose ma>
+<main max-wprose ma all:transition-400>
+  <article prose ma my4 p2 box-border shadow  rd-1 bg="white op10" dark:bg="black op20 shadow-2xl">
     {{- .Content -}}
   </article>
+  <section ma my4 p2 box-border  shadow rd-1 bg="white op10" dark:bg="black op20 shadow-2xl">
+    <ul pl-0>
+      {{ range first 10 .Site.RegularPages.ByLastmod }}
+          <li flex justify-between>
+              <a text-rose-9 dark="text-rose" href="{{ .Permalink }}">{{ .Title }}</a>
+              <time>{{ .Date.Format "Mon, Jan 2, 2006" }}</time>
+          </li>
+      {{ end }}
+    </ul>  
+  </section>
 </main>
 {{ end }}

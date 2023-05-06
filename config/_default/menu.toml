@@ -29,12 +29,12 @@ name = "Hugo"
 pre = 'i-simple-icons:hugo'
 url = 'https://gohugo.io/'
 weight = 1
-[[footer]]
-title = "备忘录"
-name = "Memos"
-pre = 'i-twemoji:feather'
-url = 'https://memos.hencte.top/'
-weight = 1
+# [[footer]]
+# title = "备忘录"
+# name = "Memos"
+# pre = 'i-twemoji:feather'
+# url = 'https://memos.hencte.top/'
+# weight = 1
 [[footer]]
 title = "感谢 Github 的免费代码托管"
 name = "Github"

@@ -6,7 +6,7 @@
   {{/* 仅在 $menuID == main 显示 */}}
   {{ if eq $menuID "main" }}
     <nav>
-      <ul class="menu">
+      <ul pl0 list-none class="menu">
         {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
         <li list-none>
           <button
@@ -23,7 +23,7 @@
     </nav>
   {{ else }}
     <nav>
-      <ul>
+      <ul pl0 list-none>
         {{- partial "inline/menu/footer.html" (dict "page" $page "menuEntries" .) }}
       </ul>
     </nav>
@@ -79,23 +79,22 @@
     {{- else if $page.HasMenuCurrent .Menu . }}
       {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
     {{- end }}
-
-
-    <li list-none hover="bg-white bg-op20 rd-1">
+    <li>
       <a
         {{- range $k, $v := $attrs }}
           {{- with $v }}
             {{- printf " %s=%q " $k $v | safeHTMLAttr }}
           {{- end }}
         {{- end -}}
-        text-center
+        (
         text-dark
         dark="text-white"
+        )
         title="{{ .Title }}"
       >
-        {{ with .Pre }}
+        {{- with .Pre -}}
           <i class="{{ . }}"></i>
-        {{ end }}
+        {{- end -}}
         {{/* {{ or (T .Identifier) .Name | safeHTML }} */}}
       </a>
 

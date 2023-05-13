@@ -26,7 +26,7 @@ weight = 0
 [[footer]]
 title = "本站点由 Hugo 强力支持"
 name = "Hugo"
-pre = 'i-simple-icons:hugo'
+pre = 'i-simple-icons:hugo text-#cd1a7e'
 url = 'https://gohugo.io/'
 weight = 1
 # [[footer]]

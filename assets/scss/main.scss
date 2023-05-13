@@ -19,7 +19,7 @@ html {
 
 .light {
   // 背景
-  background: url($light);
+  // background: url($light);
   left: 0;
   right: 0;
   height: 100%;
@@ -34,24 +34,20 @@ html {
 .menu :hover {
 
   .child-menu,
-  ul {
-    // display: block;
-    display: flex;
-
-    >li {
-      margin-top: .25em;
-      margin-right: .25em;
-    }
-  }
+  ul {}
 }
 
 
 /* 超链接 */
 
 a {
-  text-decoration: none;
-  word-wrap: break-word; // 由于长链接在 hugo 中并没有自动换航
+  // text-decoration: none;
+  // word-wrap: break-word; // 由于长链接在 hugo 中并没有自动换航
+  color: #881337;
 
+  :hover {
+    text-decoration: dotted pink;
+  }
 }
 
 /* 文章样式 */
@@ -94,7 +90,7 @@ code {
 
 
 .dark {
-  background: url($dark);
+  // background: url($dark);
   left: 0;
   right: 0;
   height: 100%;
@@ -103,20 +99,8 @@ code {
   background-size: cover;
   background-blend-mode: darken, luminosity;
 
-  #TableOfContents {
-
-    a {
-
-      // color: white;
-
-      :hover {
-        text-decoration: underline;
-      }
-
-      :visited {
-        color: pink;
-      }
-    }
-
+  a {
+    color: #fb7185;
   }
+  
 }

@@ -5,15 +5,14 @@
   {{/* {{ printf "%s" $menuID }} */}}
   {{/* 仅在 $menuID == main 显示 */}}
   {{ if eq $menuID "main" }}
-    <nav py10>
-      <ul class="menu" m0 pl0 flex flex-row justify-center text-xl>
+    <nav>
+      <ul class="menu">
         {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
         <li list-none>
           <button
             id="toggle"
-            text-2xl
-            hover:op90
             i-carbon-sun
+            text-xl
             dark="i-carbon-moon"
             title="切换主题"
           >
@@ -24,7 +23,7 @@
     </nav>
   {{ else }}
     <nav>
-      <ul flex pl0 flex-row justify-around text-xl>
+      <ul>
         {{- partial "inline/menu/footer.html" (dict "page" $page "menuEntries" .) }}
       </ul>
     </nav>
@@ -38,15 +37,15 @@
     {{- $attrs := dict "href" .URL }}
 
     {{- if $page.IsMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "active bg-white bg-op20 rd-1" "aria-current" "page") }}
+      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
     {{- else if $page.HasMenuCurrent .Menu . }}
       {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
     {{- end }}
 
 
-    <li list-none mr5 hover="bg-white bg-op20 rd-1" relative min-w-4em>
+    <li>
       {{ with .Pre }}
-        <i px1 class="{{ . }}"></i>
+        <i class="{{ . }}"></i>
       {{ end }}
       <a
         {{- range $k, $v := $attrs }}
@@ -54,22 +53,15 @@
             {{- printf " %s=%q " $k $v | safeHTMLAttr }}
           {{- end }}
         {{- end -}}
-        text-black
-        absolute
-        top-0
-        right-0
-        bottom-0
-        left-0
-        dark="text-white"
         title="{{ .Title }}"
       >
-        <span m-l-1.5em>
+        <span>
           {{ or (T .Identifier) .Name | safeHTML }}
         </span>
       </a>
       {{/* 子菜单 */}}
       {{- with .Children }}
-        <ul class="child-menu" absolute pl0 hidden min-w-4em>
+        <ul class="child-menu">
           {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
         </ul>
       {{- end }}
@@ -102,7 +94,7 @@
         title="{{ .Title }}"
       >
         {{ with .Pre }}
-          <i px1 class="{{ . }}"></i>
+          <i class="{{ . }}"></i>
         {{ end }}
         {{/* {{ or (T .Identifier) .Name | safeHTML }} */}}
       </a>

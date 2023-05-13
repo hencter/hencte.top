@@ -1,8 +1,8 @@
 {{/* 当字数超过 400 开启目录 */}}
 <aside>
 {{ if or (gt .WordCount 400 ) }}
-  <details p1 xl-ml10 xl-b-l-dotted border-l b-dark open>
-    <summary text-center list-none decoration-none>目录</summary>
+  <details>
+    <summary>目录</summary>
     {{ .TableOfContents }}
   </details>
 {{ end }}

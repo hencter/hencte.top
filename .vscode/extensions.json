@@ -7,6 +7,7 @@
     "kaellarkin.hugo-shortcode-syntax",
     "davidanson.vscode-markdownlint",
     "antfu.unocss",
-    "tamasfe.even-better-toml"
+    "tamasfe.even-better-toml",
+    "antfu.iconify"
   ]
 }

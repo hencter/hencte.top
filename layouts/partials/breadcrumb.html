@@ -5,12 +5,12 @@ Hugo 如下实现
 https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_cookbook/Breadcrumb_Navigation
 */}}
 
-<nav aria-label="breadcrumb" shadow rd-2 p2 bg="white op10" dark:bg="black op20 shadow-2xl">
+<nav aria-label="breadcrumb">
   {{ range .Ancestors.Reverse }}
-  <a decoration-none text-dark dark:text-light hover="bg-white bg-op20 rd-1" href="{{ .Permalink }}" title="{{ .LinkTitle }}">
+  <a decoration-none hover:decoration-underline text-dark dark:text-light href="{{ .Permalink }}" title="{{ .LinkTitle }}">
     {{ .LinkTitle }}
   </a>
-  >>
+  >
   {{ end }}
   
   <a decoration-none text-dark dark:text-light  font-bold aria-current="page" href="{{ .Permalink }}" title="{{ .LinkTitle }}">

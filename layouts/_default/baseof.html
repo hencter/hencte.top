@@ -18,10 +18,10 @@
     {{ block "style" . }}{{ end }}
   </head>
 
-  <body m0 text-dark dark="text-light">
+  <body (text-dark bg-#f4ecd8 dark="text-light bg-dark")>
     {{ partial "header.html" . }}
     {{ block "main" . }}{{ end }}
-    {{ partial "footer" . }}
+    {{ partial "footer.html" . }}
     {{ block "footer" . }}{{ end }}
     {{ partial "script.html" . }}
     {{ block "script" . }}{{ end }}

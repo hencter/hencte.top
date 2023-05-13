@@ -8,13 +8,14 @@
 
 {{ define "main" }}
 
-<main id="main" max-wprose ma  my-10 shadow rd-2 bg="white op10" dark:bg="black op20 shadow-2xl">
+<main id="main" max-wprose ma my-10>
 
   <header>
-    <h1 id="{{.Title}}" text="center" >
-      <a  text-dark dark="text-light" hover:decoration-underline
-        href="{{ if .IsPage }}#{{.Title}}{{ else }}{{.Permalink}}{{ end }}">{{
-        .Title }}</a>
+    <h1 id="{{.Title}}" text="center">
+      <a text-dark dark="text-light" hover:decoration-underline
+        href="{{ if .IsPage }}#{{.Title}}{{ else }}{{.Permalink}}{{ end }}">
+        {{ .Title }}
+      </a>
     </h1>
     <section my5 text-sm text-center>
       <span>{{ i18n "WordCount" . }}</span>
@@ -26,11 +27,11 @@
   </header>
 
   {{ if .IsPage }}
-    {{ partial "toc.html" . }}
+  {{ partial "toc.html" . }}
   {{ else }}
   {{ end }}
 
-  <article rd-2 p2 prose dark:prose-invert>
+  <article rd-2 prose dark:prose-invert>
     {{ with .Content }}
     {{ . }}
     {{ end }}

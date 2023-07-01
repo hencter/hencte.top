@@ -8,16 +8,15 @@
 
 {{ define "main" }}
 
-<main id="main" max-wprose ma my-10>
+<main id="main">
 
   <header>
-    <h1 id="{{.Title}}" text="center">
-      <a text-dark dark="text-light" hover:decoration-underline
-        href="{{ if .IsPage }}#{{.Title}}{{ else }}{{.Permalink}}{{ end }}">
+    <h1 id="{{.Title}}">
+      <a href="{{ if .IsPage }}#{{.Title}}{{ else }}{{.Permalink}}{{ end }}">
         {{ .Title }}
       </a>
     </h1>
-    <section my5 text-sm text-center>
+    <section>
       <span>{{ i18n "WordCount" . }}</span>
       <span>·</span>
       <span>
@@ -31,71 +30,39 @@
   {{ else }}
   {{ end }}
 
-  <article rd-2 prose dark:prose-invert>
+  <article>
     {{ with .Content }}
     {{ . }}
     {{ end }}
   </article>
 
-  {{/* <aside flex>
-    <div>
-      <a text-xl></a>
-      {{ with .Params.categories -}}
-      {{ range . -}}
-      <span shadow bg="white op10" ml-1 rd-1>
-        <a decoration-none href='{{ "categories/" | absURL }}{{ . | urlize }}' title="{{.}}">{{- . -}}</a>
-      </span>
-      {{ end -}}
-      {{ end -}}
-    </div>
-    <div>
-      {{ with .Params.tags -}}
-      {{ range . -}}
-      <span text-green>
-        <a decoration-none href='{{ "tags/" | absURL }}{{ . | urlize }}' title="{{.}}">{{- . -}}</a>
-      </span>
-      {{ end -}}
-      {{ end -}}
-    </div>
-  </aside> */}}
-
   <aside>
     {{ partial "related.html" . }}
   </aside>
 
-  <footer flex justify-between>
+  <footer >
 
     {{ with .PrevInSection }}
-    <div relative flex active:scale-96>
-      <i i-simple-line-icons:arrow-left hfull></i>
-      <span text-xl>
+    <div>
+      <i (i-simple-line-icons:arrow-left)></i>
+      <span>
         {{.Title}}
       </span>
-      <a absolute left-0 right-0 top-0 bottom-0 href="{{.Permalink}}" title="{{.Title}}"></a>
+      <a href="{{.Permalink}}" title="{{.Title}}"></a>
     </div>
     {{ end }}
 
     {{ with .NextInSection }}
-    <div relative flex active:scale-96>
-      <span text-xl>
+    <div>
+      <span>
         {{.Title}}
       </span>
-      <i i-simple-line-icons:arrow-right hfull></i>
-      <a absolute left-0 right-0 top-0 bottom-0 href="{{.Permalink}}" title="{{.Title}}"></a>
+      <i (i-simple-line-icons:arrow-right)></i>
+      <a href="{{.Permalink}}" title="{{.Title}}"></a>
     </div>
     {{ end }}
 
   </footer>
 
-
-
 </main>
 {{ end }}
-
-{{/* {{ define "script" }}
-
-{{ with .Resources.GetMatch "script.js" }}
-{{ .Content | safeJS }}
-{{ end }}
-
-{{ end }} */}}

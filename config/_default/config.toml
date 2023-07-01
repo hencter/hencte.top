@@ -1,9 +1,9 @@
-# 站点
+# 站点信息配置
 baseURL = 'http://localhost' # 请保证其链接完整性（即带有 htts://）
 title = "亦幸小阁"
 copyright = "版权所有"
 languageCode = 'zh'
-# sectionPagesMenu = "main"
+# sectionPagesMenu = "main" # 懒得写菜单就用这个
 
 # 内容
 defaultContentLanguage = 'zh'
@@ -12,11 +12,9 @@ enableEmoji = true
 enableInlineShortcodes = true # 行内简码 Default value: false
 enableGitInfo = true
 paginate = 10
+relativeURLs = true           # 为内容开启，相对路径，而不是直接生成绝对路径，这对需要在多个域名下部署很有帮助 默认为：false
 
-relativeURLs = true # 为内容开启，相对路径，而不是直接生成绝对路径，这对需要在多个域名下部署很有帮助 默认为：false
 # 分类
-
-
 [taxonomies]
 tag = 'tags'            # 英文，首字母大写
 category = 'categories' # 中文
@@ -48,7 +46,6 @@ weight = 30
 
 
 # 模块
-#      hugo mod get -u
-[module]
+[module] # hugo mod get -u MODULE_NAME
 min = '0.111.0'              # https://gohugo.io/content-management/related/#index-content-headings-in-related-content
 proxy = 'https://goproxy.cn'

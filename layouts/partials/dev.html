@@ -1,33 +1,19 @@
 {{ if .Site.IsServer }}
-<div fixed w10 bottom-0 right-0  p2 bg="white op20"  dark="bg-black bg-op20 shadow-2xl">
+  <div
+    fixed
+    w10
+    bottom-0
+    right-0
+    p2
+    bg="white op20"
+    dark="bg-black bg-op20 shadow-2xl"
+  >
     <div flex items-center justify-center uppercase mt5>
-        <div rd-full p2px block sm:hidden>all</div>
-        <div rd-full p2px  hidden sm:block md:hidden>sm</div>
-        <div rd-full p2px hidden md:block lg:hidden>md</div>
-        <div rd-full p2px hidden lg:block xl:hidden>lg</div>
-        <div rd-full p2px  hidden xl:block>xl</div>
+      <div rd-full p2px block sm:hidden>all</div>
+      <div rd-full p2px hidden sm:block md:hidden>sm</div>
+      <div rd-full p2px hidden md:block lg:hidden>md</div>
+      <div rd-full p2px hidden lg:block xl:hidden>lg</div>
+      <div rd-full p2px hidden xl:block>xl</div>
     </div>
-
-    {{/*  <div>
-        <ul>
-            <h2>Git</h2>
-            <li>mssage {{ .GitInfo.Subject }}</li>
-            <li>commit {{ .GitInfo.AbbreviatedHash }}</li>
-            <li>Author:
-                <a href="https://github.com/{{ .GitInfo.AuthorName }}">{{ .GitInfo.AuthorName }}</a>
-                &nbsp;
-                <a href="mailto:{{ .GitInfo.AuthorEmail }}">
-                    <{{ .GitInfo.AuthorEmail }}>
-                </a>
-            </li>
-            <li>Date: {{ .GitInfo.AuthorDate }}</li>
-            <li>
-                <a href="https://github.com/hencter/hencte.top/commit/{{ .GitInfo.AbbreviatedHash }}">
-                    {{.GitInfo.AbbreviatedHash }}
-                </a>
-            </li>
-        </ul>
-    </div>  */}}
-
-</div>
+  </div>
 {{ end }}

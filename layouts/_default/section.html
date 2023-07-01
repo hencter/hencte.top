@@ -1,5 +1,5 @@
 {{ define "main" }}
-<main id="main"  max-wprose ma px-10 py-10>
+<main id="main">
   <header>
     {{ partial "breadcrumb.html" . }}
   </header>
@@ -12,8 +12,8 @@
   {{ range .Pages.GroupByDate "2006" }}
 
   <section>
-    <h2 relative h15 pointer-events-none ma>
-      <span absolute -left-2rem -top-2rem op-15  text-8em font-bold>{{ .Key }}</span>
+    <h2>
+      <span>{{ .Key }}</span>
     </h2>
     {{ range .Pages }}
     {{ .Render "summary"}}

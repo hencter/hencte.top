@@ -1,5 +1,6 @@
-{{/* 这里是一些全局（公共）的脚本加载区域，如果需要局部加载，请使用 define 实现 */}}
-{{/* 例如：页面暗黑模式脚本 */}}
+{{/* 这里是一些全局（公共）的脚本加载区域，如果需要局部加载 Script，请使用 define "script" 实现
+  * 例如：页面暗黑模式脚本
+*/}}
 
 {{ with resources.Get "js/main.js" }}
   {{ $mainJs := . | js.Build | minify | fingerprint }}

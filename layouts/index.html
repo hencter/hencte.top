@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <main>
+    <article>
+      {{- .Content -}}
+    </article>
+    <section>
+      <ul>
+        {{ range first 10 .Site.RegularPages.ByLastmod }}
+          <li>
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+            <time>{{ .Date.Format "Mon, Jan 2, 2006" }}</time>
+          </li>
+        {{ end }}
+      </ul>
+    </section>
+  </main>
+{{ end }}

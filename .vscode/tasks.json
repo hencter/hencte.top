@@ -11,14 +11,15 @@
 				"id": "debug"
 			},
 			// https://unocss.dev/integrations/cli
-			// "command": "unocss \"layouts/**/*.html\" \"config/**/*.toml\" \"content/**/**.md\" --watch --out-file assets/css/uno.css",
+			// \"command": "unocss \"layouts/**/*.html\" \"config/**/*.toml\" \"content/**/**.md\" --watch --out-file assets/css/uno.css",
 			"command": "unocss",
 			"args": [
+				// 请将要渲染的文件按照如下格式渲染
 				"\"config/**/*.toml\"",
 				"\"content/**/*.md\"",
 				"\"layouts/**/*.html\"",
-				"-w", // "--watch",
-				"-o", // "--out-file",
+				"-w", // "--watch", 监听 unocss 生成
+				"-o", // "--out-file", 输出文件至 uno.css
 				"assets/css/uno.css"
 			],
 			"presentation": {
@@ -44,17 +45,16 @@
 				"focus": true,
 			}
 		},
-		// 下方任务批量执行
 		{
 			"group": {
 				"kind": "test",
 				"isDefault": true
 			},
-			"label": "dev: debug",
+			"label": "hencte.top: debug",
 			"detail": "调试整个 Hugo 站点",
 			"icon": {
 				"color": "terminal.ansiRed",
-				"id": "debug-all"
+				"id":"debug"
 			},
 			"dependsOn": [
 				"unocss cli watch",

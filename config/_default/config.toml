@@ -1,5 +1,5 @@
 # 站点信息配置
-baseURL = 'http://localhost' # 请保证其链接完整性（即带有 htts://）
+baseURL = 'http://localhost:1313' # 请保证其链接完整性（即带有 htts://）
 title = "亦幸小阁"
 copyright = "版权所有"
 languageCode = 'zh'

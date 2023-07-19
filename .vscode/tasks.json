@@ -8,7 +8,7 @@
 			"detail": "运行 unocss cli(带有监视 CSS 生成), 输出到 assets/csss/uno.css",
 			"icon": {
 				"color": "terminal.ansiGreen",
-				"id": "debug"
+				"id": "activate-breakpoints"
 			},
 			// https://unocss.dev/integrations/cli
 			// \"command": "unocss \"layouts/**/*.html\" \"config/**/*.toml\" \"content/**/**.md\" --watch --out-file assets/css/uno.css",
@@ -31,18 +31,22 @@
 		},
 		{
 			"group": "test",
-			"type": "hugo",
-			"task": "server draft",
-			"detail": "运行 Hugo 服务器（带草稿)",
+			"type": "shell",
+			"command": "hugo",
+			"args": [
+				"server",
+				"--buildDrafts"
+			],
 			"label": "hugo server draft",
+			"detail": "运行 Hugo 服务器",
 			"icon": {
 				"color": "terminal.ansiMagenta",
 				"id": "server"
 			},
 			"presentation": {
 				"echo": true,
-				// "reveal": "always",
 				"focus": true,
+				// "reveal": "always",
 			}
 		},
 		{

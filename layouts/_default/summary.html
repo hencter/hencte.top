@@ -1,12 +1,12 @@
-<article>
+<article {{- if .Draft -}} op50 {{- end -}}>
   <header>
     <h3 id="{{ .Title }}">
-      <a>
+      <a href="{{ .RelPermalink }}">
         {{- .Title -}}
-        {{ if .Site.IsServer }}
-          {{- if .Draft }}<sup><span>&nbsp;&nbsp;[草稿]</span></sup>{{- end }}
-        {{ end }}
       </a>
+      {{- if .Site.IsServer -}}
+      {{- if .Draft -}}<sup><span>&nbsp;&nbsp;[草稿]</span></sup>{{- end -}}
+      {{- end -}}
     </h3>
     <p>
       <time>
@@ -14,12 +14,12 @@
       </time>
     </p>
   </header>
-  <p break-all>
+  <p>
     {{ .Summary }}
   </p>
   {{ if .Truncated }}
-    <div>
-      <a href="{{ .RelPermalink }}">阅读更多...</a>
-    </div>
+  <div>
+    <a href="{{ .RelPermalink }}">阅读更多···</a>
+  </div>
   {{ end }}
 </article>

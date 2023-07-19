@@ -42,7 +42,7 @@ name = 'type'
 weight = 20
 [[related.indices]]
 name = "date"
-weight = 30
+weight = 10
 
 
 # 模块

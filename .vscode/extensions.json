@@ -8,6 +8,8 @@
     "davidanson.vscode-markdownlint",
     "antfu.unocss",
     "tamasfe.even-better-toml",
-    "antfu.iconify"
+    "antfu.iconify",
+    "esbenp.prettier-vscode",
+    "bungcip.better-toml"
   ]
 }

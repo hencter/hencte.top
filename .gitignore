@@ -6,5 +6,6 @@ themes
 uno.css
 .hugo_build.lock
 package-lock.json
+pnpm-lock.yaml
 # 需要了解
 assets/jsconfig.json

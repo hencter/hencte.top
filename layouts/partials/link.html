@@ -1,34 +1,21 @@
 {{/* unocss 需要 @unocss/cli 为模版文件生成 css 文件 */}}
 
 {{ with resources.Get "css/uno.css" }}
-  {{ $unocss := . | minify }}
-  <link
-    rel="stylesheet"
-    href="{{ $unocss.RelPermalink }}"
-    {{ if hugo.IsProduction }}
-      integrity={{ $unocss.Data.Integrity }}
-    {{ end }}
-  />
+{{ $unocss := . | minify }}
+<link rel="stylesheet" href="{{ $unocss.RelPermalink }}" {{ if hugo.IsProduction }} integrity={{ $unocss.Data.Integrity
+  }} {{ end }} />
 {{ end }}
 
 {{/* 对 Markdown 的 CSS 处理 */}}
 
 {{ with resources.Get "scss/main.scss" }}
-  {{ $mainCSS := . | resources.ExecuteAsTemplate "main.scss" . | toCSS | minify }}
-  <link
-    rel="stylesheet"
-    href="{{ $mainCSS.RelPermalink }}"
-    {{ if hugo.IsProduction }}
-      integrity={{ $mainCSS.Data.Integrity }}
-    {{ end }}
-  />
+{{ $mainCSS := . | resources.ExecuteAsTemplate "main.scss" . | toCSS | minify }}
+<link rel="stylesheet" href="{{ $mainCSS.RelPermalink }}" {{ if hugo.IsProduction }} integrity={{
+  $mainCSS.Data.Integrity }} {{ end }} />
 {{ end }}
 
 {{/* 赫蹏 */}}
 
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti-addon.min.js"
+{{/*  <script src="https://cdnjs.cloudflare.com/ajax/libs/heti/0.9.4/heti-addon.min.js"
   integrity="sha512-GChf2qekcjrSoPicCypQLPqkaZkEnkcsJr85AmkczY0HG5SkfbxOmZY6RoFJLdoeKTGk8EZvkRBaF7BIqV1Ipw=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-></script>
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>  */}}

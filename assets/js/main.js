@@ -1,12 +1,11 @@
 
-let root = document.body.parentElement
-let light = "light"
-let dark = "dark"
+const root = document.body.parentElement
+const light = "light"
+const dark = "dark"
 
 let darkMode = localStorage.getItem("color-scheme")
 
 if (darkMode === "dark") enableDarkMode()
-
 if (darkMode === "light") disableDarkMode()
 
 document.querySelector("#toggle").addEventListener("click", e => {
@@ -21,7 +20,7 @@ document.querySelector("#toggle").addEventListener("click", e => {
 function enableDarkMode() {
   root.classList.add("dark")
   root.classList.remove("light")
-  localStorage.setItem("color-scheme", "dark")
+  localStorage.setItem("color-scheme", dark)
 }
 
 function disableDarkMode() {

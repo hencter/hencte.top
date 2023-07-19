@@ -7,13 +7,13 @@ https://developer.mozilla.org/zh-CN/docs/Web/CSS/Layout_cookbook/Breadcrumb_Navi
 
 <nav aria-label="breadcrumb">
   {{ range .Ancestors.Reverse }}
-  <a decoration-none hover:decoration-underline text-dark dark:text-light href="{{ .Permalink }}" title="{{ .LinkTitle }}">
+  <a href="{{ .Permalink }}" title="{{ .LinkTitle }}">
     {{ .LinkTitle }}
   </a>
   >
   {{ end }}
   
-  <a decoration-none text-dark dark:text-light  font-bold aria-current="page" href="{{ .Permalink }}" title="{{ .LinkTitle }}">
+  <a aria-current="page" href="{{ .Permalink }}" title="{{ .LinkTitle }}">
     {{ .LinkTitle }}
   </a>
   </ol>

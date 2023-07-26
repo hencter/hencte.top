@@ -1,24 +1,26 @@
 {{ $related := .Site.RegularPages.Related . | first 5 }}
 {{ with $related }}
-<h2>另见</h2>
-<ul>
-  {{ range $i, $p := . }}
-  <li>
-    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-    {{ with .HeadingsFiltered }}
-    {{/* 这里关联的是由内容中有相同的标题的文章 */}}
-    <ul>
-      {{ range . }}
-      {{ $link := printf "%s#%s" $p.RelPermalink .ID | safeURL }}
-      <li>
-        <a href="{{ $link }}">
-          #{{ .Title }}
-        </a>
-      </li>
+<aside>
+  <h2>另见</h2>
+  <ul>
+    {{ range $i, $p := . }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{ with .HeadingsFiltered }}
+      {{/* 这里关联的是由内容中有相同的标题的文章 */}}
+      <ul>
+        {{ range . }}
+        {{ $link := printf "%s#%s" $p.RelPermalink .ID | safeURL }}
+        <li>
+          <a href="{{ $link }}">
+            #{{ .Title }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
       {{ end }}
-    </ul>
+    </li>
     {{ end }}
-  </li>
-  {{ end }}
-</ul>
+  </ul>
+</aside>
 {{ end }}

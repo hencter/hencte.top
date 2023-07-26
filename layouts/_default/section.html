@@ -4,9 +4,9 @@
     {{ partial "breadcrumb.html" . }}
   </header>
   {{ with .Content }}
-    <article>
-      {{ . }}
-    </article>
+  <article>
+    {{ . }}
+  </article>
   {{ end }}
 
   {{ range .Pages.GroupByDate "2006" }}

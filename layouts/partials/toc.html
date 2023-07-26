@@ -1,9 +1,16 @@
-{{/* 当字数超过 400 开启目录 */}}
+{{ if .IsPage }}
+
 <aside>
-{{ if or (gt .WordCount 400 ) }}
+  {{/* 当字数超过 400 开启目录 */}}
+  {{ if or (gt .WordCount 400 ) }}
   <details>
-    <summary>目录</summary>
+    <summary>
+      大纲预览
+    </summary>
     {{ .TableOfContents }}
   </details>
-{{ end }}
+  {{ end }}
 </aside>
+{{ else }}
+
+{{ end }}

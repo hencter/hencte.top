@@ -2,16 +2,16 @@
 <meta http-equiv="refresh" content="5; url=/">
 {{ end }}
 {{ define "main" }}
-<main all:ma2 h-full text-center flex select-none all:transition-300>
-  <div ma>
-    <h2 text-5xl fw300 animate-bounce-alt animate-count-5 animate-duration-1s>
+<main >
+  <div>
+    <h2>
       404 NOT FOUND
     </h2>
-    <p op30 text-lg fw300 m1>
+    <p >
       你好像走错地方了，点击下方返回主页，或者等待５秒后，本页会自动返回主页
     </p>
-    <div m2 flex justify-center text-2xl op30 hover="op80">
-      <a text-inherit href='{{ "" | relURL }}'>返回主页</a>
+    <div>
+      <a href='{{ "" | relURL }}'>返回主页</a>
     </div>
   </div>
 </main>

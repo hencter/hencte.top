@@ -1,5 +1,6 @@
 +++
 slug = 'log'
+aliases = ['post', 'posts']
 title = '日志'
 +++
 

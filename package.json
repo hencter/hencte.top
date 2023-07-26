@@ -9,8 +9,6 @@
     "@unocss/preset-tagify": "^0.51.4",
     "@unocss/preset-typography": "^0.51.2",
     "@unocss/preset-web-fonts": "^0.53.5",
-    "fuse.js": "^6.6.2",
-    "mark.js": "^8.11.1",
     "unocss": "^0.51.2"
   },
   "name": "hencte.top",

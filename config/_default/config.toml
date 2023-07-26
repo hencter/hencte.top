@@ -3,7 +3,7 @@ baseURL = 'http://localhost:1313' # 请保证其链接完整性（即带有 htts
 title = "亦幸小阁"
 copyright = "版权所有"
 languageCode = 'zh'
-# sectionPagesMenu = "main" # 懒得写菜单就用这个
+sectionPagesMenu = "main" # 将分区页面作为菜单
 
 # 内容
 defaultContentLanguage = 'zh'

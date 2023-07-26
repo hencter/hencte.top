@@ -1,4 +1,3 @@
-
 const root = document.body.parentElement
 const light = "light"
 const dark = "dark"

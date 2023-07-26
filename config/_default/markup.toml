@@ -1,11 +1,11 @@
-# https://gohugo.io/getting-started/configuration-markup/#goldmark
-
+# https://gohugo.io/getting-started/configuration-markup
 [highlight]
 lineNos = true
 lineNumbersInTable = false
 
 [goldmark.parser.attribute]
-block = true # 通过在块下方防止 {.class-name} 来为代码块加一个类样式
+block = true # 通过在块下方防止 {.class-name} 来为 block 块加一个类样式
 
 [goldmark.renderer]
-# hardWraps = true #  By default, Goldmark ignores newlines within a paragraph. Set to true to render newlines as <br> elements.
+# hardWraps = true # By default, Goldmark ignores newlines within a paragraph. Set to true to render newlines as <br> elements.
+# unsafe = true

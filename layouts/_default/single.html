@@ -1,60 +1,11 @@
 {{ define "main" }}
-
 <main id="main">
-
-  <header>
-    <h1 id="{{.Title}}">
-      <a href="{{ if .IsPage }}#{{.Title}}{{ else }}{{.Permalink}}{{ end }}">
-        {{ .Title }}
-      </a>
-    </h1>
-    <section>
-      <span>{{ i18n "WordCount" . }}</span>
-      <span>·</span>
-      <span>
-        <time>{{- i18n "ReadingTime" . -}}</time>
-      </span>
-    </section>
-  </header>
-
-  {{ if .IsPage }}
-  {{ partial "toc.html" . }}
-  {{ else }}
-  {{ end }}
 
   <article>
     {{ with .Content }}
     {{ . }}
     {{ end }}
   </article>
-
-  <aside>
-    {{ partial "related.html" . }}
-  </aside>
-
-  <footer>
-
-    {{ with .PrevInSection }}
-    <div>
-      <i (i-simple-line-icons:arrow-left)></i>
-      <span>
-        {{.Title}}
-      </span>
-      <a href="{{.Permalink}}" title="{{.Title}}"></a>
-    </div>
-    {{ end }}
-
-    {{ with .NextInSection }}
-    <div>
-      <span>
-        {{.Title}}
-      </span>
-      <i (i-simple-line-icons:arrow-right)></i>
-      <a href="{{.Permalink}}" title="{{.Title}}"></a>
-    </div>
-    {{ end }}
-
-  </footer>
 
 </main>
 {{ end }}

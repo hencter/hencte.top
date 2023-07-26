@@ -2,48 +2,42 @@
 # 这里我们使用类或者 UnoCSS 的属性来实现，你可以在 https://icones.js.org/ 中找到你
 
 [[main]]
-name = "Note"
-identifier = "log"        # 标识符，用于翻译
-pre = 'i-gridicons:posts' # 图标（可选）
-pageRef = "/log"
+name = "日志"
 title = "日志"
+pre = 'i-gridicons:posts'
+pageRef = "/log"
+identifier = "log"
+weight = 1
+[[main]]
+name = "技术"
+title = "技术"
+identifier = "tech"
+pre = 'i-material-symbols:edit-note-sharp'
+pageRef = "/tech"
 weight = 2
 [[main]]
-name = "Note"
-identifier = "note"                        # 标识符，用于翻译
-pre = 'i-material-symbols:edit-note-sharp' # 图标（可选）
-pageRef = "/note"
-title = "笔记"
-weight = 2
-[[main]]
-name = "about"
+name = "关于"
 title = "关于"
-identifier = "about"               # 标识符，用于翻译
-pre = 'i-mdi-about-circle-outline' # 图标（可选）
+identifier = "about"
+pre = 'i-mdi-about-circle-outline'
 pageRef = "/about"
 weight = 0
 
-[[footer]]
-title = "本站点由 Hugo 强力支持"
-name = "Hugo"
-pre = 'i-simple-icons:hugo text-#cd1a7e'
-url = 'https://gohugo.io/'
-weight = 1
 # [[footer]]
-# title = "备忘录"
-# name = "Memos"
-# pre = 'i-twemoji:feather'
-# url = 'https://memos.hencte.top/'
+# title = "本站点由 Hugo 强力支持"
+# name = "Hugo"
+# pre = 'i-simple-icons:hugo'
+# url = 'https://gohugo.io/'
 # weight = 1
-[[footer]]
-title = "感谢 Github 的免费代码托管"
-name = "Github"
-pre = 'i-simple-icons:github'
-url = 'https://github.com/hencter/'
-weight = 2
-[[footer]]
-title = "感谢 Gitee 的免费代码托管"
-name = "Gitee"
-pre = 'i-simple-icons:gitee text-#DA0000'
-url = 'https://gitee.com/hencter'
-weight = 3
+# [[footer]]
+# title = "感谢 Github 的免费代码托管"
+# name = "Github"
+# pre = 'i-simple-icons:github'
+# url = 'https://github.com/hencter/'
+# weight = 2
+# [[footer]]
+# title = "感谢 Gitee 的免费代码托管"
+# name = "Gitee"
+# pre = 'i-simple-icons:gitee'
+# url = 'https://gitee.com/hencter'
+# weight = 3

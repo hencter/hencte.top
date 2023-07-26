@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"group": "test",
-			"label": "unocss cli watch",
+			"label": "unocss cli watch", // 请勿修改，下方批量运行需要用到
 			"type": "shell",
 			"detail": "运行 unocss cli(带有监视 CSS 生成), 输出到 assets/csss/uno.css",
 			"icon": {
@@ -18,8 +18,8 @@
 				"\"config/**/*.toml\"",
 				"\"content/**/*.md\"",
 				"\"layouts/**/*.html\"",
-				"-w", // "--watch", 监听 unocss 生成
-				"-o", // "--out-file", 输出文件至 uno.css
+				"--watch", // "--watch", 监听 unocss 生成
+				"--out-file", // "--out-file", 输出文件至 uno.css
 				"assets/css/uno.css"
 			],
 			"presentation": {
@@ -27,7 +27,6 @@
 				"reveal": "silent",
 				"focus": false, // 默认不聚焦，
 			},
-		
 		},
 		{
 			"group": "test",
@@ -37,7 +36,7 @@
 				"server",
 				"--buildDrafts"
 			],
-			"label": "hugo server draft",
+			"label": "hugo server draft", // 请勿修改，下方批量运行需要用到
 			"detail": "运行 Hugo 服务器",
 			"icon": {
 				"color": "terminal.ansiMagenta",
@@ -58,7 +57,7 @@
 			"detail": "调试整个 Hugo 站点",
 			"icon": {
 				"color": "terminal.ansiRed",
-				"id":"debug"
+				"id": "debug"
 			},
 			"dependsOn": [
 				"unocss cli watch",

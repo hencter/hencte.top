@@ -1,0 +1,13 @@
+{{ define "main" }}
+<article class="pose pb-5">
+  {{ .Content }}
+</article>
+<section>
+  {{ range site.RegularPages }}
+  <div class="shadow-rose-50 hover:shadow-2xl py-5">
+    <h2><a href="{{ .RelPermalink }}" class="hover:text-rose-300 underline">{{ .LinkTitle }}</a></h2>
+    <p>{{ .Summary }}</p>
+  </div>
+  {{ end }}
+</section>
+{{ end }}

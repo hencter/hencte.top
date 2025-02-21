@@ -1,7 +1,7 @@
 baseURL = 'https://hencte.top/'
 languageCode = 'zh'
 title = '亦幸小阁'
-DefaultLanguage = 'zh'
+defaultContentLanguage = 'zh'
 
 [languages]
   [languages.zh]

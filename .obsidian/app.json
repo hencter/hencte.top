@@ -3,5 +3,6 @@
   "newLinkFormat": "relative",
   "newFileLocation": "current",
   "alwaysUpdateLinks": true,
-  "trashOption": "local"
+  "trashOption": "local",
+  "showInlineTitle": false
 }

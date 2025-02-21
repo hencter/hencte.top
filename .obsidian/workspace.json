@@ -11,10 +11,14 @@
             "id": "8fc3cae541a542a0",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "content/_index.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "_index"
             }
           }
         ],
@@ -154,12 +158,12 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:打开快速切换": false,
+      "switcher:打开快速切换": true,
+      "command-palette:打开命令面板": false,
       "graph:查看关系图谱": false,
-      "canvas:新建白板": false,
+      "canvas:新建白板": true,
       "daily-notes:打开/创建今天的日记": false,
-      "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "templates:插入模板": true
     }
   },
   "active": "8fc3cae541a542a0",

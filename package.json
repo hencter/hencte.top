@@ -5,12 +5,14 @@
   "scripts": {
     "dev": "hugo server -D"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "Hencter Lew",
+  "license": "MIT",
+  "description": "This is for Hencter Lew site",
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.7",
     "@tailwindcss/typography": "^0.5.16",
+    "prettier": "^3.5.3",
+    "prettier-plugin-go-template": "^0.0.15",
     "tailwindcss": "^4.0.7"
   }
 }

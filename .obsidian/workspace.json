@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "85700c9122cd92d1",
+        "id": "d5c75f764e78a440",
         "type": "tabs",
         "children": [
           {
-            "id": "8fc3cae541a542a0",
+            "id": "2384cc021b404cd9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/_index.md",
-                "mode": "source",
-                "source": false
+                "file": "content/tech/hugo/hugo-cli-convert-toYAML.md",
+                "mode": "preview",
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "_index"
+              "title": "hugo-cli-convert-toYAML"
             }
           }
         ],
@@ -166,6 +166,45 @@
       "templates:插入模板": true
     }
   },
-  "active": "8fc3cae541a542a0",
-  "lastOpenFiles": []
+  "active": "2384cc021b404cd9",
+  "lastOpenFiles": [
+    "public/tech/hugo/hugo-cli-convert-front-matter-to-yaml/index.html",
+    "public/tech/hugo/hugo-cli-convert-front-matter-to-yaml",
+    "content/tech/hugo/content-types.md",
+    "content/tech/hugo/content-formats.md",
+    "content/tech/hugo/_index.md",
+    "content/log/2022-04-21-first-post.md",
+    "content/log/_index.md",
+    "static/img/avatar.jpg",
+    "content/log/2024-04-11-table-rowspan-and-coilspan.md",
+    "content/log/2023-05-19-heti-test.md",
+    "content/log/2023-03-11-tomcat8.md",
+    "content/log/2023-03-11-npm-mirror-config.md",
+    "content/log/2023-03-11-browser-automation-tools.md",
+    "content/log/2023-03-10-new-bing.md",
+    "content/log/2023-03-09-cover-test.md",
+    "content/log/2022-11-19-new-keyboard-experience.md",
+    "content/log/2022-10-05-software.md",
+    "content/log/2022-10-05-proxy.md",
+    "content/log/2022-10-05-docker.md",
+    "content/log/2022-10-05-android.md",
+    "content/log/2022-10-03-neovim.md",
+    "content/log/2022-10-01-wsl.md",
+    "content/log/2022-10-01-windows-daily.md",
+    "content/log/2022-10-01-arch-linux.md",
+    "content/log/2022-07-27-terminal.md",
+    "content/log/2022-07-27-visual-studio-code.md",
+    "content/log/2022-05-26-bluetooth-keyboard-with-app-for-word-memory.md",
+    "content/log/2022-05-22-spec.md",
+    "content/log",
+    "public/tech/hugo/hugo-cli-convert-toyaml/index.html",
+    "public/tech/hugo/hugo-cli-convert-toyaml",
+    "public/oldlog/wsl/index.html",
+    "public/oldlog/windows-daily/index.html",
+    "public/oldlog/visual-studio-code/index.html",
+    "public/oldlog/tomcat8/index.html",
+    "public/oldlog/test-heti/index.html",
+    "public/oldlog/spec/index.html",
+    "static/img/2265276667.png"
+  ]
 }

@@ -2,12 +2,15 @@ baseURL = 'https://hencte.top/'
 languageCode = 'zh'
 title = '亦幸小阁'
 defaultContentLanguage = 'zh'
+relativeURLs = true
 
 [languages]
-  [languages.zh]
-    weight = 0
-  [languages.en]
-    weight = 1
+
+[languages.zh]
+weight = 0
+
+[languages.en]
+weight = 1
 
 [[menus.main]]
 name = 'Home'
@@ -16,7 +19,7 @@ weight = 10
 
 [[menus.main]]
 name = 'Posts'
-pageRef = '/posts'
+pageRef = '/log'
 weight = 20
 
 [[menus.main]]
@@ -25,20 +28,25 @@ pageRef = '/tags'
 weight = 30
 
 [build]
-  [build.buildStats]
-    enable = true
-  [[build.cachebusters]]
-    source = 'assets/notwatching/hugo_stats\.json'
-    target = 'css'
-  [[build.cachebusters]]
-    source = '(postcss|tailwind)\.config\.js'
-    target = 'css'
+[build.buildStats]
+
+enable = true
+
+[[build.cachebusters]]
+source = 'assets/notwatching/hugo_stats\.json'
+target = 'css'
+
+[[build.cachebusters]]
+source = '(postcss|tailwind)\.config\.js'
+target = 'css'
 
 [module]
-  [[module.mounts]]
-    source = 'assets'
-    target = 'assets'
-  [[module.mounts]]
-    disableWatch = true
-    source = 'hugo_stats.json'
-    target = 'assets/notwatching/hugo_stats.json'
+
+[[module.mounts]]
+source = 'assets'
+target = 'assets'
+
+[[module.mounts]]
+disableWatch = true
+source = 'hugo_stats.json'
+target = 'assets/notwatching/hugo_stats.json'

@@ -4,5 +4,14 @@
   "newFileLocation": "current",
   "alwaysUpdateLinks": true,
   "trashOption": "local",
-  "showInlineTitle": false
+  "showInlineTitle": false,
+  "userIgnoreFilters": [
+    "node_modules/",
+    "public/"
+  ],
+  "attachmentFolderPath": "static/img",
+  "tabSize": 2,
+  "showLineNumber": false,
+  "strictLineBreaks": true,
+  "livePreview": false
 }

@@ -5,12 +5,12 @@
   @context {string} menuID The menu ID.
 
   @example: {{ partial "menu.html" (dict "menuID" "main" "page" .)
-}}
 */}}
 {{- $page := .page }}
 {{- $menuID := .menuID }}
+
 {{- with index site.Menus $menuID }}
-  <nav class="flex justify-start px-6">
+  <nav aria-label="{{ $menuID | humanize }} Navigation" class="flex justify-start px-6">
     <ul class="flex items-center gap-x-5 py-6">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
     </ul>
@@ -21,18 +21,25 @@
   {{- $page := .page }}
   {{- range .menuEntries }}
     {{- $attrs := dict "href" .URL }}
-    {{- $attrs = merge $attrs (dict "class" "hover:text-rose-300") }}
+    {{- $classes := "hover:text-rose-300 transition-colors duration-200" }}
+    
     {{- if $page.IsMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "active underline" "aria-current" "page") }}
+      {{- $classes = printf "%s active text-rose-500 font-medium" $classes }}
+      {{- $attrs = merge $attrs (dict "class" $classes "aria-current" "page") }}
     {{- else if $page.HasMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
+      {{- $classes = printf "%s ancestor text-rose-400" $classes }}
+      {{- $attrs = merge $attrs (dict "class" $classes "aria-current" "true") }}
+    {{- else }}
+      {{- $attrs = merge $attrs (dict "class" $classes) }}
     {{- end }}
+    
     {{- $name := .Name }}
     {{- with .Identifier }}
       {{- with T . }}
         {{- $name = . }}
       {{- end }}
     {{- end }}
+    
     <li>
       <a
         {{- range $k, $v := $attrs }}
@@ -43,7 +50,7 @@
         >{{ $name }}</a
       >
       {{- with .Children }}
-        <ul>
+        <ul class="absolute bg-white shadow-md rounded-md mt-1 py-2 z-10">
           {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
         </ul>
       {{- end }}

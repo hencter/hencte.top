@@ -24,3 +24,6 @@ Available Commands:
 $ hugo convert toYAML --output content_as_yaml
 processing 54 content files
 ```
+
+
+Convert will modify your content to different formats

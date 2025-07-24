@@ -2,11 +2,12 @@
 <meta name="viewport" content="width=device-width" />
 <title>
   {{- if .IsHome -}}
-    {{- site.Title -}}
+  {{- site.Title -}}
   {{- else -}}
-    {{- printf "%s | %s" .Title site.Title -}}
+  {{- printf "%s | %s" .Title site.Title -}}
   {{- end -}}
 </title>
 {{/* {{ partialCached "head/css.html" . }} */}}
 {{ partialCached "head/tailwindcss.html" . }}
+{{ partialCached "jslibs/lunisolar/script-src.html" . }}
 {{ partialCached "head/js.html" . }}

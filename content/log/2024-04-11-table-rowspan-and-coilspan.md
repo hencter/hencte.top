@@ -10,11 +10,11 @@ tags:
 title: Table Rowspan and Coilspan
 ---
 
-## 现在想写点什么呢？{.text-rose}
+## 现在想写点什么呢？{.text-right}
 
 | name | age |
 |:---:|:---:|
-| hencter |  |
-| hencter |  |
-{.}
+| hencter | 23 |
+|  ^ | 22 |
+{.border .table-fixed}
 

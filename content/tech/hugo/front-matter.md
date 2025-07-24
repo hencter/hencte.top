@@ -39,4 +39,9 @@ Hugo 允许您将 yaml、toml 或 json 中的 front matter 添加到您的内容
 
 你可以在你的 front matter 中**任意添加字段**来满足你的需要。这些用户定义的键值被放置在一个单独的 `.Params` 变量中，以供在您的模板中使用。
 
-TODO
+
+> [!note]
+> 这里目前已全部调整为 YMAL 格式
+
+
+[front-matter](<ref front-matter.md>)

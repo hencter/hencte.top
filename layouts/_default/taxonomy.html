@@ -1,0 +1,133 @@
+{{ define "main" }}
+  <header class="mb-12 text-center">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">{{ .Title }}</h1>
+    {{ with .Content }}
+      <div class="prose prose-lg prose-slate max-w-none mb-6">
+        {{ . }}
+      </div>
+    {{ end }}
+    <p class="text-gray-600">共有 {{ if .Data.Terms }}{{ len .Data.Terms }}{{ else }}0{{ end }} 个{{ if eq .Type "tags" }}标签{{ else }}分类{{ end }}</p>
+  </header>
+
+  {{ if .Data.Terms }}
+    <section class="mb-16">
+      <!-- 统计信息 -->
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6 mb-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div>
+            <div class="text-2xl font-bold text-blue-600">{{ len .Data.Terms }}</div>
+            <div class="text-sm text-gray-600">{{ if eq .Type "tags" }}标签总数{{ else }}分类总数{{ end }}</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-green-600">{{ len .Pages }}</div>
+            <div class="text-sm text-gray-600">文章总数</div>
+          </div>
+          {{ $maxCount := 0 }}
+          {{ range .Data.Terms }}
+            {{ if gt (len .Pages) $maxCount }}
+              {{ $maxCount = len .Pages }}
+            {{ end }}
+          {{ end }}
+          <div>
+            <div class="text-2xl font-bold text-purple-600">{{ $maxCount }}</div>
+            <div class="text-sm text-gray-600">最多文章数</div>
+          </div>
+          {{ $avgCount := 0 }}
+          {{ if and .Data.Terms (gt (len .Data.Terms) 0) }}
+            {{ $avgCount = div (len .Pages) (len .Data.Terms) }}
+          {{ end }}
+          <div>
+            <div class="text-2xl font-bold text-orange-600">{{ $avgCount }}</div>
+            <div class="text-sm text-gray-600">平均文章数</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- {{ if eq .Type "tags" }}标签{{ else }}分类{{ end }}云 -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ if eq .Type "tags" }}标签云{{ else }}分类云{{ end }}</h2>
+        <div class="flex flex-wrap gap-3">
+          {{ range .Data.Terms.ByCount }}
+            {{ $count := len .Pages }}
+            {{ $textSize := "text-sm" }}
+            {{ $padding := "px-3 py-2" }}
+            {{ $fontWeight := "font-normal" }}
+            {{ if ge $count 15 }}
+              {{ $textSize = "text-2xl" }}
+              {{ $padding = "px-6 py-3" }}
+              {{ $fontWeight = "font-bold" }}
+            {{ else if ge $count 10 }}
+              {{ $textSize = "text-xl" }}
+              {{ $padding = "px-5 py-3" }}
+              {{ $fontWeight = "font-semibold" }}
+            {{ else if ge $count 7 }}
+              {{ $textSize = "text-lg" }}
+              {{ $padding = "px-4 py-2" }}
+              {{ $fontWeight = "font-medium" }}
+            {{ else if ge $count 4 }}
+              {{ $textSize = "text-base" }}
+              {{ $padding = "px-4 py-2" }}
+              {{ $fontWeight = "font-medium" }}
+            {{ else if ge $count 2 }}
+              {{ $textSize = "text-sm" }}
+              {{ $padding = "px-3 py-2" }}
+              {{ $fontWeight = "font-normal" }}
+            {{ else }}
+              {{ $textSize = "text-xs" }}
+              {{ $padding = "px-2 py-1" }}
+              {{ $fontWeight = "font-light" }}
+            {{ end }}
+            <a href="{{ .Page.RelPermalink }}" 
+               class="inline-block {{ $padding }} {{ $textSize }} {{ $fontWeight }} bg-white border border-gray-200 hover:border-blue-300 hover:bg-blue-50 text-gray-700 hover:text-blue-700 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-md">
+              {{ .Page.LinkTitle }}
+              <span class="text-xs opacity-75 ml-1 font-normal">({{ $count }})</span>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+
+      <!-- 详细列表 -->
+      <div>
+        <h2 class="text-2xl font-bold text-gray-900 mb-6">详细列表</h2>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {{ range .Data.Terms.Alphabetical }}
+            <div class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200">
+              <div class="flex items-center justify-between mb-3">
+                <h3 class="text-lg font-semibold text-gray-900">
+                  <a href="{{ .Page.RelPermalink }}" class="hover:text-blue-600 transition-colors duration-200">
+                    {{ .Page.LinkTitle }}
+                  </a>
+                </h3>
+                <span class="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                  {{ len .Pages }}
+                </span>
+              </div>
+              
+              <!-- 最新文章预览 -->
+              {{ if .Pages }}
+                <div class="space-y-2">
+                  {{ range first 3 .Pages }}
+                    <div class="text-sm">
+                      <a href="{{ .RelPermalink }}" class="text-gray-600 hover:text-blue-600 transition-colors duration-200 block truncate">
+                        {{ .LinkTitle }}
+                      </a>
+                    </div>
+                  {{ end }}
+                  {{ if gt (len .Pages) 3 }}
+                    <div class="text-xs text-gray-500 mt-2">
+                      还有 {{ sub (len .Pages) 3 }} 篇文章...
+                    </div>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ else }}
+    <div class="text-center py-12">
+      <p class="text-gray-500 text-lg">暂无{{ if eq .Type "tags" }}标签{{ else }}分类{{ end }}</p>
+    </div>
+  {{ end }}
+{{ end }}

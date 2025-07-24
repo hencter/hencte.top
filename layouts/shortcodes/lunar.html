@@ -1,0 +1,164 @@
+{{/*
+  农历显示 shortcode - 基于 lunisolar.js
+  用法：
+  {{< lunar >}} - 显示当前日期的农历信息
+  {{< lunar date="2024-01-01" >}} - 显示指定日期的农历信息
+  {{< lunar type="widget" >}} - 显示农历小部件
+  {{< lunar type="simple" >}} - 显示简单的农历信息
+  {{< lunar type="card" >}} - 显示农历卡片
+  {{< lunar format="date" >}} - 自定义显示格式
+*/}}
+
+{{ $type := .Get "type" | default "default" }}
+{{ $date := .Get "date" | default "" }}
+{{ $class := .Get "class" | default "" }}
+
+{{ if eq $type "widget" }}
+  {{/* 农历小部件 - 动态显示当前农历信息 */}}
+  <div class="lunar-widget {{ $class }}" data-lunar-widget="true">
+    <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 border border-amber-200">
+      <div class="flex items-center justify-center">
+        <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-amber-600"></div>
+        <span class="ml-2 text-amber-700">加载农历信息中...</span>
+      </div>
+    </div>
+  </div>
+
+{{ else if eq $type "simple" }}
+  {{/* 简单农历显示 */}}
+  <div class="lunar-simple inline-block {{ $class }}" 
+       {{ if $date }}data-date="{{ $date }}"{{ end }}>
+    <span class="text-sm text-gray-600 bg-gray-100 px-2 py-1 rounded">
+      <span class="lunar-loading">🌙 农历加载中...</span>
+    </span>
+  </div>
+
+{{ else if eq $type "card" }}
+  {{/* 农历卡片显示 */}}
+  <div class="lunar-card bg-white border border-gray-200 rounded-lg p-6 shadow-sm {{ $class }}"
+       {{ if $date }}data-date="{{ $date }}"{{ end }}>
+    <div class="flex items-center mb-4">
+      <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center mr-3">
+        <span class="text-amber-600">🌙</span>
+      </div>
+      <h3 class="text-lg font-semibold text-gray-900">农历信息</h3>
+    </div>
+    <div class="lunar-content space-y-2">
+      <div class="animate-pulse">
+        <div class="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+        <div class="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+        <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+      </div>
+    </div>
+  </div>
+
+{{ else }}
+  {{/* 默认农历显示 */}}
+  <div class="lunar-info inline-block {{ $class }}"
+       {{ if $date }}data-date="{{ $date }}"{{ end }}>
+    <span class="text-sm text-amber-700 bg-amber-50 px-2 py-1 rounded border border-amber-200">
+      <span class="lunar-loading">农历加载中...</span>
+    </span>
+  </div>
+{{ end }}
+
+{{/* 添加初始化脚本 - 使用 lunisolar.js */}}
+<script>
+(function() {
+  // 等待 lunisolar 库加载完成
+  function waitForLunisolar() {
+    if (typeof window.lunisolar !== 'undefined') {
+      initLunarShortcodes();
+    } else {
+      setTimeout(waitForLunisolar, 100);
+    }
+  }
+  
+  function initLunarShortcodes() {
+    // 处理简单农历显示
+    document.querySelectorAll('.lunar-simple').forEach(element => {
+      const date = element.dataset.date;
+      const lunar = date ? lunisolar(date) : lunisolar();
+      const lunarText = lunar.format('lM(lL)lD');
+      element.querySelector('.lunar-loading').textContent = `🌙 ${lunarText}`;
+    });
+    
+    // 处理默认农历显示
+    document.querySelectorAll('.lunar-info').forEach(element => {
+      const date = element.dataset.date;
+      const lunar = date ? lunisolar(date) : lunisolar();
+      const lunarText = lunar.format('lM(lL)lD');
+      element.querySelector('.lunar-loading').textContent = lunarText;
+    });
+    
+    // 处理农历卡片
+    document.querySelectorAll('.lunar-card').forEach(element => {
+      const date = element.dataset.date;
+      const lunar = date ? lunisolar(date) : lunisolar();
+      
+      const html = `
+        <div class="space-y-2">
+          <div class="text-gray-900">
+            <span class="font-medium">农历：</span>
+            <span class="text-gray-700">${lunar.format('lY年 lM(lL)lD')}</span>
+          </div>
+          <div class="text-gray-900">
+            <span class="font-medium">干支：</span>
+            <span class="text-gray-700">${lunar.format('cY cM cD cH')}</span>
+          </div>
+          <div class="text-gray-900">
+            <span class="font-medium">生肖：</span>
+            <span class="text-gray-700">${lunar.format('cZ')}</span>
+          </div>
+          ${lunar.solarTerm ? `
+            <div class="text-gray-900">
+              <span class="font-medium">节气：</span>
+              <span class="text-gray-700">${lunar.solarTerm.toString()}</span>
+            </div>
+          ` : ''}
+        </div>
+      `;
+      
+      element.querySelector('.lunar-content').innerHTML = html;
+    });
+    
+    // 处理农历小部件
+    document.querySelectorAll('.lunar-widget').forEach(element => {
+      const lunar = lunisolar();
+      
+      const html = `
+        <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg p-4 border border-amber-200">
+          <div class="text-center">
+            <div class="text-lg font-semibold text-amber-800 mb-2">
+              ${lunar.format('lY年 lM(lL)lD')}
+            </div>
+            <div class="text-sm text-amber-700 mb-1">
+              公历：${lunar.format('YYYY年MM月DD日')}
+            </div>
+            <div class="text-sm text-amber-700 mb-1">
+              干支：${lunar.format('cY cM cD')}
+            </div>
+            <div class="text-sm text-amber-700">
+              生肖：${lunar.format('cZ')}
+            </div>
+            ${lunar.solarTerm ? `
+              <div class="text-sm text-amber-700 mt-2 px-2 py-1 bg-amber-100 rounded">
+                ${lunar.solarTerm.toString()}
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+      
+      element.innerHTML = html;
+    });
+  }
+  
+  // 如果页面已加载完成，直接初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', waitForLunisolar);
+  } else {
+    waitForLunisolar();
+  }
+})();
+</script>

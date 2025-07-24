@@ -5,4 +5,4 @@ title: 首页
 
 
 欢迎来到我的个人小站，小站还正在建设中，敬请期待···
-{.text-center .text-rose}
+{.text-center.text-rose}

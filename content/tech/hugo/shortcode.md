@@ -22,13 +22,13 @@ Shortcode 用于再 Makrdown 中扩展一些 Makdown 本身不支持的特性。
 
 ### Gitub Gist
 
-{{< gist hencter 74114b0f07510d24b70b1a7f2def0596 >}}
+~~`{{< gist hencter 74114b0f07510d24b70b1a7f2def0596 >}}`~~
 
 ---
 
-{{< gist hencter 74114b0f07510d24b70b1a7f2def0596   darkmode.js >}}
+~~`{{< gist hencter 74114b0f07510d24b70b1a7f2def0596   darkmode.js >}}`~~
 
-{{< gist hencter 74114b0f07510d24b70b1a7f2def0596  hugo-markdown.scss  >}}
+~~`{{< gist hencter 74114b0f07510d24b70b1a7f2def0596  hugo-markdown.scss  >}}`~~
 
 ### vimeo
 

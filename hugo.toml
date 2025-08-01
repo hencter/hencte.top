@@ -3,6 +3,7 @@ languageCode           = 'zh'
 title                  = '亦幸小阁'
 defaultContentLanguage = 'zh'
 relativeURLs           = true
+theme                  = "kiss"
 
 [languages]
   [languages.zh]
@@ -24,36 +25,3 @@ relativeURLs           = true
   name    = 'Tags'
   pageRef = '/tags'
   weight  = 30
-
-[build]
-  [build.buildStats]
-    enable = true
-  [[build.cachebusters]]
-    source = 'assets/notwatching/hugo_stats\.json'
-    target = 'css'
-  [[build.cachebusters]]
-    source = '(postcss|tailwind)\.config\.js'
-    target = 'css'
-
-[module]
-  [[module.mounts]]
-    source = 'assets'
-    target = 'assets'
-  [[module.mounts]]
-    disableWatch = true
-    source       = 'hugo_stats.json'
-    target       = 'assets/notwatching/hugo_stats.json'
-  [[module.imports]]
-    path = "github.com/hencter/lunisolar"
-  [[module.imports.mounts]]
-    source = "dist"
-    target = "assets/jslibs/lunisolar"
-
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.parser]
-      [markup.goldmark.parser.attribute]
-        block = true
-        title = true
-    [markup.goldmark.renderer]
-      unsafe = false

@@ -1,6 +1,0 @@
-{{- $isProd := not hugo.IsDevelopment -}}
-{{/* Use the pre-built lunisolar.js directly without js.Build processing */}}
-{{- $js := resources.Get "jslibs/lunisolar/lunisolar.js" -}}
-{{- if $isProd }}{{ $js = $js | fingerprint }}{{ end -}}
-<script src="{{ $js.RelPermalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous" {{ end }}>
-</script>

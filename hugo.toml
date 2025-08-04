@@ -2,26 +2,44 @@ baseURL                = 'https://hencte.top/'
 languageCode           = 'zh'
 title                  = '亦幸小阁'
 defaultContentLanguage = 'zh'
-relativeURLs           = true
 theme                  = "kiss"
+relativeURLs           = true
+enableEmoji            = true
+enableGitInfo          = true
 
 [languages]
   [languages.zh]
-    weight = 0
+    weight = 0 # 权重
   [languages.en]
-    weight = 1
+    weight = 1 # 权重
 
 [[menus.main]]
   name    = 'Home'
   pageRef = '/'
   weight  = 10
-
 [[menus.main]]
   name    = 'Posts'
   pageRef = '/log'
   weight  = 20
-
 [[menus.main]]
   name    = 'Tags'
   pageRef = '/tags'
   weight  = 30
+
+[build]
+  [build.buildStats]
+    enable = true
+  [[build.cachebusters]]
+    source = 'assets/notwatching/hugo_stats\.json'
+    target = 'css'
+  [[build.cachebusters]]
+    source = '(postcss|tailwind)\.config\.js'
+    target = 'css'
+[module]
+  [[module.mounts]]
+    source = 'assets'
+    target = 'assets'
+  [[module.mounts]]
+    disableWatch = true
+    source = 'hugo_stats.json'
+    target = 'assets/notwatching/hugo_stats.json'

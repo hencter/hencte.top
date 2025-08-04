@@ -1,46 +1,7 @@
 {
-  "author": "Hencter Lew",
-  "comments": {
-    "dependencies": {
-      "lunisolar": "project"
-    },
-    "devDependencies": {
-      "@babel/cli": "project",
-      "@babel/core": "project",
-      "@babel/preset-env": "project",
-      "@tailwindcss/cli": "project",
-      "@tailwindcss/typography": "project",
-      "autoprefixer": "project",
-      "core-js": "project",
-      "prettier": "project",
-      "prettier-plugin-go-template": "project",
-      "tailwindcss": "project"
-    }
-  },
-  "dependencies": {
-    "lunisolar": "^2.5.2"
-  },
-  "description": "This is for Hencter Lew site",
-  "devDependencies": {
-    "@babel/cli": "^7.28.0",
-    "@babel/core": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
-    "@tailwindcss/cli": "^4.0.7",
-    "@tailwindcss/typography": "^0.5.16",
-    "autoprefixer": "^10.4.21",
-    "core-js": "^3.44.0",
-    "prettier": "^3.5.3",
-    "prettier-plugin-go-template": "^0.0.15",
-    "tailwindcss": "^4.0.7"
-  },
-  "license": "MIT",
-  "main": "index.js",
-  "name": "hencte.top",
-  "scripts": {
-    "build": "hugo --gc --minify",
-    "dev": "hugo server -D --bind 0.0.0.0",
-    "build:css": "tailwindcss -i ./assets/css/tailwind.css -o ./static/css/tailwind.css",
-    "watch:css": "tailwindcss -i ./assets/css/tailwind.css -o ./static/css/tailwind.css --watch"
-  },
-  "version": "1.0.0"
+	"devDependencies": {
+		"@tailwindcss/cli": "^4.1.11",
+		"@tailwindcss/typography": "^0.5.16",
+		"tailwindcss": "^4.1.11"
+	}
 }

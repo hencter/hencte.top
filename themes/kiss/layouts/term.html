@@ -1,6 +1,8 @@
 {{ define "main" }}
+<section class="prose [&_pre]:overflow-x-auto [&_code]:break-words">
   <h1>{{ .Title }}</h1>
   {{ .Content }}
+</section>
   {{ range .Pages }}
     <ul>
       <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>

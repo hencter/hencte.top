@@ -1,8 +1,13 @@
 {{ define "main" }}
+<article class="prose lg:prose-xl [&_pre]:overflow-x-auto [&_code]:break-words">
   {{ .Content }}
+</article>
+<ul class="space-y-3 mt-8">
   {{ range site.RegularPages }}
-  <ul>
-    <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
-  </ul>
+  <li class="flex justify-between items-center py-2 border-b border-gray-100 hover:bg-gray-50 transition-colors">
+    <a href="{{ .RelPermalink }}" class="text-gray-900 hover:text-rose-600 font-medium flex-1 mr-4">{{.LinkTitle }}</a>
+    <time datetime="{{ .Date }}" class="text-sm text-gray-500 whitespace-nowrap">{{ .Date | time.Format ":date_medium" }}</time>
+  </li>
   {{ end }}
+</ul>
 {{ end }}

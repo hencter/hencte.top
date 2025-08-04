@@ -1,2 +1,6 @@
-<h1>{{ site.Title }}</h1>
+<h1 id="logo" class="text-2xl font-bold">
+  <a href="{{ site.BaseURL }}" class="no-underline">
+    {{ site.Title }}
+  </a>
+</h1>
 {{ partial "menu.html" (dict "menuID" "main" "page" .) }}

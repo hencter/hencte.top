@@ -1,13 +1,11 @@
----
-categories:
-  - 表情
-date: 2022-10-11T14:30:55+08:00
-draft: false
-slug: emoji
-tags:
-  - Emoji
-title: Emoji
----
++++
+categories = ['表情']
+date = '2022-10-11T14:30:55+08:00'
+draft = false
+slug = 'emoji'
+tags = ['Emoji']
+title = 'Emoji'
++++
 
 
 ```toml
@@ -145,8 +143,6 @@ enableEmoji = true
 :information_desk_person:
 :raising_hand:
 :bride_with_veil:
-:person_with_pouting_face:
-:person_frowning:
 :bow:
 :couplekiss:
 :couple_with_heart:
@@ -160,7 +156,6 @@ enableEmoji = true
 :baby:
 :older_woman:
 :older_man:
-:person_with_blond_hair:
 :man_with_gua_pi_mao:
 :man_with_turban:
 :construction_worker:

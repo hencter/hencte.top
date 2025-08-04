@@ -1,8 +1,13 @@
 {{ define "main" }}
+<header class="prose lg:prose-xl border-b border-gray-500">
   <h1>{{ .Title }}</h1>
   {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
   {{ $dateHuman := .Date | time.Format ":date_long" }}
   <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+  {{ printf "预估阅读时间：%d 分钟" .ReadingTime }}
+</header>
+<article class="prose lg:prose-xl [&_pre]:overflow-x-auto [&_code]:break-words [&_a]:(break-words text-rose-600)">
   {{ .Content }}
-  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+</article>
+{{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
 {{ end }}

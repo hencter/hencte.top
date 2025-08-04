@@ -1,15 +1,12 @@
----
-categories:
-- 资源处理
-- 页包
-date: "2023-04-12T23:53:33+08:00"
-description: ""
-draft: false
-slug: page-resources
-tags:
-- Resources
-title: Page Resources
----
++++
+categories = ['资源处理', '页包']
+date = '2023-04-12T23:53:33+08:00'
+description = ''
+draft = false
+slug = 'page-resources'
+tags = ['Resources']
+title = 'Page Resources'
++++
 
 ## 什么是页面资源？
 

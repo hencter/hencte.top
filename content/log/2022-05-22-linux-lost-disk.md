@@ -1,13 +1,10 @@
----
-date: "2020-04-07T20:26:58+08:00"
-publishDate: "2022-05-22T13:55:55.518Z"
-slug: linux-lost-disk-experience
-tags:
-- Log
-- Error
-- Warning
-title: 一次的 Linux 全盘数据丢失经历
----
++++
+date = '2020-04-07T20:26:58+08:00'
+publishDate = '2022-05-22T13:55:55.518Z'
+slug = 'linux-lost-disk-experience'
+tags = ['Log', 'Error', 'Warning']
+title = '一次的 Linux 全盘数据丢失经历'
++++
 
 事情发生 2020 年 4 月 6 日：
 一次惨痛的 Linux 装机记录 -

@@ -1,0 +1,56 @@
+/* 全局字体设置 */
+/* body {
+  font-family: var(--font-serif);
+} */
+
+/* 标题元素 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif) !important;
+}
+
+/* 段落和文本元素 */
+p,
+span,
+div,
+a,
+li,
+td,
+th {
+  font-family: var(--font-serif);
+}
+
+/* Typography 插件 prose 类字体设置 */
+.prose {
+  font-family: var(--font-serif) !important;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  font-family: var(--font-serif) !important;
+}
+
+.prose p,
+.prose li,
+.prose blockquote,
+.prose strong,
+.prose em,
+.prose a {
+  font-family: var(--font-serif) !important;
+}
+
+.prose code {
+  font-family: var(--font-mono) !important;
+}
+
+.prose pre code {
+  font-family: var(--font-mono) !important;
+}

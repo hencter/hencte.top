@@ -1,6 +1,8 @@
-<h1 id="logo" class="text-2xl font-bold">
-  <a href="{{ site.BaseURL }}" class="no-underline">
-    {{ site.Title }}
-  </a>
-</h1>
-{{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+<div class="flex items-center justify-between">
+  <h1 id="logo" class="text-2xl font-bold">
+    <a href="{{ site.BaseURL }}" class="no-underline hover:text-rose-600 transition-colors duration-200">
+      {{ site.Title }}
+    </a>
+  </h1>
+  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+</div>

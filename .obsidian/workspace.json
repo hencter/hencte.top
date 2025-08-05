@@ -4,21 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "d5c75f764e78a440",
+        "id": "c189b82661505f88",
         "type": "tabs",
         "children": [
           {
-            "id": "2384cc021b404cd9",
+            "id": "b8cc2b90c4a88914",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "content/tech/hugo/hugo-cli-convert-toYAML.md",
-                "mode": "preview",
-                "source": true
+                "file": "static/img/avatar.jpg"
               },
-              "icon": "lucide-file",
-              "title": "hugo-cli-convert-toYAML"
+              "icon": "lucide-image",
+              "title": "avatar"
             }
           }
         ],
@@ -36,7 +34,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "b60291a750530833",
+            "id": "71819e98e17f2d2b",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -161,21 +159,26 @@
       "switcher:打开快速切换": true,
       "command-palette:打开命令面板": false,
       "graph:查看关系图谱": false,
-      "canvas:新建白板": true,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": true
     }
   },
-  "active": "2384cc021b404cd9",
+  "active": "b8cc2b90c4a88914",
   "lastOpenFiles": [
+    "static/img/2265276667.png",
+    "static/img/avatar.jpg",
+    "content/log/2025-08-04-hugo-test.md",
+    "content/log/2022-04-21-first-post.md",
+    "content/log/2022-10-01-arch-linux.md",
+    "content/log/2022-07-27-terminal.md",
+    "content/log/2022-10-03-neovim.md",
+    "content/tech/hugo/hugo-cli-convert-toYAML.md",
     "public/tech/hugo/hugo-cli-convert-front-matter-to-yaml/index.html",
     "public/tech/hugo/hugo-cli-convert-front-matter-to-yaml",
     "content/tech/hugo/content-types.md",
     "content/tech/hugo/content-formats.md",
     "content/tech/hugo/_index.md",
-    "content/log/2022-04-21-first-post.md",
     "content/log/_index.md",
-    "static/img/avatar.jpg",
     "content/log/2024-04-11-table-rowspan-and-coilspan.md",
     "content/log/2023-05-19-heti-test.md",
     "content/log/2023-03-11-tomcat8.md",
@@ -188,14 +191,9 @@
     "content/log/2022-10-05-proxy.md",
     "content/log/2022-10-05-docker.md",
     "content/log/2022-10-05-android.md",
-    "content/log/2022-10-03-neovim.md",
     "content/log/2022-10-01-wsl.md",
     "content/log/2022-10-01-windows-daily.md",
-    "content/log/2022-10-01-arch-linux.md",
-    "content/log/2022-07-27-terminal.md",
     "content/log/2022-07-27-visual-studio-code.md",
-    "content/log/2022-05-26-bluetooth-keyboard-with-app-for-word-memory.md",
-    "content/log/2022-05-22-spec.md",
     "content/log",
     "public/tech/hugo/hugo-cli-convert-toyaml/index.html",
     "public/tech/hugo/hugo-cli-convert-toyaml",
@@ -203,8 +201,6 @@
     "public/oldlog/windows-daily/index.html",
     "public/oldlog/visual-studio-code/index.html",
     "public/oldlog/tomcat8/index.html",
-    "public/oldlog/test-heti/index.html",
-    "public/oldlog/spec/index.html",
-    "static/img/2265276667.png"
+    "public/oldlog/test-heti/index.html"
   ]
 }

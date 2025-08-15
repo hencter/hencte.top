@@ -1,12 +1,14 @@
-+++
-categories = ['少儿编程']
-date = '2023-05-13T22:01:50+08:00'
-description = 'Scratch 课前备案'
-draft = true
-slug = 'lesson-01'
-tags = ['Scratch']
-title = 'Lesson 01'
-+++
+---
+categories:
+- 少儿编程
+date: "2023-05-13T22:01:50+08:00"
+description: Scratch 课前备案
+draft: true
+slug: lesson-01
+tags:
+- Scratch
+title: Lesson 01
+---
 
 ## 基本认识
 

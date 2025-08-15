@@ -1,13 +1,16 @@
-+++
-categories = ['打字']
-date = '2023-03-11T23:31:25+08:00'
-description = ''
-draft = false
-images = ['']
-slug = 'getting-start'
-tags = ['Typewriting']
-title = '欲练此功·修技'
-+++
+---
+categories:
+- 打字
+date: "2023-03-11T23:31:25+08:00"
+description: ""
+draft: false
+images:
+- ""
+slug: getting-start
+tags:
+- Typewriting
+title: 欲练此功·修技
+---
 
 
 ## 文本输入

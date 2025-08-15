@@ -1,13 +1,16 @@
-+++
-categories = ['文本编辑器']
-date = '2023-03-20T13:08:45+08:00'
-description = '关于 lazy-nvim 的一份备份记录'
-draft = true
-images = ['']
-slug = 'lazy-nvim'
-tags = ['Neovim']
-title = 'Lazy NeoVim'
-+++
+---
+categories:
+- 文本编辑器
+date: "2023-03-20T13:08:45+08:00"
+description: 关于 lazy-nvim 的一份备份记录
+draft: true
+images:
+- ""
+slug: lazy-nvim
+tags:
+- Neovim
+title: Lazy NeoVim
+---
 
 
 生命诚可贵，时间价更高

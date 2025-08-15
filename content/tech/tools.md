@@ -1,13 +1,16 @@
-+++
-categories = ['工具']
-date = '2023-04-06T18:33:39+08:00'
-description = ''
-draft = true
-images = ['']
-slug = 'tools'
-tags = ['Tools']
-title = '工具'
-+++
+---
+categories:
+- 工具
+date: "2023-04-06T18:33:39+08:00"
+description: ""
+draft: true
+images:
+- ""
+slug: tools
+tags:
+- Tools
+title: 工具
+---
 
 ## 更好的命令行工具
 

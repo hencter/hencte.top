@@ -1,13 +1,20 @@
-+++
-categories = ['开发', '包管理', '配置']
-date = '2023-03-11T23:22:52+08:00'
-description = ''
-draft = false
-images = ['']
-slug = 'npm-mirror-config'
-tags = ['NPM', 'PackManager', 'Config']
-title = 'Npm Mirror 配置'
-+++
+---
+categories:
+- 开发
+- 包管理
+- 配置
+date: "2023-03-11T23:22:52+08:00"
+description: ""
+draft: false
+images:
+- ""
+slug: npm-mirror-config
+tags:
+- NPM
+- PackManager
+- Config
+title: Npm Mirror 配置
+---
 
 
 ## 通过 yrm 工具配置镜像源

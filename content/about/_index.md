@@ -1,8 +1,9 @@
-+++
-aliases = ['me']
-slug = 'about'
-title = '关于'
-+++
+---
+aliases:
+- me
+slug: about
+title: 关于
+---
 
 <!-- ![avatar](img/avatar.jpg) -->
 

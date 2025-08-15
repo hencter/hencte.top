@@ -1,11 +1,13 @@
-+++
-categories = ['不背单词']
-date = '2022-05-26T10:59:21.922Z'
-publishDate = '2022-05-26T10:59:21.963Z'
-slug = 'bluetooth-keyboard-with-app-for-word-memory'
-tags = ['Memory']
-title = '不背单词实现键盘控制'
-+++
+---
+categories:
+- 不背单词
+date: "2022-05-26T10:59:21.922Z"
+publishDate: "2022-05-26T10:59:21.963Z"
+slug: bluetooth-keyboard-with-app-for-word-memory
+tags:
+- Memory
+title: 不背单词实现键盘控制
+---
 
 部分参考来自知乎路遥的[蓝牙键盘+不背单词+弯了的 iPadAir3 yyds](https://zhuanlan.zhihu.com/p/427119932 "作者（知乎）：璐瑶")
 

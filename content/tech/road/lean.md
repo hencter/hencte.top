@@ -1,13 +1,19 @@
-+++
-categories = ['仙途慢慢', '学习', '思想']
-date = '2023-03-11T23:29:08+08:00'
-description = ''
-draft = false
-images = ['']
-slug = 'lean'
-tags = ['Dev', 'God']
-title = '预备知识·仙途'
-+++
+---
+categories:
+- 仙途慢慢
+- 学习
+- 思想
+date: "2023-03-11T23:29:08+08:00"
+description: ""
+draft: false
+images:
+- ""
+slug: lean
+tags:
+- Dev
+- God
+title: 预备知识·仙途
+---
 
 ## 通用编程概念
 

@@ -1,4 +1,4 @@
-+++
-title = 'Hugo'
-type = 'hugo'
-+++
+---
+title: Hugo
+type: hugo
+---

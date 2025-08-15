@@ -1,12 +1,19 @@
-+++
-categories = ['键盘', '记录', '生活']
-date = '2022-11-19T11:34:23+08:00'
-description = '新键盘体验——VXB67'
-images = ['https://s2.loli.net/2023/03/10/AonrpEfckWGTZ2L.jpg']
-slug = 'new-keyboard-experience'
-tags = ['keyboard', 'new', 'life']
-title = '新键盘初体验'
-+++
+---
+categories:
+- 键盘
+- 记录
+- 生活
+date: "2022-11-19T11:34:23+08:00"
+description: 新键盘体验——VXB67
+images:
+- https://s2.loli.net/2023/03/10/AonrpEfckWGTZ2L.jpg
+slug: new-keyboard-experience
+tags:
+- keyboard
+- new
+- life
+title: 新键盘初体验
+---
 
 昨天买的新键盘[^新键盘]到手了，体验感觉十分良好，在这里教程简单，这里对**官方说明书**[^官方说明书]中的按键做整理
 

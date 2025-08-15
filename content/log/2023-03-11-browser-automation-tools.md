@@ -1,13 +1,18 @@
-+++
-categories = ['自动化', '测试']
-date = '2023-03-11T23:44:25+08:00'
-description = ''
-draft = false
-images = ['']
-slug = 'browser-automation-tools'
-tags = ['Test', 'End to End Testing']
-title = '浏览器自动化测试工具和库'
-+++
+---
+categories:
+- 自动化
+- 测试
+date: "2023-03-11T23:44:25+08:00"
+description: ""
+draft: false
+images:
+- ""
+slug: browser-automation-tools
+tags:
+- Test
+- End to End Testing
+title: 浏览器自动化测试工具和库
+---
 
 自动化测试是软件开发的一个重要环节，可以提高软件的质量和开发效率。而浏览器自动化测试是其中一个重要的领域，可以用于测试网站的前端功能和用户体验。Selenium 是一个流行的浏览器自动化测试库，它支持多种编程语言，包括 Python。
 

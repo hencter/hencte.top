@@ -1,13 +1,16 @@
-+++
-categories = ['']
-date = '2023-04-12T23:25:25+08:00'
-description = ''
-draft = false
-images = ['']
-slug = 'leaf-bundles'
-tags = ['']
-title = '页捆绑（Leaf Bundles）'
-+++
+---
+categories:
+- ""
+date: "2023-04-12T23:25:25+08:00"
+description: ""
+draft: false
+images:
+- ""
+slug: leaf-bundles
+tags:
+- ""
+title: 页捆绑（Leaf Bundles）
+---
 
 ## 页捆绑是什么
 

@@ -1,10 +1,12 @@
-+++
-date = '2022-07-18T10:12:44+08:00'
-draft = false
-slug = 'usage'
-tags = ['Hugo', 'Usage']
-title = 'Hugo 使用'
-+++
+---
+date: "2022-07-18T10:12:44+08:00"
+draft: false
+slug: usage
+tags:
+- Hugo
+- Usage
+title: Hugo 使用
+---
 
 ## Hugo 命令行帮助
 

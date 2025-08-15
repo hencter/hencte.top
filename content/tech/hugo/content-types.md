@@ -1,12 +1,16 @@
-+++
-categories = ['内容管理', '']
-date = '2023-04-13T14:05:22+08:00'
-description = ''
-draft = true
-slug = 'content-types'
-tags = ['Hugo', 'Content']
-title = '内容类型'
-+++
+---
+categories:
+- 内容管理
+- ""
+date: "2023-04-13T14:05:22+08:00"
+description: ""
+draft: true
+slug: content-types
+tags:
+- Hugo
+- Content
+title: 内容类型
+---
 
 ## 什么是内容类型？
 

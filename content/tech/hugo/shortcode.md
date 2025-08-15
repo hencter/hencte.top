@@ -1,11 +1,14 @@
-+++
-categories = ['简码', '演示']
-date = '2023-04-13T00:09:30+08:00'
-draft = true
-slug = 'shortcode'
-tags = ['Shortcode']
-title = 'Shortcode'
-+++
+---
+categories:
+- 简码
+- 演示
+date: "2023-04-13T00:09:30+08:00"
+draft: true
+slug: shortcode
+tags:
+- Shortcode
+title: Shortcode
+---
 
 ## 说明
 

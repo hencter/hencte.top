@@ -1,10 +1,13 @@
-+++
-categories = ['系统', '维护']
-date = '2022-10-01T17:05:56+08:00'
-slug = 'windows-daily'
-tags = ['Windows']
-title = 'Windows 基本安装与维护'
-+++
+---
+categories:
+- 系统
+- 维护
+date: "2022-10-01T17:05:56+08:00"
+slug: windows-daily
+tags:
+- Windows
+title: Windows 基本安装与维护
+---
 
 这里采用 Windows 10 操作系统作为内容。
 

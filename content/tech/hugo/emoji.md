@@ -1,13 +1,11 @@
----
-categories:
-- 表情
-date: "2022-10-11T14:30:55+08:00"
-draft: false
-slug: emoji
-tags:
-- Emoji
-title: Emoji
----
++++
+categories = ['表情']
+date = '2022-10-11T14:30:55+08:00'
+draft = false
+slug = 'emoji'
+tags = ['Emoji']
+title = 'Emoji'
++++
 
 
 ```toml

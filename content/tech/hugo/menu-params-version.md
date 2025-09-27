@@ -1,8 +1,8 @@
----
-date: "2023-04-14T02:35:39+08:00"
-draft: true
-title: Menu Params version
----
++++
+date = '2023-04-14T02:35:39+08:00'
+draft = true
+title = 'Menu Params version'
++++
 
 无论您如何定义菜单条目，与页面关联的条目都可以访问页面变量和方法。
 

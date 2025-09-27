@@ -1,16 +1,13 @@
----
-categories:
-- 版本控制
-date: "2023-03-20T21:05:35+08:00"
-description: 记录 Git 的问题和学习记录
-draft: true
-images:
-- ""
-slug: git
-tags:
-- Git
-title: Git
----
++++
+categories = ['版本控制']
+date = '2023-03-20T21:05:35+08:00'
+description = '记录 Git 的问题和学习记录'
+draft = true
+images = ['']
+slug = 'git'
+tags = ['Git']
+title = 'Git'
++++
 
 ## 规范 git commit[^参考]
 

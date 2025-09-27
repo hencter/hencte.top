@@ -1,18 +1,11 @@
----
-categories:
-- 系统
-- 极简主义
-date: "2022-10-01T22:10:01+08:00"
-keywords:
-- 中文
-- 个人
-slug: arch-linux
-tags:
-- ArchLinux
-- Linux
-- KISS
-title: Arch Linux 踩坑记录
----
++++
+categories = ['系统', '极简主义']
+date = '2022-10-01T22:10:01+08:00'
+keywords = ['中文', '个人']
+slug = 'arch-linux'
+tags = ['ArchLinux', 'Linux', 'KISS']
+title = 'Arch Linux 踩坑记录'
++++
 
 ## 引言
 

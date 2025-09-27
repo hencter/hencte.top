@@ -1,15 +1,12 @@
----
-categories:
-- 内容前置
-date: "2023-04-12T23:41:51+08:00"
-description: ""
-draft: true
-slug: front-matter
-tags:
-- Front Matter
-- Markdown
-title: Front Matter
----
++++
+categories = ['内容前置']
+date = '2023-04-12T23:41:51+08:00'
+description = ''
+draft = true
+slug = 'front-matter'
+tags = ['Front Matter', 'Markdown']
+title = 'Front Matter'
++++
 
 Hugo 允许您将 yaml、toml 或 json 中的 front matter 添加到您的内容文件中。
 

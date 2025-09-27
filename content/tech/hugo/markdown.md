@@ -1,15 +1,10 @@
----
-categories:
-- 语法
-- 小抄
-- 速查表
-date: "2022-04-22T22:22:28+08:00"
-slug: markdown-cheatsheet
-tags:
-- Markdown
-- Cheatsheet
-title: Markdown
----
++++
+categories = ['语法', '小抄', '速查表']
+date = '2022-04-22T22:22:28+08:00'
+slug = 'markdown-cheatsheet'
+tags = ['Markdown', 'Cheatsheet']
+title = 'Markdown'
++++
 
 什么是 Markdown？
 

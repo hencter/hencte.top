@@ -1,9 +1,9 @@
----
-aliases:
-- me
-slug: about
-title: 关于
----
++++
+aliases = ['me']
+slug = 'about'
+title = '关于'
+tag = ['about']
++++
 
 <!-- ![avatar](img/avatar.jpg) -->
 
@@ -40,7 +40,7 @@ title: 关于
 
 - [Hugo]：构建工具，没错，「亦幸小阁」由 Hugo 构建。
 - [UnoCSS](https://unocss.dev/ "Instant On-demand Atomic CSS Engine")
-  - [UnoCSS Interactive](https://unocss.dev/interactive/ "UnoCSS Interactive Docs")
+   - [UnoCSS Interactive](https://unocss.dev/interactive/ "UnoCSS Interactive Docs")
 - [Hugo 实战](https://hugo-in-action.foofun.cn/zh "Hugo In Action")
 - [Hugo 中文帮助文档](https://hugo.aiaide.com/)
 - [UnoCSS: The instant on-demand Atomic CSS engine](https://unocss.dev/)

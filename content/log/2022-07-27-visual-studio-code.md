@@ -1,16 +1,10 @@
----
-categories:
-- 编辑器
-- 工具
-- 问题
-date: "2022-07-27T21:01:31+08:00"
-slug: visual-studio-code
-tags:
-- Editor
-- Tool
-- Code
-title: Visual Studio Code
----
++++
+categories = ['编辑器', '工具', '问题']
+date = '2022-07-27T21:01:31+08:00'
+slug = 'visual-studio-code'
+tags = ['Editor', 'Tool', 'Code']
+title = 'Visual Studio Code'
++++
 
 <!-- TODO -->
 

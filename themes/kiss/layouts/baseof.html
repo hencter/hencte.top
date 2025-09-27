@@ -4,6 +4,9 @@
 
 <head>
   {{ partial "head.html" . }}
+  {{ if .Param "math" }}
+    {{ partialCached "math.html" . }}
+  {{ end }}
 </head>
 
 <body class="min-h-screen bg-gradient-to-br from-neutral-50 to-white text-gray-900 antialiased flex flex-col">

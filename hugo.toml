@@ -7,11 +7,23 @@ relativeURLs           = true
 enableEmoji            = true
 enableGitInfo          = true
 summaryLength          = 200
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+[params]
+  math = true
+
 [languages]
   [languages.zh]
-    weight = 0 # 权重
+    weight = 0
   [languages.en]
-    weight = 1 # 权重
+    weight = 1
 
 [[menus.main]]
   name    = 'Home'

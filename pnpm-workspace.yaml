@@ -1,3 +1,9 @@
+# pnpm 10 (used by Cloudflare Pages) requires an explicit `packages` field; without
+# it `pnpm install --frozen-lockfile` fails with "packages field missing or empty".
+# The site itself needs no dependencies at build time (`hugo` alone builds it) —
+# these packages only back the occasional `pnpm generate` steps.
+packages:
+  - '.'
 # pnpm blocks dependency install scripts by default and records the decision in
 # `allowBuilds`. Leaving a dependency undecided makes `pnpm install` — and so
 # every `pnpm run`, which verifies deps first — exit non-zero.

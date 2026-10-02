@@ -1,0 +1,68 @@
+{{/*
+  Lunar date for a Gregorian date — computed in-template, no build step.
+
+  data/lunar_years.json holds, per year, the solar date of lunar new year and the
+  length of every lunar month in order (leap months flagged). Converting a solar
+  date is then just subtraction and an array walk, which Go templates can do —
+  unlike bitwise maths, which they cannot. The table was generated once from the
+  `lunardate` package (see .dsh/CLOUDFLARE.md); extending it every few decades is
+  the only upkeep.
+
+  A page may override the result with `lunar = '...'` in its front matter (also the
+  fallback for dates outside the table's range).
+
+  @context {time.Time} the page date
+  @return {string} e.g. "二〇二二年七月廿六"
+*/}}
+{{- $date := . -}}
+{{- $out := "" -}}
+{{- $table := hugo.Data.lunar_years -}}
+{{- if $table -}}
+  {{- $solarYear := int ($date.Format "2006") -}}
+  {{- $months := slice -}}
+  {{- $lunarYear := $solarYear -}}
+  {{- $newYear := "" -}}
+  {{- range $i := seq 0 1 -}}
+    {{- $y := sub $solarYear $i -}}
+    {{- with index $table (printf "%d" $y) -}}
+      {{- if not $newYear -}}
+        {{- $ny := time.AsTime .newYear -}}
+        {{- if or (eq $i 1) (ge $date.Unix $ny.Unix) -}}
+          {{- $newYear = .newYear -}}
+          {{- $months = .months -}}
+          {{- $lunarYear = $y -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if and $newYear $months -}}
+    {{- $ny := time.AsTime $newYear -}}
+    {{- $offset := div (sub $date.Unix $ny.Unix) 86400 -}}
+    {{- $monthName := "" -}}
+    {{- $dayNumber := 0 -}}
+    {{- $monthNames := slice "正月" "二月" "三月" "四月" "五月" "六月" "七月" "八月" "九月" "十月" "冬月" "腊月" -}}
+    {{- $dayNames := slice "初一" "初二" "初三" "初四" "初五" "初六" "初七" "初八" "初九" "初十"
+        "十一" "十二" "十三" "十四" "十五" "十六" "十七" "十八" "十九" "二十"
+        "廿一" "廿二" "廿三" "廿四" "廿五" "廿六" "廿七" "廿八" "廿九" "三十" -}}
+    {{- range $months -}}
+      {{- if not $monthName -}}
+        {{- if lt $offset .days -}}
+          {{/* JSON numbers arrive as float64: coerce before indexing a slice. */}}
+          {{- $monthName = printf "%s%s" (cond .leap "闰" "") (index $monthNames (int (sub .m 1))) -}}
+          {{- $dayNumber = int (add $offset 1) -}}
+        {{- else -}}
+          {{- $offset = int (sub $offset .days) -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if and $monthName (gt $dayNumber 0) -}}
+      {{- $digits := slice "〇" "一" "二" "三" "四" "五" "六" "七" "八" "九" -}}
+      {{- $yearName := "" -}}
+      {{- range $c := split (printf "%d" $lunarYear) "" -}}
+        {{- $yearName = printf "%s%s" $yearName (index $digits (int $c)) -}}
+      {{- end -}}
+      {{- $out = printf "%s年%s%s" $yearName $monthName (index $dayNames (int (sub $dayNumber 1))) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

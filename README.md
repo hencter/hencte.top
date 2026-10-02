@@ -218,3 +218,15 @@ Wiki 语法在迁移期处理（`scripts/migrate_astro.py`）：`[[页面]]` 有
 - `pnpm build` 带 `--cleanDestinationDir`，避免 `public/` 累积旧指纹资源。
 
 用 `python scripts/asset_audit.py` 复查每个第三方资源的加载面（应只有需要的页面）。
+
+## 农历：在模板里算，不需要构建步骤
+
+`data/lunar_years.json` 存每年「农历新年的公历日期 + 各月天数（含闰月标记）」，
+`themes/kiss/layouts/_partials/lunar.html` 用减法 + 数组遍历完成公历→农历换算 ——
+表 + 模板算术就是它的「运行时」（Go 模板没有位运算，所以月长用数组而非位掩码）。
+
+表由 `lunardate`（Python）一次性生成，范围 2015–2050；几十年后扩表即可，平时零维护。
+页面可用 front matter 的 `lunar = '...'` 覆盖（也作为超出表范围时的兜底）。
+
+已核对：`2023-05-19 -> 二〇二三年四月初一`、`2022-08-23 -> 二〇二二年七月廿六`，
+与原先 `lunar-javascript` 脚本产出的值逐字一致。

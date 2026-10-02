@@ -17,7 +17,10 @@
   {{- $raw = replaceRE `(?s)^\+\+\+.*?\+\+\+\s*` "" $raw -}}
   {{- $raw = replaceRE `(?s)^---.*?---\s*` "" $raw -}}
   <div class="novel-reader" data-novel-reader>
-    <script type="text/plain" data-novel-source>{{ $raw }}</script>
+    {{/* <template>, not <script>: script is a raw-text element, so the entities Hugo
+         emits when escaping the payload would stay literal (&#34; drawn as text). A
+         template parses as HTML and decodes them. */}}
+    <template data-novel-source>{{ $raw }}</template>
     <div class="novel-pages" data-novel-pages></div>
     <noscript><p class="text-gray-600">{{ T "novelNeedsJS" }}</p></noscript>
   </div>
@@ -27,7 +30,13 @@
       if (!root || !window.HTMLCanvasElement) return;
       var source = root.querySelector("[data-novel-source]");
       var host = root.querySelector("[data-novel-pages]");
-      var text = source.textContent || "";
+      var text = (source.content ? source.content.textContent : source.textContent) || "";
+      // Safety net for any entity that survived parsing.
+      if (text.indexOf("&") >= 0) {
+        var dec = document.createElement("textarea");
+        dec.innerHTML = text;
+        text = dec.value;
+      }
       // Strip the Markdown that would otherwise be painted literally.
       text = text
         .replace(/\r/g, "")

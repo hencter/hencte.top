@@ -1,0 +1,101 @@
+# UI strings for the default language (zh-CN). Ported from the Astro site's
+# lib/ui-strings.ts so both sites say the same things.
+
+[readMore]
+other = '閱讀全文'
+
+[latestWriting]
+other = '最新寫作'
+
+[allArticles]
+other = '全部文章'
+
+[sectionLog]
+other = '日誌'
+
+[sectionTech]
+other = '技術'
+
+[sectionAncient]
+other = '古文'
+
+[sectionPosts]
+other = '文章'
+
+[chapters]
+other = '章節目錄'
+
+[prevChapter]
+other = '上一章'
+
+[nextChapter]
+other = '下一章'
+
+[backToShelf]
+other = '返回書架'
+
+[shelf]
+other = '書架'
+
+[shelfSubtitle]
+other = '作品庫 · 小說與開源教程'
+
+[fiction]
+other = '原創'
+
+[emptyShelf]
+other = '書架上暫時空空如也，敬請期待新作上架。'
+
+[comingSoon]
+other = '英文版即將推出'
+
+[readingTime]
+other = '約 %d 分鐘'
+
+[tags]
+other = '標籤'
+
+[language]
+other = '語言'
+
+[home]
+other = '首頁'
+
+[backHome]
+other = '返回首頁'
+
+[updated]
+other = '更新於'
+
+[skipToContent]
+other = '跳轉到主內容'
+
+[toc]
+other = '目錄'
+
+[toggleTheme]
+other = '切換深色模式'
+
+[notFoundTitle]
+other = '頁面不存在'
+
+[notFoundBody]
+other = '你訪問的頁面可能已被移動或刪除，可以從下面這些入口繼續。'
+
+[lunar]
+other = '農曆'
+
+[dateTBD]
+other = '日期待補充'
+
+[menu]
+other = '選單'
+
+[copyCode]
+other = '複製'
+
+[startReading]
+other = '開始閱讀'
+
+[novelNeedsJS]
+other = '本頁正文由瀏覽器繪製為圖片，請開啟 JavaScript。'

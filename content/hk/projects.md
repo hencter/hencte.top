@@ -1,0 +1,16 @@
++++
+description = '亦幸（Hencter Lew）的公開項目：Nova、通天路、AI.LinkTrust.Top、hencte.top 與 Obsidian 工具鏈。'
+featuredProjects = [{ stage = '開源模板', title = 'Nova · AI 自舉知識庫', description = '自舉式知識庫由 AI 代理持續維護：自動攝入、交叉鏈接、健康檢查與自動提交。每個克隆者通過初始化問答獲得「屬於自己的 Nova」。', result = 'GitHub 官方模板，約 2 分鐘啓動；開箱即用，快速迭代中。', tags = ['AI Agent', 'Obsidian', 'Zettelkasten', 'Knowledge Vault'], url = 'https://github.com/hencter/Nova', image = '/img/projects/nova.webp', imageAlt = 'Nova 知識庫：墨紙底上的青瓷色筆記星圖與柔和燈火' }, { stage = '社區運營', title = '通天路 tongtianlu.cn', description = '邀請制中文社區：用 AI 做出屬於自己的第一條內容。站內智能體輔助運營，技術棧為 Tailwind + htmx，含 CSP 與深色模式。', result = '板塊覆蓋發現、知識庫、技能庫與提示詞庫。Slogan：每一步都算數。', tags = ['Community', 'AI Creator', 'Invite-only'], url = 'https://tongtianlu.cn', image = '/img/projects/tongtianlu.webp', imageAlt = '通天路：夜市山路燈火向上延伸，創作者並肩而行' }, { stage = '開源遊戲', title = '商業帝國 3D · AI 大富翁', description = 'Three.js 3D 大富翁：DeepSeek 對手、卡牌、行業景氣與銀行系統；支持 2–34 人同屏或回合制聯機。配套零依賴 monopoly-engine。', result = 'MIT 開源，持續迭代中。', tags = ['Three.js', 'AI', 'Multiplayer', 'WebSocket'], url = 'https://github.com/hencter/monopoly-3d-ai', image = '/img/projects/monopoly-3d.webp', imageAlt = '商業帝國 3D：俯瞰三維城市棋盤與暖金路徑' }, { stage = '外站產品', title = 'AI.LinkTrust.Top', description = '面向公開用户的鏈接可信度與信息篩選體驗，幫助更快判斷內容質量。', result = '獨立站點長期運行，承接外部訪問與產品驗證。', tags = ['AI', 'Web Product', 'Trust'], url = 'https://ai.linktrust.top', image = '/img/projects/linktrust.webp', imageAlt = 'LinkTrust：青瓷與金色天平甄別可信鏈接網絡' }, { stage = '品牌主站', title = 'hencte.top', description = '個人品牌與博客主站，統一展示項目、技術文章與對外聯繫入口。', result = '從單頁升級為可持續更新的項目 + 博客雙棧站點。', tags = ['Astro', 'Bilingual', 'Personal Brand'], url = '/', image = '/img/projects/hencte-top.webp', imageAlt = '亦幸小閣：米白宣紙上硃紅「亦」印、青瓷茶盞與毛筆' }, { stage = '工具/插件', title = 'Obsidian 備忘錄插件', description = '面向個人知識庫的輕量備忘錄與快速記錄插件，配合模板化工作流沉澱。', result = '用於日常 Obsidian 工作流與知識管理實踐。', tags = ['Obsidian', 'TypeScript', 'Plugin'], url = 'https://github.com/hencter' }]
+keywords = ['項目展示', '產品經歷', 'AI.LinkTrust.Top', 'LinkTrust', 'Obsidian', 'Nova', '通天路', 'Hencter Lew']
+timeline = [{ phase = '定位', detail = '明確站點職責：面向公眾展示項目經歷，而不是僅用於個人記錄。' }, { phase = '建設', detail = '構建統一導航與頁面結構，連接項目展示、博客內容與對外入口。' }, { phase = '迭代', detail = '持續發佈項目更新與技術復盤，讓品牌內容和產品進展同步增長。' }]
+title = '項目經歷 | 亦幸小閣'
+
+[hero]
+actions = { primary = { label = '查看重點項目', href = '#featured' }, secondary = { label = '進入博客', href = '/blog' } }
+badge = 'Projects Showcase'
+headline = '公開項目與產品實踐'
+subtitle = """
+TypeScript / Lua / Python。關注可信信息、知識管理與可驗證的產品迭代。
+這裏展示對外可訪問的項目，以及支撐工作流的工具建設。
+"""
++++

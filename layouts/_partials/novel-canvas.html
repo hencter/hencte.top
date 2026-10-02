@@ -17,155 +17,16 @@
   {{- $raw = replaceRE `(?s)^\+\+\+.*?\+\+\+\s*` "" $raw -}}
   {{- $raw = replaceRE `(?s)^---.*?---\s*` "" $raw -}}
   <div class="novel-reader" data-novel-reader>
-    {{/* <template>, not <script>: script is a raw-text element, so the entities Hugo
+    {{/* a template element, not a script element: script is raw text, so the entities Hugo
          emits when escaping the payload would stay literal (&#34; drawn as text). A
          template parses as HTML and decodes them. */}}
     <template data-novel-source>{{ $raw }}</template>
     <div class="novel-pages" data-novel-pages></div>
     <noscript><p class="text-gray-600">{{ T "novelNeedsJS" }}</p></noscript>
   </div>
-  <script>
-    (function () {
-      var root = document.querySelector("[data-novel-reader]");
-      if (!root || !window.HTMLCanvasElement) return;
-      var source = root.querySelector("[data-novel-source]");
-      var host = root.querySelector("[data-novel-pages]");
-      var text = (source.content ? source.content.textContent : source.textContent) || "";
-      // Safety net for any entity that survived parsing.
-      if (text.indexOf("&") >= 0) {
-        var dec = document.createElement("textarea");
-        dec.innerHTML = text;
-        text = dec.value;
-      }
-      // Strip the Markdown that would otherwise be painted literally.
-      text = text
-        .replace(/\r/g, "")
-        .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
-        .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
-        .replace(/^\s{0,3}#{1,6}\s+/gm, "")
-        .replace(/^\s{0,3}>\s?/gm, "")
-        .replace(/\[!\w+\][-+]?\s*/g, "")  // Obsidian callout markers like [!summary]
-        .replace(/[*_`]{1,3}/g, "")
-        .replace(/^\s*-{3,}\s*$/gm, "")  // horizontal rules come from the vault's front matter separator
-        .replace(/^\s*#{1,6}\s+.*(?:\n|$)/, "")
-        .trim();
-      if (!text) return;
-
-      var W = 780,
-        H = 1400,
-        PAD = 40,
-        TOP = 84,
-        FONT = 24,
-        LH = 36,
-        BOTTOM = 116,
-        COLOR = "#1f2937",
-        PAPER = "#faf7f0",
-        WM = "© 亦幸小阁 · hencte.top",
-        COLS = W - PAD * 2,
-        ROWS = Math.floor((H - TOP - BOTTOM) / LH);
-      var NO_START = "。，、；：！？）】》」』”’…·—%";
-      var NO_END = "（【《「『“‘";
-
-      var probe = document.createElement("canvas").getContext("2d");
-      function face(px) {
-        return px + 'px "LXGWWenKai-Novel", "LXGW WenKai", sans-serif';
-      }
-      function layout() {
-        probe.font = face(FONT);
-        var lines = [];
-        text.split(/\n{2,}/).forEach(function (block, index) {
-          var para = block.replace(/\n/g, "").trim();
-          if (!para) return;
-          if (lines.length && index > 0) lines.push("");
-          var line = "";
-          for (var i = 0; i < para.length; i++) {
-            var ch = para[i];
-            if (line && probe.measureText(line + ch).width > COLS) {
-              if (NO_END.indexOf(line[line.length - 1]) >= 0) {
-                line += ch;
-                continue;
-              }
-              lines.push(line);
-              line = "";
-            }
-            line += ch;
-          }
-          if (line) lines.push(line);
-        });
-        // 禁则: closing punctuation may not open a line.
-        for (var i = 1; i < lines.length; i++) {
-          while (lines[i] && NO_START.indexOf(lines[i][0]) >= 0) {
-            lines[i - 1] += lines[i][0];
-            lines[i] = lines[i].slice(1);
-          }
-        }
-        return lines;
-      }
-
-      function paint(canvas, lines) {
-        var ctx = canvas.getContext("2d");
-        ctx.fillStyle = PAPER;
-        ctx.fillRect(0, 0, W, H);
-        ctx.fillStyle = COLOR;
-        ctx.font = face(FONT);
-        ctx.textBaseline = "alphabetic";
-        for (var r = 0; r < lines.length; r++) {
-          if (lines[r]) ctx.fillText(lines[r], PAD, TOP + r * LH);
-        }
-        ctx.fillStyle = "#b3aa99";
-        ctx.font = face(16);
-        ctx.textAlign = "center";
-        ctx.fillText(WM, W / 2, H - 42);
-        ctx.textAlign = "left";
-      }
-
-      var lines = layout();
-      var pages = [];
-      for (var i = 0; i < lines.length; i += ROWS) pages.push(lines.slice(i, i + ROWS));
-      if (!pages.length) return;
-
-      var observer = "IntersectionObserver" in window
-        ? new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-              if (!entry.isIntersecting) return;
-              var canvas = entry.target;
-              if (canvas.dataset.drawn === "1") return;
-              canvas.dataset.drawn = "1";
-              paint(canvas, pages[Number(canvas.dataset.page) - 1] || []);
-              observer.unobserve(canvas);
-            });
-          }, { rootMargin: "600px 0px" })
-        : null;
-
-      pages.forEach(function (pageLines, index) {
-        var canvas = document.createElement("canvas");
-        canvas.className = "novel-page";
-        canvas.width = W;
-        canvas.height = H;
-        canvas.dataset.page = String(index + 1);
-        canvas.setAttribute("role", "img");
-        canvas.setAttribute(
-          "aria-label",
-          document.title + " · 第 " + (index + 1) + " / " + pages.length + " 页（正文图片）"
-        );
-        host.appendChild(canvas);
-        if (observer) observer.observe(canvas);
-      });
-
-      // Draw page 1 as soon as the webfont is ready (otherwise the first paint
-      // would use the fallback face and measure differently).
-      function first() {
-        var canvas = host.querySelector("canvas");
-        if (canvas && canvas.dataset.drawn !== "1") {
-          canvas.dataset.drawn = "1";
-          paint(canvas, pages[0]);
-        }
-      }
-      if (document.fonts && document.fonts.load) {
-        document.fonts.load(face(FONT)).then(first, first);
-      } else {
-        first();
-      }
-    })();
-  </script>
+  {{ with resources.Get "js/novel.js" }}
+    {{ with . | js.Build (dict "minify" true "target" "es2020") | fingerprint }}
+      <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+    {{ end }}
+  {{ end }}
 {{- end -}}

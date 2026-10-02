@@ -21,12 +21,14 @@
   {{ if strings.Contains (printf "%s" .RawContent) "```mermaid" }}
     {{ partial "mermaid.html" . }}
   {{ end }}
-  {{/* Copy buttons only matter where there are code blocks. */}}
-  {{ if strings.Contains (printf "%s" .RawContent) "```" }}
-    {{ partial "code-copy.html" . }}
+  {{/* Site behaviour — theme toggle, reading-focus chrome, code-copy buttons — is
+       bundled by Hugo's built-in esbuild (no Node, no bundler install) into one
+       minified, fingerprinted, SRI-protected file that every page can cache. */}}
+  {{ with resources.Get "js/site.js" }}
+    {{ with . | js.Build (dict "minify" true "target" "es2020") | fingerprint }}
+      <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+    {{ end }}
   {{ end }}
-  {{/* Reading focus: hides the header (and the TOC rail) while scrolling down. */}}
-  {{ partial "reading-chrome.html" . }}
 </head>
 
 <body class="min-h-screen bg-gradient-to-br from-neutral-50 to-white text-gray-900 antialiased flex flex-col">

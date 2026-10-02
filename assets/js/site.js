@@ -1,16 +1,32 @@
-{{/*
-  Reading focus chrome (mirrors astro.hencte.top BaseLayout.astro:368-445 and
-  chrome.css:73): while the reader scrolls down or sits idle inside an article,
-  the sticky header — and, on wide screens, the TOC rail — recede so the centered
-  text column is all that is left. They come back on scroll-up, when the pointer
-  approaches the top edge, on keyboard focus into the header, or when the mobile
-  menu is open. Hovering the rail itself revives the TOC in CSS (main.css).
+/**
+ * Site behaviour, bundled by Hugo's built-in esbuild (js.Build) and served as one
+ * fingerprinted, SRI-protected file instead of several inline <script> blocks:
+ * theme toggle, reading-focus chrome, code-copy buttons.
+ *
+ * The pre-paint theme boot stays inline on purpose (it must run before first paint).
+ */
+// --- theme toggle ---
+(function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    function sync() {
+      btn.setAttribute(
+        "aria-pressed",
+        document.documentElement.classList.contains("dark") ? "true" : "false"
+      );
+    }
+    sync();
+    btn.addEventListener("click", function () {
+      var dark = document.documentElement.classList.toggle("dark");
+      try {
+        localStorage.setItem("theme", dark ? "dark" : "light");
+      } catch (e) {}
+      sync();
+    });
+  })();
 
-  The rail is only expanded where it actually floats (>=1280px); below that the TOC
-  stays the collapsed <details> above the prose, because CSS cannot open one.
-*/}}
-<script>
-  (function () {
+// --- reading focus chrome ---
+(function () {
     var HIDE_AFTER = 2400; // idle ms before the chrome retreats
     var SCROLL_BEGIN = 160; // px before a down-scroll hides it
     var TOP_REVEAL = 96; // pointer band that brings it back
@@ -102,4 +118,39 @@
       init();
     }
   })();
-</script>
+
+// --- code copy buttons ---
+(function () {
+    function wire() {
+      document.querySelectorAll(".code-block").forEach(function (block) {
+        var button = block.querySelector(".code-copy");
+        var code = block.querySelector("code");
+        if (!button || !code || button.dataset.bound === "1") return;
+        button.dataset.bound = "1";
+        button.addEventListener("click", function () {
+          var label = button.textContent;
+          var done = function () {
+            button.textContent = "✓";
+            setTimeout(function () {
+              button.textContent = label;
+            }, 1500);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code.innerText).then(done, done);
+          } else {
+            var range = document.createRange();
+            range.selectNodeContents(code);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            done();
+          }
+        });
+      });
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", wire);
+    } else {
+      wire();
+    }
+  })();

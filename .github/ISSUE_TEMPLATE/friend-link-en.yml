@@ -1,0 +1,58 @@
+name: Friend link request
+description: Ask to exchange links with 亦幸小阁 (hencte.top)
+title: "[Friend link] "
+labels: ["friend-link"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reaching out! Please add my site to yours first, then fill this in.
+
+        | Field | Value |
+        | --- | --- |
+        | Name | 亦幸小阁 (Hencter Lew) |
+        | URL | https://hencte.top/ |
+        | Avatar | https://hencte.top/img/avatar.jpg |
+        | Description | Personal brand and tech blog: projects, build notes, and original fiction. |
+
+  - type: input
+    id: site-name
+    attributes:
+      label: Site name
+      placeholder: e.g. Example Blog
+    validations:
+      required: true
+  - type: input
+    id: site-url
+    attributes:
+      label: Site URL
+      placeholder: https://example.com/
+    validations:
+      required: true
+  - type: input
+    id: site-avatar
+    attributes:
+      label: Avatar / logo URL (optional)
+      placeholder: https://example.com/avatar.png
+  - type: input
+    id: site-rss
+    attributes:
+      label: RSS URL (optional)
+      placeholder: https://example.com/index.xml
+  - type: textarea
+    id: site-description
+    attributes:
+      label: One-line description
+      description: Shown on the friend-link card
+      placeholder: Describe your site in one line
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirm
+      options:
+        - label: I have added 亦幸小阁 to my own links
+          required: true
+        - label: My site publishes original, regularly updated content
+          required: true

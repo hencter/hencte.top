@@ -1,0 +1,64 @@
+name: 友链申请
+description: 申请与「亦幸小阁」交换友链
+title: "[友链] "
+labels: ["friend-link"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢交换友链！请在**你的站点**先添加本站，再填下面的信息提交。
+
+        | 项目 | 值 |
+        | --- | --- |
+        | 名称 | 亦幸小阁 |
+        | 地址 | https://hencte.top/ |
+        | 头像 | https://hencte.top/img/avatar.jpg |
+        | 简介 | 个人品牌与技术博客：项目展示、构建笔记与原创小说。 |
+
+  - type: input
+    id: site-name
+    attributes:
+      label: 站点名称
+      placeholder: 例如：某某的博客
+    validations:
+      required: true
+  - type: input
+    id: site-url
+    attributes:
+      label: 站点地址
+      description: 请填写可访问的完整地址
+      placeholder: https://example.com/
+    validations:
+      required: true
+  - type: input
+    id: site-avatar
+    attributes:
+      label: 头像 / Logo 地址（可选）
+      placeholder: https://example.com/avatar.png
+  - type: input
+    id: site-rss
+    attributes:
+      label: RSS 地址（可选）
+      placeholder: https://example.com/index.xml
+  - type: textarea
+    id: site-description
+    attributes:
+      label: 一句话简介
+      description: 会显示在友链卡片上
+      placeholder: 用一句话介绍你的站点
+    validations:
+      required: true
+  - type: textarea
+    id: exchange-notes
+    attributes:
+      label: 备注（可选）
+      placeholder: 想补充说明的其它信息
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 我已在站点上添加了「亦幸小阁」的友链
+          required: true
+        - label: 我的站点内容原创、长期更新，非采集站或低质站
+          required: true

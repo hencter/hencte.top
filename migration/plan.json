@@ -1,0 +1,2307 @@
+{
+ "source": "D:\\Projects\\.tmp-astro-recon",
+ "entries": [
+  {
+   "kind": "blog",
+   "source": "src/content/blog/about.md",
+   "target": "content/zh/about/_index.md",
+   "url": "/about/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "section 'about' is not routed (it is served by the connect page) — see blog-index.ts BLOG_ROUTE_SECTIONS"
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/ancient/出师表.md",
+   "target": "content/zh/ancient/test-heti.md",
+   "url": "/ancient/test-heti/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/ancient/2023-05-19-heti-test/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/ancient/周髀算经.md",
+   "target": "content/zh/ancient/周髀算经.md",
+   "url": "/ancient/周髀算经/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/2022-03-09-tree.md",
+   "target": "content/zh/log/2022-03-09-tree.md",
+   "url": "/log/2022-03-09-tree/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2023-03-09-cover-test/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/2025-08-15-hugo-obsidian-plugin-dev.md",
+   "target": "content/zh/log/2025-08-15-hugo-obsidian-plugin-dev.md",
+   "url": "/log/2025-08-15-hugo-obsidian-plugin-dev/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/log/2025-08-15-Hugo-Obsidian-Plugin-Dev/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/ai-token-carrier-pricing.md",
+   "target": "content/zh/log/ai-token-carrier-pricing.md",
+   "url": "/log/ai-token-carrier-pricing/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/android.md",
+   "target": "content/zh/log/android.md",
+   "url": "/log/android/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-10-05-android/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/arch-linux.md",
+   "target": "content/zh/log/arch-linux.md",
+   "url": "/log/arch-linux/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-10-01-Arch-Linux/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/bluetooth-keyboard-with-app-for-word-memory.md",
+   "target": "content/zh/log/bluetooth-keyboard-with-app-for-word-memory.md",
+   "url": "/log/bluetooth-keyboard-with-app-for-word-memory/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-05-26-bluetooth-keyboard-with-app-for-word-memory/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/browser-automation-tools.md",
+   "target": "content/zh/log/browser-automation-tools.md",
+   "url": "/log/browser-automation-tools/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2023-03-11-browser-automation-tools/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/cancer-village-news-cycle.md",
+   "target": "content/zh/log/cancer-village-news-cycle.md",
+   "url": "/log/cancer-village-news-cycle/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/changxin-chip-semiconductor.md",
+   "target": "content/zh/log/changxin-chip-semiconductor.md",
+   "url": "/log/changxin-chip-semiconductor/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/craft-dies-taste-lasts.md",
+   "target": "content/zh/log/craft-dies-taste-lasts.md",
+   "url": "/log/craft-dies-taste-lasts/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/docker.md",
+   "target": "content/zh/log/docker.md",
+   "url": "/log/docker/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-10-05-docker/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/first-post-again.md",
+   "target": "content/zh/log/first-post-again.md",
+   "url": "/log/first-post-again/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-04-21-first-post/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/fuel-car-hospice.md",
+   "target": "content/zh/log/fuel-car-hospice.md",
+   "url": "/log/fuel-car-hospice/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/kimi-vs-all.md",
+   "target": "content/zh/log/kimi-vs-all.md",
+   "url": "/log/kimi-vs-all/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/linux-lost-disk-experience.md",
+   "target": "content/zh/log/linux-lost-disk-experience.md",
+   "url": "/log/linux-lost-disk-experience/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-05-22-linux-lost-disk/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/netlify-cms.md",
+   "target": "content/zh/log/netlify-cms.md",
+   "url": "/log/netlify-cms/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-05-22-netlify-cms/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/new-bing.md",
+   "target": "content/zh/log/new-bing.md",
+   "url": "/log/new-bing/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2023-03-10-new-bing/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/new-keyboard-experience.md",
+   "target": "content/zh/log/new-keyboard-experience.md",
+   "url": "/log/new-keyboard-experience/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-11-19-new-keyboard-experience/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/npm-mirror-config.md",
+   "target": "content/zh/log/npm-mirror-config.md",
+   "url": "/log/npm-mirror-config/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2023-03-11-npm-mirror-config/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/proxy.md",
+   "target": "content/zh/log/proxy.md",
+   "url": "/log/proxy/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-10-05-proxy/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/software.md",
+   "target": "content/zh/log/software.md",
+   "url": "/log/software/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/log/2022-10-05-software/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/spec.md",
+   "target": "content/zh/log/spec.md",
+   "url": "/log/spec/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-05-22-spec/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/terminal.md",
+   "target": "content/zh/log/terminal.md",
+   "url": "/log/terminal/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-07-27-terminal/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/tomcat8.md",
+   "target": "content/zh/log/tomcat8.md",
+   "url": "/log/tomcat8/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2023-03-11-tomcat8/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/trump-silicon-valley-china.md",
+   "target": "content/zh/log/trump-silicon-valley-china.md",
+   "url": "/log/trump-silicon-valley-china/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/vim-or-neovim.md",
+   "target": "content/zh/log/vim-or-neovim.md",
+   "url": "/log/vim-or-neovim/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/log/2022-10-03-neovim/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/visual-studio-code.md",
+   "target": "content/zh/log/visual-studio-code.md",
+   "url": "/log/visual-studio-code/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-07-27-visual-studio-code/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/whose-ai-are-you.md",
+   "target": "content/zh/log/whose-ai-are-you.md",
+   "url": "/log/whose-ai-are-you/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/windows-daily.md",
+   "target": "content/zh/log/windows-daily.md",
+   "url": "/log/windows-daily/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-10-01-windows-daily/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log/wsl.md",
+   "target": "content/zh/log/wsl.md",
+   "url": "/log/wsl/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/log/2022-10-01-wsl/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/log.md",
+   "target": "content/zh/log/_index.md",
+   "url": "/log/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/post/",
+    "/posts/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/posts.md",
+   "target": "content/zh/posts/_index.md",
+   "url": "/posts/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/ai-engineering-practices.md",
+   "target": "content/zh/tech/ai-engineering-practices.md",
+   "url": "/tech/ai-engineering-practices/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/ai-guardrail.md",
+   "target": "content/zh/tech/ai-guardrail.md",
+   "url": "/tech/ai-guardrail/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/ai-guardrail/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/ai-memory-bottleneck.md",
+   "target": "content/zh/tech/ai-memory-bottleneck.md",
+   "url": "/tech/ai-memory-bottleneck/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/ai-memory-bottleneck/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/ai-three-self-evolutions.md",
+   "target": "content/zh/tech/ai-three-self-evolutions.md",
+   "url": "/tech/ai-three-self-evolutions/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/anti-hallucination-workflow.md",
+   "target": "content/zh/tech/anti-hallucination-workflow.md",
+   "url": "/tech/anti-hallucination-workflow/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/bayes-theorem.md",
+   "target": "content/zh/tech/bayes-theorem.md",
+   "url": "/tech/bayes-theorem/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/chatgpt-health-data.md",
+   "target": "content/zh/tech/chatgpt-health-data.md",
+   "url": "/tech/chatgpt-health-data/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/chatgpt-health-data/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/combee-paper.md",
+   "target": "content/zh/tech/combee-paper.md",
+   "url": "/tech/combee-paper/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/editor/keyboard-shortcuts.md",
+   "target": "content/zh/tech/editor/keyboard-shortcuts.md",
+   "url": "/tech/editor/keyboard-shortcuts/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/tech/keyboard-shortcuts/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/editor/lazy-nvim.md",
+   "target": "content/zh/tech/editor/lazy-nvim.md",
+   "url": "/tech/editor/lazy-nvim/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/tech/lazy-nvim/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/editor.md",
+   "target": "content/zh/tech/editor/_index.md",
+   "url": "/tech/editor/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/geo-two-years-en.md",
+   "target": "content/zh/tech/geo-two-years-en.md",
+   "url": "/tech/geo-two-years-en/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/geo-two-years.md",
+   "target": "content/zh/tech/geo-two-years.md",
+   "url": "/tech/geo-two-years/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/config/hugo-markup-config.md",
+   "target": "content/zh/tech/hugo/config/hugo-markup-config.md",
+   "url": "/tech/hugo/config/hugo-markup-config/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/tech/hugo/config/markup/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/config.md",
+   "target": "content/zh/tech/hugo/config/_index.md",
+   "url": "/tech/hugo/config/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/content-formats.md",
+   "target": "content/zh/tech/hugo/content-formats.md",
+   "url": "/tech/hugo/content-formats/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/content-types.md",
+   "target": "content/zh/tech/hugo/content-types.md",
+   "url": "/tech/hugo/content-types/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/diagrams.md",
+   "target": "content/zh/tech/hugo/diagrams.md",
+   "url": "/tech/hugo/diagrams/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/emoji.md",
+   "target": "content/zh/tech/hugo/emoji.md",
+   "url": "/tech/hugo/emoji/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/front-matter.md",
+   "target": "content/zh/tech/hugo/front-matter.md",
+   "url": "/tech/hugo/front-matter/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/hugo-cli-convert-front-matter-to-yaml.md",
+   "target": "content/zh/tech/hugo/hugo-cli-convert-front-matter-to-yaml.md",
+   "url": "/tech/hugo/hugo-cli-convert-front-matter-to-yaml/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/tech/hugo/hugo-cli-convert-toYAML/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/hugo-npm.md",
+   "target": "content/zh/tech/hugo/hugo-npm.md",
+   "url": "/tech/hugo/hugo-npm/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/tech/hugo/2025-10-02-hugo-npm/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/leaf-bundles.md",
+   "target": "content/zh/tech/hugo/leaf-bundles.md",
+   "url": "/tech/hugo/leaf-bundles/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/tech/hugo/leaf-bundles/index/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/markdown-cheatsheet.md",
+   "target": "content/zh/tech/hugo/markdown-cheatsheet.md",
+   "url": "/tech/hugo/markdown-cheatsheet/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/tech/hugo/markdown/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/menu-params-version.md",
+   "target": "content/zh/tech/hugo/menu-params-version.md",
+   "url": "/tech/hugo/menu-params-version/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/page-resources.md",
+   "target": "content/zh/tech/hugo/page-resources.md",
+   "url": "/tech/hugo/page-resources/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/tech/hugo/page-resources/index/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/post-bundle-archetype-template.md",
+   "target": "content/zh/tech/hugo/post-bundle-archetype-template.md",
+   "url": "/tech/hugo/post-bundle-archetype-template/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/tech/hugo/post-bundle-archetype-template/index/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/shortcode.md",
+   "target": "content/zh/tech/hugo/shortcode.md",
+   "url": "/tech/hugo/shortcode/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo/usage.md",
+   "target": "content/zh/tech/hugo/usage.md",
+   "url": "/tech/hugo/usage/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/tech/usage/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/hugo.md",
+   "target": "content/zh/tech/hugo/_index.md",
+   "url": "/tech/hugo/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/road/getting-start.md",
+   "target": "content/zh/tech/road/getting-start.md",
+   "url": "/tech/road/getting-start/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/road/lean.md",
+   "target": "content/zh/tech/road/lean.md",
+   "url": "/tech/road/lean/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/road/plus.md",
+   "target": "content/zh/tech/road/plus.md",
+   "url": "/tech/road/plus/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/road.md",
+   "target": "content/zh/tech/road/_index.md",
+   "url": "/tech/road/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/god-road/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/seo-geo-architecture.md",
+   "target": "content/zh/tech/seo-geo-architecture.md",
+   "url": "/tech/seo-geo-architecture/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/tools.md",
+   "target": "content/zh/tech/tools.md",
+   "url": "/tech/tools/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/tutorials/ai-on-your-computer.md",
+   "target": "content/zh/tech/tutorials/ai-on-your-computer.md",
+   "url": "/tech/tutorials/ai-on-your-computer/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/tutorials/proxy-tun-mode-explained.md",
+   "target": "content/zh/tech/tutorials/proxy-tun-mode-explained.md",
+   "url": "/tech/tutorials/proxy-tun-mode-explained/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/vsc/git.md",
+   "target": "content/zh/tech/vsc/git.md",
+   "url": "/tech/vsc/git/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [
+    "/tech/git/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech/vsc.md",
+   "target": "content/zh/tech/vsc/_index.md",
+   "url": "/tech/vsc/",
+   "lang": "zh",
+   "draft": true,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "blog",
+   "source": "src/content/blog/tech.md",
+   "target": "content/zh/tech/_index.md",
+   "url": "/tech/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/zh/about.md",
+   "target": "content/zh/about.md",
+   "url": "/about/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/zh/blog.md",
+   "target": "content/zh/blog.md",
+   "url": "/blog/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/zh/home.md",
+   "target": "content/zh/_index.md",
+   "url": "/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/zh/links.md",
+   "target": "content/zh/links.md",
+   "url": "/links/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/zh/obsidian/plugins.md",
+   "target": "content/zh/obsidian/plugins.md",
+   "url": "/obsidian/plugins/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/zh/projects.md",
+   "target": "content/zh/projects.md",
+   "url": "/projects/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/en/about.md",
+   "target": "content/en/about.md",
+   "url": "/en/about/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/en/blog.md",
+   "target": "content/en/blog.md",
+   "url": "/en/blog/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/en/home.md",
+   "target": "content/en/_index.md",
+   "url": "/en/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/en/links.md",
+   "target": "content/en/links.md",
+   "url": "/en/links/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/en/obsidian/plugins.md",
+   "target": "content/en/obsidian/plugins.md",
+   "url": "/en/obsidian/plugins/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "connect",
+   "source": "src/content/en/projects.md",
+   "target": "content/en/projects.md",
+   "url": "/en/projects/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "page",
+   "source": "src/pages/pages.md",
+   "target": "content/zh/pages.md",
+   "url": "/pages/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/ai-counter-taming/index.md",
+   "target": "content/en/shelf/ai-counter-taming.md",
+   "url": "/en/shelf/ai-counter-taming/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/ai-counter-taming/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/novel.md",
+   "target": "content/en/shelf/_index.md",
+   "url": "/en/shelf/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch01.md",
+   "target": "content/en/shelf/sky-tax-ch01.md",
+   "url": "/en/shelf/sky-tax-ch01/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch01/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch02.md",
+   "target": "content/en/shelf/sky-tax-ch02.md",
+   "url": "/en/shelf/sky-tax-ch02/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch02/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch03.md",
+   "target": "content/en/shelf/sky-tax-ch03.md",
+   "url": "/en/shelf/sky-tax-ch03/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch03/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch04.md",
+   "target": "content/en/shelf/sky-tax-ch04.md",
+   "url": "/en/shelf/sky-tax-ch04/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch04/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch05.md",
+   "target": "content/en/shelf/sky-tax-ch05.md",
+   "url": "/en/shelf/sky-tax-ch05/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch05/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch06.md",
+   "target": "content/en/shelf/sky-tax-ch06.md",
+   "url": "/en/shelf/sky-tax-ch06/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch06/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch07.md",
+   "target": "content/en/shelf/sky-tax-ch07.md",
+   "url": "/en/shelf/sky-tax-ch07/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch07/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch08.md",
+   "target": "content/en/shelf/sky-tax-ch08.md",
+   "url": "/en/shelf/sky-tax-ch08/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch08/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch09.md",
+   "target": "content/en/shelf/sky-tax-ch09.md",
+   "url": "/en/shelf/sky-tax-ch09/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch09/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch10.md",
+   "target": "content/en/shelf/sky-tax-ch10.md",
+   "url": "/en/shelf/sky-tax-ch10/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch10/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch11.md",
+   "target": "content/en/shelf/sky-tax-ch11.md",
+   "url": "/en/shelf/sky-tax-ch11/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch11/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch12.md",
+   "target": "content/en/shelf/sky-tax-ch12.md",
+   "url": "/en/shelf/sky-tax-ch12/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch12/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch13.md",
+   "target": "content/en/shelf/sky-tax-ch13.md",
+   "url": "/en/shelf/sky-tax-ch13/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch13/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch14.md",
+   "target": "content/en/shelf/sky-tax-ch14.md",
+   "url": "/en/shelf/sky-tax-ch14/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch14/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch15.md",
+   "target": "content/en/shelf/sky-tax-ch15.md",
+   "url": "/en/shelf/sky-tax-ch15/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch15/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch16.md",
+   "target": "content/en/shelf/sky-tax-ch16.md",
+   "url": "/en/shelf/sky-tax-ch16/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch16/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch17.md",
+   "target": "content/en/shelf/sky-tax-ch17.md",
+   "url": "/en/shelf/sky-tax-ch17/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch17/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch18.md",
+   "target": "content/en/shelf/sky-tax-ch18.md",
+   "url": "/en/shelf/sky-tax-ch18/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch18/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch19.md",
+   "target": "content/en/shelf/sky-tax-ch19.md",
+   "url": "/en/shelf/sky-tax-ch19/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch19/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch20.md",
+   "target": "content/en/shelf/sky-tax-ch20.md",
+   "url": "/en/shelf/sky-tax-ch20/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch20/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch21.md",
+   "target": "content/en/shelf/sky-tax-ch21.md",
+   "url": "/en/shelf/sky-tax-ch21/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch21/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch22.md",
+   "target": "content/en/shelf/sky-tax-ch22.md",
+   "url": "/en/shelf/sky-tax-ch22/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch22/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch23.md",
+   "target": "content/en/shelf/sky-tax-ch23.md",
+   "url": "/en/shelf/sky-tax-ch23/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch23/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch24.md",
+   "target": "content/en/shelf/sky-tax-ch24.md",
+   "url": "/en/shelf/sky-tax-ch24/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch24/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch25.md",
+   "target": "content/en/shelf/sky-tax-ch25.md",
+   "url": "/en/shelf/sky-tax-ch25/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch25/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/ch26.md",
+   "target": "content/en/shelf/sky-tax-ch26.md",
+   "url": "/en/shelf/sky-tax-ch26/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch26/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/en/sky-tax/index.md",
+   "target": "content/en/shelf/sky-tax.md",
+   "url": "/en/shelf/sky-tax/",
+   "lang": "en",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch01.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch02.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch03.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch04.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch05.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch06.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch07.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch08.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch09.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch10.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch11.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch12.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch13.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch14.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch15.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch16.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch17.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch18.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch19.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch20.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch21.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch22.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch23.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch24.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch25.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax-ch26.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/sky-tax.md",
+   "target": "content/zh/",
+   "url": "",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [],
+   "skip": "legacy flat novel file (superseded by the nested per-locale copy)"
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/ai-counter-taming/ch01.md",
+   "target": "content/zh/shelf/ai-counter-taming-ch01.md",
+   "url": "/shelf/ai-counter-taming-ch01/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/ai-counter-taming-ch01/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/ai-counter-taming/ch02.md",
+   "target": "content/zh/shelf/ai-counter-taming-ch02.md",
+   "url": "/shelf/ai-counter-taming-ch02/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/ai-counter-taming-ch02/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/ai-counter-taming/ch03.md",
+   "target": "content/zh/shelf/ai-counter-taming-ch03.md",
+   "url": "/shelf/ai-counter-taming-ch03/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/ai-counter-taming-ch03/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/ai-counter-taming/ch04.md",
+   "target": "content/zh/shelf/ai-counter-taming-ch04.md",
+   "url": "/shelf/ai-counter-taming-ch04/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/ai-counter-taming-ch04/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/ai-counter-taming/index.md",
+   "target": "content/zh/shelf/ai-counter-taming.md",
+   "url": "/shelf/ai-counter-taming/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/ai-counter-taming/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/novel.md",
+   "target": "content/zh/shelf/_index.md",
+   "url": "/shelf/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch01.md",
+   "target": "content/zh/shelf/sky-tax-ch01.md",
+   "url": "/shelf/sky-tax-ch01/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch01/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch02.md",
+   "target": "content/zh/shelf/sky-tax-ch02.md",
+   "url": "/shelf/sky-tax-ch02/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch02/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch03.md",
+   "target": "content/zh/shelf/sky-tax-ch03.md",
+   "url": "/shelf/sky-tax-ch03/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch03/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch04.md",
+   "target": "content/zh/shelf/sky-tax-ch04.md",
+   "url": "/shelf/sky-tax-ch04/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch04/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch05.md",
+   "target": "content/zh/shelf/sky-tax-ch05.md",
+   "url": "/shelf/sky-tax-ch05/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch05/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch06.md",
+   "target": "content/zh/shelf/sky-tax-ch06.md",
+   "url": "/shelf/sky-tax-ch06/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch06/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch07.md",
+   "target": "content/zh/shelf/sky-tax-ch07.md",
+   "url": "/shelf/sky-tax-ch07/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch07/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch08.md",
+   "target": "content/zh/shelf/sky-tax-ch08.md",
+   "url": "/shelf/sky-tax-ch08/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch08/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch09.md",
+   "target": "content/zh/shelf/sky-tax-ch09.md",
+   "url": "/shelf/sky-tax-ch09/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch09/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch10.md",
+   "target": "content/zh/shelf/sky-tax-ch10.md",
+   "url": "/shelf/sky-tax-ch10/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch10/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch11.md",
+   "target": "content/zh/shelf/sky-tax-ch11.md",
+   "url": "/shelf/sky-tax-ch11/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch11/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch12.md",
+   "target": "content/zh/shelf/sky-tax-ch12.md",
+   "url": "/shelf/sky-tax-ch12/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch12/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch13.md",
+   "target": "content/zh/shelf/sky-tax-ch13.md",
+   "url": "/shelf/sky-tax-ch13/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch13/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch14.md",
+   "target": "content/zh/shelf/sky-tax-ch14.md",
+   "url": "/shelf/sky-tax-ch14/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch14/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch15.md",
+   "target": "content/zh/shelf/sky-tax-ch15.md",
+   "url": "/shelf/sky-tax-ch15/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch15/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch16.md",
+   "target": "content/zh/shelf/sky-tax-ch16.md",
+   "url": "/shelf/sky-tax-ch16/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch16/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch17.md",
+   "target": "content/zh/shelf/sky-tax-ch17.md",
+   "url": "/shelf/sky-tax-ch17/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch17/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch18.md",
+   "target": "content/zh/shelf/sky-tax-ch18.md",
+   "url": "/shelf/sky-tax-ch18/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch18/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch19.md",
+   "target": "content/zh/shelf/sky-tax-ch19.md",
+   "url": "/shelf/sky-tax-ch19/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch19/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch20.md",
+   "target": "content/zh/shelf/sky-tax-ch20.md",
+   "url": "/shelf/sky-tax-ch20/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch20/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch21.md",
+   "target": "content/zh/shelf/sky-tax-ch21.md",
+   "url": "/shelf/sky-tax-ch21/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch21/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch22.md",
+   "target": "content/zh/shelf/sky-tax-ch22.md",
+   "url": "/shelf/sky-tax-ch22/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch22/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch23.md",
+   "target": "content/zh/shelf/sky-tax-ch23.md",
+   "url": "/shelf/sky-tax-ch23/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch23/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch24.md",
+   "target": "content/zh/shelf/sky-tax-ch24.md",
+   "url": "/shelf/sky-tax-ch24/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch24/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch25.md",
+   "target": "content/zh/shelf/sky-tax-ch25.md",
+   "url": "/shelf/sky-tax-ch25/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch25/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/ch26.md",
+   "target": "content/zh/shelf/sky-tax-ch26.md",
+   "url": "/shelf/sky-tax-ch26/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax-ch26/"
+   ],
+   "skip": ""
+  },
+  {
+   "kind": "novel",
+   "source": "src/content/novel/zh-CN/sky-tax/index.md",
+   "target": "content/zh/shelf/sky-tax.md",
+   "url": "/shelf/sky-tax/",
+   "lang": "zh",
+   "draft": false,
+   "aliases": [
+    "/novel/sky-tax/"
+   ],
+   "skip": ""
+  }
+ ],
+ "kinds": {
+  "blog": 76,
+  "connect": 12,
+  "page": 1,
+  "novel": 89
+ },
+ "stats": {
+  "shortcode_delims": 1,
+  "hahahugo": 0,
+  "wiki_links": 5,
+  "highlights": 0,
+  "callouts": 4,
+  "raw_html_pages": 7,
+  "mermaid_pages": 1,
+  "math_pages": 1,
+  "wiki_resolved": 0,
+  "wiki_plain": 1,
+  "embeds_dropped": 3,
+  "callout_blocks": 40
+ },
+ "superseded": [],
+ "keep_in_place": [],
+ "assets": {
+  "count": 47,
+  "bytes": 44485421,
+  "missing_refs": []
+ },
+ "parity": {
+  "ours": [
+   "/",
+   "/about/",
+   "/ancient/%E5%91%A8%E9%AB%80%E7%AE%97%E7%BB%8F/",
+   "/ancient/test-heti/",
+   "/blog/",
+   "/en/",
+   "/en/about/",
+   "/en/blog/",
+   "/en/links/",
+   "/en/obsidian/plugins/",
+   "/en/projects/",
+   "/en/shelf/",
+   "/en/shelf/ai-counter-taming/",
+   "/en/shelf/sky-tax-ch01/",
+   "/en/shelf/sky-tax-ch02/",
+   "/en/shelf/sky-tax-ch03/",
+   "/en/shelf/sky-tax-ch04/",
+   "/en/shelf/sky-tax-ch05/",
+   "/en/shelf/sky-tax-ch06/",
+   "/en/shelf/sky-tax-ch07/",
+   "/en/shelf/sky-tax-ch08/",
+   "/en/shelf/sky-tax-ch09/",
+   "/en/shelf/sky-tax-ch10/",
+   "/en/shelf/sky-tax-ch11/",
+   "/en/shelf/sky-tax-ch12/",
+   "/en/shelf/sky-tax-ch13/",
+   "/en/shelf/sky-tax-ch14/",
+   "/en/shelf/sky-tax-ch15/",
+   "/en/shelf/sky-tax-ch16/",
+   "/en/shelf/sky-tax-ch17/",
+   "/en/shelf/sky-tax-ch18/",
+   "/en/shelf/sky-tax-ch19/",
+   "/en/shelf/sky-tax-ch20/",
+   "/en/shelf/sky-tax-ch21/",
+   "/en/shelf/sky-tax-ch22/",
+   "/en/shelf/sky-tax-ch23/",
+   "/en/shelf/sky-tax-ch24/",
+   "/en/shelf/sky-tax-ch25/",
+   "/en/shelf/sky-tax-ch26/",
+   "/en/shelf/sky-tax/",
+   "/links/",
+   "/log/",
+   "/log/2022-03-09-tree/",
+   "/log/ai-token-carrier-pricing/",
+   "/log/android/",
+   "/log/arch-linux/",
+   "/log/bluetooth-keyboard-with-app-for-word-memory/",
+   "/log/browser-automation-tools/",
+   "/log/cancer-village-news-cycle/",
+   "/log/changxin-chip-semiconductor/",
+   "/log/craft-dies-taste-lasts/",
+   "/log/docker/",
+   "/log/first-post-again/",
+   "/log/fuel-car-hospice/",
+   "/log/kimi-vs-all/",
+   "/log/linux-lost-disk-experience/",
+   "/log/netlify-cms/",
+   "/log/new-bing/",
+   "/log/new-keyboard-experience/",
+   "/log/npm-mirror-config/",
+   "/log/proxy/",
+   "/log/spec/",
+   "/log/terminal/",
+   "/log/tomcat8/",
+   "/log/trump-silicon-valley-china/",
+   "/log/visual-studio-code/",
+   "/log/whose-ai-are-you/",
+   "/log/windows-daily/",
+   "/log/wsl/",
+   "/obsidian/plugins/",
+   "/pages/",
+   "/projects/",
+   "/shelf/",
+   "/shelf/ai-counter-taming-ch01/",
+   "/shelf/ai-counter-taming-ch02/",
+   "/shelf/ai-counter-taming-ch03/",
+   "/shelf/ai-counter-taming-ch04/",
+   "/shelf/ai-counter-taming/",
+   "/shelf/sky-tax-ch01/",
+   "/shelf/sky-tax-ch02/",
+   "/shelf/sky-tax-ch03/",
+   "/shelf/sky-tax-ch04/",
+   "/shelf/sky-tax-ch05/",
+   "/shelf/sky-tax-ch06/",
+   "/shelf/sky-tax-ch07/",
+   "/shelf/sky-tax-ch08/",
+   "/shelf/sky-tax-ch09/",
+   "/shelf/sky-tax-ch10/",
+   "/shelf/sky-tax-ch11/",
+   "/shelf/sky-tax-ch12/",
+   "/shelf/sky-tax-ch13/",
+   "/shelf/sky-tax-ch14/",
+   "/shelf/sky-tax-ch15/",
+   "/shelf/sky-tax-ch16/",
+   "/shelf/sky-tax-ch17/",
+   "/shelf/sky-tax-ch18/",
+   "/shelf/sky-tax-ch19/",
+   "/shelf/sky-tax-ch20/",
+   "/shelf/sky-tax-ch21/",
+   "/shelf/sky-tax-ch22/",
+   "/shelf/sky-tax-ch23/",
+   "/shelf/sky-tax-ch24/",
+   "/shelf/sky-tax-ch25/",
+   "/shelf/sky-tax-ch26/",
+   "/shelf/sky-tax/",
+   "/tech/",
+   "/tech/ai-engineering-practices/",
+   "/tech/ai-guardrail/",
+   "/tech/ai-memory-bottleneck/",
+   "/tech/ai-three-self-evolutions/",
+   "/tech/anti-hallucination-workflow/",
+   "/tech/bayes-theorem/",
+   "/tech/chatgpt-health-data/",
+   "/tech/combee-paper/",
+   "/tech/geo-two-years-en/",
+   "/tech/geo-two-years/",
+   "/tech/hugo/config/",
+   "/tech/hugo/content-formats/",
+   "/tech/hugo/diagrams/",
+   "/tech/hugo/emoji/",
+   "/tech/hugo/leaf-bundles/",
+   "/tech/hugo/markdown-cheatsheet/",
+   "/tech/hugo/page-resources/",
+   "/tech/hugo/usage/",
+   "/tech/road/",
+   "/tech/road/getting-start/",
+   "/tech/road/lean/",
+   "/tech/seo-geo-architecture/",
+   "/tech/tutorials/ai-on-your-computer/",
+   "/tech/tutorials/proxy-tun-mode-explained/"
+  ],
+  "live": [
+   "/",
+   "/about/",
+   "/ancient/",
+   "/ancient/%E5%91%A8%E9%AB%80%E7%AE%97%E7%BB%8F/",
+   "/ancient/test-heti/",
+   "/blog/",
+   "/en/",
+   "/en/about/",
+   "/en/blog/",
+   "/en/links/",
+   "/en/obsidian/plugins/",
+   "/en/projects/",
+   "/hk/",
+   "/hk/about/",
+   "/hk/blog/",
+   "/hk/links/",
+   "/hk/projects/",
+   "/links/",
+   "/log/",
+   "/log/2022-03-09-tree/",
+   "/log/ai-token-carrier-pricing/",
+   "/log/android/",
+   "/log/arch-linux/",
+   "/log/bluetooth-keyboard-with-app-for-word-memory/",
+   "/log/browser-automation-tools/",
+   "/log/cancer-village-news-cycle/",
+   "/log/changxin-chip-semiconductor/",
+   "/log/craft-dies-taste-lasts/",
+   "/log/docker/",
+   "/log/first-post-again/",
+   "/log/fuel-car-hospice/",
+   "/log/kimi-vs-all/",
+   "/log/linux-lost-disk-experience/",
+   "/log/netlify-cms/",
+   "/log/new-bing/",
+   "/log/new-keyboard-experience/",
+   "/log/npm-mirror-config/",
+   "/log/proxy/",
+   "/log/spec/",
+   "/log/terminal/",
+   "/log/tomcat8/",
+   "/log/trump-silicon-valley-china/",
+   "/log/visual-studio-code/",
+   "/log/whose-ai-are-you/",
+   "/log/windows-daily/",
+   "/log/wsl/",
+   "/obsidian/plugins/",
+   "/pages/",
+   "/projects/",
+   "/tech/",
+   "/tech/ai-engineering-practices/",
+   "/tech/ai-guardrail/",
+   "/tech/ai-memory-bottleneck/",
+   "/tech/ai-three-self-evolutions/",
+   "/tech/anti-hallucination-workflow/",
+   "/tech/bayes-theorem/",
+   "/tech/chatgpt-health-data/",
+   "/tech/combee-paper/",
+   "/tech/geo-two-years-en/",
+   "/tech/geo-two-years/",
+   "/tech/hugo/content-formats/",
+   "/tech/hugo/diagrams/",
+   "/tech/hugo/emoji/",
+   "/tech/hugo/leaf-bundles/",
+   "/tech/hugo/markdown-cheatsheet/",
+   "/tech/hugo/page-resources/",
+   "/tech/hugo/usage/",
+   "/tech/road/",
+   "/tech/road/getting-start/",
+   "/tech/road/lean/",
+   "/tech/seo-geo-architecture/",
+   "/tech/tutorials/ai-on-your-computer/",
+   "/tech/tutorials/proxy-tun-mode-explained/",
+   "/tw/",
+   "/tw/about/",
+   "/tw/blog/",
+   "/tw/links/",
+   "/tw/projects/"
+  ],
+  "missing": [
+   "/ancient/",
+   "/hk/",
+   "/hk/about/",
+   "/hk/blog/",
+   "/hk/links/",
+   "/hk/projects/",
+   "/tw/",
+   "/tw/about/",
+   "/tw/blog/",
+   "/tw/links/",
+   "/tw/projects/"
+  ],
+  "extra": [
+   "/en/shelf/",
+   "/en/shelf/ai-counter-taming/",
+   "/en/shelf/sky-tax-ch01/",
+   "/en/shelf/sky-tax-ch02/",
+   "/en/shelf/sky-tax-ch03/",
+   "/en/shelf/sky-tax-ch04/",
+   "/en/shelf/sky-tax-ch05/",
+   "/en/shelf/sky-tax-ch06/",
+   "/en/shelf/sky-tax-ch07/",
+   "/en/shelf/sky-tax-ch08/",
+   "/en/shelf/sky-tax-ch09/",
+   "/en/shelf/sky-tax-ch10/",
+   "/en/shelf/sky-tax-ch11/",
+   "/en/shelf/sky-tax-ch12/",
+   "/en/shelf/sky-tax-ch13/",
+   "/en/shelf/sky-tax-ch14/",
+   "/en/shelf/sky-tax-ch15/",
+   "/en/shelf/sky-tax-ch16/",
+   "/en/shelf/sky-tax-ch17/",
+   "/en/shelf/sky-tax-ch18/",
+   "/en/shelf/sky-tax-ch19/",
+   "/en/shelf/sky-tax-ch20/",
+   "/en/shelf/sky-tax-ch21/",
+   "/en/shelf/sky-tax-ch22/",
+   "/en/shelf/sky-tax-ch23/",
+   "/en/shelf/sky-tax-ch24/",
+   "/en/shelf/sky-tax-ch25/",
+   "/en/shelf/sky-tax-ch26/",
+   "/en/shelf/sky-tax/",
+   "/shelf/",
+   "/shelf/ai-counter-taming-ch01/",
+   "/shelf/ai-counter-taming-ch02/",
+   "/shelf/ai-counter-taming-ch03/",
+   "/shelf/ai-counter-taming-ch04/",
+   "/shelf/ai-counter-taming/",
+   "/shelf/sky-tax-ch01/",
+   "/shelf/sky-tax-ch02/",
+   "/shelf/sky-tax-ch03/",
+   "/shelf/sky-tax-ch04/",
+   "/shelf/sky-tax-ch05/",
+   "/shelf/sky-tax-ch06/",
+   "/shelf/sky-tax-ch07/",
+   "/shelf/sky-tax-ch08/",
+   "/shelf/sky-tax-ch09/",
+   "/shelf/sky-tax-ch10/",
+   "/shelf/sky-tax-ch11/",
+   "/shelf/sky-tax-ch12/",
+   "/shelf/sky-tax-ch13/",
+   "/shelf/sky-tax-ch14/",
+   "/shelf/sky-tax-ch15/",
+   "/shelf/sky-tax-ch16/",
+   "/shelf/sky-tax-ch17/",
+   "/shelf/sky-tax-ch18/",
+   "/shelf/sky-tax-ch19/",
+   "/shelf/sky-tax-ch20/",
+   "/shelf/sky-tax-ch21/",
+   "/shelf/sky-tax-ch22/",
+   "/shelf/sky-tax-ch23/",
+   "/shelf/sky-tax-ch24/",
+   "/shelf/sky-tax-ch25/",
+   "/shelf/sky-tax-ch26/",
+   "/shelf/sky-tax/",
+   "/tech/hugo/config/"
+  ]
+ }
+}

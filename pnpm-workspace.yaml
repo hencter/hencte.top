@@ -1,2 +1,8 @@
-onlyBuiltDependencies:
-  - '@parcel/watcher'
+# pnpm blocks dependency install scripts by default and records the decision in
+# `allowBuilds`. Leaving a dependency undecided makes `pnpm install` — and so
+# every `pnpm run`, which verifies deps first — exit non-zero.
+# @tailwindcss/oxide ships Tailwind CSS v4's native engine; @parcel/watcher backs
+# Tailwind's --watch mode.
+allowBuilds:
+  '@parcel/watcher': true
+  '@tailwindcss/oxide': true

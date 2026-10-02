@@ -22,3 +22,34 @@
 git clone --depth 1 https://github.com/cloudflare/skills.git .review/cf-skills
 Copy-Item .review/cf-skills/skills/* .dsh/skills/ -Recurse -Force
 ```
+
+## `hugo` 需不需要先 `pnpm install`？—— 不需要（已实测）
+
+两次全新克隆（`git clone` 后**没有** `node_modules`）直接构建：
+
+| 测试 | Hugo | 结果 |
+| --- | --- | --- |
+| 克隆 A | v0.167.0 **extended** | exit 0 / 6.4s |
+| 克隆 B | v0.166.0 **标准版（非 extended）** | exit 0 / 8.9s，四语 221/151/151/46 页，0 警告，Processed images 0 |
+
+原因：所有生成物都在仓库里（Tailwind CSS、`content/{tw,hk}`、`i18n/{tw,hk}.toml`、`data/lunar.json`），
+前端 JS 由 Hugo **内置 esbuild** 打包，站点不 import 任何 npm 包。
+
+`pnpm install` 只在两种情况下需要：
+
+1. 跑 `pnpm generate`（= `variants` + `lunar` + `css`）刷新上述生成物：改动 `content/zh`、新增古文页、
+   或改动类名/样式之后；
+2. 跑开发期工具：`pnpm format`（prettier）、`pnpm audit:visual`（playwright）。
+
+**结论：部署与本地预览都只需 `hugo`**（标准版即可，无需 extended）✓
+
+## Cloudflare Pages 上的安装步骤
+
+Cloudflare 检测到 `pnpm-lock.yaml` 就会自动执行一次 `pnpm install --frozen-lockfile`
+（日志里可见），这一步现在能正常通过（已补 `pnpm-workspace.yaml` 的 `packages: ['.']`），
+但产物完全不需要它，纯属额外开销（约 30 秒）。
+
+- 省事做法：让它跑完即可 ✓
+- 想彻底去掉：把 `package.json` / `pnpm-lock.yaml` / `pnpm-workspace.yaml` 移出仓库，
+  Pages 就不会再检测到包管理器、安装步骤自然消失；代价是 `pnpm generate` 的依赖不再有锁定与记录
+  （需要时可再 `pnpm init` 补回）。

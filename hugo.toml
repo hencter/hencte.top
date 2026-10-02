@@ -1,58 +1,196 @@
 baseURL                = 'https://hencte.top/'
-languageCode           = 'zh'
 title                  = '亦幸小阁'
 defaultContentLanguage = 'zh'
 theme                  = "kiss"
-relativeURLs           = true
 enableEmoji            = true
 enableGitInfo          = true
+enableRobotsTXT        = true
+hasCJKLanguage         = true
 summaryLength          = 200
+# The live Astro site has no tag/category routes; keeping the default taxonomies
+# would publish a set of thin term pages that are not part of the site's URL set.
+disableKinds = ['taxonomy', 'term']
 
 [markup]
   [markup.goldmark]
+    # The Astro site renders raw HTML embedded in Markdown (remark allows it),
+    # and its content uses some (<mark>, <div>…). Without unsafe the HTML is
+    # stripped and replaced by a comment, so rendered output would differ.
+    [markup.goldmark.renderer]
+      unsafe = true
     [markup.goldmark.extensions]
       [markup.goldmark.extensions.passthrough]
         enable = true
         [markup.goldmark.extensions.passthrough.delimiters]
           block = [['\[', '\]'], ['$$', '$$']]
           inline = [['\(', '\)']]
-[params]
-  math = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 3
 
+[params]
+  # Draw novel chapter text into <canvas> in the browser (no build-time images).
+  novelCanvas = true
+
+  applicationName      = 'Hencter Studio'
+  author               = 'Hencter Lew'
+  bingSiteVerification = 'DE3B203227A8CF344D0A0F8E02B192CB'
+  defaultImage         = '/og-image.png'
+  description          = '亦幸（Hencter Lew）的公开项目与博客：产品实践、知识管理与技术写作。'
+  twitterSite          = '@hencter'
+
+# The migration rewrote every content file, so git commit dates would report
+# "updated 2026-10-03" for the whole site. Prefer an explicit lastmod, then the
+# article's own date. https://gohugo.io/getting-started/configuration/#frontmatter
+[frontmatter]
+  lastmod = ['lastmod', 'date']
+
+# The live site serves its feed at /rss.xml, not Hugo's default /index.xml.
+[outputFormats.RSS]
+  baseName  = 'rss'
+  mediaType = 'application/rss+xml'
+
+# Machine-readable, citation-oriented indexes for agents. Templates live in
+# layouts/home.<format>.txt; the Cite/Protect policy they describe matches
+# layouts/robots.txt.
+[outputFormats.llms]
+  baseName       = 'llms'
+  isPlainText    = true
+  mediaType      = 'text/plain'
+  notAlternative = true
+[outputFormats.llm]
+  baseName       = 'llm'
+  isPlainText    = true
+  mediaType      = 'text/plain'
+  notAlternative = true
+[outputFormats.llmsfull]
+  baseName       = 'llms-full'
+  isPlainText    = true
+  mediaType      = 'text/plain'
+  notAlternative = true
+
+[outputs]
+  home = ['HTML', 'RSS', 'llms', 'llm', 'llmsfull']
+
+# One content directory per language keeps content/zh mapped to / and the other
+# languages to their subdirectory prefixes (/en/…).
 [languages]
   [languages.zh]
-    weight = 0
+    contentDir = 'content/zh'
+    label      = '简体'
+    locale     = 'zh-CN'
+    weight     = 0
+    # Navigation mirrors the Astro site's getNavLinks(): the logo is home, so
+    # there is no redundant "home" entry.
+    [[languages.zh.menus.main]]
+      name    = '项目'
+      pageRef = '/projects'
+      weight  = 10
+    [[languages.zh.menus.main]]
+      name    = '博客'
+      pageRef = '/blog'
+      weight  = 20
+    [[languages.zh.menus.main]]
+      name    = '友链'
+      pageRef = '/links'
+      weight  = 30
+    [[languages.zh.menus.main]]
+      name    = '关于'
+      pageRef = '/about'
+      weight  = 40
+    [[languages.zh.menus.main]]
+      name   = '联系'
+      url    = '#contact'
+      weight = 50
+
   [languages.en]
-    weight = 1
+    contentDir = 'content/en'
+    label      = 'EN'
+    locale     = 'en-US'
+    weight     = 1
+    [[languages.en.menus.main]]
+      name    = 'Projects'
+      pageRef = '/projects'
+      weight  = 10
+    [[languages.en.menus.main]]
+      name    = 'Blog'
+      pageRef = '/blog'
+      weight  = 20
+    [[languages.en.menus.main]]
+      name    = 'Friends'
+      pageRef = '/links'
+      weight  = 30
+    [[languages.en.menus.main]]
+      name    = 'About'
+      pageRef = '/about'
+      weight  = 40
+    [[languages.en.menus.main]]
+      name   = 'Contact'
+      url    = '#contact'
+      weight = 50
 
-[[menus.main]]
-  name    = 'Home'
-  pageRef = '/'
-  weight  = 10
-[[menus.main]]
-  name    = 'Posts'
-  pageRef = '/log'
-  weight  = 20
-[[menus.main]]
-  name    = 'Tags'
-  pageRef = '/tags'
-  weight  = 30
+  # Traditional-Chinese mirrors, generated from content/zh by scripts/build_variants.mjs
+  # (`pnpm variants`): brand pages and the shelf, matching the Astro site's
+  # src/pages/{tw,hk}/ route set. Labels follow getNavLinks() there.
+  [languages.tw]
+    contentDir = 'content/tw'
+    # Per-language site name: without it the header logo and <title> suffix stayed
+    # simplified on the traditional pages ("關於 | 亦幸小閣 | 亦幸小阁").
+    title      = '亦幸小閣'
+    label      = '繁體（台灣）'
+    locale     = 'zh-TW'
+    weight     = 2
+    [[languages.tw.menus.main]]
+      name    = '項目'
+      pageRef = '/projects'
+      weight  = 10
+    [[languages.tw.menus.main]]
+      name    = '博客'
+      pageRef = '/blog'
+      weight  = 20
+    [[languages.tw.menus.main]]
+      name    = '友鏈'
+      pageRef = '/links'
+      weight  = 30
+    [[languages.tw.menus.main]]
+      name    = '關於'
+      pageRef = '/about'
+      weight  = 40
+    [[languages.tw.menus.main]]
+      name   = '聯繫'
+      url    = '#contact'
+      weight = 50
 
+  [languages.hk]
+    contentDir = 'content/hk'
+    title      = '亦幸小閣'
+    label      = '繁體（香港）'
+    locale     = 'zh-HK'
+    weight     = 3
+    [[languages.hk.menus.main]]
+      name    = '項目'
+      pageRef = '/projects'
+      weight  = 10
+    [[languages.hk.menus.main]]
+      name    = '博客'
+      pageRef = '/blog'
+      weight  = 20
+    [[languages.hk.menus.main]]
+      name    = '友鏈'
+      pageRef = '/links'
+      weight  = 30
+    [[languages.hk.menus.main]]
+      name    = '關於'
+      pageRef = '/about'
+      weight  = 40
+    [[languages.hk.menus.main]]
+      name   = '聯絡'
+      url    = '#contact'
+      weight = 50
 
 [build]
+  # hugo_stats.json (project root) is the class inventory scanned by the Tailwind
+  # CSS CLI. Tailwind is compiled by `pnpm css` before Hugo runs, not by Hugo's
+  # css.TailwindCSS transform — see themes/kiss/assets/css/main.css and package.json.
   [build.buildStats]
     enable = true
-  [[build.cachebusters]]
-    source = 'assets/notwatching/hugo_stats\.json'
-    target = 'css'
-  [[build.cachebusters]]
-    source = '(postcss|tailwind)\.config\.js'
-    target = 'css'
-[module]
-  [[module.mounts]]
-    source = 'assets'
-    target = 'assets'
-  [[module.mounts]]
-    disableWatch = true
-    source = 'hugo_stats.json'
-    target = 'assets/notwatching/hugo_stats.json'

@@ -1,0 +1,7 @@
+LXGW WenKai (霞鹜文楷) — SIL Open Font License 1.1
+Upstream: https://github.com/lxgw/LxgwWenKai
+
+static/fonts/LXGWWenKai-Novel.woff2 is a SUBSET (2,751 glyphs: the simplified-Chinese
+novels, ASCII and the watermark line) produced with fontTools and converted to woff2.
+The browser loads it only on novel chapter pages, to draw the chapter text into
+<canvas>. License and name/license records are preserved in the font.

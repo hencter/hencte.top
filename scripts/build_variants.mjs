@@ -7,7 +7,7 @@
  * reproduces that scope with opencc-js, and converts the UI strings too so
  * i18n/tw.toml and i18n/hk.toml match i18n/zh.toml.
  *
- * Output: content/tw/**, content/hk/**, i18n/tw.toml, i18n/hk.toml — all
+ * Output: content/tw/**, content/hk/**, i18n/tw.toml, i18n/hk.toml — committed to the
  * generated (git-ignored) and rebuilt by `pnpm variants` before `pnpm build`.
  *
  *   node scripts/build_variants.mjs

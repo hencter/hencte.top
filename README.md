@@ -17,7 +17,6 @@ pnpm dev        # 本地预览（hugo server -D）
 | 步骤 | 命令 | 产物 | 说明 |
 | --- | --- | --- | --- |
 | 繁体变体 | `pnpm variants` | `content/{tw,hk}/`、`i18n/{tw,hk}.toml` | 由 `content/zh` 经 OpenCC 生成，范围与 Astro 站一致（品牌页 + 书架） |
-| 农历对照表 | `pnpm lunar` | `data/lunar.json` | lunar-javascript 把内容日期换算成农历（Hugo 模板调不了 JS 库），并用已知农历新年日期自检 |
 | Tailwind | `pnpm css` | `assets/css/tailwind.css` | Tailwind CSS CLI 编译主题入口 `themes/kiss/assets/css/main.css` |
 | 站点 | `hugo` | `public/` | 读取前三步的产物 |
 
@@ -50,7 +49,6 @@ content/hk/   繁體（香港，→ /hk/，生成）
 | --- | --- |
 | `scripts/migrate_astro.py` | Astro → Hugo 迁移（YAML→TOML、路径/URL 映射、aliases、短代码转义、图片、wiki 语法） |
 | `scripts/build_variants.mjs` | 由 `content/zh` 生成 `/tw`、`/hk` 繁体镜像 |
-| `scripts/build_lunar.mjs` | 生成 `data/lunar.json` 农历对照表（含已知日期自检） |
 | `scripts/verify_urls.py` | 用 `public/` 产物验收：live URL 覆盖、别名、已发布页面、图片引用、小说章节归属 |
 | `scripts/asset_audit.py` | 按页面统计第三方资源加载面（MathJax/mermaid/Heti/CSS） |
 | `scripts/visual_audit.mjs` | Playwright 真机渲染审计：截图 + 控制台错误/破图/横向溢出/字号层级/暗色模式（`pnpm audit:visual`） |
@@ -130,7 +128,6 @@ You must now install the Tailwind CSS CLI via npm."*），`hugo mod npm pack` �
 | --- | --- | --- |
 | `assets/css/tailwind.css` | Tailwind CLI（`pnpm css`） | 改动类名/主题样式后 |
 | `content/tw/`、`content/hk/` | OpenCC（`pnpm variants`） | 改动 `content/zh` 后 |
-| `data/lunar.json` | lunar-javascript（`pnpm lunar`） | 新增古文页后 |
 | `assets/fonts/LXGWWenKai-Novel.ttf` | fontTools 子集化（一次性，23.6MB → **1.11MB**，2751 字形） | 小说用字超出子集时 |
 
 一键刷新：`pnpm generate`（= variants + lunar + css），然后照旧 `pnpm build`。
@@ -201,7 +198,6 @@ Hugo 会渲染——迁移时按 `PLACEHOLDER_BODY_RE` 丢弃这类短占位正�
 | 目录 | `_partials/toc.html` | 用 `.TableOfContents`（`.Fragments.Headings` 在本内容下是嵌套结构，顶层只有 1 项）；标题数足够才渲染 |
 | 阅读时间 | `page.html` | `printf (T "readingTime") .ReadingTime`（`i18n` 不做 `%d` 插值） |
 | 古文竖排 | `layouts/ancient/page.html` + `_partials/head/heti.html` | 内置 Heti（MIT，`assets/vendor/heti`）：`heti--vertical` + `autoSpacing()`，仅古文文章页加载 |
-| 古文农历 | `scripts/build_lunar.mjs` → `data/lunar.json` → `ancient/page.html` | 与 Astro 同一套 lunar-javascript；模板侧读 `hugo.Data.lunar` |
 | 暗色模式 | `_partials/head/theme-boot.html` + `_partials/theme-toggle.html` + `main.css` 的 `.dark` 层 | 与 Astro 同约定：`localStorage["theme"]`、`<html class="dark">`、`aria-pressed`；首屏前置脚本防闪烁 |
 | 404 | `layouts/404.html` | 走 baseof 渲染（带站点导航与暗色模式），列出博客/项目/友链/关于/书架入口 |
 | 小说导航 | `layouts/shelf/section.html`（书架）、`layouts/shelf/page.html`（落地页与章节页） | 落地页列**本系列**章节；章节页列章节 + 上一章/下一章，按 `weight`（= `chapter`）排序。系列用 `novel` 参数归组，落地页无此参数，故回退用文件名（见模板注释） |
@@ -222,4 +218,3 @@ Wiki 语法在迁移期处理（`scripts/migrate_astro.py`）：`[[页面]]` 有
 - `pnpm build` 带 `--cleanDestinationDir`，避免 `public/` 累积旧指纹资源。
 
 用 `python scripts/asset_audit.py` 复查每个第三方资源的加载面（应只有需要的页面）。
-

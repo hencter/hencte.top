@@ -4,12 +4,11 @@
 	"description": "亦幸小阁 — Hugo 站点。Tailwind CSS 与繁体变体在 Hugo 之前生成（pnpm variants / pnpm css）。",
 	"scripts": {
 		"variants": "node scripts/build_variants.mjs",
-		"lunar": "node scripts/build_lunar.mjs",
 		"css": "tailwindcss -i themes/kiss/assets/css/main.css -o assets/css/tailwind.css --cwd .",
 		"css:watch": "tailwindcss -i themes/kiss/assets/css/main.css -o assets/css/tailwind.css --cwd . --watch",
 		"dev": "hugo server -D",
 		"build": "hugo --ignoreCache --cleanDestinationDir --panicOnWarning --printPathWarnings --printI18nWarnings",
-		"generate": "pnpm variants && pnpm lunar && pnpm css",
+		"generate": "pnpm variants && pnpm css",
 		"check": "python scripts/verify_urls.py",
 		"check:templates": "hugo --ignoreCache --printUnusedTemplates --printPathWarnings --printI18nWarnings",
 		"audit:visual": "node scripts/visual_audit.mjs",
@@ -20,7 +19,6 @@
 	"devDependencies": {
 		"@tailwindcss/cli": "4.1.11",
 		"@tailwindcss/typography": "0.5.16",
-		"lunar-javascript": "1.7.7",
 		"opencc-js": "1.4.2",
 		"playwright-core": "^1.63.0",
 		"prettier": "3.6.2",

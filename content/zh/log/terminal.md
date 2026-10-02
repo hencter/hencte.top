@@ -1,0 +1,21 @@
++++
+aliases = ['/log/2022-07-27-terminal/']
+categories = ['奇技淫巧']
+date = '2022-07-27T21:05:30+08:00'
+description = 'Windows Terminal 小技巧：将图标文件放进 RoamingState 目录，在 settings.json 中用 ms-appdata 地址引用，即可自定义标题栏图标；也可用 Ctrl+, 进入图形化配置。'
+draft = false
+tags = ['Windows', 'Tips']
+title = '终端模拟器'
++++
+## Windows Terminal 配置标题栏图标
+
+### 图标文件配置[^1]
+
+1. 将图标放在这个目录，然后 `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState`
+
+2. 通过在 `settings.json` 中将此行添加到配置文件来显示图标：
+   `"icon": "ms-appdata:///roaming/ kali.ico"`。
+
+### 图形化配置
+
+- 打开 Windows 终端，`Ctrl` + `,` 进入终端 GUI 配置

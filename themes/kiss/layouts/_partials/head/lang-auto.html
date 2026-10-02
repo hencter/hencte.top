@@ -1,0 +1,61 @@
+{{/*
+  Language auto-detect — inline and pre-paint, same rationale as theme-boot.html: a
+  reader whose browser prefers another language must not see the wrong language
+  flash before the redirect.
+
+  Guards, in order:
+    · `localStorage.lang` — an explicit choice (written by the <select> in
+      lang-switcher.html) always wins, so auto-detection never overrides the reader;
+    · `sessionStorage.langAuto` — at most one automatic redirect per session, so a
+      reader can browse the "other" language without being bounced back and there is
+      no redirect loop.
+
+  Matching walks navigator.languages in the reader's own priority order: exact tag
+  (zh-TW), then a Han-script hint (zh-Hant -> 繁體), then the primary subtag (zh ->
+  the default language). Crawlers send no navigator.language, so they never redirect.
+
+  Targets come from the same computation as the switcher: this page's translation
+  when it exists, otherwise that language's home.
+
+  @context {page} page
+*/}}
+{{- $page := . -}}
+{{- $sites := hugo.Sites -}}
+{{- if gt (len $sites) 1 -}}
+<script>
+  (function () {
+    try {
+      if (localStorage.getItem("lang")) return;
+      if (sessionStorage.getItem("langAuto")) return;
+      var targets = {
+        {{- range $sites }}
+          {{- $siteLang := .Language.Lang }}
+          {{- $target := .Home }}
+          {{- range $page.AllTranslations }}{{ if eq .Language.Lang $siteLang }}{{ $target = . }}{{ end }}{{ end }}
+        "{{ .Language.Locale }}": "{{ $target.RelPermalink }}",
+        {{- end }}
+      };
+      var current = "{{ site.Language.Locale }}";
+      var prefs = [];
+      if (navigator.languages && navigator.languages.length) prefs = prefs.concat(navigator.languages);
+      if (navigator.language && prefs.indexOf(navigator.language) === -1) prefs.push(navigator.language);
+      var keys = Object.keys(targets);
+      var pick = "";
+      function firstWhere(fn) {
+        for (var i = 0; i < keys.length; i++) if (fn(keys[i].toLowerCase())) return keys[i];
+        return "";
+      }
+      for (var i = 0; i < prefs.length && !pick; i++) {
+        var tag = String(prefs[i]).toLowerCase();
+        var primary = tag.split("-")[0];
+        pick = firstWhere(function (k) { return k === tag; })
+            || (tag.indexOf("hant") >= 0 ? firstWhere(function (k) { return k === "zh-tw" || k === "zh-hk"; }) : "")
+            || firstWhere(function (k) { return k.split("-")[0] === primary; });
+      }
+      if (!pick || pick === current) return;
+      sessionStorage.setItem("langAuto", "1");
+      location.replace(targets[pick]);
+    } catch (e) {}
+  })();
+</script>
+{{- end -}}

@@ -122,49 +122,39 @@ def main() -> int:
 
     # The language switcher must actually switch. It once linked every language to
     # the page you were already on (a comparison used the page's language instead of
-    # the iterated site's), so clicking did nothing at all — and a presence-only
-    # check ("four links exist") passed. Verify the targets are distinct and resolve.
+    # the iterated site's), so clicking did nothing — and a presence-only check
+    # ("four links exist") passed. It is a <select> now, so verify each option's
+    # target resolves and that at least one leads somewhere other than this page.
     print("\n== 6. language switcher resolves to other languages ==")
-    switcher = re.compile(
-        r"<nav[^>]*aria-label=\"[^\"]*\"[^>]*>(?P<nav>.*?)</nav>", re.S)
-    langlink = re.compile(
-        r"<a\s+href=\"(?P<href>[^\"]+)\"[^>]*hreflang=\"(?P<lang>[^\"]*)\"[^>]*>(?P<text>.*?)</a>",
+    select_re = re.compile(r"<select[^>]*class=\"[^\"]*lang-select[^\"]*\"[^>]*>(?P<body>.*?)</select>", re.S)
+    option_re = re.compile(
+        r"<option\s+value=\"(?P<href>[^\"]+)\"[^>]*data-locale=\"(?P<lang>[^\"]*)\"[^>]*>(?P<text>.*?)</option>",
         re.S)
     pages_with_switcher = 0
     for page_file in sorted(public.rglob("*.html")):
         html = page_file.read_text(encoding="utf-8", errors="ignore")
-        nav = None
-        for candidate in switcher.finditer(html):
-            if "hreflang=" in candidate.group("nav"):
-                nav = candidate.group("nav")
-                break
-        if not nav:
+        m = select_re.search(html)
+        if not m:
             continue
         pages_with_switcher += 1
-        links = list(langlink.finditer(nav))
         rel_page = page_file.relative_to(public).as_posix()
         self_url = "/" + rel_page[: -len("index.html")]
-        targets = {}
-        for link in links:
-            href = link.group("href").replace("https://hencte.top", "") or "/"
-            lang = link.group("lang")
-            text = re.sub(r"<[^>]+>", "", link.group("text")).strip()
-            targets[lang] = (href, text)
-            # url_to_file() appends index.html, which is wrong for a file target
-            # like the per-language /en/404.html outputs.
+        options = []
+        for opt in option_re.finditer(m.group("body")):
+            href = opt.group("href")
             target = (public / href.lstrip("/")) if href.endswith(".html") \
                 else url_to_file(public, href)
             if not target.exists():
-                print(f"  {rel_page}: {text} -> {href} is missing")
+                print(f"  {rel_page}: {opt.group('lang')} -> {href} is missing")
                 failures += 1
-        # Every non-current language must lead somewhere other than this page.
-        other = [t for t in targets.values() if t[0] != self_url]
-        if len(targets) > 1 and not other:
-            print(f"  {rel_page}: all {len(targets)} language links point back at this "
+            options.append(href)
+        other = [href for href in options if href != self_url]
+        if len(options) > 1 and not other:
+            print(f"  {rel_page}: all {len(options)} language options point back at this "
                   f"page ({self_url}) — switching does nothing")
             failures += 1
     print(f"  {pages_with_switcher} page(s) carry a language switcher; "
-          f"all non-current links lead to a different, existing page")
+          f"all non-current options lead to a different, existing page")
 
     print()
     if failures:

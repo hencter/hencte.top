@@ -154,3 +154,24 @@
       wire();
     }
   })();
+
+// --- language select ---
+// Navigating on change is the whole feature; storing the choice is what stops the
+// pre-paint auto-detect (head/lang-auto.html) from overriding the reader later.
+(function () {
+  // The switcher is rendered twice — once in the desktop nav, once in the mobile
+  // <details> panel — so every instance must be wired, not just the first.
+  var selects = document.querySelectorAll(".lang-select");
+  if (!selects.length) return;
+  Array.prototype.forEach.call(selects, function (select) {
+    select.addEventListener("change", function () {
+      try {
+        localStorage.setItem(
+          "lang",
+          select.options[select.selectedIndex].getAttribute("data-locale") || select.value,
+        );
+      } catch (e) {}
+      window.location.assign(select.value);
+    });
+  });
+})();

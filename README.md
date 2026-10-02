@@ -230,3 +230,19 @@ Wiki 语法在迁移期处理（`scripts/migrate_astro.py`）：`[[页面]]` 有
 
 已核对：`2023-05-19 -> 二〇二三年四月初一`、`2022-08-23 -> 二〇二二年七月廿六`，
 与原先 `lunar-javascript` 脚本产出的值逐字一致。
+
+## 多语言：自动检测 + select 管理
+
+- **自动检测**（`themes/kiss/layouts/_partials/head/lang-auto.html`，内联在 `<head>`、首屏前执行，
+  避免先闪错语言）：按 `navigator.languages` 的优先级匹配 —— 先精确标签（`zh-TW`），
+  再看 Han 脚本提示（`zh-Hant` → 繁體），最后取主语言（`zh` → 默认简体）；
+  命中的目标是**当前页的对应译文**（无译文则回该语言首页），与手选逻辑完全一致。
+- **两道守卫**：`localStorage.lang`（用户手选过就不再自动跳）与 `sessionStorage.langAuto`
+  （每会话最多自动跳一次）—— 因此不会覆盖读者选择、不会来回弹、也不会有重定向环。
+  爬虫不带 `navigator.language`，不受影响。
+- **select**（`_partials/lang-switcher.html`）：桌面导航与移动菜单各一份，选项值即目标 URL，
+  带 `data-locale` 与 `lang` 属性；`assets/js/site.js` 绑定全部实例，切换即跳转并记住选择。
+
+实测（Playwright，逐场景）：`zh-TW→/tw/`、`zh-Hant→/tw/`、`en-US→/en/`、`zh-CN→/`、`fr-FR→不动`、
+`/about/` 上的 `en-US→/en/about/`、同一会话二次访问不再跳、手选简体后即使浏览器是 zh-TW 也停在 `/`。
+`verify_urls.py` 第 6 项已改为校验 select 选项：536 页的目标全部存在且至少一个指向别处。

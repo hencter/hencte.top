@@ -1,33 +1,37 @@
 {{/*
-  Language switcher.
+  Language switcher: a native <select> whose option values are the target URLs.
 
   Uses hugo.Sites (the documented replacement for the Site.Sites/Page.Sites pair
-  deprecated in v0.156.0). For a language a page has no translation in, it links
-  to that language's home — the Astro site's locale selector does the same. Rotating
-  through .Rotate "language" instead left article pages offering only their own
-  language, so a reader could not reach /en or 繁體 at all from there.
+  deprecated in v0.156.0). A language the page has no translation in falls back to
+  that language's home — same computation as head/lang-auto.html, so manual and
+  automatic switching always agree.
+
+  The <option> carries `data-locale` (BCP 47) both for the reader's information and
+  so the tooling can check the targets; the change handler lives in assets/js/site.js,
+  which also records the explicit choice that disables auto-detection.
 
   @context {page} page
 */}}
-{{ $page := . }}
-{{ $sites := hugo.Sites }}
-{{ if gt (len $sites) 1 }}
-  <nav aria-label="{{ T "language" }}" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-    {{ range $sites }}
-      {{/* Compare against THIS site's language, not the current page's: using
-           $.Language.Lang made every iteration resolve to the page itself, so every
-           language link pointed at the URL you were already on. */}}
-      {{ $siteLang := .Language.Lang }}
-      {{ $target := .Home }}
-      {{ range $page.AllTranslations }}
-        {{ if eq .Language.Lang $siteLang }}{{ $target = . }}{{ end }}
-      {{ end }}
-      {{ $current := eq $page.Language.Lang $siteLang }}
-      <a
-        href="{{ $target.RelPermalink }}"
-        hreflang="{{ .Language.Locale }}"
-        {{ if $current }}aria-current="page" class="font-semibold text-rose-600"{{ else }}class="text-gray-600 hover:text-rose-600"{{ end }}
-      >{{ .Language.Label }}</a>
-    {{ end }}
-  </nav>
-{{ end }}
+{{- $page := . -}}
+{{- $sites := hugo.Sites -}}
+{{- if gt (len $sites) 1 -}}
+  <label class="lang-switch inline-flex items-center">
+    <span class="sr-only">{{ T "language" }}</span>
+    <select
+      class="lang-select rounded-md border border-gray-200 bg-transparent px-2 py-1 text-sm text-gray-700 transition-colors hover:text-rose-600"
+      aria-label="{{ T "language" }}"
+    >
+      {{- range $sites }}
+        {{- $siteLang := .Language.Lang }}
+        {{- $target := .Home }}
+        {{- range $page.AllTranslations }}{{ if eq .Language.Lang $siteLang }}{{ $target = . }}{{ end }}{{ end }}
+        <option
+          value="{{ $target.RelPermalink }}"
+          data-locale="{{ .Language.Locale }}"
+          lang="{{ .Language.Locale }}"
+          {{ if eq $page.Language.Lang $siteLang }}selected{{ end }}
+        >{{ .Language.Label }}</option>
+      {{- end }}
+    </select>
+  </label>
+{{- end -}}

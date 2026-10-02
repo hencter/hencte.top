@@ -1,5 +1,6 @@
 {{/* Applied before the stylesheet so the saved theme never flashes. */}}
 {{ partial "head/theme-boot.html" . }}
+{{ partial "head/lang-auto.html" . }}
 {{ partial "seo.html" . }}
 {{/* 古文 article pages get Heti's typography (spacing + vertical layout). */}}
 {{ if and .IsPage (eq .Section "ancient") }}{{ partial "head/heti.html" . }}{{ end }}

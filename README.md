@@ -246,3 +246,19 @@ Wiki 语法在迁移期处理（`scripts/migrate_astro.py`）：`[[页面]]` 有
 实测（Playwright，逐场景）：`zh-TW→/tw/`、`zh-Hant→/tw/`、`en-US→/en/`、`zh-CN→/`、`fr-FR→不动`、
 `/about/` 上的 `en-US→/en/about/`、同一会话二次访问不再跳、手选简体后即使浏览器是 zh-TW 也停在 `/`。
 `verify_urls.py` 第 6 项已改为校验 select 选项：536 页的目标全部存在且至少一个指向别处。
+
+## 友链交换：GitHub Issue
+
+友链申请不再走邮件，改为在仓库里提一个 issue（表单已预填）：
+
+| 语言 | 入口 | 模板 |
+| --- | --- | --- |
+| 简体 / 繁中 | `/links/`、`/tw/links/`、`/hk/links/` | [`.github/ISSUE_TEMPLATE/friend-link.yml`](.github/ISSUE_TEMPLATE/friend-link.yml) |
+| English | `/en/links/` | [`.github/ISSUE_TEMPLATE/friend-link-en.yml`](.github/ISSUE_TEMPLATE/friend-link-en.yml) |
+
+直达：<https://github.com/hencter/hencte.top/issues/new?template=friend-link.yml>
+
+表单字段：站点名称、站点地址、头像/Logo（可选）、RSS（可选）、一句话简介、备注（可选），
+以及两项必勾确认（已添加本站友链、内容原创且长期更新）。提交后自动打上 `friend-link` 标签。
+模板由 `gh api` 直接创建在仓库上；页面侧 `[applyRules]` 新增可选的 `link`/`linkLabel`，
+由 `themes/kiss/layouts/page.html` 渲染成卡片内的按钮。

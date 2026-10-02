@@ -1,0 +1,105 @@
+{{/*
+  Reading focus chrome (mirrors astro.hencte.top BaseLayout.astro:368-445 and
+  chrome.css:73): while the reader scrolls down or sits idle inside an article,
+  the sticky header — and, on wide screens, the TOC rail — recede so the centered
+  text column is all that is left. They come back on scroll-up, when the pointer
+  approaches the top edge, on keyboard focus into the header, or when the mobile
+  menu is open. Hovering the rail itself revives the TOC in CSS (main.css).
+
+  The rail is only expanded where it actually floats (>=1280px); below that the TOC
+  stays the collapsed <details> above the prose, because CSS cannot open one.
+*/}}
+<script>
+  (function () {
+    var HIDE_AFTER = 2400; // idle ms before the chrome retreats
+    var SCROLL_BEGIN = 160; // px before a down-scroll hides it
+    var TOP_REVEAL = 96; // pointer band that brings it back
+    var DELTA = 6;
+    var doc = document.documentElement;
+    var lastY = window.scrollY;
+    var atTop = true;
+    var idleTimer = null;
+    var ticking = false;
+
+    function menuOpen() {
+      return !!document.querySelector("header details[open]");
+    }
+
+    function apply(hidden) {
+      doc.classList.toggle("reading-chrome--hidden", Boolean(hidden) && !atTop && !menuOpen());
+    }
+
+    function armIdle() {
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(function () {
+        if (!atTop) apply(true);
+      }, HIDE_AFTER);
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        var y = window.scrollY;
+        atTop = y < SCROLL_BEGIN;
+        if (atTop) {
+          apply(false);
+        } else {
+          var dy = y - lastY;
+          if (Math.abs(dy) > DELTA) {
+            if (dy > 0) {
+              apply(true);
+            } else {
+              apply(false);
+              armIdle();
+            }
+          }
+        }
+        lastY = y;
+        ticking = false;
+      });
+    }
+
+    function init() {
+      var railQuery = window.matchMedia("(min-width: 1280px)");
+      function syncToc() {
+        var tocs = document.querySelectorAll(".toc-rail details.toc");
+        for (var i = 0; i < tocs.length; i++) tocs[i].open = railQuery.matches;
+      }
+      syncToc();
+      if (railQuery.addEventListener) railQuery.addEventListener("change", syncToc);
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      atTop = window.scrollY < SCROLL_BEGIN;
+      lastY = window.scrollY;
+      apply(false);
+      armIdle();
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener(
+        "mousemove",
+        function (e) {
+          if (e.clientY < TOP_REVEAL && !atTop) apply(false);
+        },
+        { passive: true },
+      );
+      document.addEventListener("focusin", function (e) {
+        if (e.target && e.target.closest && e.target.closest("header")) apply(false);
+      });
+      document.addEventListener(
+        "toggle",
+        function (e) {
+          if (e.target && e.target.tagName === "DETAILS") apply(false);
+        },
+        true,
+      );
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+</script>

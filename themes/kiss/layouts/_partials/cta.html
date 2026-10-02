@@ -1,0 +1,22 @@
+{{/*
+  Call-to-action block. Reads the `cta` table from front matter
+  (title / text / actions.primary / actions.secondary).
+
+  @context {page} page
+*/}}
+{{ with .Params.cta }}
+  <section id="contact" class="mt-14 rounded-2xl border border-rose-100 bg-rose-50/60 p-6 sm:p-8">
+    {{ with .title }}<h2 class="text-xl font-bold text-gray-900">{{ . }}</h2>{{ end }}
+    {{ with .text }}<p class="mt-2 text-gray-700">{{ . }}</p>{{ end }}
+    {{ with .actions }}
+      <div class="mt-5 flex flex-wrap gap-3">
+        {{ with .primary }}
+          <a href="{{ .href }}" class="inline-flex items-center rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500 transition-colors">{{ .label }}</a>
+        {{ end }}
+        {{ with .secondary }}
+          <a href="{{ .href }}" class="inline-flex items-center rounded-lg border border-rose-200 bg-white px-5 py-2.5 text-sm font-medium text-rose-700 hover:border-rose-300 transition-colors">{{ .label }}</a>
+        {{ end }}
+      </div>
+    {{ end }}
+  </section>
+{{ end }}

@@ -1,0 +1,17 @@
+{{/*
+  Heti (https://github.com/sivan/heti, MIT) for the 古文 section: CJK/Latin
+  spacing and punctuation compression, applied by the ancient page template to
+  elements under #heti-ancient. Vendored under assets/vendor/heti so the section
+  works offline and without a CDN; both files go through the asset pipeline
+  (minify + fingerprint + SRI).
+*/}}
+{{ with resources.Get "vendor/heti/heti.min.css" }}
+  {{ with . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+  {{ end }}
+{{ end }}
+{{ with resources.Get "vendor/heti/heti-addon.min.js" }}
+  {{ with . | minify | fingerprint }}
+    <script defer src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+  {{ end }}
+{{ end }}

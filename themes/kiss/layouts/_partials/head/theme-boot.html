@@ -1,0 +1,16 @@
+{{/*
+  Pre-paint dark-mode bootstrap, mirroring the Astro site's ThemeBoot.astro:
+  localStorage key "theme", falling back to prefers-color-scheme. Inline and in
+  <head> before the stylesheet so there is no flash of the wrong theme.
+*/}}
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("theme");
+      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (saved === "dark" || (!saved && prefersDark)) {
+        document.documentElement.classList.add("dark");
+      }
+    } catch (e) {}
+  })();
+</script>

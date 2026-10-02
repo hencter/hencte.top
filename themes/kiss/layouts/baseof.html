@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html lang="{{ site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}"
+<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}"
   class="scroll-smooth">
 
 <head>
   {{ partial "head.html" . }}
-  {{ if .Param "math" }}
+  {{/*
+    MathJax is only worth its weight on pages that actually typeset something.
+    Uses .Params (page front matter only): the site-wide params.math would make
+    every page true and put a ~1 MB MathJax bundle on the whole site.
+  */}}
+  {{ $needsMath := .Params.math | default false }}
+  {{ if not $needsMath }}
+    {{ $raw := printf "%s" .RawContent }}
+    {{ $needsMath = or (strings.Contains $raw "$$") (strings.Contains $raw "\\(") (strings.Contains $raw "\\[") }}
+  {{ end }}
+  {{ if $needsMath }}
     {{ partialCached "math.html" . }}
   {{ end }}
+  {{/* The mermaid runtime is only needed by pages that actually draw a diagram. */}}
+  {{ if strings.Contains (printf "%s" .RawContent) "```mermaid" }}
+    {{ partial "mermaid.html" . }}
+  {{ end }}
+  {{/* Copy buttons only matter where there are code blocks. */}}
+  {{ if strings.Contains (printf "%s" .RawContent) "```" }}
+    {{ partial "code-copy.html" . }}
+  {{ end }}
+  {{/* Reading focus: hides the header (and the TOC rail) while scrolling down. */}}
+  {{ partial "reading-chrome.html" . }}
 </head>
 
 <body class="min-h-screen bg-gradient-to-br from-neutral-50 to-white text-gray-900 antialiased flex flex-col">
+  <!-- Skip link: keyboard users reached the article only after ~11 tab stops. -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-rose-600 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white">{{ T "skipToContent" }}</a>
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-sm">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -18,8 +40,11 @@
   </header>
 
   <!-- Main Content -->
-  <main class="flex-1">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main id="main" class="flex-1">
+    {{/* Article pages with a TOC get a wider container so the reading shell's right
+         gutter can hold the TOC rail; everything else keeps the 6xl measure. */}}
+    {{ $wide := and .IsPage (ge (len .Fragments.Identifiers) 5) }}
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 py-8 {{ if $wide }}max-w-[100rem]{{ else }}max-w-6xl{{ end }}">
       {{ block "main" . }}{{ end }}
     </div>
   </main>

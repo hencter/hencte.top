@@ -1,0 +1,49 @@
+{{/*
+  /blog/ — article index. The Astro site builds this from src/pages/blog/index.astro
+  over every routed post; here the articles live in the log/tech/ancient sections,
+  so list them grouped by section.
+
+  Pages reach this template through `type = "blog"` (set by the migration for the
+  connect `blog` page).
+
+  @context {page} the blog index page
+*/}}
+{{ define "main" }}
+  {{ partial "hero.html" . }}
+
+  {{ if not .Params.hero }}
+    <header class="prose-header">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="text-gray-600">{{ . }}</p>{{ end }}
+    </header>
+  {{ end }}
+
+  {{ with .Content }}<article class="prose-content">{{ . }}</article>{{ end }}
+
+  {{ $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient") }}
+  {{ range $key := slice "tech" "log" "ancient" }}
+    {{ $inSection := where $posts "Section" $key }}
+    {{ with $inSection.ByDate.Reverse }}
+      {{/* Constrained to a readable measure: at the container width these one-line
+           descriptions ran past 90 characters per line. */}}
+      <section class="mt-10 max-w-3xl">
+        <h2 class="text-xl font-bold text-gray-900">{{ T (printf "section%s" (title $key)) }}</h2>
+        <ul class="mt-4 divide-y divide-gray-100">
+          {{ range . }}
+            <li class="py-3">
+              {{/* flex-wrap + nowrap keeps the date from breaking mid-value ("2026-" /
+                   "09-02") when a long title fills the measure. */}}
+              <div class="flex flex-wrap items-baseline gap-x-3">
+                <a href="{{ .RelPermalink }}" class="font-medium text-gray-900 hover:text-rose-600">{{ .LinkTitle }}</a>
+                {{ if not .Date.IsZero }}
+                  <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="whitespace-nowrap text-sm text-gray-500">{{ .Date.Format "2006-01-02" }}</time>
+                {{ end }}
+              </div>
+              {{ with .Description }}<p class="mt-1 text-sm text-gray-600">{{ . }}</p>{{ end }}
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+    {{ end }}
+  {{ end }}
+{{ end }}

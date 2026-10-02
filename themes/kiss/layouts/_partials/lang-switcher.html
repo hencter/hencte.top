@@ -1,0 +1,33 @@
+{{/*
+  Language switcher.
+
+  Uses hugo.Sites (the documented replacement for the Site.Sites/Page.Sites pair
+  deprecated in v0.156.0). For a language a page has no translation in, it links
+  to that language's home — the Astro site's locale selector does the same. Rotating
+  through .Rotate "language" instead left article pages offering only their own
+  language, so a reader could not reach /en or 繁體 at all from there.
+
+  @context {page} page
+*/}}
+{{ $page := . }}
+{{ $sites := hugo.Sites }}
+{{ if gt (len $sites) 1 }}
+  <nav aria-label="{{ T "language" }}" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+    {{ range $sites }}
+      {{/* Compare against THIS site's language, not the current page's: using
+           $.Language.Lang made every iteration resolve to the page itself, so every
+           language link pointed at the URL you were already on. */}}
+      {{ $siteLang := .Language.Lang }}
+      {{ $target := .Home }}
+      {{ range $page.AllTranslations }}
+        {{ if eq .Language.Lang $siteLang }}{{ $target = . }}{{ end }}
+      {{ end }}
+      {{ $current := eq $page.Language.Lang $siteLang }}
+      <a
+        href="{{ $target.RelPermalink }}"
+        hreflang="{{ .Language.Locale }}"
+        {{ if $current }}aria-current="page" class="font-semibold text-rose-600"{{ else }}class="text-gray-600 hover:text-rose-600"{{ end }}
+      >{{ .Language.Label }}</a>
+    {{ end }}
+  </nav>
+{{ end }}

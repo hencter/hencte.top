@@ -1,0 +1,108 @@
+{{/*
+  Per-page SEO head. Mirrors src/components/Meta.astro of the Astro site:
+  canonical, robots policy (Cite vs Protect track), hreflang, Open Graph,
+  Twitter card, RFC-9110-friendly JSON-LD, and the machine-readable index links.
+
+  JSON-LD note: the object is handed to the template as an object so the
+  JavaScript context serialises it. Piping jsonify's *string* here would emit a
+  quoted string literal that no consumer accepts.
+
+  @context {page} page
+*/}}
+{{/* Brand pages already carry the site name in their own title ("关于 | 亦幸小阁"),
+   so appending it again produced "关于 | 亦幸小阁 | 亦幸小阁". */}}
+{{- $pageTitle := strings.TrimSuffix (printf " | %s" site.Title) .Title -}}
+{{- $title := cond .IsHome site.Title (printf "%s | %s" $pageTitle site.Title) -}}
+{{- $desc := "" -}}
+{{- with .Description }}{{ $desc = . }}{{ else }}{{ with .Summary }}{{ $desc = . }}{{ end }}{{ end -}}
+{{- $desc = $desc | default site.Params.description | plainify | htmlUnescape | chomp | truncate 160 -}}
+{{- $image := "" -}}
+{{- with .Params.images }}{{ $image = index . 0 }}{{ end -}}
+{{- $image = $image | default site.Params.defaultImage | default "/og-image.png" -}}
+{{- $imageAbs := $image | absURL -}}
+{{- $isShelf := eq .Section "shelf" -}}
+{{- $robots := "" -}}
+{{- with .Params.robots }}{{ $robots = . }}{{ end -}}
+{{- if not $robots -}}
+  {{- if ne hugo.Environment "production" -}}
+    {{- $robots = "noindex, nofollow" -}}
+  {{- else if $isShelf -}}
+    {{- $robots = "noindex, noai, noimageai" -}}
+  {{- else -}}
+    {{- $robots = "index, follow" -}}
+  {{- end -}}
+{{- end -}}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $title }}</title>
+{{ with $desc }}<meta name="description" content="{{ . }}">{{ end }}
+{{ with .Params.keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
+<meta name="author" content="{{ site.Params.author | default "Hencter Lew" }}">
+<meta name="application-name" content="{{ site.Params.applicationName | default "Hencter Studio" }}">
+<meta name="robots" content="{{ $robots }}">
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* hreflang only when a page really has counterparts. */}}
+{{- $translations := .AllTranslations -}}
+{{- if gt (len $translations) 1 -}}
+  {{- range $translations }}
+<link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">
+  {{- end }}
+  {{/* Exactly one x-default, pointing at the default language's version of this
+       page. Previously every zh variant (zh-CN/zh-TW/zh-HK) emitted one, so the
+       home page carried three conflicting x-default links. The default language is
+       the one whose home is the site root (hugo.Sites is not ordered by config). */}}
+  {{- $defaultLang := site.Language.Lang }}
+  {{- range hugo.Sites }}{{ if eq .Home.RelPermalink "/" }}{{ $defaultLang = .Language.Lang }}{{ end }}{{ end }}
+  {{- range $translations }}{{ if eq .Language.Lang $defaultLang }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+  {{- end }}{{ end -}}
+{{- end }}
+
+{{ with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="{{ .MediaType.Type }}" title="{{ site.Title }} RSS" href="{{ .Permalink }}">
+{{ end }}
+<link rel="describedby" type="text/plain" href="{{ "llms.txt" | absURL }}" title="llms.txt">
+<link rel="alternate" type="text/plain" title="llm.txt entity FAQ" href="{{ "llm.txt" | absURL }}">
+<link rel="alternate" type="text/plain" title="llms-full.txt" href="{{ "llms-full.txt" | absURL }}">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111827">
+
+<meta property="og:type" content="{{ if eq .Kind "page" }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ $title }}">
+{{ with $desc }}<meta property="og:description" content="{{ . }}">{{ end }}
+<meta property="og:locale" content="{{ replace site.Language.Locale "-" "_" }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:image" content="{{ $imageAbs }}">
+{{ if eq .Kind "page" }}
+  <meta property="article:author" content="{{ site.Params.author | default "Hencter Lew" }}">
+  {{ if not .Date.IsZero }}<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ end }}
+  {{ if not .Lastmod.IsZero }}<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}">{{ end }}
+{{ end }}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+{{ with $desc }}<meta name="twitter:description" content="{{ . }}">{{ end }}
+<meta name="twitter:image" content="{{ $imageAbs }}">
+{{ with site.Params.twitterSite }}<meta name="twitter:site" content="{{ . }}">{{ end }}
+{{ with site.Params.bingSiteVerification }}<meta name="msvalidate.01" content="{{ . }}">{{ end }}
+
+{{/* Structured data — one object per page, serialised by the JS context. */}}
+{{- $type := cond (eq .Kind "page") "TechArticle" "WebPage" -}}
+{{- $ld := dict
+      "@context" "https://schema.org"
+      "@type" $type
+      "name" $title
+      "headline" .Title
+      "url" .Permalink
+      "inLanguage" site.Language.Locale
+      "image" $imageAbs
+      "author" (dict "@type" "Person" "name" (site.Params.author | default "Hencter Lew") "url" ("about/" | absLangURL))
+      "isPartOf" (dict "@type" "WebSite" "name" site.Title "url" site.BaseURL) -}}
+{{- with $desc }}{{ $ld = merge $ld (dict "description" .) }}{{ end -}}
+{{- if not .Date.IsZero }}{{ $ld = merge $ld (dict "datePublished" (.Date.Format "2006-01-02T15:04:05-07:00")) }}{{ end -}}
+{{- if not .Lastmod.IsZero }}{{ $ld = merge $ld (dict "dateModified" (.Lastmod.Format "2006-01-02T15:04:05-07:00")) }}{{ end -}}
+{{- if $isShelf }}{{ $ld = merge $ld (dict "isAccessibleForFree" true) }}{{ end -}}
+<script type="application/ld+json">{{ $ld }}</script>

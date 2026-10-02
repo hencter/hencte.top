@@ -1,7 +1,27 @@
+/* Tailwind CSS entry point for the kiss theme.
+ *
+ * Compiled to assets/css/tailwind.css by the Tailwind CSS CLI *before* Hugo runs:
+ *   pnpm css        (pnpm build runs it automatically)
+ *
+ * The compile step is explicit because Hugo locates the CLI by parsing
+ * node_modules/.bin/tailwindcss(.cmd) for its Node.js entry point, and pnpm's
+ * Windows shim embeds a NODE_PATH line pointing at a
+ * "node_modules/@tailwindcss/cli/node_modules" directory, which that parser
+ * matches instead — so Hugo aborts with:
+ *   binary "tailwindcss" is not a Node.js script
+ */
 @import "tailwindcss";
-@import "font.css";
+@import "./font.css";
 @plugin "@tailwindcss/typography";
-@source "hugo_stats.json";
+
+/* Class sources. Automatic content detection does not cover the template trees
+ * in this project, so utilities used only in a template would otherwise appear
+ * one build late — hugo_stats.json is written by the Hugo run that *follows*
+ * this compile step. @source paths resolve relative to this file. */
+@source "../../../../layouts/**/*.{html,xml,txt}";
+@source "../../layouts/**/*.html";
+@source "../../../../content/**/*.md";
+@source "../../../../hugo_stats.json";
 
 @theme {
   --font-serif: "LXGWWenKai", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
@@ -12,23 +32,508 @@
 @layer components {
   .prose-content {
     @apply prose lg:prose-xl;
-    
+
     /* 代码块和内联代码的通用样式 */
     & pre {
       @apply overflow-x-auto;
     }
-    
+
     & code {
       @apply break-words;
     }
-    
+
     /* 链接样式 */
     & a {
       @apply break-words text-rose-600;
     }
   }
-  
+
+  /* Article/section header. The title is sized explicitly instead of inheriting
+   * prose-xl's h1 (which rendered ~56px and dominated the first screen). */
   .prose-header {
-    @apply prose lg:prose-xl border-b border-gray-500;
+    @apply border-b border-gray-200 pb-4;
   }
+  .prose-header h1 {
+    @apply text-3xl font-bold leading-tight sm:text-4xl;
+  }
+  .prose-header p {
+    @apply mt-2 text-gray-600;
+  }
+}
+
+/* ── Obsidian callouts ──────────────────────────────────────────────────────
+ * Markup comes from layouts/_markup/render-blockquote.html and uses the same
+ * class names as the Astro site (src/styles/post.css) so both render alike. */
+@layer components {
+  .callout {
+    @apply my-6 overflow-hidden rounded-xl border border-gray-200 bg-gray-50;
+  }
+  .callout-header {
+    @apply flex cursor-pointer items-center gap-2 border-b border-gray-200 px-4 py-2 text-sm;
+  }
+  .callout-title {
+    @apply font-bold;
+  }
+  .callout-icon {
+    @apply text-base leading-none;
+  }
+  .callout-body {
+    @apply px-4 py-3;
+  }
+  .callout-body > :first-child {
+    margin-top: 0;
+  }
+  .callout-body > :last-child {
+    margin-bottom: 0;
+  }
+  details.callout > summary {
+    list-style: none;
+  }
+  details.callout > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .callout-note      { border-left: 4px solid #448aff; }
+  .callout-info      { border-left: 4px solid #00b8d4; }
+  .callout-tip       { border-left: 4px solid #00bfa5; }
+  .callout-success   { border-left: 4px solid #4caf50; }
+  .callout-question  { border-left: 4px solid #64b5f6; }
+  .callout-warning   { border-left: 4px solid #ff9800; }
+  .callout-danger    { border-left: 4px solid #f44336; }
+  .callout-failure   { border-left: 4px solid #f44336; }
+  .callout-bug       { border-left: 4px solid #e91e63; }
+  .callout-example   { border-left: 4px solid #9c27b0; }
+  .callout-quote     { border-left: 4px solid #9e9e9e; }
+  .callout-abstract  { border-left: 4px solid #00acc1; }
+  .callout-todo      { border-left: 4px solid #2196f3; }
+  .callout-important { border-left: 4px solid #e040fb; }
+
+  .callout-note      > .callout-header { color: #448aff; }
+  .callout-info      > .callout-header { color: #00b8d4; }
+  .callout-tip       > .callout-header { color: #00bfa5; }
+  .callout-success   > .callout-header { color: #4caf50; }
+  .callout-question  > .callout-header { color: #64b5f6; }
+  .callout-warning   > .callout-header { color: #ff9800; }
+  .callout-danger    > .callout-header { color: #f44336; }
+  .callout-failure   > .callout-header { color: #f44336; }
+  .callout-bug       > .callout-header { color: #e91e63; }
+  .callout-example   > .callout-header { color: #9c27b0; }
+  .callout-quote     > .callout-header { color: #9e9e9e; }
+  .callout-abstract  > .callout-header { color: #00acc1; }
+  .callout-todo      > .callout-header { color: #2196f3; }
+  .callout-important > .callout-header { color: #e040fb; }
+
+  .callout > .callout-header .callout-icon::before { content: "🗒"; }
+  .callout-note      > .callout-header .callout-icon::before { content: "🗒"; }
+  .callout-info      > .callout-header .callout-icon::before { content: "ℹ️"; }
+  .callout-tip       > .callout-header .callout-icon::before { content: "💡"; }
+  .callout-success   > .callout-header .callout-icon::before { content: "✅"; }
+  .callout-question  > .callout-header .callout-icon::before { content: "❓"; }
+  .callout-warning   > .callout-header .callout-icon::before { content: "⚠️"; }
+  .callout-danger    > .callout-header .callout-icon::before { content: "⛔"; }
+  .callout-failure   > .callout-header .callout-icon::before { content: "⛔"; }
+  .callout-bug       > .callout-header .callout-icon::before { content: "🐞"; }
+  .callout-example   > .callout-header .callout-icon::before { content: "🧪"; }
+  .callout-quote     > .callout-header .callout-icon::before { content: "❝"; }
+  .callout-abstract  > .callout-header .callout-icon::before { content: "📌"; }
+  .callout-todo      > .callout-header .callout-icon::before { content: "☑️"; }
+  .callout-important > .callout-header .callout-icon::before { content: "❗"; }
+
+  /* ── 古文 vertical typography (layouts/ancient/page.html + Heti) ───────── */
+  .heti-scroll-wrapper {
+    @apply overflow-x-auto pb-6;
+  }
+  .heti--vertical {
+    max-height: 78vh;
+  }
+
+  /* ── Table of contents (layouts/_partials/toc.html) ────────────────────── */
+  #TableOfContents ul {
+    @apply mt-1 list-none space-y-1 pl-0;
+  }
+  #TableOfContents ul ul {
+    @apply ml-4;
+  }
+  #TableOfContents a {
+    @apply text-gray-700 no-underline hover:text-rose-600;
+  }
+
+  /* ── Mermaid diagrams (layouts/_markup/render-codeblock-mermaid.html) ──── */
+  .mermaid-container {
+    @apply my-6 overflow-x-auto rounded-xl border border-gray-200 bg-white p-4;
+  }
+  .mermaid-container .mermaid {
+    @apply m-0 bg-transparent p-0 text-center;
+  }
+}
+
+/* Long-form CJK reading. prose-xl sized h2 at 1.8x the body (36px against 20px)
+ * and h3 at 30px, so the top two levels were nearly the same size and shouted
+ * over the prose; these em-based sizes keep the outline legible at both the
+ * mobile and desktop body sizes. Unlayered: the typography plugin's rules are
+ * emitted in @layer utilities, which would otherwise outrank this. */
+.prose-content h2,
+.prose-content h3,
+.prose-content h4 {
+  line-height: 1.35;
+}
+.prose-content h2 {
+  font-size: 1.4em;
+}
+.prose-content h3 {
+  font-size: 1.15em;
+}
+.prose-content h4 {
+  font-size: 1.05em;
+}
+/* Chapter bodies open with "# 第1章…" in the markdown, which otherwise inherits
+ * prose-xl's 2.8em (56px) — the only 56px heading on the site. */
+.prose-content h1 {
+  font-size: 1.6em;
+}
+
+/* Mobile tables. The typography plugin lets a 3-column table squeeze into 358px,
+ * which collapsed the first column to ~22px (one CJK glyph per line) and pushed
+ * the whole page sideways at 320/360px. Scrolling the table is the fix WCAG 1.4.10
+ * expects; cells stop wrapping so the original column widths survive. */
+@media (max-width: 767px) {
+  .prose-content table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  .prose-content table :where(th, td) {
+    white-space: nowrap;
+  }
+}
+
+/* 古文 was inheriting Heti's 16px/1.5 — smaller and denser than the 20px/1.8 body
+ * text everywhere else, on the text most worth reading slowly. */
+.heti--ancient {
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+/* The vertical reader is a scroll container; give it a visible, thin scrollbar so
+ * a mouse user can discover that the columns continue sideways. */
+.heti-scroll-wrapper {
+  scrollbar-width: thin;
+}
+
+/* Code block chrome (layouts/_markup/render-codeblock.html). Unlayered: it has to
+ * beat the typography plugin's `pre` margins, which live in @layer utilities.
+ * The figure background matches the inline Chroma (monokai) background so the
+ * language/copy bar and the code area read as one object. */
+.code-block {
+  margin: 1.5rem 0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background-color: #272822;
+}
+.code-block .highlight,
+.code-block pre {
+  margin: 0;
+  border-radius: 0;
+}
+.code-block-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.35rem 1rem;
+  font-size: 0.75rem;
+  color: #d1d5db;
+  background-color: rgb(255 255 255 / 0.06);
+}
+.code-block-lang {
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.code-copy {
+  cursor: pointer;
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.375rem;
+  color: #d1d5db;
+  transition: background-color 0.15s, color 0.15s;
+}
+.code-copy:hover {
+  background-color: rgb(255 255 255 / 0.14);
+  color: #fff;
+}
+
+/* ── Reading shell: centred text column + floating TOC rail ────────────────
+ * Mirrors astro.hencte.top's .post-shell--reading (post.css:69-200): a three
+ * column grid whose symmetric 1fr gutters put the text column on the page's true
+ * centre, with the TOC sticky in the right gutter. Below the rail breakpoint the
+ * rail wrapper is `display: contents`, so the TOC is the ordinary collapsed
+ * <details> above the prose (reading-chrome.html opens it only when it floats). */
+.reading-shell {
+  --read-col: 48rem;
+  --rail-w: 12rem;
+  --rail-gap: 1.75rem;
+  --rail-line: #e5e7eb;
+}
+.dark .reading-shell {
+  --rail-line: #1f2937;
+}
+.reading-shell > .reading-header,
+.reading-shell > .reading-prose,
+.reading-shell > .reading-foot {
+  max-width: var(--read-col);
+  margin-inline: auto;
+}
+.reading-shell > .toc-rail {
+  display: contents;
+}
+@media (min-width: 1280px) {
+  .reading-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--read-col)) minmax(0, 1fr);
+    column-gap: var(--rail-gap);
+    align-items: start;
+  }
+  .reading-shell > .reading-header {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: none;
+  }
+  .reading-shell > .toc-rail {
+    display: block;
+    grid-column: 3;
+    grid-row: 1 / span 3;
+    align-self: stretch;
+    min-width: 0;
+  }
+  .reading-shell > .reading-prose {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: none;
+  }
+  .reading-shell > .reading-foot {
+    grid-column: 2;
+    grid-row: 3;
+    max-width: none;
+  }
+  /* Bare editorial rail, not the card the narrow layout uses. */
+  .toc-rail .toc {
+    position: sticky;
+    top: 5.5rem;
+    max-width: var(--rail-w);
+    max-height: calc(100vh - 8rem);
+    margin: 0;
+    overflow-y: auto;
+    border: 0;
+    border-left: 2px solid var(--rail-line);
+    border-radius: 0;
+    background: transparent;
+    padding: 0 0 0 1rem;
+    transition: opacity 260ms ease, transform 360ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  /* Reading focus: the rail fades with the header but stays in tab order, and
+     hovering the gutter (or focusing into it) brings it back — the chrome itself
+     stays hidden. */
+  html.reading-chrome--hidden .toc-rail .toc {
+    top: 1.5rem;
+    opacity: 0;
+    transform: translateX(14px);
+    pointer-events: none;
+    transition: opacity 200ms ease, transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  html.reading-chrome--hidden .toc-rail:hover .toc,
+  html.reading-chrome--hidden .toc-rail:focus-within .toc {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  /* Touch screens have no hover: never hide the rail there. */
+  @media (hover: none) {
+    html.reading-chrome--hidden .toc-rail .toc {
+      top: 5.5rem;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+  }
+}
+
+/* Reading focus: the sticky header recedes on scroll-down / idle. Visual only —
+   the transform never shifts the centered column, and the bar stays focusable so
+   Tab can revive it. */
+header.sticky {
+  transition: transform 360ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms ease;
+}
+html.reading-chrome--hidden header.sticky {
+  opacity: 0;
+  transform: translateY(calc(-100% - 1.35rem));
+  pointer-events: none;
+}
+html.reading-chrome--hidden header.sticky:focus-within {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* ── Novel chapters ────────────────────────────────────────────────────────
+ * The chapter text is drawn into <canvas> in the browser (see
+ * layouts/_partials/novel-canvas.html), so the font is only fetched on those
+ * pages and the build needs no image processing at all. */
+@font-face {
+  font-family: "LXGWWenKai-Novel";
+  src: url("/fonts/LXGWWenKai-Novel.woff2") format("woff2");
+  font-display: swap;
+}
+.novel-page {
+  display: block;
+  width: 100%;
+  max-width: 46rem;
+  height: auto;
+  margin: 0 auto 1.25rem;
+  border-radius: 0.75rem;
+}
+
+/* Anchor targets keep clear of the sticky header. */
+:target {
+  scroll-margin-top: 6rem;
+}
+
+/* Native <details> disclosures (mobile menu, table of contents) render without
+ * the default triangle so they look like the rest of the UI. */
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* 古文 竖排 needs horizontal room. On a phone the vertical column degenerates to
+ * one narrow strip that the reader has to scroll sideways, so fall back to normal
+ * horizontal text below md — vertical typography stays for wider screens.
+ * Unlayered on purpose: Heti's vendored CSS is unlayered and would otherwise win. */
+@media (max-width: 767px) {
+  .heti--vertical {
+    writing-mode: horizontal-tb;
+    max-height: none;
+    letter-spacing: normal;
+  }
+}
+
+/* ── Dark mode ─────────────────────────────────────────────────────────────
+ * Toggled by adding `dark` to <html> (pre-paint script:
+ * _partials/head/theme-boot.html; button: _partials/theme-toggle.html), the same
+ * contract as the Astro site.
+ *
+ * Deliberately UNLAYERED: unlayered rules outrank every @layer, so these beat
+ * Tailwind's utilities by specificity (`dark .bg-white` = 0,2,0 vs `.bg-white` =
+ * 0,1,0) without !important. One place to tune the whole palette — the alternative
+ * is a `dark:` variant on every surface class in a dozen templates.
+ *
+ * Code blocks need no rule here: markup.highlight.noClasses is true with the
+ * monokai style, so highlighted code is already a dark card in both modes.
+ */
+.dark body {
+  background-image: none;
+  background-color: #030712;
+  color: #e5e7eb;
+}
+.dark header.sticky {
+  background-color: rgb(17 24 39 / 0.85);
+  border-color: #1f2937;
+}
+.dark footer {
+  background-color: #111827;
+  border-color: #1f2937;
+}
+.dark .bg-white,
+.dark .bg-gray-50 {
+  background-color: #111827;
+}
+.dark .bg-gray-100 {
+  background-color: #1f2937;
+}
+.dark .bg-white\/80 {
+  background-color: rgb(17 24 39 / 0.85);
+}
+.dark .bg-rose-50,
+.dark .bg-rose-50\/60 {
+  background-color: rgb(159 18 57 / 0.18);
+}
+.dark .border-gray-100,
+.dark .border-gray-200,
+.dark .border-gray-200\/50 {
+  border-color: #1f2937;
+}
+.dark .border-gray-300 {
+  border-color: #374151;
+}
+.dark .border-rose-100,
+.dark .border-rose-200 {
+  border-color: rgb(159 18 57 / 0.5);
+}
+.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #1f2937;
+}
+.dark .text-gray-900 {
+  color: #f9fafb;
+}
+.dark .text-gray-700 {
+  color: #e5e7eb;
+}
+.dark .text-gray-600 {
+  color: #d1d5db;
+}
+.dark .text-gray-500 {
+  color: #9ca3af;
+}
+/* NB: .text-gray-300 is deliberately not remapped. It was mapped to #4b5563, which
+ * is *darker* than gray-300 — the breadcrumb separator "/" measured 2.66:1 in dark
+ * mode and 1.41:1 in light. */
+.dark .text-rose-600 {
+  color: #fb7185;
+}
+.dark .text-rose-700 {
+  color: #fda4af;
+}
+/* Article links use rose-600 (4.45:1 on #030712 — just under WCAG AA for body
+ * text), so dark mode lifts them to rose-400 (~7:1). */
+.dark .prose-content a,
+.dark .prose a {
+  color: #fb7185;
+}
+.dark .hover\:text-rose-600:hover {
+  color: #fb7185;
+}
+/* Typography plugin palette (prose / .prose-content). */
+.dark .prose,
+.dark .prose-content {
+  @apply prose-invert;
+}
+/* Callouts keep their per-type accent (border-left, set in the components layer)
+ * in dark mode: overriding the shorthand `border-color` here flattened all 14
+ * variants to the same gray. */
+.dark .callout {
+  border-top-color: #1f2937;
+  border-right-color: #1f2937;
+  border-bottom-color: #1f2937;
+  background-color: #111827;
+}
+.dark .toc {
+  border-color: #1f2937;
+  background-color: #111827;
+}
+.dark .callout-header {
+  border-color: #1f2937;
+}
+.dark #TableOfContents a {
+  color: #d1d5db;
+}
+/* Sun/moon toggle: show the icon for the mode you would switch to. */
+.theme-toggle .icon-moon {
+  display: none;
+}
+.dark .theme-toggle .icon-sun {
+  display: none;
+}
+.dark .theme-toggle .icon-moon {
+  display: block;
 }

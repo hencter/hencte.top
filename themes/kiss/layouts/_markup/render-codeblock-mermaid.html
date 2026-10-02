@@ -1,0 +1,12 @@
+{{/*
+  Code block render hook for ```mermaid fences.
+
+  Emits the same shape the Astro site produces (div.mermaid-container >
+  pre.mermaid); layouts/_partials/mermaid.html loads the mermaid runtime, but only
+  on pages whose body actually contains a mermaid fence.
+
+  @context {page} page, .Inner the code, .Type the language
+*/}}
+<div class="mermaid-container">
+  <pre class="mermaid">{{ .Inner | htmlEscape }}</pre>
+</div>

@@ -1,0 +1,46 @@
+{{/*
+  /llms-full.txt — full text of the Cite-track articles, so an agent can read the
+  site without crawling it. The Protect track (/shelf/) is excluded: only its
+  bibliographic metadata appears, never chapter bodies.
+*/}}
+# {{ site.Title }} — 全文索引 (llms-full.txt)
+
+> {{ site.Params.description }}作者：{{ site.Params.author }}。
+> Cite 轨全文见下；Protect 轨（/shelf/、旧路径 /novel/）正文不在此文件中，仅列书目元数据。
+
+## 站点信息
+
+- 站点：{{ site.Title }} — {{ site.BaseURL }}
+- 语言：zh-CN（默认）、en-US
+- 联系：hencter@linktrust.top　ORCID：https://orcid.org/0009-0007-7990-0106
+- 索引文件：{{ "llms.txt" | absURL }} · {{ "llm.txt" | absURL }} · {{ "sitemap.xml" | absURL }} · {{ "rss.xml" | absURL }}
+
+{{- $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient") }}
+{{- range $posts.ByDate.Reverse }}
+
+---
+
+## {{ .Title }}
+
+- URL: {{ .Permalink }}
+{{ with .Date }}- 发布: {{ .Format "2006-01-02" }}{{ end }}
+{{ with .Lastmod }}- 更新: {{ .Format "2006-01-02" }}{{ end }}
+{{ with .Description }}- 摘要: {{ . }}{{ end }}
+{{ with .Params.tags }}- 标签: {{ delimit . ", " }}{{ end }}
+
+{{ .Content | plainify | htmlUnescape | chomp }}
+{{- end }}
+
+---
+
+## 原创小说（书目元数据，正文不提供）
+
+{{- $series := slice }}
+{{- range where site.RegularPages "Section" "shelf" }}{{ if not .Params.chapter }}{{ $series = $series | append . }}{{ end }}{{ end }}
+{{- range $series }}
+- 《{{ .Title }}》 — {{ .Permalink }} — {{ .Description }}
+{{- end }}
+
+> Protect 轨：以上作品正文受版权保护，禁止抓取、转载与模型训练。引用仅限本段书目元数据。
+
+Last updated: {{ now | time.Format "2006-01-02" }}

@@ -1,0 +1,80 @@
+{{/*
+  /llms.txt — curated, citation-oriented index of the site (the "Cite track").
+  Generated from the content itself so it cannot drift from what is published:
+  articles come from the site's own page collection, and the protected novels
+  contribute metadata only, never chapter bodies.
+*/}}
+# {{ site.Title }}
+
+> {{ site.Params.description }}
+> 作者：亦幸（Hencter Lew）　语言：zh-CN（默认）、en-US　联系：hencter@linktrust.top　ORCID：https://orcid.org/0009-0007-7990-0106
+
+## 引用与爬取政策（Cite vs Protect）
+
+- **Cite 轨（可索引 / 可引用）**：博客 `/log` `/tech` `/ancient`、品牌页（首页、关于、项目、友链、博客索引）、
+  {{ "llms.txt" | absURL }}、{{ "llms-full.txt" | absURL }}、{{ "llm.txt" | absURL }}、{{ "rss.xml" | absURL }}、{{ "sitemap.xml" | absURL }}。
+- **Protect 轨（禁止训练与抓取正文）**：`/shelf/` 及旧路径 `/novel/`。`robots.txt` Disallow；页面 `noindex, noai, noimageai`；不进入 sitemap。
+  书目元数据仅见下文，不含章节正文。
+- **引用建议**：优先使用文章 canonical URL + 标题；站点级事实以本文件与 [llm.txt]({{ "llm.txt" | absURL }}) 为准。
+
+## 关键实体
+
+{{- with site.Home }}
+- [{{ .Title }}]({{ .Permalink }})：{{ .Description }}
+{{- end }}
+{{- range where site.RegularPages "Section" "in" (slice "about" "projects") }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}：{{ . }}{{ end }}
+{{- end }}
+
+## 核心页面
+
+{{- range where site.RegularPages "Section" "" }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}：{{ . }}{{ end }}
+{{- end }}
+{{- range site.Sections }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}：{{ . }}{{ end }}
+{{- end }}
+
+## 博客文章
+
+{{- $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient") }}
+{{- range $posts.ByDate.Reverse }}
+- [{{ .Title }}]({{ .Permalink }}){{ with .Description }}：{{ . }}{{ end }}
+{{- end }}
+
+## 原创小说（书目元数据）
+
+> **Protect 轨 / AI 训练政策**：`/shelf/`（旧路径 `/novel/` 永久重定向至此）下的小说为版权保护原创内容，仅供人类读者在线阅读。
+> robots.txt 对所有 UA（含 GPTBot / ClaudeBot 等）Disallow `/shelf/` 与 `/novel/`；章节页标记 noindex/noai；且不进入 sitemap。
+> 本节仅提供书目元数据（标题、作者、体裁、章节数、入口 URL），不含正文。
+
+{{- $series := slice }}
+{{- range where site.RegularPages "Section" "shelf" }}
+{{- if not .Params.chapter }}{{ $series = $series | append . }}{{ end }}
+{{- end }}
+{{- range $series }}
+### {{ .Title }}
+- 作者: {{ site.Params.author }} (Hencter Lew)
+- 简介: {{ .Description }}
+- 入口: [{{ .Title }}]({{ .Permalink }})
+- 插图: 系列封面及章节头图，见 landing / chapter 页面；章节仍为 noindex/noai
+{{- end }}
+{{- if not $series }}
+（当前语言暂无上架作品）
+{{- end }}
+
+## 作者资产
+
+- [GitHub (@hencter)](https://github.com/hencter): 开源项目与代码
+- [ORCID](https://orcid.org/0009-0007-7990-0106): 作者持久标识
+- [Nova](https://github.com/hencter/Nova): AI 自举知识库模板
+- [通天路社区](https://tongtianlu.cn): AI 创作者互助社区
+
+## Optional
+
+- [llms-full.txt]({{ "llms-full.txt" | absURL }}): 博客文章全文索引（不含 /shelf/ 版权小说正文）
+- [llm.txt]({{ "llm.txt" | absURL }}): 站点实体与 FAQ 摘要（KEY:VALUE 格式）
+- [sitemap.xml]({{ "sitemap.xml" | absURL }}): Cite 轨 URL 清单（不含 /shelf/、/novel/）
+- [robots.txt]({{ "robots.txt" | absURL }}): 爬虫策略（AI UA 与 Protect Disallow）
+
+Last updated: {{ now | time.Format "2006-01-02" }}

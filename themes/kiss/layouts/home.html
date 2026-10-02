@@ -1,13 +1,82 @@
 {{ define "main" }}
-<article class="prose-content">
-  {{ .Content }}
-</article>
-<ul class="space-y-3 mt-8">
-  {{ range site.RegularPages }}
-  <li class="flex justify-between items-center py-2 border-b border-gray-100 hover:bg-gray-50 transition-colors">
-    <a href="{{ .RelPermalink }}" class="text-gray-900 hover:text-rose-600 font-medium flex-1 mr-4">{{.LinkTitle }}</a>
-    <time datetime="{{ .Date }}" class="text-sm text-gray-500 whitespace-nowrap">{{ .Date | time.Format ":date_medium" }}</time>
-  </li>
+  {{ partial "hero.html" . }}
+
+  {{ with .Content }}<div class="prose-content">{{ . }}</div>{{ end }}
+
+  {{ with .Params.focusSection }}
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold text-gray-900">{{ .title }}</h2>
+      {{ with .subtitle }}<p class="mt-1 text-gray-600">{{ . }}</p>{{ end }}
+      <div class="mt-6 grid gap-6 sm:grid-cols-3">
+        {{ range $.Params.focusAreas }}
+          <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
+            {{ with .tag }}<p class="text-xs font-semibold uppercase tracking-wide text-rose-600">{{ . }}</p>{{ end }}
+            <h3 class="mt-1 font-bold text-gray-900">{{ .title }}</h3>
+            <p class="mt-2 text-sm text-gray-600">{{ .text }}</p>
+          </div>
+        {{ end }}
+      </div>
+    </section>
   {{ end }}
-</ul>
+
+  {{ partial "projects.html" . }}
+
+  {{ with .Params.buildSection }}
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold text-gray-900">{{ .title }}</h2>
+      {{ with .subtitle }}<p class="mt-1 text-gray-600">{{ . }}</p>{{ end }}
+      <ol class="mt-6 grid gap-4 sm:grid-cols-3">
+        {{ range $.Params.buildSteps }}
+          <li class="rounded-2xl border border-gray-200 bg-white p-5">
+            <p class="text-sm font-semibold text-rose-600">{{ .phase }}</p>
+            <p class="mt-2 text-sm text-gray-600">{{ .detail }}</p>
+          </li>
+        {{ end }}
+      </ol>
+    </section>
+  {{ end }}
+
+  {{ $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient") }}
+  {{ $posts = $posts.ByDate.Reverse | first 8 }}
+  {{ with .Params.latestSection }}
+    <section id="hub-writing" class="mt-12">
+      <h2 class="text-2xl font-bold text-gray-900">{{ .title }}</h2>
+      {{ with .subtitle }}<p class="mt-1 text-gray-600">{{ . }}</p>{{ end }}
+      <ul class="mt-6 divide-y divide-gray-100">
+        {{ range $posts }}
+          <li class="flex items-baseline justify-between gap-4 py-3">
+            <a href="{{ .RelPermalink }}" class="font-medium text-gray-900 hover:text-rose-600">{{ .LinkTitle }}</a>
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="shrink-0 text-sm text-gray-500">{{ .Date.Format "2006-01-02" }}</time>
+          </li>
+        {{ end }}
+      </ul>
+      <p class="mt-4"><a href="{{ "/blog/" | relLangURL }}" class="text-sm font-medium text-rose-600 hover:underline">{{ T "allArticles" }} →</a></p>
+    </section>
+  {{ end }}
+
+  {{ $novels := where site.RegularPages "Section" "shelf" }}
+  {{ with .Params.novelSection }}
+    <section id="hub-novel" class="mt-12">
+      <h2 class="text-2xl font-bold text-gray-900">{{ .title }}</h2>
+      {{ with .subtitle }}<p class="mt-1 text-gray-600">{{ . }}</p>{{ end }}
+      <div class="mt-6 grid gap-6 sm:grid-cols-2">
+        {{ range $novels }}
+          {{ if not .Params.chapter }}
+            {{ $novel := . }}
+            <a href="{{ .RelPermalink }}" class="flex gap-4 rounded-2xl border border-gray-200 bg-white p-4 hover:shadow-md transition-shadow">
+              {{ with .Params.cover }}
+                <img src="{{ . }}" alt="{{ $novel.Params.imageAlt | default $novel.Title }}" loading="lazy" class="h-24 w-20 shrink-0 rounded-lg object-cover">
+              {{ end }}
+              <span>
+                <span class="block font-bold text-gray-900">{{ .Title }}</span>
+                <span class="mt-1 block text-sm text-gray-600">{{ .Description }}</span>
+              </span>
+            </a>
+          {{ end }}
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+
+  {{ partial "cta.html" . }}
 {{ end }}

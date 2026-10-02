@@ -1,23 +1,7 @@
-baseURL = 'https://example.org/'
-languageCode = 'en-US'
-title = 'My New Hugo Site'
-
-[menus]
-  [[menus.main]]
-    name = 'Home'
-    pageRef = '/'
-    weight = 10
-
-  [[menus.main]]
-    name = 'Posts'
-    pageRef = '/posts'
-    weight = 20
-
-  [[menus.main]]
-    name = 'Tags'
-    pageRef = '/tags'
-    weight = 30
-
+# Only params, menu, outputFormats and mediaTypes are honoured from a theme
+# configuration; the scaffolded demo keys (baseURL, title, languageCode) and the
+# demo [menus] entries were removed so they cannot merge into the real site
+# navigation. https://gohugo.io/hugo-modules/theme-components/
 [module]
   [module.hugoVersion]
     extended = false

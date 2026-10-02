@@ -1,4 +1,7 @@
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+{{/* Config MUST be defined before the MathJax bundle loads: with the script first,
+   a cached bundle could start before `MathJax = {...}` was set and silently ignore
+   the delimiters. Version pinned (was `mathjax@3`, a floating major) so an upstream
+   release cannot change rendering under us. */}}
 <script>
   MathJax = {
     tex: {
@@ -10,3 +13,4 @@
     },
   };
 </script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>

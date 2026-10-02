@@ -1,0 +1,41 @@
+{{/*
+  Copy-to-clipboard handler for the code block bar (see
+  layouts/_markup/render-codeblock.html). Included once per page whose body
+  contains a fenced block, so pages without code pay nothing.
+*/}}
+<script>
+  (function () {
+    function wire() {
+      document.querySelectorAll(".code-block").forEach(function (block) {
+        var button = block.querySelector(".code-copy");
+        var code = block.querySelector("code");
+        if (!button || !code || button.dataset.bound === "1") return;
+        button.dataset.bound = "1";
+        button.addEventListener("click", function () {
+          var label = button.textContent;
+          var done = function () {
+            button.textContent = "✓";
+            setTimeout(function () {
+              button.textContent = label;
+            }, 1500);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code.innerText).then(done, done);
+          } else {
+            var range = document.createRange();
+            range.selectNodeContents(code);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            done();
+          }
+        });
+      });
+    }
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", wire);
+    } else {
+      wire();
+    }
+  })();
+</script>

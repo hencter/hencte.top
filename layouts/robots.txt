@@ -1,0 +1,25 @@
+# robots.txt for {{ site.BaseURL }} ({{ site.Title }})
+# Ported from the Astro site's public/robots.txt: the Cite track (blog + brand
+# pages) is open to crawlers, including generative ones; the Protect track
+# (/shelf/ and its legacy /novel/ paths) is closed to everything.
+# Discovery: {{ "llms.txt" | absURL }} | {{ "llm.txt" | absURL }} | {{ "llms-full.txt" | absURL }} | {{ "rss.xml" | absURL }}
+{{ if ne hugo.Environment "production" -}}
+# Not a production build: keep previews out of every index.
+User-agent: *
+Disallow: /
+{{ else -}}
+{{- $protected := slice "/shelf/" "/en/shelf/" "/tw/shelf/" "/hk/shelf/" "/novel/" "/en/novel/" "/tw/novel/" "/hk/novel/" -}}
+{{- $aiAgents := slice "GPTBot" "OAI-SearchBot" "ChatGPT-User" "ClaudeBot" "Claude-Web" "anthropic-ai" "PerplexityBot" "Google-Extended" "Applebot-Extended" "CCBot" "Bytespider" -}}
+
+User-agent: *
+Allow: /
+{{ range $protected }}Disallow: {{ . }}
+{{ end }}
+# AI / generative engines — same Protect track policy.
+{{ range $aiAgents }}User-agent: {{ . }}
+Allow: /
+{{ range $protected }}Disallow: {{ . }}
+{{ end }}
+{{ end -}}
+{{- end }}
+Sitemap: {{ "sitemap.xml" | absURL }}

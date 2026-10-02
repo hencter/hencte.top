@@ -1,0 +1,100 @@
+# UI strings for en-US, mirroring i18n/zh.toml.
+
+[readMore]
+other = 'Read more'
+
+[latestWriting]
+other = 'Latest writing'
+
+[allArticles]
+other = 'All articles'
+
+[sectionLog]
+other = 'Log'
+
+[sectionTech]
+other = 'Tech'
+
+[sectionAncient]
+other = 'Classics'
+
+[sectionPosts]
+other = 'Posts'
+
+[chapters]
+other = 'Chapters'
+
+[prevChapter]
+other = 'Previous'
+
+[nextChapter]
+other = 'Next'
+
+[backToShelf]
+other = 'Back to shelf'
+
+[shelf]
+other = 'Shelf'
+
+[shelfSubtitle]
+other = 'A personal library — fiction, and open tutorials to come'
+
+[fiction]
+other = 'Fiction'
+
+[emptyShelf]
+other = 'This shelf is empty for now. New works are on the way.'
+
+[comingSoon]
+other = 'English edition coming soon'
+
+[readingTime]
+other = 'about %d min read'
+
+[tags]
+other = 'Tags'
+
+[language]
+other = 'Language'
+
+[home]
+other = 'Home'
+
+[backHome]
+other = 'Back home'
+
+[updated]
+other = 'Updated'
+
+[skipToContent]
+other = 'Skip to content'
+
+[toc]
+other = 'On this page'
+
+[toggleTheme]
+other = 'Toggle dark mode'
+
+[notFoundTitle]
+other = 'Page not found'
+
+[notFoundBody]
+other = 'The page may have moved or no longer exists. These are good places to continue.'
+
+[lunar]
+other = 'Lunar'
+
+[dateTBD]
+other = 'Date to be added'
+
+[menu]
+other = 'Menu'
+
+[copyCode]
+other = 'Copy'
+
+[startReading]
+other = 'Start reading'
+
+[novelNeedsJS]
+other = 'This chapter is drawn as images in your browser; please enable JavaScript.'

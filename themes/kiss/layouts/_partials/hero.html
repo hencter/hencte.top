@@ -1,0 +1,32 @@
+{{/*
+  Hero block. Reads the `hero` table that the connect pages carry in front
+  matter (badge / headline / subtitle / actions.primary / actions.secondary) —
+  see scripts/migrate_astro.py and src/content/{zh,en}/*.md of the Astro site.
+
+  @context {page} page
+*/}}
+{{ with .Params.hero }}
+  <section class="mb-12">
+    {{ with .badge }}
+      <p class="inline-block text-xs font-semibold tracking-wider uppercase text-rose-700 bg-rose-50 px-3 py-1 rounded-full">
+        {{ . }}
+      </p>
+    {{ end }}
+    {{ with .headline }}
+      <h1 class="mt-4 text-3xl sm:text-4xl font-bold text-gray-900">{{ . }}</h1>
+    {{ end }}
+    {{ with .subtitle }}
+      <p class="mt-4 text-lg text-gray-600 whitespace-pre-line max-w-3xl">{{ . }}</p>
+    {{ end }}
+    {{ with .actions }}
+      <div class="mt-6 flex flex-wrap gap-3">
+        {{ with .primary }}
+          <a href="{{ .href }}" class="inline-flex items-center rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500 transition-colors">{{ .label }}</a>
+        {{ end }}
+        {{ with .secondary }}
+          <a href="{{ .href }}" class="inline-flex items-center rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:border-rose-300 hover:text-rose-600 transition-colors">{{ .label }}</a>
+        {{ end }}
+      </div>
+    {{ end }}
+  </section>
+{{ end }}

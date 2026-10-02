@@ -1,0 +1,10 @@
+{{/*
+  Mermaid runtime, mirroring the Astro site's setup
+  (src/pages/[...slug].astro): mermaid@11 from jsDelivr, startOnLoad.
+  Included by baseof.html only when the page body contains a ```mermaid fence, so
+  pages without diagrams pay nothing.
+*/}}
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, theme: "default", securityLevel: "loose" });
+</script>

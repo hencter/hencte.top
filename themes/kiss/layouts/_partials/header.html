@@ -1,8 +1,36 @@
-<div class="flex items-center justify-between">
-  <h1 id="logo" class="text-2xl font-bold">
-    <a href="{{ site.BaseURL }}" class="no-underline hover:text-rose-600 transition-colors duration-200">
+<div class="flex items-center justify-between gap-3">
+  {{/* The site name is a <p>, not an <h1>: every page already has exactly one h1
+       (its own title), and a second h1 on all 212 pages muddies the outline for
+       screen readers and search engines alike. */}}
+  <p id="logo" class="shrink-0 text-2xl font-bold">
+    <a href="{{ site.Home.RelPermalink }}" class="whitespace-nowrap no-underline hover:text-rose-600 transition-colors duration-200">
       {{ site.Title }}
     </a>
-  </h1>
-  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  </p>
+
+  <div class="flex items-center gap-3">
+    {{/* Inline navigation from md up. */}}
+    <div class="hidden items-center gap-6 md:flex">
+      {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+      {{ partial "lang-switcher.html" . }}
+    </div>
+
+    {{/* Below md the same menus live in a native <details> disclosure. Rendering
+         them inline squeezed the logo to one character per line, wrapped every
+         menu label and pushed the language links 63px off-screen. */}}
+    <details class="relative md:hidden">
+      <summary class="inline-flex cursor-pointer list-none items-center rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-700 hover:text-rose-600">
+        {{ T "menu" }}
+      </summary>
+      <div class="absolute right-0 z-50 mt-2 w-64 rounded-xl border border-gray-200 bg-white p-4 shadow-lg">
+        {{ partial "menu.html" (dict "menuID" "main" "page" . "vertical" true) }}
+        <div class="mt-3 border-t border-gray-200 pt-3">
+          {{ partial "lang-switcher.html" . }}
+        </div>
+      </div>
+    </details>
+
+    {{/* Last element, so the theme toggle sits at the far right of the header. */}}
+    {{ partial "theme-toggle.html" . }}
+  </div>
 </div>

@@ -1,0 +1,35 @@
+{{/*
+  Blockquote render hook.
+
+  Hugo parses GitHub/Obsidian alert blockquotes (`> [!note] Title`) natively and
+  hands this hook the parsed alert, so no marker parsing is needed here:
+  .Type (.Type == "alert"), .AlertType, .AlertTitle, .AlertSign ("-"/"+"),
+  .Text (body with the marker line already removed).
+
+  Alerts use the same class names as the Astro site (src/styles/post.css) so the
+  two render alike — see .callout in assets/css/main.css. Obsidian's fold signs
+  become <details> ("-" collapsed, "+" open).
+
+  @context {page} page
+*/}}
+{{- if eq .Type "alert" -}}
+  {{- $type := lower .AlertType -}}
+  {{- $known := slice "note" "info" "tip" "success" "question" "warning" "danger" "bug" "example" "quote" "abstract" "todo" "failure" "important" -}}
+  {{- if not (in $known $type) -}}{{- $type = "note" -}}{{- end -}}
+  {{- $class := printf "callout callout-%s" $type -}}
+  {{- $title := .AlertTitle -}}
+  {{- if not $title -}}{{- $title = title $type -}}{{- end -}}
+  {{- if .AlertSign -}}
+    <details class="{{ $class }}"{{ if eq .AlertSign "+" }} open{{ end }}>
+      <summary class="callout-header"><span class="callout-icon"></span><strong class="callout-title">{{ $title }}</strong></summary>
+      <div class="callout-body">{{ .Text }}</div>
+    </details>
+  {{- else -}}
+    <div class="{{ $class }}">
+      <div class="callout-header"><span class="callout-icon"></span><strong class="callout-title">{{ $title }}</strong></div>
+      <div class="callout-body">{{ .Text }}</div>
+    </div>
+  {{- end -}}
+{{- else -}}
+  <blockquote class="my-6 border-l-4 border-gray-300 bg-gray-50 py-1 pl-4 text-gray-700">{{ .Text }}</blockquote>
+{{- end -}}

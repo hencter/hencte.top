@@ -1,15 +1,9 @@
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
-{{ hugo.Generator }}
-<title>
-  {{ if .IsHome }}
-    {{ site.Title }}
-  {{ else }}
-    {{ printf "%s | %s" .Title site.Title }}
-  {{ end }}
-</title>
+{{/* Applied before the stylesheet so the saved theme never flashes. */}}
+{{ partial "head/theme-boot.html" . }}
+{{ partial "seo.html" . }}
+{{/* 古文 article pages get Heti's typography (spacing + vertical layout). */}}
+{{ if and .IsPage (eq .Section "ancient") }}{{ partial "head/heti.html" . }}{{ end }}
 {{ with (templates.Defer (dict "key" "global")) }}
   {{ partialCached "head/font.html" . }}
   {{ partialCached "head/css.html" . }}
 {{ end }}
-{{ partialCached "head/js.html" . }}

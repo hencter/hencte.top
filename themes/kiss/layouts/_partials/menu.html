@@ -3,23 +3,28 @@
 
   @context {page} page The current page.
   @context {string} menuID The menu ID.
+  @context {bool} vertical Render as a stacked list (mobile disclosure panel).
 
-  @example: {{ partial "menu.html" (dict "menuID" "main" "page" .)
-}}
+  @example: {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
 */}}
 {{- $page := .page }}
 {{- $menuID := .menuID }}
+{{- $vertical := .vertical | default false }}
+{{- $listClass := cond $vertical "flex flex-col gap-2" "flex gap-6" }}
+{{- $childClass := cond $vertical "flex flex-col gap-1 ml-4 mt-1" "flex space-x-6 ml-6" }}
 
 {{- with index site.Menus $menuID }}
   <nav>
-    <ul class="flex space-x-8">
-      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+    <ul class="{{ $listClass }}">
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" . "listClass" $listClass "childClass" $childClass) }}
     </ul>
   </nav>
 {{- end }}
 
 {{- define "_partials/inline/menu/walk.html" }}
   {{- $page := .page }}
+  {{- $listClass := .listClass }}
+  {{- $childClass := .childClass }}
   {{- range .menuEntries }}
     {{- $attrs := dict "href" .URL }}
     {{- if $page.IsMenuCurrent .Menu . }}
@@ -44,8 +49,8 @@
         {{- end -}}
       >{{ $name }}</a>
       {{- with .Children }}
-        <ul class="flex space-x-6 ml-6">
-          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+        <ul class="{{ $childClass }}">
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" . "listClass" $listClass "childClass" $childClass) }}
         </ul>
       {{- end }}
     </li>

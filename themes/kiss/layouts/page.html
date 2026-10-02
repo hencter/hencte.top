@@ -1,13 +1,130 @@
 {{ define "main" }}
-<header class="prose-header">
-  <h1>{{ .Title }}</h1>
-  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-  {{ $dateHuman := .Date | time.Format ":date_long" }}
-  <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
-  {{ printf "预估阅读时间：%d 分钟" .ReadingTime }}
-</header>
-<article class="prose-content">
-  {{ .Content }}
-</article>
-{{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  {{ if .Params.hero }}
+    {{/* Brand page (home/about/projects/links/obsidian): the Astro site renders
+         these from front-matter tables rather than a Markdown body, so the same
+         tables drive the blocks below. */}}
+    {{ partial "hero.html" . }}
+    {{ with .Content }}<div class="prose-content">{{ . }}</div>{{ end }}
+
+    {{ with .Params.panels }}
+      <section class="mt-10 grid gap-6 sm:grid-cols-2">
+        {{ range $key, $panel := . }}
+          <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+            <h2 class="text-lg font-bold text-gray-900">{{ $panel.title }}</h2>
+            {{ with $panel.body }}<p class="mt-2 text-sm text-gray-600 whitespace-pre-line">{{ . }}</p>{{ end }}
+            {{ with $panel.bullets }}
+              <ul class="mt-4 space-y-1 text-sm text-gray-700">
+                {{ range . }}<li>· {{ . }}</li>{{ end }}
+              </ul>
+            {{ end }}
+          </div>
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ with .Params.principles }}
+      <section class="mt-10 grid gap-4 sm:grid-cols-3">
+        {{ range . }}
+          <div class="rounded-2xl border border-gray-200 bg-white p-5">
+            <h3 class="font-bold text-gray-900">{{ .title }}</h3>
+            <p class="mt-2 text-sm text-gray-600">{{ .text }}</p>
+          </div>
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ with .Params.milestones }}
+      <section class="mt-10">
+        <ol class="space-y-4 border-l border-gray-200 pl-5">
+          {{ range . }}
+            <li>
+              <p class="text-sm font-semibold text-rose-600">{{ .year }} · {{ .title }}</p>
+              <p class="mt-1 text-sm text-gray-600">{{ .detail }}</p>
+            </li>
+          {{ end }}
+        </ol>
+      </section>
+    {{ end }}
+
+    {{ partial "projects.html" . }}
+
+    {{ with .Params.timeline }}
+      <section class="mt-10 grid gap-4 sm:grid-cols-3">
+        {{ range . }}
+          <div class="rounded-2xl border border-gray-200 bg-white p-5">
+            <p class="text-sm font-semibold text-rose-600">{{ .phase }}</p>
+            <p class="mt-2 text-sm text-gray-600">{{ .detail }}</p>
+          </div>
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ with .Params.friendLinks }}
+      <section class="mt-12">
+        {{ with $.Params.linksSection }}
+          <h2 class="text-2xl font-bold text-gray-900">{{ .title }}</h2>
+          {{ with .subtitle }}<p class="mt-1 text-gray-600">{{ . }}</p>{{ end }}
+        {{ end }}
+        <div class="mt-6 grid gap-4 sm:grid-cols-2">
+          {{ range . }}
+            {{ $friend := . }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="flex gap-4 rounded-2xl border border-gray-200 bg-white p-4 hover:shadow-md transition-shadow">
+              {{ with .avatar }}
+                <img src="{{ . }}" alt="{{ $friend.name }}" loading="lazy" class="h-12 w-12 shrink-0 rounded-full object-cover">
+              {{ end }}
+              <span>
+                <span class="block font-bold text-gray-900">{{ .name }}</span>
+                <span class="mt-1 block text-sm text-gray-600">{{ .description }}</span>
+                {{ with .tags }}
+                  <span class="mt-2 flex flex-wrap gap-2">
+                    {{ range . }}<span class="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-700">{{ . }}</span>{{ end }}
+                  </span>
+                {{ end }}
+              </span>
+            </a>
+          {{ end }}
+        </div>
+      </section>
+    {{ end }}
+
+    {{ with .Params.applyRules }}
+      <section class="mt-10 rounded-2xl border border-gray-200 bg-white p-6">
+        <h2 class="text-lg font-bold text-gray-900">{{ .title }}</h2>
+        {{ with .subtitle }}<p class="mt-2 text-sm text-gray-600">{{ . }}</p>{{ end }}
+        {{ with .rules }}
+          <ul class="mt-4 space-y-1 text-sm text-gray-700">
+            {{ range . }}<li>· {{ . }}</li>{{ end }}
+          </ul>
+        {{ end }}
+      </section>
+    {{ end }}
+
+    {{ partial "cta.html" . }}
+  {{ else }}
+    {{/* ------------------------- article page -------------------------
+         Reading shell (mirrors astro's .post-shell--reading): a three-column grid
+         whose symmetric 1fr gutters put the text column on the page's true centre,
+         with the TOC floating in the right gutter as a sticky rail. Below the rail
+         breakpoint the rail wrapper becomes `display: contents`, so the TOC is the
+         same collapsed <details> above the prose as before. */}}
+    <div class="reading-shell">
+      <header class="prose-header reading-header">
+        <h1>{{ .Title }}</h1>
+        {{ if not .Date.IsZero }}
+          <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
+        {{ end }}
+        {{ if gt .ReadingTime 0 }}<span class="ml-3">{{ printf (T "readingTime") .ReadingTime }}</span>{{ end }}
+        {{ with .Lastmod }}
+          {{ if and (not .IsZero) (ne (.Format "2006-01-02") ($.Date.Format "2006-01-02")) }}
+            <span class="ml-3">{{ T "updated" }} {{ .Format "2006-01-02" }}</span>
+          {{ end }}
+        {{ end }}
+      </header>
+      <aside class="toc-rail">{{ partial "toc.html" . }}</aside>
+      <article class="prose-content reading-prose">
+        {{ .Content }}
+      </article>
+      <div class="reading-foot">{{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}</div>
+    </div>
+  {{ end }}
 {{ end }}

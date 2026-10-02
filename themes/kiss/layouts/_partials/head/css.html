@@ -1,17 +1,15 @@
-{{ with resources.Get "css/main.css" }}
+{{/*
+  Tailwind is compiled ahead of Hugo by the Tailwind CSS CLI (`pnpm css`, run
+  automatically by `pnpm build`) into assets/css/tailwind.css. Hugo cannot launch
+  the CLI from here: it resolves node_modules/.bin/tailwindcss(.cmd) and pnpm's
+  Windows shim defeats its entry-point parser. See themes/kiss/assets/css/main.css.
+*/}}
+{{ with resources.Get "css/tailwind.css" }}
   {{ $opts := dict "minify" (not hugo.IsDevelopment) }}
-  {{ with . | css.TailwindCSS $opts }}
-    {{ if hugo.IsDevelopment }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" />
-    {{ else }}
-      {{ with . | fingerprint }}
-        <link
-          rel="stylesheet"
-          href="{{ .RelPermalink }}"
-          integrity="{{ .Data.Integrity }}"
-          crossorigin="anonymous"
-        />
-      {{ end }}
-    {{ end }}
+  {{ with . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}"
+      {{- if not hugo.IsDevelopment }} integrity="{{ .Data.Integrity }}" crossorigin="anonymous"{{ end }} />
   {{ end }}
+{{ else }}
+  {{ warnf "assets/css/tailwind.css is missing — run `pnpm css` (or `pnpm build`) before Hugo" }}
 {{ end }}

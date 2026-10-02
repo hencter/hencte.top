@@ -1,0 +1,24 @@
+{{/*
+  Table of contents for long articles.
+
+  Collapsed by default (<details>): a 40-heading tutorial produced a TOC taller
+  than the viewport, pushing the article itself entirely below the fold. The
+  summary carries the heading count so the reader knows what is inside.
+
+  Uses .TableOfContents rather than .Fragments.Headings: the fragments tree is
+  nested (this content's first heading pulls the rest under it, so the top level
+  holds a single entry), while .TableOfContents respects
+  [markup.tableOfContents] startLevel/endLevel and carries the heading ids.
+
+  @context {page} page
+*/}}
+{{- $toc := .TableOfContents -}}
+{{- $ids := .Fragments.Identifiers -}}
+{{- if and $toc (ge (len $ids) 5) -}}
+  <details class="toc mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-4 text-sm">
+    <summary class="cursor-pointer list-none font-bold text-gray-900">
+      {{ T "toc" }}<span class="ml-2 font-normal text-gray-500">{{ len $ids }}</span>
+    </summary>
+    <div class="mt-3">{{ $toc }}</div>
+  </details>
+{{- end -}}

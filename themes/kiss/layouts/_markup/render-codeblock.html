@@ -1,0 +1,22 @@
+{{/*
+  Fenced code blocks.
+
+  Chroma's output (from transform.HighlightCodeBlock, so it honours the site's
+  markup.highlight config) is wrapped in a bar carrying the language and a copy
+  button; the handler is the small script in _partials/code-copy.html, included
+  once per page that actually contains a fence.
+
+  Language-specific hooks (render-codeblock-mermaid.html) take precedence over
+  this one, so mermaid fences still become diagrams.
+
+  @context {page} page, .Inner the code, .Type the language
+*/}}
+{{- $result := transform.HighlightCodeBlock . -}}
+{{- $lang := .Type -}}
+<figure class="code-block">
+  <figcaption class="code-block-bar">
+    <span class="code-block-lang">{{ with $lang }}{{ . }}{{ else }}text{{ end }}</span>
+    <button type="button" class="code-copy" aria-label="{{ T "copyCode" }}">{{ T "copyCode" }}</button>
+  </figcaption>
+  {{ $result.Wrapped }}
+</figure>

@@ -1,0 +1,45 @@
+{{/*
+  /llm.txt — KEY:VALUE entity and FAQ summary of the site, for agents that want
+  the facts without fetching pages. Same Cite/Protect split as /llms.txt.
+*/}}
+# llm.txt — {{ site.Title }} 站点实体与 FAQ 摘要（KEY:VALUE）
+site.name: {{ site.Title }}
+site.url: {{ site.BaseURL }}
+site.description: {{ site.Params.description }}
+site.languages: zh-CN (default), en-US
+site.contact: hencter@linktrust.top
+site.sitemap: {{ "sitemap.xml" | absURL }}
+site.feed: {{ "rss.xml" | absURL }}
+site.llms: {{ "llms.txt" | absURL }}
+site.llms_full: {{ "llms-full.txt" | absURL }}
+site.robots: {{ "robots.txt" | absURL }}
+
+author.name: 亦幸 (Hencter Lew)
+author.github: https://github.com/hencter
+author.orcid: https://orcid.org/0009-0007-7990-0106
+author.email: hencter@linktrust.top
+
+policy.cite: 博客 /log /tech /ancient、品牌页（首页、关于、项目、友链、博客索引）可索引、可引用
+policy.protect: /shelf/ 与旧路径 /novel/ 为版权保护原创小说：robots.txt Disallow、noindex/noai、不入 sitemap
+policy.protect_scope: 四语 /shelf/ /en/shelf/ /tw/shelf/ /hk/shelf/ 及对应 /novel/ 路径
+policy.citation: 引用请使用文章 canonical URL 与标题；站点级事实以 llms.txt / llm.txt 为准
+
+{{- $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient") }}
+articles.count: {{ len $posts }}
+{{- range $posts.ByDate.Reverse }}
+article: {{ .Title }} | {{ .Permalink }}{{ with .Date }} | {{ .Format "2006-01-02" }}{{ end }}
+{{- end }}
+
+{{- $series := slice }}
+{{- range where site.RegularPages "Section" "shelf" }}{{ if not .Params.chapter }}{{ $series = $series | append . }}{{ end }}{{ end }}
+{{- range $series }}
+novel: {{ .Title }} | {{ .Permalink }} | 书目元数据可引用，正文禁止抓取与训练
+{{- end }}
+
+faq.what_is_this: 亦幸小阁（{{ site.BaseURL }}）是 Hencter Lew（亦幸）的个人品牌站点：技术博客、项目展示与知识管理实践。
+faq.languages: 默认 zh-CN，另有 /en（英文）。
+faq.ai_indexing: 公开博客与品牌页可被索引与引用；/shelf/ 小说正文禁止抓取与训练。
+{{- with site.Home }}
+faq.homepage: {{ .Title }} — {{ .Description }}
+{{- end }}
+Last updated: {{ now | time.Format "2006-01-02" }}

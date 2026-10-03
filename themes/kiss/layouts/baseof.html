@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}"
-  class="scroll-smooth">
+ class="scroll-smooth">
 
 <head>
   {{ partial "head.html" . }}
@@ -31,11 +31,11 @@
   {{ end }}
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-neutral-50 to-white text-gray-900 antialiased flex flex-col">
+<body class="min-h-screen bg-gradient-to-br from-neutral-50 to-white text-ink antialiased flex flex-col">
   <!-- Skip link: keyboard users reached the article only after ~11 tab stops. -->
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-rose-600 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white">{{ T "skipToContent" }}</a>
   <!-- Header -->
-  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-sm">
+  <header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-line/50 shadow-sm">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {{ partial "header.html" . }}
     </div>
@@ -52,9 +52,9 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-gray-50 border-t border-gray-200">
+  <footer class="bg-surface-soft border-t border-line">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div class="text-center text-gray-600">
+      <div class="text-center text-ink-muted">
         {{ partial "footer.html" . }}
       </div>
     </div>

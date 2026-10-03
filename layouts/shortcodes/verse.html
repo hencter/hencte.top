@@ -20,12 +20,12 @@
 <div class="my-8">
   {{- if eq $mode "vertical" -}}
     <div class="flex justify-center">
-      <div class="max-h-[22rem] overflow-x-auto whitespace-pre-line rounded-2xl border border-gray-200 bg-white px-5 py-6 text-lg leading-loose tracking-[0.08em] [writing-mode:vertical-rl] max-md:max-h-none max-md:text-center max-md:[writing-mode:horizontal-tb] dark:border-[#302a21] dark:bg-[#1c1813]" lang="{{ $lang }}">{{ .Inner | htmlEscape | safeHTML }}</div>
+      <div class="max-h-[22rem] overflow-x-auto whitespace-pre-line rounded-2xl border border-line bg-surface px-5 py-6 text-lg leading-loose tracking-[0.08em] [writing-mode:vertical-rl] max-md:max-h-none max-md:text-center max-md:[writing-mode:horizontal-tb]" lang="{{ $lang }}">{{ .Inner | htmlEscape | safeHTML }}</div>
     </div>
   {{- else -}}
     <div class="text-center text-lg leading-loose" lang="{{ $lang }}">{{ .Inner | htmlEscape | safeHTML }}</div>
   {{- end -}}
   {{- with $cite -}}
-    <p class="mt-3 text-right text-sm text-gray-500 dark:text-[#9d9483]">—— {{ . | markdownify }}</p>
+    <p class="mt-3 text-right text-sm text-ink-faint">—— {{ . | markdownify }}</p>
   {{- end -}}
 </div>

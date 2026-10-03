@@ -18,15 +18,15 @@
     {{ $cardLevel := "h2" }}
     {{ with $.Params.projectsSection }}{{ $cardLevel = "h3" }}{{ end }}
     {{ with $.Params.projectsSection }}
-      {{ with .title }}<h2 class="text-2xl font-bold text-gray-900">{{ . }}</h2>{{ end }}
-      {{ with .subtitle }}<p class="mt-1 text-gray-600">{{ . }}</p>{{ end }}
+      {{ with .title }}<h2 class="text-2xl font-bold text-ink">{{ . }}</h2>{{ end }}
+      {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
     {{ end }}
     <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {{ range . }}
         {{ $project := . }}
         {{ $note := .outcome | default .result }}
         {{ $external := hasPrefix (string .url) "http" }}
-        <article class="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow">
+        <article class="flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-sm hover:shadow-md transition-shadow">
           {{ with .image }}
             {{ partial "img.html" (dict "src" . "page" $ "alt" ($project.imageAlt | default $project.title) "class" "project-cover w-full object-cover" "sizes" "(min-width: 1280px) 360px, (min-width: 640px) 45vw, 92vw") }}
           {{ end }}
@@ -37,15 +37,15 @@
             {{/* Opening/closing tags are built as one string: html/template escapes
                  a literal `<` that sits in front of an action (it read `<{{ … }}`
                  as text), so `<{{ $cardLevel }}>` came out as `&lt;h2`. */}}
-            {{ printf `<%s class="mt-1 text-lg font-bold text-gray-900">` $cardLevel | safeHTML }}
+            {{ printf `<%s class="mt-1 text-lg font-bold text-ink">` $cardLevel | safeHTML }}
               <a href="{{ .url }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="hover:text-accent">{{ .title }}</a>
             {{ printf `</%s>` $cardLevel | safeHTML }}
-            {{ with .description }}<p class="mt-2 flex-1 text-sm text-gray-600">{{ . }}</p>{{ end }}
-            {{ with $note }}<p class="mt-3 text-sm text-gray-500">{{ . }}</p>{{ end }}
+            {{ with .description }}<p class="mt-2 flex-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}
+            {{ with $note }}<p class="mt-3 text-sm text-ink-faint">{{ . }}</p>{{ end }}
             {{ with .tags }}
               <ul class="mt-4 flex flex-wrap gap-2">
                 {{ range . }}
-                  <li class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-700">{{ . }}</li>
+                  <li class="rounded bg-surface-soft px-2 py-1 text-xs text-ink-soft">{{ . }}</li>
                 {{ end }}
               </ul>
             {{ end }}

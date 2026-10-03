@@ -21,5 +21,5 @@
   <a class="underline decoration-1 underline-offset-2" href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a>
 {{- else -}}
   {{- warnf "shortcode chapter: 找不到 novel=%q chapter=%v（页面 %s）" $novel $n $.Page.File.Path -}}
-  <span class="text-gray-500 dark:text-[#9d9483]">第 {{ $n }} 章</span>
+  <span class="text-ink-faint">第 {{ $n }} 章</span>
 {{- end -}}

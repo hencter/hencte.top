@@ -31,7 +31,7 @@
     <div class="sr-only" data-novel-source>{{ $raw }}</div>
     {{/* Purely decorative duplicate of the text above. */}}
     <div class="novel-pages" data-novel-pages aria-hidden="true"></div>
-    <noscript><p class="text-gray-600">{{ T "novelNeedsJS" }}</p></noscript>
+    <noscript><p class="text-ink-muted">{{ T "novelNeedsJS" }}</p></noscript>
   </div>
   {{ with resources.Get "js/novel.js" }}
     {{ with . | js.Build (dict "minify" true "target" "es2020") | fingerprint }}

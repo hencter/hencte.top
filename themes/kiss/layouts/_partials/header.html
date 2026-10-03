@@ -19,12 +19,12 @@
          them inline squeezed the logo to one character per line, wrapped every
          menu label and pushed the language links 63px off-screen. */}}
     <details class="relative md:hidden">
-      <summary class="inline-flex cursor-pointer list-none items-center rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-700 hover:text-accent">
+      <summary class="inline-flex cursor-pointer list-none items-center rounded-lg border border-line px-3 py-2 text-sm text-ink-soft hover:text-accent">
         {{ T "menu" }}
       </summary>
-      <div class="absolute right-0 z-50 mt-2 w-64 rounded-xl border border-gray-200 bg-white p-4 shadow-lg">
+      <div class="absolute right-0 z-50 mt-2 w-64 rounded-xl border border-line bg-surface p-4 shadow-lg">
         {{ partial "menu.html" (dict "menuID" "main" "page" . "vertical" true) }}
-        <div class="mt-3 border-t border-gray-200 pt-3">
+        <div class="mt-3 border-t border-line pt-3">
           {{ partial "lang-switcher.html" . }}
         </div>
       </div>

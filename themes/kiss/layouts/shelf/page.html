@@ -46,14 +46,14 @@
 
     <nav class="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm" aria-label="{{ T "navChapterTop" }}">
       <span>
-        <a href="{{ $shelf.RelPermalink }}" class="text-gray-600 hover:text-accent">← {{ T "backToShelf" }}</a>
-        {{ with $shelf }}<span class="mx-2 text-gray-500">/</span><span class="text-gray-500">{{ .Title }}</span>{{ end }}
+        <a href="{{ $shelf.RelPermalink }}" class="text-ink-muted hover:text-accent">← {{ T "backToShelf" }}</a>
+        {{ with $shelf }}<span class="mx-2 text-ink-faint">/</span><span class="text-ink-faint">{{ .Title }}</span>{{ end }}
       </span>
       {{/* The next-chapter link used to exist only at the very end of an ~8000px
            chapter (y=8115 of 8291), so serial readers had no way forward from the
            top of the page. */}}
       {{ with $next }}
-        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-gray-300 px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} →</a>
+        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} →</a>
       {{ end }}
     </nav>
 
@@ -67,7 +67,7 @@
         <h1>{{ .Title }}</h1>
         {{/* The overview is the only text search engines and llms.txt get for a
              chapter: the body itself is published as images. */}}
-        {{ with .Description }}<p class="mt-2 text-gray-600">{{ . }}</p>{{ end }}
+        {{ with .Description }}<p class="mt-2 text-ink-muted">{{ . }}</p>{{ end }}
       </header>
     {{ end }}
 
@@ -79,8 +79,8 @@
     {{ end }}
 
     {{ if $chapters }}
-      <details class="chapter-index mb-8 rounded-2xl border border-gray-200 bg-white">
-        <summary class="cursor-pointer font-bold text-gray-900">{{ T "chapters" }}</summary>
+      <details class="chapter-index mb-8 rounded-2xl border border-line bg-surface">
+        <summary class="cursor-pointer font-bold text-ink">{{ T "chapters" }}</summary>
         <ol class="mt-4 space-y-1 text-sm">
           {{ range $chapters }}
             <li>
@@ -101,10 +101,10 @@
 
     <nav class="mt-8 flex flex-wrap justify-between gap-4 text-sm" aria-label="{{ T "navChapterPager" }}">
       {{ with $prev }}
-        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-gray-300 px-4 py-2 hover:border-rose-300 hover:text-accent">← {{ T "prevChapter" }} · {{ .Title }}</a>
+        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">← {{ T "prevChapter" }} · {{ .Title }}</a>
       {{ else }}<span></span>{{ end }}
       {{ with $next }}
-        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-gray-300 px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} · {{ .Title }} →</a>
+        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} · {{ .Title }} →</a>
       {{ end }}
     </nav>
     </div>
@@ -112,7 +112,7 @@
     {{/* ---------------------------- landing ---------------------------- */}}
     <header class="prose-header">
       <h1>{{ .Title }}</h1>
-      {{ with .Description }}<p class="text-gray-600">{{ . }}</p>{{ end }}
+      {{ with .Description }}<p class="text-ink-muted">{{ . }}</p>{{ end }}
     </header>
 
     <div class="mt-6 flex flex-col gap-8 sm:flex-row">
@@ -124,7 +124,7 @@
         {{/* A single blurb left the whole right column empty; the chapter count and
              a start-reading link make it useful. */}}
         {{ if $chapters }}
-          <p class="mt-4 text-sm text-gray-500">{{ T "chapters" }} · {{ len $chapters }}</p>
+          <p class="mt-4 text-sm text-ink-faint">{{ T "chapters" }} · {{ len $chapters }}</p>
           {{ with index $chapters 0 }}
             <a href="{{ .RelPermalink }}" class="mt-4 inline-flex items-center rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500 transition-colors">{{ T "startReading" }}</a>
           {{ end }}
@@ -134,19 +134,19 @@
 
     {{ if $chapters }}
       <section class="mt-12">
-        <h2 class="text-xl font-bold text-gray-900">{{ T "chapters" }}</h2>
+        <h2 class="text-xl font-bold text-ink">{{ T "chapters" }}</h2>
         {{/* Multi-column: 26 chapters in one column meant a very long scroll on a
              page whose only job is to get you into chapter 1. */}}
         <ol class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
           {{ range $chapters }}
-            <li class="border-b border-gray-100 pb-2">
+            <li class="border-b border-line pb-2">
               <a href="{{ .RelPermalink }}" class="hover:text-accent">{{ .Title }}</a>
             </li>
           {{ end }}
         </ol>
       </section>
     {{ else }}
-      <p class="mt-8 text-gray-600">{{ T "comingSoon" }}</p>
+      <p class="mt-8 text-ink-muted">{{ T "comingSoon" }}</p>
     {{ end }}
   {{ end }}
 {{ end }}

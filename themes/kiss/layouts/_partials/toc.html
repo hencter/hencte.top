@@ -31,9 +31,9 @@
        plain string and Go templates would otherwise escape the whole tree. */ -}}
 {{- $toc = replaceRE `<nav id="TableOfContents">` (printf `<nav id="TableOfContents" aria-label="%s">` (T "toc")) $toc | safeHTML -}}
 {{- if and $toc (ge (len $ids) 5) -}}
-  <details class="toc mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-4 text-sm dark:border-[#302a21] dark:bg-[#1c1813]{{ if $compact }} [&_li]:break-inside-avoid sm:[&_ul]:columns-2 sm:[&_ul]:gap-x-8{{ end }}">
-    <summary class="cursor-pointer list-none font-bold text-gray-900 dark:text-[#f2ece1]">
-      {{ T "toc" }}<span class="ml-2 font-normal text-gray-500 dark:text-[#9d9483]">{{ len $ids }}</span>
+  <details class="toc mb-8 rounded-2xl border border-line bg-surface-soft p-4 text-sm{{ if $compact }} [&_li]:break-inside-avoid sm:[&_ul]:columns-2 sm:[&_ul]:gap-x-8{{ end }}">
+    <summary class="cursor-pointer list-none font-bold text-ink">
+      {{ T "toc" }}<span class="ml-2 font-normal text-ink-faint">{{ len $ids }}</span>
     </summary>
     <div class="mt-3 [&_ul]:space-y-1 [&_ul_ul]:mt-1 [&_ul_ul]:pl-4 [&_li]:leading-relaxed">{{ $toc }}</div>
   </details>

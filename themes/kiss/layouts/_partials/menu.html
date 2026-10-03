@@ -32,7 +32,7 @@
     {{- else if $page.HasMenuCurrent .Menu .}}
       {{- $attrs = merge $attrs (dict "class" "text-accent font-medium" "aria-current" "true") }}
     {{- else }}
-      {{- $attrs = merge $attrs (dict "class" "text-gray-700 hover:text-accent transition-colors duration-200 font-medium") }}
+      {{- $attrs = merge $attrs (dict "class" "text-ink-soft hover:text-accent transition-colors duration-200 font-medium") }}
     {{- end }}
     {{- $name := .Name }}
     {{- with .Identifier }}

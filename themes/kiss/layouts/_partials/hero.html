@@ -16,10 +16,10 @@
       </p>
     {{ end }}
     {{ with .headline }}
-      <h1 class="mt-4 text-3xl sm:text-4xl font-bold text-gray-900">{{ . }}</h1>
+      <h1 class="mt-4 text-3xl sm:text-4xl font-bold text-ink">{{ . }}</h1>
     {{ end }}
     {{ with .subtitle }}
-      <p class="hero-subtitle mt-4 max-w-3xl text-lg text-gray-600">{{ . }}</p>
+      <p class="hero-subtitle mt-4 max-w-3xl text-lg text-ink-muted">{{ . }}</p>
     {{ end }}
     {{ with .actions }}
       <div class="mt-6 flex flex-wrap gap-3">
@@ -27,7 +27,7 @@
           <a href="{{ .href }}" class="inline-flex items-center rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500 transition-colors">{{ .label }}</a>
         {{ end }}
         {{ with .secondary }}
-          <a href="{{ .href }}" class="inline-flex items-center rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:border-rose-300 hover:text-accent transition-colors">{{ .label }}</a>
+          <a href="{{ .href }}" class="inline-flex items-center rounded-lg border border-line-strong px-5 py-2.5 text-sm font-medium text-ink-soft hover:border-rose-300 hover:text-accent transition-colors">{{ .label }}</a>
         {{ end }}
       </div>
     {{ end }}

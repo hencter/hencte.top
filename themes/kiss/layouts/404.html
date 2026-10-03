@@ -9,8 +9,8 @@
 {{ define "main" }}
   <section class="py-16 text-center">
     <p class="text-[3.5rem] font-bold leading-[1.15] text-accent">404</p>
-    <h1 class="mt-4 text-2xl font-bold text-gray-900">{{ T "notFoundTitle" }}</h1>
-    <p class="mx-auto mt-3 max-w-xl text-gray-600">{{ T "notFoundBody" }}</p>
+    <h1 class="mt-4 text-2xl font-bold text-ink">{{ T "notFoundTitle" }}</h1>
+    <p class="mx-auto mt-3 max-w-xl text-ink-muted">{{ T "notFoundBody" }}</p>
     <nav class="mt-8 flex flex-wrap justify-center gap-3" aria-label="{{ T "navSiteLinks" }}">
       <a href="{{ site.Home.RelPermalink }}" class="inline-flex items-center rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500 transition-colors">{{ T "home" }}</a>
       {{ range slice "/blog" "/projects" "/links" "/about" "/shelf" }}
@@ -18,7 +18,7 @@
           {{/* Brand pages carry SEO-style titles ("项目经历 | 亦幸小阁"); the site
                suffix is noise on a button. */}}
           {{ $label := replace .Title (printf " | %s" site.Title) "" }}
-          <a href="{{ .RelPermalink }}" class="inline-flex items-center rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:border-rose-300 hover:text-accent transition-colors">{{ $label }}</a>
+          <a href="{{ .RelPermalink }}" class="inline-flex items-center rounded-lg border border-line-strong px-5 py-2.5 text-sm font-medium text-ink-soft hover:border-rose-300 hover:text-accent transition-colors">{{ $label }}</a>
         {{ end }}
       {{ end }}
     </nav>

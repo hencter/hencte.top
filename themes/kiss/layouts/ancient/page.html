@@ -12,10 +12,10 @@
   <header class="prose-header ancient-head">
     <h1>{{ .Title }}</h1>
     {{ if .Date.IsZero }}
-      <p class="mt-2 text-sm text-gray-500">{{ T "dateTBD" }}</p>
+      <p class="mt-2 text-sm text-ink-faint">{{ T "dateTBD" }}</p>
     {{ else }}
       {{ $key := .Date.Format "2006-01-02" }}
-      <p class="mt-2 text-sm text-gray-500">
+      <p class="mt-2 text-sm text-ink-faint">
         <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">公历 {{ $key }}</time>
         {{/* Lunar counterpart. `lunar = '...'` in front matter wins; otherwise it is
              computed in-template from data/lunar_years.json (table + arithmetic), so
@@ -27,7 +27,7 @@
         {{ end }}
       </p>
     {{ end }}
-    {{ with .Description }}<p class="text-gray-600">{{ . }}</p>{{ end }}
+    {{ with .Description }}<p class="text-ink-muted">{{ . }}</p>{{ end }}
   </header>
 
   {{ partial "toc.html" (dict "page" . "compact" true) }}
@@ -38,7 +38,7 @@
     </article>
   </div>
 
-  <p class="ancient-foot mt-6 text-sm text-gray-500">
+  <p class="ancient-foot mt-6 text-sm text-ink-faint">
     <a href="{{ .CurrentSection.RelPermalink }}" class="hover:text-accent">← {{ .CurrentSection.Title }}</a>
   </p>
 

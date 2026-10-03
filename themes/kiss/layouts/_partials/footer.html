@@ -4,7 +4,7 @@
 <nav aria-label="{{ T "navSiteLinks" }}">
   <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
     {{ range site.Menus.main }}
-      <li><a href="{{ .URL }}" class="text-gray-600 transition-colors hover:text-accent">{{ .Name }}</a></li>
+      <li><a href="{{ .URL }}" class="text-ink-muted transition-colors hover:text-accent">{{ .Name }}</a></li>
     {{ end }}
   </ul>
 </nav>

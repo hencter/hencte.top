@@ -43,6 +43,18 @@
    * rose-700 the same usages measure 5.49–6.03:1 (prose links 5.78:1); the dark
    * value is the #fb7185 the dark mode already used (7.48:1). */
   --color-accent: var(--color-rose-700);
+
+  /* 语义 token：模板只写一次类名（bg-surface / text-ink-muted…），暗色在 .dark 里
+   * 翻转同一批变量即可 —— 不再需要逐工具类写 `.dark .text-ink-muted {}` 覆盖。
+   * 换皮、迁移、暗色都只动这一处。 */
+  --color-surface: #fffdf8; /* 卡片 / 面板底 */
+  --color-surface-soft: #f6f1e6; /* 次级底：callout、表头、chip */
+  --color-line: #e2d8c4; /* 发丝边框 / 分隔线 */
+  --color-line-strong: #cfc2a9; /* 需要更明显的边（次要按钮） */
+  --color-ink: #211d17; /* 标题与强调文字 */
+  --color-ink-soft: #433c32; /* 次强文字 */
+  --color-ink-muted: #5d5446; /* 次要文字 */
+  --color-ink-faint: #746a5b; /* 元信息 */
 }
 
 /* Novel chapter canvases are painted by JS from these values, so the paper/ink
@@ -56,7 +68,7 @@
 
 /* ── Brand palette: 宣纸 / 朱红 / 青墨 ─────────────────────────────────────
  * Tailwind v4 compiles every utility to a reference
- * (`.bg-white { background-color: var(--color-white) }`), so re-declaring the
+ * (`.bg-surface { background-color: var(--color-white) }`), so re-declaring the
  * steps here re-skins the whole site from one place — no template edits and no
  * `!important`. Unlayered on purpose: Tailwind emits the @theme values into a
  * layer, and unlayered rules outrank layered ones.
@@ -136,13 +148,13 @@
   /* Article/section header. The title is sized explicitly instead of inheriting
    * prose-xl's h1 (which rendered ~56px and dominated the first screen). */
   .prose-header {
-    @apply border-b border-gray-200 pb-4;
+    @apply border-b border-line pb-4;
   }
   .prose-header h1 {
     @apply text-3xl font-bold leading-tight sm:text-4xl;
   }
   .prose-header p {
-    @apply mt-2 text-gray-600;
+    @apply mt-2 text-ink-muted;
   }
 }
 
@@ -153,10 +165,10 @@
  * tag rather than a card, so it is gone. */
 @layer components {
   .callout {
-    @apply my-6 overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-[#302a21] dark:bg-[#1c1813];
+    @apply my-6 overflow-hidden rounded-2xl border border-line bg-surface;
   }
   .callout-header {
-    @apply flex cursor-pointer items-center gap-2 border-b border-gray-200 px-4 py-2 text-sm text-gray-600 dark:border-[#302a21] dark:text-[#c4bbaa];
+    @apply flex cursor-pointer items-center gap-2 border-b border-line px-4 py-2 text-sm text-ink-muted dark:text-[#c4bbaa];
   }
   .callout-title {
     @apply font-bold;
@@ -186,11 +198,11 @@
   .callout-failure > .callout-header,
   .callout-bug > .callout-header,
   .callout-important > .callout-header {
-    @apply text-rose-700 dark:text-accent;
+    @apply text-accent;
   }
   .callout-quote > .callout-header,
   .callout-abstract > .callout-header {
-    @apply text-gray-500 dark:text-[#9d9483];
+    @apply text-ink-faint;
   }
 
   .callout > .callout-header .callout-icon::before { content: "🗒"; }
@@ -225,12 +237,12 @@
     @apply ml-4;
   }
   #TableOfContents a {
-    @apply text-gray-700 no-underline hover:text-accent;
+    @apply text-ink-soft no-underline hover:text-accent;
   }
 
   /* ── Mermaid diagrams (layouts/_markup/render-codeblock-mermaid.html) ──── */
   .mermaid-container {
-    @apply my-6 overflow-x-auto rounded-xl border border-gray-200 bg-white p-4;
+    @apply my-6 overflow-x-auto rounded-xl border border-line bg-surface p-4;
   }
   .mermaid-container .mermaid {
     @apply m-0 bg-transparent p-0 text-center;
@@ -496,7 +508,7 @@ summary::-webkit-details-marker {
  * contract as the Astro site.
  *
  * Deliberately UNLAYERED: unlayered rules outrank every @layer, so these beat
- * Tailwind's utilities by specificity (`dark .bg-white` = 0,2,0 vs `.bg-white` =
+ * Tailwind's utilities by specificity (`dark .bg-surface` = 0,2,0 vs `.bg-surface` =
  * 0,1,0) without !important. One place to tune the whole palette — the alternative
  * is a `dark:` variant on every surface class in a dozen templates.
  *
@@ -516,51 +528,17 @@ summary::-webkit-details-marker {
   background-color: #1c1813;
   border-color: #302a21;
 }
-.dark .bg-white,
-.dark .bg-gray-50 {
-  background-color: #1c1813;
-}
-.dark .bg-gray-100 {
-  background-color: #26211a;
-}
-.dark .bg-white\/80 {
-  background-color: rgb(20 17 13 / 0.85);
-}
+/* 语义 token 化之后，这里不再需要逐工具类的暗色映射：模板写的是 bg-surface /
+ * text-ink-* / border-line* / divide-line，它们的值就是 --color-* 变量，而变量已在
+ * 上面的 .dark 块里翻转。原先那 19 条 `.dark .bg-gray-50 {}` 之类的覆盖已随迁移删除。
+ * 只剩 accent 家族（rose-*）没有对应 token，仍在此处暗色化。 */
 .dark .bg-rose-50,
 .dark .bg-rose-50\/60 {
   background-color: rgb(173 55 41 / 0.2);
 }
-.dark .border-gray-100,
-.dark .border-gray-200,
-.dark .border-gray-200\/50 {
-  border-color: #302a21;
-}
-.dark .border-gray-300 {
-  border-color: #453c2f;
-}
 .dark .border-rose-100,
 .dark .border-rose-200 {
   border-color: rgb(173 55 41 / 0.5);
-}
-/* Tailwind v4 implements `divide-*` as `:where(& > :not(:last-child))` — the
- * `:where()` wrapper means the compiled selector has *zero* specificity, and a
- * sibling-combinator guess leaves the FIRST row with the light token. Mirror the
- * structure instead. */
-.dark .divide-gray-100 > :not(:last-child),
-.dark .divide-gray-200 > :not(:last-child) {
-  border-color: #302a21;
-}
-.dark .text-gray-900 {
-  color: #f2ece1;
-}
-.dark .text-gray-700 {
-  color: #ddd4c6;
-}
-.dark .text-gray-600 {
-  color: #c4bbaa;
-}
-.dark .text-gray-500 {
-  color: #9d9483;
 }
 /* NB: .text-gray-300 is deliberately not remapped. It was mapped to #4b5563, which
  * is *darker* than gray-300 — the breadcrumb separator "/" measured 2.66:1 in dark
@@ -576,8 +554,17 @@ summary::-webkit-details-marker {
  * Same specificity as :root and later in source order, so this wins. */
 .dark {
   --color-accent: #e0836c;
+  /* 语义 token 的暗色端：模板里的 bg-surface / text-ink-* 自动跟着变。 */
+  --color-surface: #1c1813;
+  --color-surface-soft: #221e18;
+  --color-line: #302a21;
+  --color-line-strong: #453c2f;
+  --color-ink: #f2ece1;
+  --color-ink-soft: #ddd4c6;
+  --color-ink-muted: #c4bbaa;
+  --color-ink-faint: #9d9483;
   /* Warm ink shell instead of #030712, and the same paper/ink pair the chapter
-   * canvases flip to. These match the .dark .bg-white / .text-gray-600 mappings
+   * canvases flip to. These match the .dark .bg-surface / .text-ink-muted mappings
    * above; measured 6.4–9.3:1 on the surface. */
   --novel-paper: #1c1813;
   --novel-ink: #c4bbaa;
@@ -1208,22 +1195,22 @@ h3,
     color: #14110d !important;
   }
   .dark body,
-  .dark .bg-white,
-  .dark .bg-gray-50,
+  .dark .bg-surface,
+  .dark .bg-surface-soft,
   .dark .callout,
   .dark .novel-page {
     background: #fff !important;
   }
-  .dark .text-gray-900,
+  .dark .text-ink,
   .dark .text-gray-800,
-  .dark .text-gray-700,
-  .dark .text-gray-600,
-  .dark .text-gray-500 {
+  .dark .text-ink-soft,
+  .dark .text-ink-muted,
+  .dark .text-ink-faint {
     color: #14110d !important;
   }
-  .dark .border-gray-100,
-  .dark .border-gray-200,
-  .dark .border-gray-300,
+  .dark .border-line,
+  .dark .border-line,
+  .dark .border-line-strong,
   .dark .divide-y > :not(:last-child) {
     border-color: #e2d8c4 !important;
   }
@@ -1308,13 +1295,13 @@ h3,
  * 暗色一律用 `dark:` 变体（见文件顶部的 @custom-variant）。 */
 @layer components {
   .tabs {
-    @apply my-8 flex flex-wrap gap-1 rounded-2xl border border-gray-200 bg-white p-3 dark:border-[#302a21] dark:bg-[#1c1813];
+    @apply my-8 flex flex-wrap gap-1 rounded-2xl border border-line bg-surface p-3;
   }
   .tab-input {
     @apply sr-only;
   }
   .tab-label {
-    @apply cursor-pointer rounded-lg px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:text-[#c4bbaa] dark:hover:bg-[#26201a];
+    @apply cursor-pointer rounded-lg px-3 py-1.5 text-sm text-ink-muted transition-colors hover:bg-surface-soft dark:text-[#c4bbaa] dark:hover:bg-[#26201a];
   }
   .tab-panel {
     @apply hidden w-full basis-full;
@@ -1322,7 +1309,7 @@ h3,
   /* peer 变体在这里用不了：`~` 会把前面所有 radio 都算作 peer，多个面板会一起显示，
    * 所以面板必须跟在自己的 label 之后（相邻选择器）。 */
   .tab-input:checked + .tab-label {
-    @apply bg-gray-100 font-semibold text-gray-900 dark:bg-[#26201a] dark:text-[#f2ece1];
+    @apply bg-surface-soft font-semibold text-ink bg-surface-soft text-ink;
   }
   .tab-input:checked + .tab-label + .tab-panel {
     @apply block;

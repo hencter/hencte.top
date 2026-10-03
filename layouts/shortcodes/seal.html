@@ -17,5 +17,5 @@
 {{- if eq $size "sm" }}{{ $sizeClass = "text-[0.8rem]" }}{{ else if eq $size "lg" }}{{ $sizeClass = "text-[1.35rem]" }}{{ end -}}
 {{- $shapeClass := cond (eq $shape "round") "rounded-full px-[0.45em] py-[0.5em]" "rounded-sm px-[0.25em] py-[0.35em]" -}}
 {{- with $text -}}
-  <span class="mx-[0.35em] inline-flex items-center justify-center border-2 border-rose-600 align-middle font-bold leading-none tracking-[0.12em] text-rose-700 [text-orientation:upright] [writing-mode:vertical-rl] dark:border-accent dark:text-accent {{ $sizeClass }} {{ $shapeClass }}" role="img" aria-label="印：{{ . }}">{{ . }}</span>
+  <span class="mx-[0.35em] inline-flex items-center justify-center border-2 border-rose-600 align-middle font-bold leading-none tracking-[0.12em] text-rose-700 [text-orientation:upright] [writing-mode:vertical-rl] border-accent text-accent {{ $sizeClass }} {{ $shapeClass }}" role="img" aria-label="印：{{ . }}">{{ . }}</span>
 {{- end -}}

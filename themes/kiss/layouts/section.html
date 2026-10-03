@@ -25,7 +25,7 @@
   {{ end }}
   <section class="mt-12 grid grid-cols-1 gap-6 {{ $cols }}">
     {{ range .Pages.ByDate.Reverse }}
-      <article class="flex flex-col rounded-2xl border border-line bg-surface p-5 shadow-sm transition-shadow hover:shadow-md">
+      <article class="card flex flex-col p-5">
         <h2 class="card-title mb-2 mt-0 text-lg font-bold">
           {{/* Migrated brand pages carry SEO-style titles ("Obsidian 插件 | 亦幸小阁");
                the site suffix is noise inside a card. Same trim the 404 buttons do. */}}
@@ -33,7 +33,7 @@
         </h2>
         {{/* `truncate`: the meta row has to stay one line — a long tag wrapped it onto
              a second line and pushed this card's excerpt 20px below its neighbours'. */}}
-        <p class="truncate text-sm text-ink-faint">
+        <p class="meta truncate">
           {{ if not .Date.IsZero }}
             <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="whitespace-nowrap">{{ .Date.Format "2006-01-02" }}</time>
           {{ end }}
@@ -41,7 +41,7 @@
             {{/* Two tags, unwrapped: the full list pushed the meta row onto a second
                  line and staggered every excerpt in the row by up to 63.8px. */}}
             <span class="ml-2 whitespace-nowrap">
-              {{ range first 2 . }}<span class="mr-1 inline-block rounded bg-surface-soft px-2 py-0.5 text-xs text-ink-soft">#{{ . }}</span>{{ end }}
+              {{ range first 2 . }}<span class="chip mr-1 inline-block">#{{ . }}</span>{{ end }}
             </span>
           {{ end }}
         </p>

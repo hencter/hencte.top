@@ -20,7 +20,7 @@
     <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {{ range $series }}
         {{ $novel := . }}
-        <a href="{{ .RelPermalink }}" class="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-sm transition-shadow hover:shadow-md">
+        <a href="{{ .RelPermalink }}" class="card group flex flex-col overflow-hidden">
           {{ with .Params.cover }}
             {{ partial "img.html" (dict "src" . "page" $novel "alt" ($novel.Params.imageAlt | default $novel.Title) "class" "h-56 w-full object-cover" "sizes" "(min-width: 1024px) 360px, (min-width: 640px) 45vw, 92vw") }}
           {{ end }}

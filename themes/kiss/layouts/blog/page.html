@@ -39,7 +39,7 @@
               <div class="flex flex-wrap items-baseline gap-x-3">
                 <a href="{{ .RelPermalink }}" class="font-medium text-ink hover:text-accent">{{ .LinkTitle }}</a>
                 {{ if not .Date.IsZero }}
-                  <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="whitespace-nowrap text-sm text-ink-faint">{{ .Date.Format "2006-01-02" }}</time>
+                  <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="meta whitespace-nowrap">{{ .Date.Format "2006-01-02" }}</time>
                 {{ end }}
               </div>
               {{ with .Description }}<p class="mt-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}

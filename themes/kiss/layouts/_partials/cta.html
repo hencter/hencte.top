@@ -11,7 +11,7 @@
     {{ with .actions }}
       <div class="mt-5 flex flex-wrap gap-3">
         {{ with .primary }}
-          <a href="{{ .href }}" class="inline-flex items-center rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500 transition-colors">{{ .label }}</a>
+          <a href="{{ .href }}" class="btn-primary">{{ .label }}</a>
         {{ end }}
         {{ with .secondary }}
           <a href="{{ .href }}" class="inline-flex items-center rounded-lg border border-rose-200 bg-surface px-5 py-2.5 text-sm font-medium text-accent hover:border-rose-300 transition-colors">{{ .label }}</a>

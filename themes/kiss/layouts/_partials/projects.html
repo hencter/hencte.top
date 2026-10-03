@@ -26,7 +26,7 @@
         {{ $project := . }}
         {{ $note := .outcome | default .result }}
         {{ $external := hasPrefix (string .url) "http" }}
-        <article class="flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-sm hover:shadow-md transition-shadow">
+        <article class="card flex flex-col overflow-hidden">
           {{ with .image }}
             {{ partial "img.html" (dict "src" . "page" $ "alt" ($project.imageAlt | default $project.title) "class" "project-cover w-full object-cover" "sizes" "(min-width: 1280px) 360px, (min-width: 640px) 45vw, 92vw") }}
           {{ end }}
@@ -41,7 +41,7 @@
               <a href="{{ .url }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="hover:text-accent">{{ .title }}</a>
             {{ printf `</%s>` $cardLevel | safeHTML }}
             {{ with .description }}<p class="mt-2 flex-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}
-            {{ with $note }}<p class="mt-3 text-sm text-ink-faint">{{ . }}</p>{{ end }}
+            {{ with $note }}<p class="meta mt-3">{{ . }}</p>{{ end }}
             {{ with .tags }}
               <ul class="mt-4 flex flex-wrap gap-2">
                 {{ range . }}

@@ -9,7 +9,7 @@
       {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
       <div class="mt-6 grid gap-6 sm:grid-cols-3">
         {{ range $.Params.focusAreas }}
-          <div class="rounded-2xl border border-line bg-surface p-5 shadow-sm">
+          <div class="card p-5">
             {{ with .tag }}<p class="text-xs font-semibold uppercase tracking-wide text-accent">{{ . }}</p>{{ end }}
             <h3 class="mt-1 font-bold text-ink">{{ .title }}</h3>
             <p class="mt-2 text-sm text-ink-muted">{{ .text }}</p>
@@ -27,7 +27,7 @@
       {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
       <ol class="mt-6 grid gap-4 sm:grid-cols-3">
         {{ range $.Params.buildSteps }}
-          <li class="rounded-2xl border border-line bg-surface p-5">
+          <li class="card p-5">
             <p class="text-sm font-semibold text-accent">{{ .phase }}</p>
             <p class="mt-2 text-sm text-ink-muted">{{ .detail }}</p>
           </li>
@@ -46,7 +46,7 @@
         {{ range $posts }}
           <li class="flex items-baseline justify-between gap-4 py-3">
             <a href="{{ .RelPermalink }}" class="font-medium text-ink hover:text-accent">{{ .LinkTitle }}</a>
-            <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="shrink-0 text-sm text-ink-faint">{{ .Date.Format "2006-01-02" }}</time>
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="meta shrink-0">{{ .Date.Format "2006-01-02" }}</time>
           </li>
         {{ end }}
       </ul>
@@ -63,7 +63,7 @@
         {{ range $novels }}
           {{ if not .Params.chapter }}
             {{ $novel := . }}
-            <a href="{{ .RelPermalink }}" class="flex gap-4 rounded-2xl border border-line bg-surface p-4 hover:shadow-md transition-shadow">
+            <a href="{{ .RelPermalink }}" class="card flex gap-4 p-4">
               {{ with .Params.cover }}
                 {{ partial "img.html" (dict "src" . "page" $novel "alt" ($novel.Params.imageAlt | default $novel.Title) "class" "h-24 w-20 shrink-0 rounded-lg object-cover") }}
               {{ end }}

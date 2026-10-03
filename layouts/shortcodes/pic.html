@@ -19,7 +19,7 @@
 <figure class="my-8{{ with $class }} {{ . }}{{ end }}">
   {{- partial "img.html" (dict "src" $src "page" $.Page "alt" $alt "class" "h-auto w-full rounded-lg" "sizes" ($.Get "sizes") "eager" ($.Get "eager")) -}}
   {{- with $caption -}}
-    <figcaption class="mt-3 text-center text-sm leading-relaxed text-ink-faint">{{ . | markdownify }}</figcaption>
+    <figcaption class="meta mt-3 text-center leading-relaxed">{{ . | markdownify }}</figcaption>
   {{- end -}}
 </figure>
 {{- else -}}

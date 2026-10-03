@@ -102,6 +102,40 @@
   --color-rose-700: #94301f;
 }
 
+/* ── 原语组件 ───────────────────────────────────────────────────────────────
+ * 全站重复出现的组合在这里定义一次，模板里只写组件名 + 布局原子类。
+ * 颜色一律走语义 token，所以暗色无需 `dark:` 变体，换皮也只动 token。
+ * 这就是「组件化」的落点：模板可迁移，样式不跟着页面走。 */
+@layer components {
+  /* 卡片：迁移前这段组合在 5 个模板里各写了一遍（共 14 处） */
+  .card {
+    @apply rounded-2xl border border-line bg-surface shadow-sm transition-shadow hover:shadow-md;
+  }
+
+  /* 按钮：主/次两档，共用几何，只有颜色与边框不同 */
+  .btn,
+  .btn-primary,
+  .btn-secondary {
+    @apply inline-flex items-center rounded-lg px-5 py-2.5 text-sm font-medium transition-colors;
+  }
+  .btn-primary {
+    @apply bg-rose-600 text-white hover:bg-rose-500;
+  }
+  .btn-secondary {
+    @apply border border-line-strong text-ink-soft hover:border-rose-300 hover:text-accent;
+  }
+
+  /* 标签 chip（标签、分类） */
+  .chip {
+    @apply inline-flex items-center rounded bg-surface-soft px-2 py-0.5 text-xs text-ink-soft;
+  }
+
+  /* 元信息行：日期 / 字数 / 栏目 */
+  .meta {
+    @apply text-sm text-ink-faint;
+  }
+}
+
 /* The typography plugin bakes its own (cool) gray scale into --tw-prose-*, so
  * prose is the one place the palette above cannot reach. Re-point the variables
  * the plugin actually uses. */

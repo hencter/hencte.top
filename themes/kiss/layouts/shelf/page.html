@@ -79,7 +79,7 @@
     {{ end }}
 
     {{ if $chapters }}
-      <details class="chapter-index mb-8 rounded-2xl border border-line bg-surface">
+      <details class="card chapter-index mb-8">
         <summary class="cursor-pointer font-bold text-ink">{{ T "chapters" }}</summary>
         <ol class="mt-4 space-y-1 text-sm">
           {{ range $chapters }}
@@ -124,9 +124,9 @@
         {{/* A single blurb left the whole right column empty; the chapter count and
              a start-reading link make it useful. */}}
         {{ if $chapters }}
-          <p class="mt-4 text-sm text-ink-faint">{{ T "chapters" }} · {{ len $chapters }}</p>
+          <p class="meta mt-4">{{ T "chapters" }} · {{ len $chapters }}</p>
           {{ with index $chapters 0 }}
-            <a href="{{ .RelPermalink }}" class="mt-4 inline-flex items-center rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500 transition-colors">{{ T "startReading" }}</a>
+            <a href="{{ .RelPermalink }}" class="btn-primary mt-4">{{ T "startReading" }}</a>
           {{ end }}
         {{ end }}
       </div>

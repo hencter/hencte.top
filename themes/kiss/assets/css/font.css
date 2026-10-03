@@ -1,56 +1,27 @@
-/* 全局字体设置 */
-/* body {
-  font-family: var(--font-serif);
-} */
+/* Global typeface wiring.
+ *
+ * Base layer, deliberately. These are element *defaults*, not overrides — and
+ * unlayered rules outrank every @layer, which is what the previous version got
+ * wrong: a bare `p, span, div, a, li, td, th { font-family: … }` silently beat
+ * Tailwind's `font-mono` / `font-sans` utilities (all emitted in @layer
+ * utilities) on any <div> or <span> that carried one, and the file needed six
+ * `!important`s to out-rank its own rules.
+ *
+ * Declared once on the root so the whole document inherits it; utilities can
+ * still win where a template asks for another face.
+ */
+@layer base {
+  html {
+    font-family: var(--font-serif);
+  }
 
-/* 标题元素 */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-serif) !important;
-}
-
-/* 段落和文本元素 */
-p,
-span,
-div,
-a,
-li,
-td,
-th {
-  font-family: var(--font-serif);
-}
-
-/* Typography 插件 prose 类字体设置 */
-.prose {
-  font-family: var(--font-serif) !important;
-}
-
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  font-family: var(--font-serif) !important;
-}
-
-.prose p,
-.prose li,
-.prose blockquote,
-.prose strong,
-.prose em,
-.prose a {
-  font-family: var(--font-serif) !important;
-}
-
-.prose code {
-  font-family: var(--font-mono) !important;
-}
-
-.prose pre code {
-  font-family: var(--font-mono) !important;
+  /* Preflight already maps these to --font-mono (via --default-mono-font-family)
+   * and the typography plugin does not set a code face, so this is the single
+   * place the monospace stack is bound. */
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-mono);
+  }
 }

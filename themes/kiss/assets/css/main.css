@@ -26,6 +26,86 @@
 @theme {
   --font-serif: "LXGWWenKai", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   --font-mono: "MapleMono-NF-CN", "SF Mono", "Monaco", "Inconsolata", "Fira Code", "Source Code Pro", "Courier New", monospace;
+
+  /* Semantic accent, for accent *text* on a page surface (links, eyebrows,
+   * current-item markers, hover states). Templates ask for `text-accent` /
+   * `hover:text-accent`; the value is swapped once in the .dark block at the end
+   * of this file. Before that, every usage carried the raw step `text-rose-600`
+   * and dark mode needed a matching `!important`-free override per step.
+   *
+   * rose-700 rather than rose-600: the light-mode link colour measured 4.34:1 on
+   * the #fafafa page ground, just under WCAG 2.2 AA (1.4.3) for body text. With
+   * rose-700 the same usages measure 5.49–6.03:1 (prose links 5.78:1); the dark
+   * value is the #fb7185 the dark mode already used (7.48:1). */
+  --color-accent: var(--color-rose-700);
+}
+
+/* Novel chapter canvases are painted by JS from these values, so the paper/ink
+ * pair can flip with the theme without a template or a rebuild. Declared on the
+ * root because novel.js reads them from the document element. */
+:root {
+  --novel-paper: #faf7f0;
+  --novel-ink: #1f2937;
+  --novel-watermark: #b3aa99;
+}
+
+/* ── Brand palette: 宣纸 / 朱红 / 青墨 ─────────────────────────────────────
+ * Tailwind v4 compiles every utility to a reference
+ * (`.bg-white { background-color: var(--color-white) }`), so re-declaring the
+ * steps here re-skins the whole site from one place — no template edits and no
+ * `!important`. Unlayered on purpose: Tailwind emits the @theme values into a
+ * layer, and unlayered rules outrank layered ones.
+ *
+ * Measured against the paper ground (#fffdf8): headings 16.5:1, body 9.7:1,
+ * secondary 7.3:1, meta 5.2:1, accent text 7.7:1, paper-on-cinnabar buttons
+ * 6.2:1 — all above WCAG 2.2 AA. The paper step matches --novel-paper above, so
+ * the chapter canvases and the surrounding pages now share one ground.
+ *
+ * The rose steps become 朱红 (cinnabar) rather than rose: the brand art is a
+ * vermilion seal on cream paper, and the accent should read as that seal. */
+:root {
+  /* Warm neutrals: paper surfaces and ink text instead of cool gray. */
+  --color-white: #fffdf8;
+  --color-neutral-50: #faf7f0;
+  --color-gray-50: #f6f1e6;
+  --color-gray-100: #efe8d9;
+  --color-gray-200: #e2d8c4;
+  --color-gray-300: #cfc2a9;
+  --color-gray-500: #746a5b;
+  --color-gray-600: #5d5446;
+  --color-gray-700: #433c32;
+  --color-gray-900: #211d17;
+  /* 朱红 */
+  --color-rose-50: #f8eae3;
+  --color-rose-100: #f0d7cc;
+  --color-rose-200: #e0b6a5;
+  --color-rose-300: #cb907d;
+  --color-rose-500: #c04a37;
+  --color-rose-600: #ad3729;
+  --color-rose-700: #94301f;
+}
+
+/* The typography plugin bakes its own (cool) gray scale into --tw-prose-*, so
+ * prose is the one place the palette above cannot reach. Re-point the variables
+ * the plugin actually uses. */
+.prose,
+.prose-content {
+  --tw-prose-body: #4a4238;
+  --tw-prose-headings: #211d17;
+  --tw-prose-lead: #5d5446;
+  --tw-prose-links: #94301f;
+  --tw-prose-bold: #211d17;
+  --tw-prose-counters: #746a5b;
+  --tw-prose-bullets: #cfc2a9;
+  --tw-prose-hr: #efe8d9;
+  --tw-prose-quotes: #211d17;
+  --tw-prose-quote-borders: #e2d8c4;
+  --tw-prose-captions: #746a5b;
+  --tw-prose-code: #211d17;
+  --tw-prose-pre-bg: #221e18;
+  --tw-prose-pre-code: #f0eae0;
+  --tw-prose-th-borders: #e2d8c4;
+  --tw-prose-td-borders: #efe8d9;
 }
 
 /* 统一的 prose 样式 */
@@ -44,7 +124,7 @@
 
     /* 链接样式 */
     & a {
-      @apply break-words text-rose-600;
+      @apply break-words text-accent;
     }
   }
 
@@ -155,7 +235,7 @@
     @apply ml-4;
   }
   #TableOfContents a {
-    @apply text-gray-700 no-underline hover:text-rose-600;
+    @apply text-gray-700 no-underline hover:text-accent;
   }
 
   /* ── Mermaid diagrams (layouts/_markup/render-codeblock-mermaid.html) ──── */
@@ -242,7 +322,7 @@
   gap: 0.75rem;
   padding: 0.35rem 1rem;
   font-size: 0.75rem;
-  color: #d1d5db;
+  color: #cfc2a9;
   background-color: rgb(255 255 255 / 0.06);
 }
 .code-block-lang {
@@ -254,12 +334,12 @@
   cursor: pointer;
   padding: 0.1rem 0.5rem;
   border-radius: 0.375rem;
-  color: #d1d5db;
+  color: #cfc2a9;
   transition: background-color 0.15s, color 0.15s;
 }
 .code-copy:hover {
   background-color: rgb(255 255 255 / 0.14);
-  color: #fff;
+  color: #fffdf8;
 }
 
 /* ── Reading shell: centred text column + floating TOC rail ────────────────
@@ -267,15 +347,15 @@
  * column grid whose symmetric 1fr gutters put the text column on the page's true
  * centre, with the TOC sticky in the right gutter. Below the rail breakpoint the
  * rail wrapper is `display: contents`, so the TOC is the ordinary collapsed
- * <details> above the prose (reading-chrome.html opens it only when it floats). */
+ * <details> above the prose (assets/js/site.js opens it only when it floats). */
 .reading-shell {
   --read-col: 48rem;
   --rail-w: 12rem;
   --rail-gap: 1.75rem;
-  --rail-line: #e5e7eb;
+  --rail-line: #e8dfcd;
 }
 .dark .reading-shell {
-  --rail-line: #1f2937;
+  --rail-line: #302a21;
 }
 .reading-shell > .reading-header,
 .reading-shell > .reading-prose,
@@ -296,7 +376,6 @@
   .reading-shell > .reading-header {
     grid-column: 2;
     grid-row: 1;
-    max-width: none;
   }
   .reading-shell > .toc-rail {
     display: block;
@@ -305,15 +384,18 @@
     align-self: stretch;
     min-width: 0;
   }
+  /* `margin-inline: auto` (base rule) turns off grid stretching, so these items
+   * are sized fit-content — whose lower bound is min-content. A table with a
+   * 1399px min-content therefore pushed the article to 1399px, past its 768px
+   * column, and every paragraph ran ~70 CJK glyphs per line. Keeping the base
+   * max-width is what caps it (measured: 1399px → 768px, 38 glyphs/line). */
   .reading-shell > .reading-prose {
     grid-column: 2;
     grid-row: 2;
-    max-width: none;
   }
   .reading-shell > .reading-foot {
     grid-column: 2;
     grid-row: 3;
-    max-width: none;
   }
   /* Bare editorial rail, not the card the narrow layout uses. */
   .toc-rail .toc {
@@ -433,75 +515,107 @@ summary::-webkit-details-marker {
  */
 .dark body {
   background-image: none;
-  background-color: #030712;
-  color: #e5e7eb;
+  background-color: #14110d;
+  color: #ece6db;
 }
 .dark header.sticky {
-  background-color: rgb(17 24 39 / 0.85);
-  border-color: #1f2937;
+  background-color: rgb(20 17 13 / 0.85);
+  border-color: #302a21;
 }
 .dark footer {
-  background-color: #111827;
-  border-color: #1f2937;
+  background-color: #1c1813;
+  border-color: #302a21;
 }
 .dark .bg-white,
 .dark .bg-gray-50 {
-  background-color: #111827;
+  background-color: #1c1813;
 }
 .dark .bg-gray-100 {
-  background-color: #1f2937;
+  background-color: #26211a;
 }
 .dark .bg-white\/80 {
-  background-color: rgb(17 24 39 / 0.85);
+  background-color: rgb(20 17 13 / 0.85);
 }
 .dark .bg-rose-50,
 .dark .bg-rose-50\/60 {
-  background-color: rgb(159 18 57 / 0.18);
+  background-color: rgb(173 55 41 / 0.2);
 }
 .dark .border-gray-100,
 .dark .border-gray-200,
 .dark .border-gray-200\/50 {
-  border-color: #1f2937;
+  border-color: #302a21;
 }
 .dark .border-gray-300 {
-  border-color: #374151;
+  border-color: #453c2f;
 }
 .dark .border-rose-100,
 .dark .border-rose-200 {
-  border-color: rgb(159 18 57 / 0.5);
+  border-color: rgb(173 55 41 / 0.5);
 }
-.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
-  border-color: #1f2937;
+/* Tailwind v4 implements `divide-*` as `:where(& > :not(:last-child))` — the
+ * `:where()` wrapper means the compiled selector has *zero* specificity, and a
+ * sibling-combinator guess leaves the FIRST row with the light token. Mirror the
+ * structure instead. */
+.dark .divide-gray-100 > :not(:last-child),
+.dark .divide-gray-200 > :not(:last-child) {
+  border-color: #302a21;
 }
 .dark .text-gray-900 {
-  color: #f9fafb;
+  color: #f2ece1;
 }
 .dark .text-gray-700 {
-  color: #e5e7eb;
+  color: #ddd4c6;
 }
 .dark .text-gray-600 {
-  color: #d1d5db;
+  color: #c4bbaa;
 }
 .dark .text-gray-500 {
-  color: #9ca3af;
+  color: #9d9483;
 }
 /* NB: .text-gray-300 is deliberately not remapped. It was mapped to #4b5563, which
  * is *darker* than gray-300 — the breadcrumb separator "/" measured 2.66:1 in dark
  * mode and 1.41:1 in light. */
-.dark .text-rose-600 {
-  color: #fb7185;
+/* Accent text and the novel-canvas palette flip here, in one place.
+ *
+ * Templates ask for `text-accent` / `hover:text-accent`, which resolve through
+ * --color-accent, so the per-usage overrides this block used to carry
+ * (`.dark .text-rose-600`, `.dark .text-rose-700`, `.dark .prose-content a`,
+ * `.dark .hover\:text-rose-600:hover`) are gone. #fb7185 is the rose-400 dark
+ * mode already used and measured at ~7:1 on #030712.
+ *
+ * Same specificity as :root and later in source order, so this wins. */
+.dark {
+  --color-accent: #e0836c;
+  /* Warm ink shell instead of #030712, and the same paper/ink pair the chapter
+   * canvases flip to. These match the .dark .bg-white / .text-gray-600 mappings
+   * above; measured 6.4–9.3:1 on the surface. */
+  --novel-paper: #1c1813;
+  --novel-ink: #c4bbaa;
+  --novel-watermark: #57503f;
 }
-.dark .text-rose-700 {
-  color: #fda4af;
-}
-/* Article links use rose-600 (4.45:1 on #030712 — just under WCAG AA for body
- * text), so dark mode lifts them to rose-400 (~7:1). */
-.dark .prose-content a,
-.dark .prose a {
-  color: #fb7185;
-}
-.dark .hover\:text-rose-600:hover {
-  color: #fb7185;
+/* The typography plugin sets --tw-prose-invert-* on the prose element itself
+ * (via the @apply'd `prose-invert`), and an element's own declaration beats one
+ * inherited from <html class="dark"> — which is why the dark article body was
+ * still the plugin's cool oklch(87.2% 0.01 258) rather than warm ink. Declare
+ * them on the element. */
+.dark .prose,
+.dark .prose-content {
+  --tw-prose-invert-body: #c4bbaa;
+  --tw-prose-invert-headings: #f2ece1;
+  --tw-prose-invert-lead: #c4bbaa;
+  --tw-prose-invert-links: var(--color-accent);
+  --tw-prose-invert-bold: #f2ece1;
+  --tw-prose-invert-counters: #9d9483;
+  --tw-prose-invert-bullets: #57503f;
+  --tw-prose-invert-hr: #302a21;
+  --tw-prose-invert-quotes: #f2ece1;
+  --tw-prose-invert-quote-borders: #302a21;
+  --tw-prose-invert-captions: #9d9483;
+  --tw-prose-invert-code: #f2ece1;
+  --tw-prose-invert-pre-bg: #221e18;
+  --tw-prose-invert-pre-code: #f0eae0;
+  --tw-prose-invert-th-borders: #302a21;
+  --tw-prose-invert-td-borders: #262019;
 }
 /* Typography plugin palette (prose / .prose-content). */
 .dark .prose,
@@ -512,20 +626,20 @@ summary::-webkit-details-marker {
  * in dark mode: overriding the shorthand `border-color` here flattened all 14
  * variants to the same gray. */
 .dark .callout {
-  border-top-color: #1f2937;
-  border-right-color: #1f2937;
-  border-bottom-color: #1f2937;
-  background-color: #111827;
+  border-top-color: #302a21;
+  border-right-color: #302a21;
+  border-bottom-color: #302a21;
+  background-color: #1c1813;
 }
 .dark .toc {
-  border-color: #1f2937;
-  background-color: #111827;
+  border-color: #302a21;
+  background-color: #1c1813;
 }
 .dark .callout-header {
-  border-color: #1f2937;
+  border-color: #302a21;
 }
 .dark #TableOfContents a {
-  color: #d1d5db;
+  color: #ddd4c6;
 }
 /* Sun/moon toggle: show the icon for the mode you would switch to. */
 .theme-toggle .icon-moon {
@@ -536,4 +650,746 @@ summary::-webkit-details-marker {
 }
 .dark .theme-toggle .icon-moon {
   display: block;
+}
+
+/* ── Polish pass ──────────────────────────────────────────────────────────
+ * UI-only fixes measured on the built site; no markup structure changed. */
+
+/* Chapter art is 1536×1024 and novel covers are 1024×1536, so the box can be
+ * reserved before the bytes arrive. Without this the shelf landing measured
+ * CLS 0.370 and a chapter page 0.173 (both "poor"): the only shifting elements
+ * were these two <img>, which had no intrinsic size. The ratio matches the real
+ * files exactly, so the rendered size is unchanged — nothing crops or moves. */
+.novel-banner {
+  aspect-ratio: 3 / 2;
+}
+.novel-cover {
+  aspect-ratio: 2 / 3;
+}
+
+/* A list card prints .Summary, which carries the article's footnote markers but
+ * not its footnotes — every #fn: link on a list page pointed at nothing. */
+.summary-excerpt .footnote-ref {
+  display: none;
+}
+
+/* Cap the excerpt at six lines of the surrounding prose scale (prose-sm is
+ * 14px/1.714). Tailwind's `line-clamp-6` was tried first and had to go: it needs
+ * `display: -webkit-box`, and inside this flex card Chromium painted the clamped
+ * overflow on top of the visible text — two paragraphs overlapped in one box. A
+ * plain max-height has no such failure mode. */
+.summary-excerpt {
+  max-height: calc(6 * 1.714em);
+  overflow: hidden;
+}
+
+/* One keyboard focus ring for the whole site. `:where()` keeps specificity at 0,
+ * so component rules still win, and --color-accent already flips for dark mode. */
+:where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  /* The ring used to fade in from currentColor while `transition-colors` ran. */
+  transition: none;
+}
+
+/* ── Elegance pass ────────────────────────────────────────────────────────
+ * Unlayered on purpose, so these beat Tailwind's utilities (which live in a
+ * layer) without a single `!important` or a template-by-template rewrite. What
+ * the measurements said, and what each rule answers:
+ *   - h1/h2/h3 measured 16/18/20/24/28px across pages (same level, different
+ *     size) and every weight was 700 → one scale below, weights 600.
+ *   - article body ran 70 CJK glyphs per line instead of 30–40: a <table> with a
+ *     1399px min-content blew the 768px reading column out of its grid track.
+ *   - radii measured 4/6/8/12/16px; three steps are enough.
+ *   - section rhythm measured 24/32/40/48/56px; the type scale sets the rhythm.
+ *   - hover transitions mixed 150ms and 200ms with two easings. */
+
+/* Reading column: never let a wide child (table, long code line) size the column. */
+.reading-shell > * {
+  min-width: 0;
+}
+.prose-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 1.35rem + 1.1vw, 2.125rem);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+h2 {
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+/* The article's own headings keep their em-based scale — re-asserted here because
+ * the element rules above are unlayered and would otherwise flatten them. */
+.prose-content h2,
+.prose h2 {
+  font-size: 1.4em;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.prose-content h3,
+.prose h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Three radius steps instead of five. */
+.rounded {
+  border-radius: 6px;
+}
+.rounded-xl,
+.rounded-2xl {
+  border-radius: 14px;
+}
+
+/* Softer, wider shadows: cards should read as paper on paper, not as boxes. */
+.shadow-sm {
+  box-shadow: 0 1px 2px rgb(33 29 23 / 0.03), 0 12px 32px -24px rgb(33 29 23 / 0.2);
+}
+.hover\:shadow-md:hover {
+  box-shadow: 0 1px 2px rgb(33 29 23 / 0.04), 0 18px 44px -26px rgb(33 29 23 / 0.24);
+}
+
+/* Link craft: hairline underline, offset from the glyphs, muted until hover. */
+.prose-content a,
+.prose a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.prose-content a:hover,
+.prose a:hover {
+  text-decoration-color: currentColor;
+}
+.prose-content hr,
+.prose hr {
+  margin-block: 3rem;
+  border-color: var(--color-gray-100);
+}
+.prose-content time,
+time {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Code block chrome: a hairline rule instead of a translucent band. */
+.code-block-bar {
+  background-color: transparent;
+  border-bottom: 1px solid rgb(255 255 255 / 0.08);
+}
+.code-block pre {
+  line-height: 1.7;
+}
+
+/* One interaction tempo for links and buttons (the reading-chrome transitions
+ * keep their own deliberately slower timing). Cards animate their shadow too, so
+ * they join the same tempo instead of Tailwind's default 150ms ease. */
+a,
+button,
+summary,
+article,
+select {
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* ── Elegance pass, wave 2 (from the independent visual audit, 09) ───────── */
+
+/* The reading page's three blocks share one column: auto margins disable grid
+ * stretching, so the header was fit-content and its title sat 125.3px right of
+ * the body's left edge (and `/pages/` prose only 460px wide). Reset them in the
+ * grid branch and keep the max-width, which is what caps the column. */
+@media (min-width: 1280px) {
+  .reading-shell > .reading-header,
+  .reading-shell > .reading-prose,
+  .reading-shell > .reading-foot {
+    margin-inline: 0;
+  }
+}
+
+/* A clipped excerpt used to stop mid-sentence with no signal. Fade the last
+ * lines instead of cutting them: no layout risk, and it reads as "there is more". */
+.summary-excerpt {
+  -webkit-mask-image: linear-gradient(#000 74%, transparent);
+  mask-image: linear-gradient(#000 74%, transparent);
+}
+/* An excerpt is a teaser, not a document: headings inside it must not shout.
+ * Specificity beats the article rhythm rules below, which are more specific than a
+ * bare `.summary-excerpt :where(…)`. */
+.summary-excerpt.prose :where(h1, h2, h3, h4, h5, h6) {
+  margin: 0.5em 0 0.2em;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Two lines per card title (63.8px at the 22px/1.45 scale), so every excerpt in a
+ * row starts on the same baseline — the audit measured up to 63.8px of stagger.
+ * min-height reserves the second line for a short title; the clamp cuts a long one
+ * with an ellipsis instead of a hard edge (audit 2 #7: a 4-line title was silently
+ * chopped inside a 2-line box). */
+.card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  min-height: calc(2 * 1.45em);
+  max-height: calc(2 * 1.45em);
+  overflow: hidden;
+}
+
+/* One ground for the whole code card: the bar was #272822 (cool green) against a
+ * #221e18 body, so the seam was visible. */
+.code-block {
+  overflow: hidden;
+  background-color: #221e18;
+}
+
+/* Callouts: 14 Material hues condensed to four warm ones (celadon / moss / amber /
+ * cinnabar), so the accent family stays within the brand instead of importing a
+ * second colour system. Light-mode header colours measure 4.5–7.7:1 on paper. */
+.callout-note,
+.callout-info,
+.callout-todo,
+.callout-question,
+.callout-abstract {
+  border-left-color: #5f8f86;
+}
+.callout-note > .callout-header,
+.callout-info > .callout-header,
+.callout-todo > .callout-header,
+.callout-question > .callout-header,
+.callout-abstract > .callout-header {
+  color: #45736b;
+}
+.callout-tip,
+.callout-success {
+  border-left-color: #7d9a6a;
+}
+.callout-tip > .callout-header,
+.callout-success > .callout-header {
+  color: #56713f;
+}
+.callout-warning,
+.callout-important {
+  border-left-color: #c07a2c;
+}
+.callout-warning > .callout-header,
+.callout-important > .callout-header {
+  color: #96581a;
+}
+.callout-danger,
+.callout-failure,
+.callout-bug {
+  border-left-color: #ad3729;
+}
+.callout-danger > .callout-header,
+.callout-failure > .callout-header,
+.callout-bug > .callout-header {
+  color: #94301f;
+}
+.callout-example,
+.callout-quote {
+  border-left-color: #a49a89;
+}
+.callout-example > .callout-header,
+.callout-quote > .callout-header {
+  color: #6b6252;
+}
+/* Dark mode needs the lighter end of each hue to clear 4.5:1 on #1c1813. */
+.dark .callout-note > .callout-header,
+.dark .callout-info > .callout-header,
+.dark .callout-todo > .callout-header,
+.dark .callout-question > .callout-header,
+.dark .callout-abstract > .callout-header {
+  color: #8fbdb3;
+}
+.dark .callout-tip > .callout-header,
+.dark .callout-success > .callout-header {
+  color: #a9c48f;
+}
+.dark .callout-warning > .callout-header,
+.dark .callout-important > .callout-header {
+  color: #e0a95f;
+}
+.dark .callout-danger > .callout-header,
+.dark .callout-failure > .callout-header,
+.dark .callout-bug > .callout-header {
+  color: #e58a76;
+}
+.dark .callout-example > .callout-header,
+.dark .callout-quote > .callout-header {
+  color: #bdb3a1;
+}
+
+/* The audit found the rail 12rem wide with 7 links, 2 of which wrapped. */
+.reading-shell {
+  --rail-w: 15rem;
+}
+
+/* Reduced motion was not honoured at all (header still slid 360ms, the page still
+ * smooth-scrolled). This is the one place `!important` is the right tool: it has
+ * to win over every component rule, present and future. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Elegance pass, wave 3 (details layer) ─────────────────────────────── */
+
+/* Footer was set at the body's 16px and read as loud as the content it closes;
+ * 14px is the site's meta step (13px sat outside the scale). */
+footer {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+footer > div {
+  padding-block: 2.5rem;
+}
+footer p {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The language select measured 31px tall with a 6px radius next to 42px buttons
+   with 8px: header controls now share one geometry. */
+select {
+  min-height: 2.375rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 8px;
+}
+
+/* h4 sat at 21px against h3's 23px (ratio 1.09 — too dense to read as a level).
+   Body size at a heavier weight and slight tracking separates it instead. */
+.prose-content h4,
+.prose h4 {
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+}
+
+/* One radius for the remaining 12px components. `.callout` and `.mermaid-container`
+   get theirs from an `@apply rounded-xl` inside @layer components, which inlines the
+   12px value, so a class-level override cannot reach them. */
+.code-block,
+.novel-page,
+.callout,
+.mermaid-container {
+  border-radius: 14px;
+}
+
+/* Brand-coloured text selection and a warm scrollbar: the small signals that the
+   palette was designed rather than defaulted. */
+::selection {
+  background-color: rgb(173 55 41 / 0.18);
+  color: inherit;
+}
+.dark ::selection {
+  background-color: rgb(224 131 108 / 0.3);
+}
+html {
+  scrollbar-color: var(--color-gray-300) transparent;
+}
+.dark {
+  scrollbar-color: #453c2f transparent;
+}
+
+/* ── Elegance pass, wave 4 (audit 2: two P1s and the detail tail) ──────── */
+
+/* P1: below 640px the card grids declare no column count, so the implicit `auto`
+ * track was sized by the widest content and the page scrolled sideways
+ * (/log/ measured docSW 592 on a 390px screen). Every grid child must be able to
+ * shrink — `min-width: 0` is what lets the title and the `truncate` meta do so. */
+main section.grid > *,
+#hub-projects .grid > *,
+.prose-content [class*="grid"] > * {
+  min-width: 0;
+}
+
+/* P1: prose dark values are declared on the prose element (see the .dark .prose
+ * rule above); this is the light-mode counterpart sanity note — no change here. */
+
+/* 1024–1279px: the TOC is an inline <details> above the prose and stretched to the
+ * whole container (1215px measured at 1279). Keep it on the reading measure. */
+.toc {
+  max-width: var(--read-col, 48rem);
+  margin-inline: auto;
+}
+
+/* CJK has no italic: the browser was synthesising an oblique for 中文引用块.
+ * Latin quotes keep their italic. */
+:lang(zh) .prose-content blockquote,
+:lang(zh) .prose blockquote {
+  font-style: normal;
+}
+
+/* Footnotes were set at body size with no separator, so they ran into the article. */
+.prose-content .footnotes,
+.prose .footnotes {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-gray-100);
+  font-size: 0.9em;
+}
+.dark .prose-content .footnotes,
+.dark .prose .footnotes {
+  border-top-color: #302a21;
+}
+
+/* Audit 2 #6: on a phone many inline targets measured under 24px (WCAG 2.5.8).
+ * Inline padding enlarges the hit area without changing the line box. */
+@media (max-width: 767px) {
+  .prose-content a,
+  .prose a,
+  .summary-excerpt a {
+    padding-block: 3px;
+  }
+  .toc a,
+  #TableOfContents a {
+    display: inline-block;
+    padding-block: 3px;
+  }
+  .code-copy {
+    min-height: 24px;
+  }
+  .summary-excerpt code {
+    font-size: 0.95em;
+  }
+}
+
+/* 1920px left 384px on each side of the 1152px list container and 576px beside the
+ * 1600px article shell. One measure for both: wider for lists, tighter for reading. */
+@media (min-width: 1536px) {
+  main > div {
+    max-width: 76rem;
+  }
+}
+
+/* The chapter reader is built by JS after parsing: `.novel-pages` starts empty and
+ * is then filled with ~8 canvases (5281px measured at 390px wide). Everything below
+ * it — the chapter pager and the footer — was sitting inside the viewport when that
+ * happened, so they jumped down and the mobile CLS measured 0.2404 (LayoutShift
+ * sources: FOOTER + NAV). Reserving roughly one screen while the container is still
+ * empty pushes those two below the fold, so nothing visible moves.
+ * Scoped to `:empty`, so the final layout is untouched, and 75vh rather than 100vh
+ * to keep the no-JS fallback from being a full blank screen. */
+.novel-pages:empty {
+  min-height: 75vh;
+}
+
+/* ── Elegance pass, wave 5 (novel pages + line breaking) ───────────────── */
+
+/* The chapter pager links were two different sizes (34px top / 38px bottom) and
+ * neither matched the site's 42px controls. One geometry for all three. */
+.pager-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+}
+
+/* Headline breaking: balance keeps a two-line title from leaving one word behind;
+ * `pretty` stops paragraphs from ending on a lone word. Both are progressive —
+ * browsers without support simply wrap as before. */
+h1,
+h2,
+h3,
+.card-title {
+  text-wrap: balance;
+}
+.prose-content p,
+.prose p,
+.hero-subtitle {
+  text-wrap: pretty;
+}
+
+/* The chapter page's blocks measured 1088 / 672 / 1088 wide: the banner, the
+ * chapter index and the reader each started at the container edge with different
+ * right edges, so the page read as three unrelated widths. One reading column,
+ * the same measure the article pages use. */
+.chapter-body {
+  max-width: var(--read-col, 48rem);
+  margin-inline: auto;
+}
+
+/* The chapter index is a <details> whose closed state looked like an empty card
+ * (a label alone in a 1088px box). Tighter box, and a chevron that says it opens. */
+.chapter-index {
+  padding: 0.875rem 1.25rem;
+}
+.chapter-index > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.chapter-index > summary::after {
+  content: "▾";
+  color: var(--color-gray-500);
+  transition: transform 180ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.chapter-index[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+/* ── Elegance pass, wave 6 (古文 vertical reading) ─────────────────────── */
+
+/* The 古文 page header ran the full container (1376px at 1440, title flush left at
+ * x=32) while every other reading page centres a 768px measure. The vertical block
+ * still needs the full width — it is the one element that should be wide. */
+.ancient-head,
+.ancient-foot {
+  max-width: var(--read-col, 48rem);
+  margin-inline: auto;
+}
+
+/* The vertical text was a bare overflow area with a 1px scrollbar and no edge —
+ * nothing said "this is a scroll you move sideways". A quiet paper panel makes the
+ * object legible, and the padding gives the first column room to breathe
+ * (it started flush against the container's right edge). */
+.heti-scroll-wrapper {
+  padding: 1.5rem 1.75rem 0.75rem;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 14px;
+  background: var(--color-white);
+}
+/* `--color-white` is a light-mode value, so the panel above stayed paper-white in
+ * dark mode while the article text is light — "卷之始" measured 1.16:1 and was
+ * invisible (found by the site-wide sweep). */
+.dark .heti-scroll-wrapper {
+  border-color: #302a21;
+  background-color: #1c1813;
+}
+
+/* Project covers are 1536×1024 (3:2). The fixed h-44 gave them a 1.96:1 box at
+ * three columns, so `object-cover` cropped ~25% off the top and bottom of every
+ * illustration. Declaring the real ratio reserves the space (no CLS) and shows the
+ * whole picture. */
+.project-cover {
+  aspect-ratio: 3 / 2;
+}
+
+/* ── Elegance pass, wave 8 (article rhythm on the grid) ────────────────── */
+
+/* Measured block margins in an article: paragraphs, lists and quotes already sat at
+ * 24px, but the typography plugin derives heading and table margins from em, so they
+ * landed wherever the font-size put them — h2 43.6px, h3 36.8px, h4 36/12px, table
+ * 36px. Fixed steps put the whole article on a 4px grid; spacing no longer shifts
+ * when the prose scale changes at a breakpoint. */
+.prose-content h2,
+.prose h2 {
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+.prose-content h3,
+.prose h3 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+.prose-content h4,
+.prose h4 {
+  margin-top: 28px;
+  margin-bottom: 8px;
+}
+.prose-content table,
+.prose table {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+/* The reading measure is tuned for CJK (768px ≈ 38 glyphs). Latin at the same width
+ * runs ~85 characters per line, past the 60–75 convention, so the English pages get
+ * a ch-based measure. Scoped with :lang(en) so the Chinese measure is untouched.
+ * `ch` resolves to 0.587em in this stack, so 60ch ≈ 634px ≈ 70 characters. */
+:lang(en) .hero-subtitle,
+:lang(en) .prose-content > p,
+:lang(en) .prose > p {
+  max-width: 60ch;
+}
+
+/* ── Elegance pass, wave 9 (mobile disclosure + content images) ────────── */
+
+/* The mobile menu's links measured 21px tall: a cramped row and below the 24px
+ * minimum target size. Padding lifts them to ~33px without widening the panel. */
+@media (max-width: 767px) {
+  header details a {
+    display: block;
+    padding-block: 6px;
+  }
+}
+
+/* ── Elegance pass, wave 10 (dark hairlines) ───────────────────────────── */
+
+/* Three rules hardcode a *light* hairline token, so they outranked the palette
+ * mapping and stayed bright in dark mode — measured on a #14110d ground:
+ *   .prose-header bottom  rgb(226,216,196)  lum 0.693   (/tech/, /shelf/sky-tax/)
+ *   prose <hr>            rgb(239,232,217)  lum 0.811   (/tech/, incl. excerpts)
+ *   divide-y row borders  rgb(239,232,217)  lum 0.811   (home article list)
+ * Dark mode gets the same warm-dark hairline the cards already use. The code block's
+ * rgba(255,255,255,.08) bar is left alone — it is a deliberate overlay on the dark
+ * code surface. */
+.dark .prose-header {
+  border-bottom-color: #302a21;
+}
+.dark .prose-content hr,
+.dark .prose hr {
+  border-color: #302a21;
+}
+.dark .divide-y > :not(:last-child) {
+  border-color: #302a21;
+}
+
+/* ── Elegance pass, wave 11 (print / PDF) ─────────────────────────────── */
+
+/* The site shipped no print rules at all. In dark mode a printed sheet therefore
+ * came out as light text on paper — printers drop background colours, so
+ * rgb(242,236,225) on white is illegible — and every sheet carried the sticky
+ * header, the table of contents, the copy buttons and the language switcher.
+ * Print is a document: ink on paper, one column, no chrome. */
+@page {
+  margin: 14mm;
+}
+
+@media print {
+  /* Screen theme must not reach the sheet. */
+  .dark {
+    --color-accent: #94301f;
+    --novel-paper: #ffffff;
+    --novel-ink: #14110d;
+    --novel-watermark: #cfc2a9;
+  }
+  .dark .prose,
+  .dark .prose-content {
+    --tw-prose-invert-body: #37352f;
+    --tw-prose-invert-headings: #14110d;
+    --tw-prose-invert-lead: #37352f;
+    --tw-prose-invert-bold: #14110d;
+    --tw-prose-invert-quotes: #14110d;
+    --tw-prose-invert-code: #14110d;
+    --tw-prose-invert-pre-bg: #faf8f3;
+    --tw-prose-invert-pre-code: #14110d;
+    --tw-prose-invert-links: #94301f;
+    --tw-prose-invert-counters: #6b6355;
+    --tw-prose-invert-bullets: #a99a80;
+    --tw-prose-invert-hr: #d9d2c2;
+    --tw-prose-invert-quote-borders: #d9d2c2;
+    --tw-prose-invert-captions: #6b6355;
+    --tw-prose-invert-th-borders: #d9d2c2;
+    --tw-prose-invert-td-borders: #e2d8c4;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #14110d !important;
+  }
+  .dark body,
+  .dark .bg-white,
+  .dark .bg-gray-50,
+  .dark .callout,
+  .dark .novel-page {
+    background: #fff !important;
+  }
+  .dark .text-gray-900,
+  .dark .text-gray-800,
+  .dark .text-gray-700,
+  .dark .text-gray-600,
+  .dark .text-gray-500 {
+    color: #14110d !important;
+  }
+  .dark .border-gray-100,
+  .dark .border-gray-200,
+  .dark .border-gray-300,
+  .dark .divide-y > :not(:last-child) {
+    border-color: #e2d8c4 !important;
+  }
+  /* Syntax highlighting ships light-on-dark token colours; on paper the card is
+   * white, so the tokens flatten to ink. */
+  .code-block,
+  .code-block-bar {
+    border: 1px solid #e2d8c4 !important;
+    background: #faf8f3 !important;
+  }
+  .code-block pre,
+  .code-block pre span,
+  .code-block code {
+    color: #14110d !important;
+    background: transparent !important;
+  }
+  /* Chrome off the sheet; the copyright line stays so the page identifies itself. */
+  header,
+  footer nav,
+  .toc,
+  .toc-rail,
+  .code-copy,
+  .lang-select,
+  #theme-toggle,
+  .pager-link,
+  .ancient-foot {
+    display: none !important;
+  }
+  /* One column, full width: the rail grid and the 768px measure are screen devices. */
+  .reading-shell {
+    display: block !important;
+  }
+  .reading-header,
+  .reading-prose,
+  .reading-foot,
+  .chapter-body,
+  .prose-content,
+  .prose {
+    max-width: none !important;
+    margin-inline: 0 !important;
+  }
+  /* An external link is useless on paper without its target. */
+  .prose-content a[href^="http"]::after,
+  .prose a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #6b6355;
+    word-break: break-all;
+  }
+  a {
+    text-decoration: underline;
+  }
+  img {
+    max-width: 100% !important;
+  }
+  /* Keep blocks whole across page breaks. */
+  pre,
+  figure,
+  blockquote,
+  table,
+  .callout,
+  img {
+    break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+  p,
+  li {
+    orphans: 3;
+    widows: 3;
+  }
 }

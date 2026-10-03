@@ -28,6 +28,9 @@
 
   {{ if .Params.chapter }}
     {{/* ---------------------------- chapter ---------------------------- */}}
+    {{/* One reading column: the blocks used to be 1088 / 672 / 1088 wide, so the
+         banner, the chapter index and the reader edge did not line up. */}}
+    <div class="chapter-body">
     {{ $prev := false }}
     {{ $next := false }}
     {{ $seen := false }}
@@ -41,16 +44,16 @@
       {{ end }}
     {{ end }}
 
-    <nav class="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm">
+    <nav class="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm" aria-label="{{ T "navChapterTop" }}">
       <span>
-        <a href="{{ $shelf.RelPermalink }}" class="text-gray-600 hover:text-rose-600">← {{ T "backToShelf" }}</a>
+        <a href="{{ $shelf.RelPermalink }}" class="text-gray-600 hover:text-accent">← {{ T "backToShelf" }}</a>
         {{ with $shelf }}<span class="mx-2 text-gray-500">/</span><span class="text-gray-500">{{ .Title }}</span>{{ end }}
       </span>
       {{/* The next-chapter link used to exist only at the very end of an ~8000px
            chapter (y=8115 of 8291), so serial readers had no way forward from the
            top of the page. */}}
       {{ with $next }}
-        <a href="{{ .RelPermalink }}" class="rounded-lg border border-gray-300 px-3 py-1.5 hover:border-rose-300 hover:text-rose-600">{{ T "nextChapter" }} →</a>
+        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-gray-300 px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} →</a>
       {{ end }}
     </nav>
 
@@ -75,17 +78,18 @@
       <img
         src="{{ . }}"
         alt="{{ $page.Params.imageAlt | default $page.Title }}"
-        class="mb-8 h-auto w-full max-w-2xl rounded-2xl"
+        class="novel-banner mb-8 h-auto w-full max-w-2xl rounded-2xl"
+        decoding="async"
       >
     {{ end }}
 
     {{ if $chapters }}
-      <details class="mb-8 rounded-2xl border border-gray-200 bg-white p-5">
+      <details class="chapter-index mb-8 rounded-2xl border border-gray-200 bg-white">
         <summary class="cursor-pointer font-bold text-gray-900">{{ T "chapters" }}</summary>
         <ol class="mt-4 space-y-1 text-sm">
           {{ range $chapters }}
             <li>
-              <a href="{{ .RelPermalink }}" class="hover:text-rose-600{{ if eq .RelPermalink $page.RelPermalink }} font-semibold text-rose-600{{ end }}">{{ .Title }}</a>
+              <a href="{{ .RelPermalink }}" class="hover:text-accent{{ if eq .RelPermalink $page.RelPermalink }} font-semibold text-accent{{ end }}">{{ .Title }}</a>
             </li>
           {{ end }}
         </ol>
@@ -100,14 +104,15 @@
       <article class="prose-content">{{ .Content }}</article>
     {{ end }}
 
-    <nav class="mt-8 flex flex-wrap justify-between gap-4 text-sm">
+    <nav class="mt-8 flex flex-wrap justify-between gap-4 text-sm" aria-label="{{ T "navChapterPager" }}">
       {{ with $prev }}
-        <a href="{{ .RelPermalink }}" class="rounded-lg border border-gray-300 px-4 py-2 hover:border-rose-300 hover:text-rose-600">← {{ T "prevChapter" }} · {{ .Title }}</a>
+        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-gray-300 px-4 py-2 hover:border-rose-300 hover:text-accent">← {{ T "prevChapter" }} · {{ .Title }}</a>
       {{ else }}<span></span>{{ end }}
       {{ with $next }}
-        <a href="{{ .RelPermalink }}" class="rounded-lg border border-gray-300 px-4 py-2 hover:border-rose-300 hover:text-rose-600">{{ T "nextChapter" }} · {{ .Title }} →</a>
+        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-gray-300 px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} · {{ .Title }} →</a>
       {{ end }}
     </nav>
+    </div>
   {{ else }}
     {{/* ---------------------------- landing ---------------------------- */}}
     <header class="prose-header">
@@ -117,7 +122,7 @@
 
     <div class="mt-6 flex flex-col gap-8 sm:flex-row">
       {{ with .Params.cover }}
-        <img src="{{ . }}" alt="{{ $page.Params.imageAlt | default $page.Title }}" class="w-full rounded-2xl object-cover sm:w-56">
+        <img src="{{ . }}" alt="{{ $page.Params.imageAlt | default $page.Title }}" decoding="async" class="novel-cover w-full rounded-2xl object-cover sm:w-56">
       {{ end }}
       <div class="flex-1">
         {{ with .Content }}<article class="prose-content">{{ . }}</article>{{ end }}
@@ -133,14 +138,14 @@
     </div>
 
     {{ if $chapters }}
-      <section class="mt-10">
+      <section class="mt-12">
         <h2 class="text-xl font-bold text-gray-900">{{ T "chapters" }}</h2>
         {{/* Multi-column: 26 chapters in one column meant a very long scroll on a
              page whose only job is to get you into chapter 1. */}}
         <ol class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
           {{ range $chapters }}
             <li class="border-b border-gray-100 pb-2">
-              <a href="{{ .RelPermalink }}" class="hover:text-rose-600">{{ .Title }}</a>
+              <a href="{{ .RelPermalink }}" class="hover:text-accent">{{ .Title }}</a>
             </li>
           {{ end }}
         </ol>

@@ -98,3 +98,19 @@ other = 'Start reading'
 
 [novelNeedsJS]
 other = 'This chapter is drawn as images in your browser; please enable JavaScript.'
+
+# Landmark labels — see i18n/zh.toml.
+[navMain]
+other = 'Main navigation'
+
+[navChapterTop]
+other = 'Chapter navigation'
+
+[navChapterPager]
+other = 'Chapter pager'
+
+[navSiteLinks]
+other = 'Site links'
+
+[copied]
+other = 'Copied to clipboard'

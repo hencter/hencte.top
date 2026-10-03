@@ -1,0 +1,16 @@
+{{/*
+  Preload the chapter face.
+
+  main.css binds @font-face to /fonts/LXGWWenKai-Novel.woff2 — a subset in
+  static/, so it carries no fingerprint and Hugo cannot rewrite the @font-face
+  src to a hashed URL. Without a preload the fetch only starts once the
+  stylesheet is parsed, and novel.js waits on document.fonts.load() before it can
+  wrap the text with the real metrics (measured on a throttled connection:
+  fallback layout at t=229ms, font arrives t=3247ms).
+
+  `crossorigin` is required for font preloads even same-origin, and the href must
+  match the @font-face src exactly or the browser fetches the file twice.
+
+  @context {page} a zh novel chapter page
+*/}}
+<link rel="preload" href="/fonts/LXGWWenKai-Novel.woff2" as="font" type="font/woff2" crossorigin>

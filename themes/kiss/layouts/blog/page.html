@@ -24,17 +24,20 @@
   {{ range $key := slice "tech" "log" "ancient" }}
     {{ $inSection := where $posts "Section" $key }}
     {{ with $inSection.ByDate.Reverse }}
-      {{/* Constrained to a readable measure: at the container width these one-line
-           descriptions ran past 90 characters per line. */}}
-      <section class="mt-10 max-w-3xl">
+      {{/* One narrow column left ~430px of empty gutter on either side of a
+           1600px screen. Two balanced columns use the width while keeping each
+           line inside the readable measure; below `sm` it stays one column. */}}
+      <section class="mt-12 max-w-6xl">
         <h2 class="text-xl font-bold text-gray-900">{{ T (printf "section%s" (title $key)) }}</h2>
-        <ul class="mt-4 divide-y divide-gray-100">
+        {{/* A real grid, not CSS multi-column: multicol fills column by column, so
+             the two sides never lined up (row heights measured 93/113/177px). */}}
+        <ul class="mt-4 sm:grid sm:grid-cols-2 sm:gap-x-12">
           {{ range . }}
-            <li class="py-3">
+            <li class="border-b border-gray-100 py-3">
               {{/* flex-wrap + nowrap keeps the date from breaking mid-value ("2026-" /
                    "09-02") when a long title fills the measure. */}}
               <div class="flex flex-wrap items-baseline gap-x-3">
-                <a href="{{ .RelPermalink }}" class="font-medium text-gray-900 hover:text-rose-600">{{ .LinkTitle }}</a>
+                <a href="{{ .RelPermalink }}" class="font-medium text-gray-900 hover:text-accent">{{ .LinkTitle }}</a>
                 {{ if not .Date.IsZero }}
                   <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="whitespace-nowrap text-sm text-gray-500">{{ .Date.Format "2006-01-02" }}</time>
                 {{ end }}

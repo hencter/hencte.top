@@ -17,11 +17,20 @@
   {{- $raw = replaceRE `(?s)^\+\+\+.*?\+\+\+\s*` "" $raw -}}
   {{- $raw = replaceRE `(?s)^---.*?---\s*` "" $raw -}}
   <div class="novel-reader" data-novel-reader>
-    {{/* a template element, not a script element: script is raw text, so the entities Hugo
-         emits when escaping the payload would stay literal (&#34; drawn as text). A
-         template parses as HTML and decodes them. */}}
-    <template data-novel-source>{{ $raw }}</template>
-    <div class="novel-pages" data-novel-pages></div>
+    {{/* A visually-hidden div, not a <template>: template content is inert, so a
+         screen reader hit `role="img"` on the canvases and nothing else — the 136
+         chapter pages were unreadable and unfindable (WCAG 2.2 1.1.1). The prose
+         was already in the delivered HTML either way (a template is still
+         serialised), so this moves no text that was not already served; it only
+         makes it reachable. novel.js reads it through the same
+         `source.content ? … : source.textContent` branch as before.
+
+         It stays a parsed element rather than a <script>: script is raw text, so
+         the entities Hugo emits when escaping the payload would stay literal
+         (&#34; drawn as text). */}}
+    <div class="sr-only" data-novel-source>{{ $raw }}</div>
+    {{/* Purely decorative duplicate of the text above. */}}
+    <div class="novel-pages" data-novel-pages aria-hidden="true"></div>
     <noscript><p class="text-gray-600">{{ T "novelNeedsJS" }}</p></noscript>
   </div>
   {{ with resources.Get "js/novel.js" }}

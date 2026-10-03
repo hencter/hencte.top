@@ -1,0 +1,45 @@
+{{/*
+  Markdown tables → <table> with real header semantics.
+
+  Goldmark emits bare <th> cells, so none of the site's tables associated a data
+  cell with its column header and a screen reader fell back to guessing
+  (WCAG 2.2 1.3.1). This hook adds `scope="col"` and otherwise reproduces
+  Goldmark's own output — same tags, same newlines, same alignment attribute —
+  so the only change in the rendered HTML is the added `scope`.
+
+  Alignment is an inline style, not the obsolete `align` attribute: that is what
+  Goldmark emits (`style="text-align: center"`), and a first pass that wrote
+  `align="center"` was caught by diffing the rendered tables against a build made
+  before the hook existed. Keep it in sync if that ever changes.
+
+  Context shape verified against the installed Hugo (0.167.0ext) rather than
+  assumed: `.THead` and `.TBody` are both []TableRow, each TableRow is a
+  []TableCell, and TableCell carries `.Text` (already-safe HTML) and
+  `.Alignment` ("" | "left" | "center" | "right").
+
+  @context {tables.tableContext} .THead, .TBody
+*/}}
+<table>
+{{- with .THead }}
+<thead>
+{{- range . }}
+<tr>
+{{- range . }}
+<th scope="col"{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</th>
+{{- end }}
+</tr>
+{{- end }}
+</thead>
+{{- end }}
+{{- with .TBody }}
+<tbody>
+{{- range . }}
+<tr>
+{{- range . }}
+<td{{ with .Alignment }} style="text-align: {{ . }}"{{ end }}>{{ .Text }}</td>
+{{- end }}
+</tr>
+{{- end }}
+</tbody>
+{{- end }}
+</table>

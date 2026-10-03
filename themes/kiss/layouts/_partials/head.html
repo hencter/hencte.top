@@ -1,10 +1,15 @@
 {{/* Applied before the stylesheet so the saved theme never flashes. */}}
 {{ partial "head/theme-boot.html" . }}
 {{ partial "head/lang-auto.html" . }}
+{{/* Chapter pages paint their text into <canvas> with a 568KB subset, and the
+     text cannot be wrapped correctly until that face arrives — start it before
+     the stylesheet is parsed. Same condition as the reader itself. */}}
+{{ if and site.Params.novelCanvas (eq site.Language.Lang "zh") .IsPage (eq .Section "shelf") .Params.chapter }}
+  {{ partial "head/novel-font.html" . }}
+{{ end }}
 {{ partial "seo.html" . }}
 {{/* 古文 article pages get Heti's typography (spacing + vertical layout). */}}
 {{ if and .IsPage (eq .Section "ancient") }}{{ partial "head/heti.html" . }}{{ end }}
 {{ with (templates.Defer (dict "key" "global")) }}
-  {{ partialCached "head/font.html" . }}
   {{ partialCached "head/css.html" . }}
 {{ end }}

@@ -8,7 +8,10 @@
 {{ with .Params.hero }}
   <section class="mb-12">
     {{ with .badge }}
-      <p class="inline-block text-xs font-semibold tracking-wider uppercase text-rose-700 bg-rose-50 px-3 py-1 rounded-full">
+      {{/* Restraint over emphasis: a hairline label rather than a filled block.
+           Still the first thing on the page, but it stops competing with the
+           headline. Accent text on paper measures 7.7:1. */}}
+      <p class="inline-block rounded-full border border-rose-200/70 px-3 py-1 text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-accent">
         {{ . }}
       </p>
     {{ end }}
@@ -16,7 +19,7 @@
       <h1 class="mt-4 text-3xl sm:text-4xl font-bold text-gray-900">{{ . }}</h1>
     {{ end }}
     {{ with .subtitle }}
-      <p class="mt-4 text-lg text-gray-600 whitespace-pre-line max-w-3xl">{{ . }}</p>
+      <p class="hero-subtitle mt-4 max-w-3xl text-lg text-gray-600">{{ . }}</p>
     {{ end }}
     {{ with .actions }}
       <div class="mt-6 flex flex-wrap gap-3">
@@ -24,7 +27,7 @@
           <a href="{{ .href }}" class="inline-flex items-center rounded-lg bg-rose-600 px-5 py-2.5 text-sm font-medium text-white hover:bg-rose-500 transition-colors">{{ .label }}</a>
         {{ end }}
         {{ with .secondary }}
-          <a href="{{ .href }}" class="inline-flex items-center rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:border-rose-300 hover:text-rose-600 transition-colors">{{ .label }}</a>
+          <a href="{{ .href }}" class="inline-flex items-center rounded-lg border border-gray-300 px-5 py-2.5 text-sm font-medium text-gray-700 hover:border-rose-300 hover:text-accent transition-colors">{{ .label }}</a>
         {{ end }}
       </div>
     {{ end }}

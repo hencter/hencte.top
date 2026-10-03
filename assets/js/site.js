@@ -22,6 +22,8 @@
         localStorage.setItem("theme", dark ? "dark" : "light");
       } catch (e) {}
       sync();
+      // Lets the novel reader repaint its <canvas> pages with the other palette.
+      document.dispatchEvent(new CustomEvent("themechange", { detail: { dark: dark } }));
     });
   })();
 
@@ -125,14 +127,20 @@
       document.querySelectorAll(".code-block").forEach(function (block) {
         var button = block.querySelector(".code-copy");
         var code = block.querySelector("code");
+        var status = block.querySelector(".code-copy-status");
         if (!button || !code || button.dataset.bound === "1") return;
         button.dataset.bound = "1";
         button.addEventListener("click", function () {
           var label = button.textContent;
           var done = function () {
+            // The button's accessible name comes from its static aria-label, so
+            // the "✓" swap is a visual cue only; the live region is what reports
+            // success to a screen reader.
             button.textContent = "✓";
+            if (status) status.textContent = block.dataset.copied || "";
             setTimeout(function () {
               button.textContent = label;
+              if (status) status.textContent = "";
             }, 1500);
           };
           if (navigator.clipboard && navigator.clipboard.writeText) {

@@ -1,0 +1,12 @@
+# Theme metadata. Hugo reads this for theme listings and `hugo new theme`
+# scaffolding; it is not needed to build a site-local theme, so it records only
+# what the repository already states: the name, the scope, the version floor
+# (mirrored from [module.hugoVersion] in hugo.toml) and the site author from
+# site params.
+
+name = 'kiss'
+description = 'Theme for hencte.top: Tailwind CSS v4 entry compiled ahead of Hugo, reading shell with a sticky TOC rail, Obsidian callouts, class-based dark mode, Heti vertical typography for 古文, and the canvas-based novel chapter reader.'
+min_version = '0.146.0'
+
+[author]
+  name = 'Hencter Lew'

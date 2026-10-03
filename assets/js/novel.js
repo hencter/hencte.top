@@ -1,12 +1,18 @@
 /**
  * Novel chapter reader: draws the chapter text into <canvas>.
  * Extracted from layouts/_partials/novel-canvas.html; bundled by js.Build.
+ *
+ * The palette and the page grid come from CSS (--novel-paper / --novel-ink /
+ * --novel-watermark), so dark mode is one variable flip rather than a second
+ * render path — a cream canvas in a #030712 shell was a full-screen glare.
  */
 (function () {
       var root = document.querySelector("[data-novel-reader]");
       if (!root || !window.HTMLCanvasElement) return;
       var source = root.querySelector("[data-novel-source]");
       var host = root.querySelector("[data-novel-pages]");
+      // The source is a <div> now (was a <template>); both branches are kept so
+      // either element works.
       var text = (source.content ? source.content.textContent : source.textContent) || "";
       // Safety net for any entity that survived parsing.
       if (text.indexOf("&") >= 0) {
@@ -35,8 +41,6 @@
         FONT = 24,
         LH = 36,
         BOTTOM = 116,
-        COLOR = "#1f2937",
-        PAPER = "#faf7f0",
         WM = "© 亦幸小阁 · hencte.top",
         COLS = W - PAD * 2,
         ROWS = Math.floor((H - TOP - BOTTOM) / LH);
@@ -47,6 +51,24 @@
       function face(px) {
         return px + 'px "LXGWWenKai-Novel", "LXGW WenKai", sans-serif';
       }
+
+      // Palette is read from the document element once per theme change instead of
+      // being hardcoded, so `.dark { --novel-* }` in main.css drives it.
+      var palette = null;
+      function refreshPalette() {
+        var cs = getComputedStyle(document.documentElement);
+        function read(name, fallback) {
+          var v = cs.getPropertyValue(name);
+          return (v && v.trim()) || fallback;
+        }
+        palette = {
+          paper: read("--novel-paper", "#faf7f0"),
+          ink: read("--novel-ink", "#1f2937"),
+          watermark: read("--novel-watermark", "#b3aa99"),
+        };
+      }
+      refreshPalette();
+
       function layout() {
         probe.font = face(FONT);
         var lines = [];
@@ -81,66 +103,89 @@
 
       function paint(canvas, lines) {
         var ctx = canvas.getContext("2d");
-        ctx.fillStyle = PAPER;
+        ctx.fillStyle = palette.paper;
         ctx.fillRect(0, 0, W, H);
-        ctx.fillStyle = COLOR;
+        ctx.fillStyle = palette.ink;
         ctx.font = face(FONT);
         ctx.textBaseline = "alphabetic";
         for (var r = 0; r < lines.length; r++) {
           if (lines[r]) ctx.fillText(lines[r], PAD, TOP + r * LH);
         }
-        ctx.fillStyle = "#b3aa99";
+        ctx.fillStyle = palette.watermark;
         ctx.font = face(16);
         ctx.textAlign = "center";
         ctx.fillText(WM, W / 2, H - 42);
         ctx.textAlign = "left";
       }
 
-      var lines = layout();
-      var pages = [];
-      for (var i = 0; i < lines.length; i += ROWS) pages.push(lines.slice(i, i + ROWS));
-      if (!pages.length) return;
-
       var observer = "IntersectionObserver" in window
         ? new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
               if (!entry.isIntersecting) return;
-              var canvas = entry.target;
-              if (canvas.dataset.drawn === "1") return;
-              canvas.dataset.drawn = "1";
-              paint(canvas, pages[Number(canvas.dataset.page) - 1] || []);
-              observer.unobserve(canvas);
+              draw(entry.target);
             });
           }, { rootMargin: "600px 0px" })
         : null;
 
-      pages.forEach(function (pageLines, index) {
-        var canvas = document.createElement("canvas");
-        canvas.className = "novel-page";
-        canvas.width = W;
-        canvas.height = H;
-        canvas.dataset.page = String(index + 1);
-        canvas.setAttribute("role", "img");
-        canvas.setAttribute(
-          "aria-label",
-          document.title + " · 第 " + (index + 1) + " / " + pages.length + " 页（正文图片）"
-        );
-        host.appendChild(canvas);
-        if (observer) observer.observe(canvas);
-      });
+      var pages = [];
 
-      // Draw page 1 as soon as the webfont is ready (otherwise the first paint
-      // would use the fallback face and measure differently).
-      function first() {
-        var canvas = host.querySelector("canvas");
-        if (canvas && canvas.dataset.drawn !== "1") {
-          canvas.dataset.drawn = "1";
-          paint(canvas, pages[0]);
+      function draw(canvas) {
+        if (canvas.dataset.drawn === "1") return;
+        canvas.dataset.drawn = "1";
+        paint(canvas, pages[Number(canvas.dataset.page) - 1] || []);
+        if (observer) observer.unobserve(canvas);
+      }
+
+      /**
+       * Wrap the text, resize the page list to match, and repaint.
+       *
+       * Called twice on purpose. The first call runs before the webfont is ready
+       * and uses the fallback face, which reserves the page boxes immediately
+       * (no empty gap while 580KB downloads). The second runs once
+       * document.fonts.load() settles, because LXGW measures differently from the
+       * fallback: the old code wrapped with the fallback metrics and then painted
+       * with LXGW, so lines could overflow the page they were measured for. The
+       * re-measure is also what makes the theme-change repaint possible.
+       */
+      function render() {
+        var lines = layout();
+        pages = [];
+        for (var i = 0; i < lines.length; i += ROWS) pages.push(lines.slice(i, i + ROWS));
+        if (!pages.length) return;
+
+        for (var n = host.children.length; n < pages.length; n++) {
+          var canvas = document.createElement("canvas");
+          canvas.className = "novel-page";
+          canvas.width = W;
+          canvas.height = H;
+          host.appendChild(canvas);
         }
+        while (host.children.length > pages.length) host.removeChild(host.lastElementChild);
+
+        for (var p = 0; p < host.children.length; p++) {
+          var c = host.children[p];
+          c.dataset.page = String(p + 1);
+          c.dataset.drawn = "0";
+          if (observer) observer.observe(c);
+        }
+        // Draw page 1 straight away so the top of the chapter is never blank.
+        draw(host.firstElementChild);
       }
+
+      render();
+      // The page grid depends on the font's metrics, so re-render once the real
+      // face is loaded (and on failure too — then the fallback metrics stand).
       if (document.fonts && document.fonts.load) {
-        document.fonts.load(face(FONT)).then(first, first);
-      } else {
-        first();
+        document.fonts.load(face(FONT)).then(render, render);
       }
+
+      // Theme change: repaint what is already drawn with the new palette; pages
+      // not drawn yet pick the new palette up when the observer reaches them.
+      document.addEventListener("themechange", function () {
+        refreshPalette();
+        for (var i = 0; i < host.children.length; i++) {
+          var canvas = host.children[i];
+          if (canvas.dataset.drawn === "1") paint(canvas, pages[i] || []);
+        }
+      });
     })();

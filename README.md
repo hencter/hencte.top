@@ -128,7 +128,7 @@ You must now install the Tailwind CSS CLI via npm."*），`hugo mod npm pack` �
 | --- | --- | --- |
 | `assets/css/tailwind.css` | Tailwind CLI（`pnpm css`） | 改动类名/主题样式后 |
 | `content/tw/`、`content/hk/` | OpenCC（`pnpm variants`） | 改动 `content/zh` 后 |
-| `assets/fonts/LXGWWenKai-Novel.ttf` | fontTools 子集化（一次性，23.6MB → **1.11MB**，2751 字形） | 小说用字超出子集时 |
+| `static/fonts/LXGWWenKai-Novel.woff2` | fontTools 子集化（一次性，**580,884 B**；许可证文本在 `assets/fonts/`） | 小说用字超出子集时 |
 
 一键刷新：`pnpm generate`（= variants + lunar + css），然后照旧 `pnpm build`。
 Hugo 侧仍然做了全部该它做的事：`minify` + `fingerprint` + SRI、`images.Text` 画正文图、`.Process` 压缩、
@@ -188,6 +188,30 @@ Hugo 会渲染——迁移时按 `PLACEHOLDER_BODY_RE` 丢弃这类短占位正�
 注意资源归属：迁移脚本会从 Astro 的 `public/` 复制资源并**覆盖同名文件**（`eogee.png` 就是这样被字标覆盖回来的），
 所以自选品牌图用 Astro 不会写入的文件名（`eogee-mark.png`、`seawave.jpg`），并在
 `scripts/migrate_astro.py` 的 `FRIEND_AVATAR_OVERRIDES` 里登记，重跑迁移仍保持这套 Logo。
+
+## 主题优化（第三轮，实测驱动）
+
+针对 R2 评审的 P0–P2 项做了一轮**主题层**修复，全部以构建产物或真实浏览器实测验收
+（`hugo` 严格构建 exit 0；`visual_audit.mjs` 报 `no findings`；`verify_urls.py` 全绿）。
+
+| 问题 | 实测证据 | 改法 |
+| --- | --- | --- |
+| 亮色正文链接对比度 4.34:1，低于 WCAG AA（暗色上轮已修） | 浏览器逐元素采样：`.prose-content a`、eyebrow、步骤标签 | 新增语义 token `--color-accent`（`main.css` `@theme`），亮色 = rose-700、暗色 = rose-400；30 处 `text-rose-600/700/500` 全改 `text-accent`。实测亮色 **5.49–6.03:1**，暗色 **7.48:1** |
+| `font.css` 用无层级元素选择器 + 6 处 `!important` 设字体 | `p, span, div, a, li, td, th { font-family }` 无层级 → 压过 `@layer utilities` 里的一切工具类 | 收进 `@layer base`，只在 `html` 上设一次（继承），去掉全部 `!important`。浏览器断言：**0 条**无层级裸元素 `font-family` 规则；`code`/`pre` 仍是 mono，其余仍是 serif |
+| 小说正文只画进 canvas，读屏读不到、Ctrl+F 搜不到（WCAG 1.1.1） | `<template>` 是 inert：`renderedTextNodes=0` | `<template>` → `<div class="sr-only">`（正文本来就在交付 HTML 里，不新增暴露面），canvas 宿主 `aria-hidden="true"`。实测 **4192 字**可被读屏取到 |
+| 暗色模式章节仍是米白纸面（整屏眩光） | canvas 像素 `#faf7f0` on `#030712` | 纸张/墨色改为 CSS 变量 `--novel-paper/-ink/-watermark`，`novel.js` 从文档根读取并在 `themechange` 时重绘。实测亮 `rgb(250,247,240)` → 暗 `rgb(17,24,39)` |
+| 章节字体晚于排版（回退字体度量 + 580KB 串行） | 上轮实测：排版 t=229ms、字体 t=3247ms | 新增 `_partials/head/novel-font.html` 预加载（`crossorigin` 必需，href 必须与 `@font-face` 一致）；`novel.js` 先渲染占位、`document.fonts.load()` 后**重排一次**，避免用回退度量排版却用 LXGW 绘制 |
+| 全站 `<nav>` 无 `aria-label`（含 Hugo 自动生成的 `#TableOfContents`） | 扫描 536 页：**1971/1971** 无标签 | 4 个新 i18n key（主导航/章节导航/章节翻页/站点入口）；TOC 因标签由 Hugo 生成，在 `toc.html` 内注入 `aria-label` 并 `safeHTML` |
+| 153 个 `<th>` 全部无 `scope`（WCAG 1.3.1） | 全站扫描 | 新增 `_markup/render-table.html`，逐字节复刻 Goldmark 输出（含 `style="text-align: …"`）只加 `scope="col"`。验收：**153/153**，且与改动前构建产物归一化比对**0 处差异** |
+| 复制按钮成功无播报（WCAG 4.1.3） | 只把按钮文案换成「✓」 | 新增 `.code-copy-status`（`aria-live="polite"`）+ i18n `copied`；按钮 `aria-label` 保持稳定 |
+| 0 字节 partial、缺失主题元数据、注释指向不存在的模板 | `head/font.html` 0 字节仍被 `partialCached` 调用 | 删除该 partial 及其调用；补 `themes/kiss/theme.toml`；修正 `main.css`/`novel-canvas.html` 里过期的注释 |
+
+**刻意没做**（需要联网验证或属于输出格式/产品决策，另开一批）：
+
+- `mermaid@11` / `mathjax@3` 固定版本 + SRI：本环境 `cdn.jsdelivr.net` 不可达，**无法确认某个精确版本是否存在**，不猜版本号。
+- 图片交付管线（无 `.Process`、122 张图 0 尺寸、`/tech/` 首屏 9.36MB、移动 CLS 0.370）——需把 `static/img` 挂进 `assets/` 并改内容引用。
+- 单文件 CSS 中约 36.8KB 未被首页使用；按页拆分的收益与维护成本需先定策略。
+- 输出格式/SEO：11 个栏目 feed 是整站副本（`/shelf/rss.xml` 62 条含 106 个 `/log|/tech` 链接，而 `/shelf/` 是 Protect 轨）、`/zh/sitemap.xml` 列根路径 URL、非默认语言 `llms*.txt` 语言错配——改动牵涉 robots/sitemap/产品决策。
 
 ## 主题渲染能力
 

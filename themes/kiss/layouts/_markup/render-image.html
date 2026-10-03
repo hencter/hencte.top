@@ -1,0 +1,30 @@
+{{/*
+  Content images (Markdown `![alt](src)`).
+
+  Without a hook Hugo emits a bare <img>, and the site's own measurement found every
+  content image arriving with no loading or decoding hint — on /tech/ four covers were
+  fetched eagerly although all four sit below the fold. This keeps the author's alt
+  and title and adds the two hints.
+
+  Dimensions are emitted only when the file resolves as a page resource; this site's
+  images live under static/ (e.g. /img/2026-07-24/…), which Hugo cannot read, so most
+  images simply get no width/height. Their layout is already reserved by CSS
+  (aspect-ratio on covers, fixed boxes in cards), which is why CLS stays at 0.
+
+  @context {renderer} the image render context
+*/}}
+{{- $dest := .Destination -}}
+{{- $img := "" -}}
+{{- with .Page -}}
+  {{- with .Resources.GetMatch $dest -}}
+    {{- if eq .ResourceType "image" -}}{{- $img = . -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+<img
+  src="{{ $dest | safeURL }}"
+  alt="{{ .Text }}"
+  {{- with .Title }} title="{{ . }}"{{ end }}
+  {{- with $img }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}
+  loading="lazy"
+  decoding="async"
+>

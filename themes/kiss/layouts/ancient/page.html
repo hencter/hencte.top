@@ -9,7 +9,7 @@
   @context {page} a page in the ancient section
 */}}
 {{ define "main" }}
-  <header class="prose-header">
+  <header class="prose-header ancient-head">
     <h1>{{ .Title }}</h1>
     {{ if .Date.IsZero }}
       <p class="mt-2 text-sm text-gray-500">{{ T "dateTBD" }}</p>
@@ -38,8 +38,8 @@
     </article>
   </div>
 
-  <p class="mt-6 text-sm text-gray-500">
-    <a href="{{ .CurrentSection.RelPermalink }}" class="hover:text-rose-600">← {{ .CurrentSection.Title }}</a>
+  <p class="ancient-foot mt-6 text-sm text-gray-500">
+    <a href="{{ .CurrentSection.RelPermalink }}" class="hover:text-accent">← {{ .CurrentSection.Title }}</a>
   </p>
 
   <script>

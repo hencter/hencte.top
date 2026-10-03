@@ -10,7 +10,7 @@
       <div class="mt-6 grid gap-6 sm:grid-cols-3">
         {{ range $.Params.focusAreas }}
           <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
-            {{ with .tag }}<p class="text-xs font-semibold uppercase tracking-wide text-rose-600">{{ . }}</p>{{ end }}
+            {{ with .tag }}<p class="text-xs font-semibold uppercase tracking-wide text-accent">{{ . }}</p>{{ end }}
             <h3 class="mt-1 font-bold text-gray-900">{{ .title }}</h3>
             <p class="mt-2 text-sm text-gray-600">{{ .text }}</p>
           </div>
@@ -28,7 +28,7 @@
       <ol class="mt-6 grid gap-4 sm:grid-cols-3">
         {{ range $.Params.buildSteps }}
           <li class="rounded-2xl border border-gray-200 bg-white p-5">
-            <p class="text-sm font-semibold text-rose-600">{{ .phase }}</p>
+            <p class="text-sm font-semibold text-accent">{{ .phase }}</p>
             <p class="mt-2 text-sm text-gray-600">{{ .detail }}</p>
           </li>
         {{ end }}
@@ -45,12 +45,12 @@
       <ul class="mt-6 divide-y divide-gray-100">
         {{ range $posts }}
           <li class="flex items-baseline justify-between gap-4 py-3">
-            <a href="{{ .RelPermalink }}" class="font-medium text-gray-900 hover:text-rose-600">{{ .LinkTitle }}</a>
+            <a href="{{ .RelPermalink }}" class="font-medium text-gray-900 hover:text-accent">{{ .LinkTitle }}</a>
             <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="shrink-0 text-sm text-gray-500">{{ .Date.Format "2006-01-02" }}</time>
           </li>
         {{ end }}
       </ul>
-      <p class="mt-4"><a href="{{ "/blog/" | relLangURL }}" class="text-sm font-medium text-rose-600 hover:underline">{{ T "allArticles" }} →</a></p>
+      <p class="mt-4"><a href="{{ "/blog/" | relLangURL }}" class="text-sm font-medium text-accent hover:underline">{{ T "allArticles" }} →</a></p>
     </section>
   {{ end }}
 
@@ -65,7 +65,7 @@
             {{ $novel := . }}
             <a href="{{ .RelPermalink }}" class="flex gap-4 rounded-2xl border border-gray-200 bg-white p-4 hover:shadow-md transition-shadow">
               {{ with .Params.cover }}
-                <img src="{{ . }}" alt="{{ $novel.Params.imageAlt | default $novel.Title }}" loading="lazy" class="h-24 w-20 shrink-0 rounded-lg object-cover">
+                <img src="{{ . }}" alt="{{ $novel.Params.imageAlt | default $novel.Title }}" loading="lazy" decoding="async" class="h-24 w-20 shrink-0 rounded-lg object-cover">
               {{ end }}
               <span>
                 <span class="block font-bold text-gray-900">{{ .Title }}</span>

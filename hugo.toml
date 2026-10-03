@@ -100,7 +100,10 @@ disableKinds = ['taxonomy', 'term']
       weight  = 40
     [[languages.zh.menus.main]]
       name   = '联系'
-      url    = '#contact'
+      # `#contact` on its own was dead on 524 of 536 pages: only home/about/links
+      # carry that id. Menu URLs render verbatim (see _partials/menu.html), so the
+      # target is spelled out per language rather than relying on a resolver.
+      url    = '/about/#contact'
       weight = 50
 
   [languages.en]
@@ -126,7 +129,7 @@ disableKinds = ['taxonomy', 'term']
       weight  = 40
     [[languages.en.menus.main]]
       name   = 'Contact'
-      url    = '#contact'
+      url    = '/en/about/#contact'
       weight = 50
 
   # Traditional-Chinese mirrors, generated from content/zh by scripts/build_variants.mjs
@@ -158,7 +161,7 @@ disableKinds = ['taxonomy', 'term']
       weight  = 40
     [[languages.tw.menus.main]]
       name   = '聯繫'
-      url    = '#contact'
+      url    = '/tw/about/#contact'
       weight = 50
 
   [languages.hk]
@@ -185,7 +188,7 @@ disableKinds = ['taxonomy', 'term']
       weight  = 40
     [[languages.hk.menus.main]]
       name   = '聯絡'
-      url    = '#contact'
+      url    = '/hk/about/#contact'
       weight = 50
 
 [build]

@@ -99,3 +99,24 @@ other = '開始閲讀'
 
 [novelNeedsJS]
 other = '本頁正文由瀏覽器繪製為圖片，請開啓 JavaScript。'
+
+# Landmark labels. Every <nav> on the site was unlabelled, so a screen reader's
+# landmark list showed several anonymous "navigation" entries per page
+# (WCAG 2.2 1.3.1 / 2.4.1). Kept as separate keys so the two chapter navs on a
+# chapter page remain distinguishable.
+[navMain]
+other = '主導航'
+
+[navChapterTop]
+other = '章節導航'
+
+[navChapterPager]
+other = '章節翻頁'
+
+[navSiteLinks]
+other = '站點入口'
+
+# Announced through the code block's aria-live region after a successful copy
+# (the "✓" swap is visual only). WCAG 2.2 4.1.3.
+[copied]
+other = '已複製到剪貼板'

@@ -30,6 +30,9 @@ __pycache__/
 # agent review reports
 .review/
 
+# IDE state (was tracked once; the editor recreates it on open)
+.trae/
+
 # NOTE: assets/css/tailwind.css, data/lunar.json, content/{tw,hk}/ and i18n/{tw,hk}.toml
 # are COMMITTED on purpose: `hugo` alone must build the whole site. Refresh them with
 # `pnpm variants && pnpm lunar && pnpm css` after changing zh content or templates.

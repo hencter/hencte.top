@@ -5,7 +5,7 @@
   length of every lunar month in order (leap months flagged). Converting a solar
   date is then just subtraction and an array walk, which Go templates can do —
   unlike bitwise maths, which they cannot. The table was generated once from the
-  `lunardate` package (see .dsh/CLOUDFLARE.md); extending it every few decades is
+  `lunardate` package (see .agents/CLOUDFLARE.md); extending it every few decades is
   the only upkeep.
 
   A page may override the result with `lunar = '...'` in its front matter (also the

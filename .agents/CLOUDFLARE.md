@@ -7,8 +7,8 @@
 | 项目 | 位置 | 说明 |
 | --- | --- | --- |
 | 农历表 | `data/lunar_years.json`（2015–2050，15KB） | 由 Python `lunardate` 一次性生成；Hugo 模板据此在构建期换算，无需任何运行时或构建步骤 |
-| Cloudflare Skills | `.dsh/skills/`（16 个：cloudflare、wrangler、workers-best-practices、durable-objects、agents-sdk、cloudflare-one*、basin、k2、nextjs-on-cloudflare、sandbox-*、turnstile-spin、web-perf、cloudflare-email-service） | 由 `git clone cloudflare/skills` 取官方仓库 `skills/` 目录复制而来，替代 `npx -y skills add`（避免第三方 npm 包与 Node 依赖） |
-| MCP 服务器 | `.dsh/mcp.json` | 5 个远端 MCP：cloudflare、cloudflare-docs（公开，无需鉴权）、cloudflare-bindings、cloudflare-builds、cloudflare-observability；其余首次调用时走 OAuth |
+| Cloudflare Skills | `.agents/skills/`（16 个：cloudflare、wrangler、workers-best-practices、durable-objects、agents-sdk、cloudflare-one*、basin、k2、nextjs-on-cloudflare、sandbox-*、turnstile-spin、web-perf、cloudflare-email-service） | 由 `git clone cloudflare/skills` 取官方仓库 `skills/` 目录复制而来，替代 `npx -y skills add`（避免第三方 npm 包与 Node 依赖） |
+| MCP 服务器 | `.agents/mcp.json` | 5 个远端 MCP：cloudflare、cloudflare-docs（公开，无需鉴权）、cloudflare-bindings、cloudflare-builds、cloudflare-observability；其余首次调用时走 OAuth |
 
 ## 本站的部署要点（Cloudflare Pages —— 备选方案）
 
@@ -19,8 +19,8 @@
 ## 复跑方式
 
 ```powershell
-git clone --depth 1 https://github.com/cloudflare/skills.git .review/cf-skills
-Copy-Item .review/cf-skills/skills/* .dsh/skills/ -Recurse -Force
+git clone --depth 1 https://github.com/cloudflare/skills.git "$env:TEMP/cf-skills"
+Copy-Item "$env:TEMP/cf-skills/skills/*" .agents/skills/ -Recurse -Force
 ```
 
 ## `hugo` 需不需要先 `pnpm install`？—— 不需要（已实测）

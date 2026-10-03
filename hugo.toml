@@ -11,6 +11,14 @@ summaryLength          = 200
 # would publish a set of thin term pages that are not part of the site's URL set.
 disableKinds = ['taxonomy', 'term']
 
+# Minify HTML/XML output. Hugo ≥ 0.150 removed the old top-level `minify` key
+# (it now errors: "project config minify was deprecated… use minify.minifyOutput"),
+# so the supported switch is the table below. It lives in config rather than in the
+# build command because Cloudflare Workers Builds runs plain `hugo` from its panel,
+# which this repository cannot change. Measured: HTML 21.2 MB -> 16.2 MB, same build time.
+[minify]
+  minifyOutput = true
+
 [markup]
   [markup.goldmark]
     # The Astro site renders raw HTML embedded in Markdown (remark allows it),

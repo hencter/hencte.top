@@ -19,7 +19,17 @@
 {{- $image := "" -}}
 {{- with .Params.images }}{{ $image = index . 0 }}{{ end -}}
 {{- $image = $image | default site.Params.defaultImage | default "/og-image.png" -}}
+{{/* OG 图走与正文相同的两级解析（页包 → assets/）。图片迁到 assets/ 并离线优化为 WebP 后，
+     front matter 里保持原路径也能取到正确的绝对地址。 */}}
+{{- $ogRes := "" -}}
+{{- if not (hasPrefix $image "http") -}}
+  {{- $rel := strings.TrimPrefix "/" $image -}}
+  {{- with .Resources.GetMatch $rel }}{{ $ogRes = . }}{{ end -}}
+  {{- if not $ogRes }}{{ with resources.Get $rel }}{{ $ogRes = . }}{{ end }}{{ end -}}
+  {{- if not $ogRes }}{{ with resources.Get (printf "%s.webp" (strings.TrimSuffix (path.Ext $rel) $rel)) }}{{ $ogRes = . }}{{ end }}{{ end -}}
+{{- end -}}
 {{- $imageAbs := $image | absURL -}}
+{{- with $ogRes }}{{ $imageAbs = .Permalink }}{{ end -}}
 {{- $isShelf := eq .Section "shelf" -}}
 {{- $robots := "" -}}
 {{- with .Params.robots }}{{ $robots = . }}{{ end -}}

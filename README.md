@@ -65,6 +65,34 @@ python scripts/verify_urls.py                                  # 验收
 
 计划与报告输出在 `migration/`（`plan.json`、`report.md`，含与线上 sitemap 的逐条比对）。
 
+## 图片与资源模型（assets = 公共，页包 = 单篇）
+
+图片只有一个入口：`_partials/img.html`。它按顺序解析，模板与正文都用它，不要直接写 `<img>`：
+
+1. **页包（page bundle）** —— `src` 是相对文件名时，先查当前页的 `.Resources`。
+   单篇文章专属的图放在文章目录里：
+
+   ```
+   content/zh/tech/ai-guardrail/
+     index.md            # 原 ai-guardrail.md，URL 不变
+     ai-guardrail-cover.webp
+   ```
+
+   正文写 `![封面](ai-guardrail-cover.webp)`，front matter 的 `images = ['ai-guardrail-cover.webp']` 同样能被解析（OG 图也会转成绝对地址）。
+
+2. **公共资源（`assets/img/…`）** —— 跨页、跨语言共用的图（项目封面、友链头像、小说章节图与封面、作者头像、OG 图）放这里。
+   模板传绝对路径 `/img/…`；解析器会依次尝试原名与 `.webp`，因此**内容里的路径不必随图片改名而改**：
+   `/img/novel/sky-tax-ch01.png` 会自动命中 `assets/img/novel/sky-tax-ch01.webp`。
+
+3. 都命中不了时按原样输出 `<img>`（外链图、`data:` URI 等），所以迁移期可以安全替换调用点。
+
+**为什么这样分**：`static/` 里的文件只会被 Hugo 原样拷进 `public/`，不做任何处理；`assets/` 里的文件才被 Hugo 当作资源
+（可读尺寸、可发布、可用于 OG）。`static/` 一旦放图，就等于把未压缩的原始字节直接送上 CDN，且拿不到 `width/height`。
+
+**新增图片**：单篇专属 → 放文章目录；跨页共用 → 放 `assets/img/`。两者都建议先压到 WebP（长边 ≤1200、q82），
+离线一次性完成，**构建期不做转码**（这是 CI 时长与上传量的关键取舍）。历史图片由 `scripts/*` 之外的一次性脚本处理过，
+原图仍可在 git 历史里找回。
+
 ## 抓取与引用政策（Cite vs Protect）
 
 - **Cite 轨**：博客 `/log` `/tech` `/ancient`、品牌页（首页/关于/项目/友链/博客索引）可索引、可引用。

@@ -28,7 +28,7 @@
         {{ $external := hasPrefix (string .url) "http" }}
         <article class="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow">
           {{ with .image }}
-            <img src="{{ . }}" alt="{{ $project.imageAlt | default $project.title }}" loading="lazy" decoding="async" class="project-cover w-full object-cover">
+            {{ partial "img.html" (dict "src" . "page" $ "alt" ($project.imageAlt | default $project.title) "class" "project-cover w-full object-cover" "sizes" "(min-width: 1280px) 360px, (min-width: 640px) 45vw, 92vw") }}
           {{ end }}
           <div class="flex flex-1 flex-col p-5">
             {{ with .stage }}

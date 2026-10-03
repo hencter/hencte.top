@@ -65,7 +65,7 @@
             {{ $novel := . }}
             <a href="{{ .RelPermalink }}" class="flex gap-4 rounded-2xl border border-gray-200 bg-white p-4 hover:shadow-md transition-shadow">
               {{ with .Params.cover }}
-                <img src="{{ . }}" alt="{{ $novel.Params.imageAlt | default $novel.Title }}" loading="lazy" decoding="async" class="h-24 w-20 shrink-0 rounded-lg object-cover">
+                {{ partial "img.html" (dict "src" . "page" $novel "alt" ($novel.Params.imageAlt | default $novel.Title) "class" "h-24 w-20 shrink-0 rounded-lg object-cover") }}
               {{ end }}
               <span>
                 <span class="block font-bold text-gray-900">{{ .Title }}</span>

@@ -75,12 +75,7 @@
       {{/* Banner, not a full screen: unconstrained, a tall illustration pushed the
            chapter text entirely below the fold on a reading page. `max-w-2xl` keeps
            it modest without cropping (object-cover was cutting ~50% of the art). */}}
-      <img
-        src="{{ . }}"
-        alt="{{ $page.Params.imageAlt | default $page.Title }}"
-        class="novel-banner mb-8 h-auto w-full max-w-2xl rounded-2xl"
-        decoding="async"
-      >
+      {{ partial "img.html" (dict "src" . "page" $page "alt" ($page.Params.imageAlt | default $page.Title) "class" "novel-banner mb-8 h-auto w-full max-w-2xl rounded-2xl" "eager" true "sizes" "(min-width: 768px) 672px, 92vw") }}
     {{ end }}
 
     {{ if $chapters }}
@@ -122,7 +117,7 @@
 
     <div class="mt-6 flex flex-col gap-8 sm:flex-row">
       {{ with .Params.cover }}
-        <img src="{{ . }}" alt="{{ $page.Params.imageAlt | default $page.Title }}" decoding="async" class="novel-cover w-full rounded-2xl object-cover sm:w-56">
+        {{ partial "img.html" (dict "src" . "page" $page "alt" ($page.Params.imageAlt | default $page.Title) "class" "novel-cover w-full rounded-2xl object-cover sm:w-56" "eager" true "sizes" "(min-width: 640px) 224px, 100vw") }}
       {{ end }}
       <div class="flex-1">
         {{ with .Content }}<article class="prose-content">{{ . }}</article>{{ end }}

@@ -7,7 +7,7 @@
 		"css": "tailwindcss -i themes/kiss/assets/css/main.css -o assets/css/tailwind.css --cwd .",
 		"css:watch": "tailwindcss -i themes/kiss/assets/css/main.css -o assets/css/tailwind.css --cwd . --watch",
 		"dev": "hugo server -D",
-		"build": "hugo --ignoreCache --cleanDestinationDir --panicOnWarning --printPathWarnings --printI18nWarnings",
+		"build": "hugo --ignoreCache --cleanDestinationDir --panicOnWarning --printPathWarnings --printI18nWarnings --minify",
 		"generate": "pnpm variants && pnpm css",
 		"check": "python scripts/verify_urls.py",
 		"check:templates": "hugo --ignoreCache --printUnusedTemplates --printPathWarnings --printI18nWarnings",

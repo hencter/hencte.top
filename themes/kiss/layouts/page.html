@@ -70,7 +70,7 @@
             {{ $friend := . }}
             <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="flex gap-4 rounded-2xl border border-gray-200 bg-white p-5 hover:shadow-md transition-shadow">
               {{ with .avatar }}
-                <img src="{{ . }}" alt="{{ $friend.name }}" loading="lazy" decoding="async" class="h-12 w-12 shrink-0 rounded-full object-cover">
+                {{ partial "img.html" (dict "src" . "page" $ "alt" $friend.name "class" "h-12 w-12 shrink-0 rounded-full object-cover" "sizes" "48px") }}
               {{ end }}
               <span>
                 <span class="block font-bold text-gray-900">{{ .name }}</span>

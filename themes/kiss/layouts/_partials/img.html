@@ -1,0 +1,55 @@
+{{/*
+  图片解析（全站唯一入口）。
+
+  两种资源来源，按顺序解析：
+
+    1. 页包（page bundle）——`src` 是相对文件名时，先查当前页的 `.Resources`。
+       `content/zh/tech/foo/index.md` 旁边的 `cover.webp` 就是这一页的专属资源。
+    2. 公共资源（assets/）——跨页/跨语言共用的图放 `assets/img/…`，Hugo 能读到尺寸并可发布。
+       绝对路径 `/img/x.png` 会依次尝试 `img/x.png` 与 `img/x.webp`：文件已离线优化为
+       WebP，因此**内容里的路径无需改动**。
+
+  两者都命中不了时按原样输出 `<img>`（外链图、或尚未迁移的文件），
+  所以这个 partial 可以在迁移过程中安全替换调用点。
+
+  参数（dict）：
+    src    图片路径（`/img/…` 绝对，或页包内相对文件名）
+    page   当前页（页包解析用；必须是 page，不能是 map）
+    alt    替代文本        title  可选 title
+    class  class 属性      sizes  可选 sizes 属性
+    eager  true -> loading="eager"（首屏元素），默认 lazy
+
+  @context {dict} 上表参数
+*/}}
+{{- $src := .src -}}
+{{- $page := .page -}}
+{{- $alt := .alt | default "" -}}
+{{- $title := .title | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $sizes := .sizes | default "" -}}
+{{- $loading := cond (.eager | default false) "eager" "lazy" -}}
+
+{{- $res := "" -}}
+{{/* 外链图（https://…、//cdn…、data:）不参与站点资源解析，原样输出。 */}}
+{{- $isRemote := or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//") (hasPrefix $src "data:") -}}
+{{- $isAbs := hasPrefix $src "/" -}}
+{{- $rel := cond $isAbs (strings.TrimPrefix "/" $src) $src -}}
+{{- $ext := path.Ext $rel -}}
+{{- $base := strings.TrimSuffix $ext $rel -}}
+{{- $cands := slice $rel -}}
+{{- if ne (lower $ext) ".webp" -}}{{- $cands = $cands | append (printf "%s.webp" $base) -}}{{- end -}}
+
+{{- if not $isRemote -}}
+  {{- if and (not $isAbs) $page -}}
+    {{- range $cands -}}{{- with $page.Resources.GetMatch . -}}{{- $res = . -}}{{- end -}}{{- end -}}
+  {{- end -}}
+  {{- if not $res -}}
+    {{- range $cands -}}{{- with resources.Get . -}}{{- $res = . -}}{{- end -}}{{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $res -}}
+<img src="{{ $res.RelPermalink }}"{{ with $res.Width }} width="{{ . }}"{{ end }}{{ with $res.Height }} height="{{ . }}"{{ end }} alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }}{{ with $class }} class="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="async"{{ with $sizes }} sizes="{{ . }}"{{ end }}>
+{{- else -}}
+<img src="{{ $src | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }}{{ with $class }} class="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="async"{{ with $sizes }} sizes="{{ . }}"{{ end }}>
+{{- end -}}

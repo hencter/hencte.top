@@ -69,10 +69,21 @@ Workers 构建面板里必须这样设：
 
 | 设置项 | 值 | 原因 |
 | --- | --- | --- |
-| **构建命令** | `hugo` | ❌ 不能写 `hugo build` —— `hugo` 没有 `build` 子命令，会直接失败。想用严格参数就写 `pnpm build` |
+| **构建命令** | `pnpm build` | ❌ 不能写 `hugo build` —— `hugo` 没有 `build` 子命令，会直接失败。`pnpm build` = `hugo … --minify`（HTML 由 21.2 MB 压到 16.2 MB，构建时长不变） |
 | **部署命令** | `npx wrangler deploy` | 读取上面的 `wrangler.jsonc`；建议钉版本：`npx wrangler@4 deploy` |
 | **构建变量** | `HUGO_VERSION = 0.167.0` | Workers 构建镜像装了 Hugo extended，但默认版本偏旧；本站需要 ≥0.146 的模板行为。文档见 workers/ci-cd/builds/build-image |
 | 根目录 | `/` | 默认即可 |
+
+### CI 性能要点（实测）
+
+| 项 | 数值 | 说明 |
+| --- | --- | --- |
+| Hugo 构建本体 | **≈7.5 秒** | 691 页四语言；其中渲染 6.4 s（zh 1.26 / tw 0.94 / hk 0.91 / en 0.19 + deferred 2.4）、static 同步 0.5 s |
+| `pnpm install` | ≈30 秒（文档值） | **构建并不需要**：`assets/css/tailwind.css` 与 `content/{tw,hk}` 都已提交。若要彻底去掉，把 `package.json`/`pnpm-lock.yaml`/`pnpm-workspace.yaml` 移出仓库根目录，Workers 就不再检测到包管理器 |
+| 上传产物 | **65.4 MB → 20.4 MB**（−69%） | 图片全部离线压成 WebP 并从 `static/` 迁到 `assets/`（公共）与页包（单篇）；`--minify` 再省 5 MB HTML |
+| `pnpm css` / `pnpm variants` | 2.4 秒 / — | CI **不需要**（产物已提交）；仅在改了 CSS 源或 zh 内容后才跑 |
+
+注意：**不要用 Windows 本地的构建时长估算 CI 容量**——本机曾因杀软/文件锁出现 7 s、17 s、21 s 的巨大抖动，Linux 构建机上应按 ≈7.5 秒估。
 
 注意：`wrangler.jsonc` 的 `name` 必须与**已有 Worker 同名**（这里是 `hencte-top`），否则 `wrangler deploy` 会新建一个 Worker。若面板里绑定的 Worker 叫别的名字，改这里。
 

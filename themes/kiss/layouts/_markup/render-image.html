@@ -1,30 +1,11 @@
 {{/*
-  Content images (Markdown `![alt](src)`).
+  内容图片（Markdown `![alt](src)`）渲染钩子。
 
-  Without a hook Hugo emits a bare <img>, and the site's own measurement found every
-  content image arriving with no loading or decoding hint — on /tech/ four covers were
-  fetched eagerly although all four sit below the fold. This keeps the author's alt
-  and title and adds the two hints.
-
-  Dimensions are emitted only when the file resolves as a page resource; this site's
-  images live under static/ (e.g. /img/2026-07-24/…), which Hugo cannot read, so most
-  images simply get no width/height. Their layout is already reserved by CSS
-  (aspect-ratio on covers, fixed boxes in cards), which is why CLS stays at 0.
+  实际解析交给 `_partials/img.html`：先查本页页包资源（相对路径），再查
+  `assets/`（`/img/…`，会自动命中离线优化后的 `.webp`），都没有则原样输出。
+  这样正文里的路径不必随资源迁移而改动，同时拿到 width/height（避免 CLS）
+  与加载提示。
 
   @context {renderer} the image render context
 */}}
-{{- $dest := .Destination -}}
-{{- $img := "" -}}
-{{- with .Page -}}
-  {{- with .Resources.GetMatch $dest -}}
-    {{- if eq .ResourceType "image" -}}{{- $img = . -}}{{- end -}}
-  {{- end -}}
-{{- end -}}
-<img
-  src="{{ $dest | safeURL }}"
-  alt="{{ .Text }}"
-  {{- with .Title }} title="{{ . }}"{{ end }}
-  {{- with $img }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}
-  loading="lazy"
-  decoding="async"
->
+{{- partial "img.html" (dict "src" .Destination "page" .Page "alt" .Text "title" .Title) -}}

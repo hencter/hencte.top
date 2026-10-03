@@ -1,18 +1,21 @@
 {{/*
-  seal — 朱红印章。站点的强调色本来就是「宣纸上的朱红印记」（见 main.css 顶部的
-  palette 注释），这个短代码让正文里也能直接盖一枚印。
+  seal — 朱红印章。样式是原子类 + 两个任意属性（Tailwind 没有 writing-mode 的现成
+  工具类，用 [writing-mode:vertical-rl] / [text-orientation:upright] 表达）。
 
   用法：
-    {{< seal >}}亦幸{{< /seal >}}         ← 两字竖排，最像真印
+    {{< seal >}}亦幸{{< /seal >}}
     {{< seal size="sm" >}}阁{{< /seal >}}
-    {{< seal shape="round" >}}幸{{< /seal >}}
+    {{< seal shape="round" size="lg" >}}幸{{< /seal >}}
 
-  参数：size（sm / md / lg）、shape（square 默认 / round）。
-  无障碍：输出 role="img" + aria-label，读屏会念「印：亦幸」。
+  参数：size（sm / md / lg）、shape（square / round）。
+  无障碍：role="img" + aria-label，读屏念「印：亦幸」。
 */}}
 {{- $text := .Inner | plainify | strings.TrimSpace -}}
 {{- $size := .Get "size" | default "md" -}}
 {{- $shape := .Get "shape" | default "square" -}}
+{{- $sizeClass := "text-base" -}}
+{{- if eq $size "sm" }}{{ $sizeClass = "text-[0.8rem]" }}{{ else if eq $size "lg" }}{{ $sizeClass = "text-[1.35rem]" }}{{ end -}}
+{{- $shapeClass := cond (eq $shape "round") "rounded-full px-[0.45em] py-[0.5em]" "rounded-sm px-[0.25em] py-[0.35em]" -}}
 {{- with $text -}}
-  <span class="seal seal--{{ $size }} seal--{{ $shape }}" role="img" aria-label="印：{{ . }}">{{ . }}</span>
+  <span class="mx-[0.35em] inline-flex items-center justify-center border-2 border-rose-600 align-middle font-bold leading-none tracking-[0.12em] text-rose-700 [text-orientation:upright] [writing-mode:vertical-rl] dark:border-accent dark:text-accent {{ $sizeClass }} {{ $shapeClass }}" role="img" aria-label="印：{{ . }}">{{ . }}</span>
 {{- end -}}

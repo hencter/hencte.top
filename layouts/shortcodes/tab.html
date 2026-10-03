@@ -2,9 +2,8 @@
   tab — tabs 里的一页。子级短代码，请勿单独使用。
 
   位置参数或 name 参数即标签文字；内容支持 Markdown。
-  每页输出三条相邻元素（input / label / panel），CSS 依据相邻关系切换，
-  因此这一层不需要 id 也能工作；id 仍然给出，便于 label 关联与无障碍点击。
-  面板内容用 markdownify，所以代码块、列表、链接都能正常渲染。
+  三条相邻元素（input / label / panel）由 `.tabs` 组件里的状态选择器切换，
+  见 main.css 的 @layer components（原子类表达不了复合选择器，所以留在那一处）。
 */}}
 {{- $name := .Get "name" | default (.Get 0) | default "Tab" -}}
 {{- $gid := printf "tabs-%d" .Parent.Ordinal -}}

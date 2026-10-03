@@ -1,15 +1,11 @@
 {{/*
-  chapter — 引用小说章节，自动取到标题与永久链接。
-
-  正文里手写「第 12 章」再配一个链接，章节改名或调整顺序后就会失效；
-  这个短代码按 `novel` + `chapter` 两个 front matter 字段查找，永远指向当前正确的一章。
+  chapter — 引用小说章节，自动取到标题与永久链接。样式用原子类。
 
   用法：
     {{< chapter 12 >}}                      ← 本书（沿用当前页的 novel 字段）
     {{< chapter novel="sky-tax" n="12" >}}  ← 跨书引用
-    {{< chapter 3 >}}                        ← 也可以写在小说章节页正文里
 
-  未找到时：输出「第 N 章」占位并 **warnf**——本站构建带 --panicOnWarning，
+  未找到时：输出「第 N 章」占位并 warnf —— 本站构建带 --panicOnWarning，
   写错章节号会当场失败，而不是留一个静默的死链。
 */}}
 {{- $novel := .Get "novel" -}}
@@ -22,8 +18,8 @@
   {{- end -}}
 {{- end -}}
 {{- with $target -}}
-  <a class="chapter-ref" href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a>
+  <a class="underline decoration-1 underline-offset-2" href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a>
 {{- else -}}
   {{- warnf "shortcode chapter: 找不到 novel=%q chapter=%v（页面 %s）" $novel $n $.Page.File.Path -}}
-  <span class="chapter-ref chapter-ref--missing">第 {{ $n }} 章</span>
+  <span class="text-gray-500 dark:text-[#9d9483]">第 {{ $n }} 章</span>
 {{- end -}}

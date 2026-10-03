@@ -1,27 +1,25 @@
 {{/*
-  pic — 插图 + 图注，走站点的图片解析器（_partials/img.html）。
+  pic — 插图 + 图注。样式全部是原子类，跟着模板走，方便迁移。
 
-  为什么不用 Hugo 内置的 figure：内置 figure 只认页面包资源，拿不到 assets/ 里的
-  公共图片，也不会补 width/height。本站的图分两处（assets/ 公共、页包专属），
-  必须经由 img.html 才能两级都命中并输出尺寸。
+  图片本身仍交给 `_partials/img.html`（页包 → assets 两级解析、自动补 width/height）。
 
   用法：
-    {{< pic src="/img/projects/nova.webp" alt="Nova 知识库" caption="墨纸底上的青瓷星图" >}}
-    {{< pic src="diff-screen-capture.png" alt="差异对比" caption="页包内的图" >}}      ← 相对路径 = 本页页包
-    {{< pic src="/img/novel/sky-tax-cover.webp" alt="封面" eager="true" class="narrow" >}}
+    {{< pic src="/img/projects/nova.webp" alt="Nova 知识库" caption="**墨纸底上的青瓷星图**" >}}
+    {{< pic src="screenshot.png" alt="页包内的图" eager="true" >}}
+    {{< pic src="/img/novel/sky-tax-cover.webp" alt="封面" class="mx-auto max-w-md" >}}
 
   参数：src（必填，绝对 /img/… 或页包内相对文件名）、alt、caption（支持 Markdown）、
-        class（附加到 figure）、sizes、eager（首屏图设 true 以免推迟 LCP）。
+        class（附加到 figure 的原子类，例如 mx-auto max-w-md）、sizes、eager。
 */}}
 {{- $src := .Get "src" | default (.Get 0) -}}
 {{- $alt := .Get "alt" | default (.Get 1) | default "" -}}
 {{- $caption := .Get "caption" -}}
 {{- $class := .Get "class" | default "" -}}
 {{- with $src -}}
-<figure class="pic{{ with $class }} {{ . }}{{ end }}">
-  {{- partial "img.html" (dict "src" $src "page" $.Page "alt" $alt "class" "pic-img" "sizes" ($.Get "sizes") "eager" ($.Get "eager")) -}}
+<figure class="my-8{{ with $class }} {{ . }}{{ end }}">
+  {{- partial "img.html" (dict "src" $src "page" $.Page "alt" $alt "class" "h-auto w-full rounded-lg" "sizes" ($.Get "sizes") "eager" ($.Get "eager")) -}}
   {{- with $caption -}}
-    <figcaption class="pic-caption">{{ . | markdownify }}</figcaption>
+    <figcaption class="mt-3 text-center text-sm leading-relaxed text-gray-500 dark:text-[#9d9483]">{{ . | markdownify }}</figcaption>
   {{- end -}}
 </figure>
 {{- else -}}

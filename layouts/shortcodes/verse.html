@@ -1,9 +1,7 @@
 {{/*
-  verse — 诗 / 古文引文，默认竖排（与 /ancient/ 竖排阅读同一套想法）。
-
-  竖排用 writing-mode: vertical-rl，行由原文换行决定（white-space: pre-line），
-  所以**内容按行写**，不要写 Markdown——竖排里的 <p> 会变成一列一列。
-  窄屏自动回落成横排，避免手机上横向拖拽。
+  verse — 诗 / 古文引文，默认竖排。样式是原子类：竖排用任意属性
+  [writing-mode:vertical-rl]，窄屏回落用 max-md:[writing-mode:horizontal-tb]，
+  因此不需要任何自定义 CSS。
 
   用法：
     {{< verse >}}
@@ -11,17 +9,23 @@
     柳暗花明又一村
     {{< /verse >}}
 
-    {{< verse mode="horizontal" cite="陆游《游山西村》" >}}
-    山重水复疑无路
-    柳暗花明又一村
-    {{< /verse >}}
+    {{< verse mode="horizontal" cite="陆游《游山西村》" >}}…{{< /verse >}}
 
-  参数：mode（vertical 默认 / horizontal）、cite（出处，可省）、lang（默认 zh-Hant）。
+  参数：mode（vertical 默认 / horizontal）、cite（出处）、lang（默认 zh-Hant）。
+  竖排的换行由原文决定（whitespace-pre-line），所以内容按行写、不要写 Markdown。
 */}}
 {{- $mode := .Get "mode" | default "vertical" -}}
 {{- $cite := .Get "cite" -}}
 {{- $lang := .Get "lang" | default "zh-Hant" -}}
-<div class="verse verse--{{ $mode }}">
-  <div class="verse-body" lang="{{ $lang }}">{{ .Inner | htmlEscape | safeHTML }}</div>
-  {{- with $cite }}<p class="verse-cite">—— {{ . | markdownify }}</p>{{ end -}}
+<div class="my-8">
+  {{- if eq $mode "vertical" -}}
+    <div class="flex justify-center">
+      <div class="max-h-[22rem] overflow-x-auto whitespace-pre-line rounded-2xl border border-gray-200 bg-white px-5 py-6 text-lg leading-loose tracking-[0.08em] [writing-mode:vertical-rl] max-md:max-h-none max-md:text-center max-md:[writing-mode:horizontal-tb] dark:border-[#302a21] dark:bg-[#1c1813]" lang="{{ $lang }}">{{ .Inner | htmlEscape | safeHTML }}</div>
+    </div>
+  {{- else -}}
+    <div class="text-center text-lg leading-loose" lang="{{ $lang }}">{{ .Inner | htmlEscape | safeHTML }}</div>
+  {{- end -}}
+  {{- with $cite -}}
+    <p class="mt-3 text-right text-sm text-gray-500 dark:text-[#9d9483]">—— {{ . | markdownify }}</p>
+  {{- end -}}
 </div>

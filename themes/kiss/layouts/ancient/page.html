@@ -30,7 +30,7 @@
     {{ with .Description }}<p class="text-gray-600">{{ . }}</p>{{ end }}
   </header>
 
-  {{ partial "toc.html" . }}
+  {{ partial "toc.html" (dict "page" . "compact" true) }}
 
   <div class="heti-scroll-wrapper">
     <article id="heti-ancient" class="heti heti--ancient heti--vertical">

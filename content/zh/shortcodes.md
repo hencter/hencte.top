@@ -14,7 +14,7 @@ draft = true
 
 {{< note >}}默认类型。正文支持 **Markdown**、[链接](/about/) 与 `行内代码`。{{< /note >}}
 
-{{< note type="tip" title="小技巧" >}}标题可以自定义，类型决定左侧色条与标题色。{{< /note >}}
+{{< note type="tip" title="小技巧" >}}标题可以自定义；类型只决定标题的语气色（朱红＝警示类，暖灰＝引用类），卡片本身与站点其他卡片是同一套样式。{{< /note >}}
 
 {{< note type="warning" fold="true" >}}给 `fold="true"` 就变成可折叠的 —— 点标题展开；再加 `open="true"` 则默认展开。{{< /note >}}
 
@@ -29,7 +29,7 @@ draft = true
 
 走站点的图片解析器：`/img/…` 查 `assets/`，相对路径查本页页包，命中后自动补 `width`/`height`（不留 CLS 空间空洞）。
 
-{{< pic src="/img/projects/nova.webp" alt="Nova 知识库封面" caption="**墨纸底上的青瓷星图** —— 图注支持 Markdown，`class=\"narrow\"` 可收窄。" >}}
+{{< pic src="/img/projects/nova.webp" alt="Nova 知识库封面" caption="**墨纸底上的青瓷星图** —— 图注支持 Markdown；`class=\"mx-auto max-w-md\"` 这类原子类会附加到 figure 上。" >}}
 
 ```go-html-template
 {{</* pic src="/img/projects/nova.webp" alt="封面" caption="图注" */>}}

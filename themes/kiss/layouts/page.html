@@ -124,7 +124,7 @@
           {{ end }}
         {{ end }}
       </header>
-      <aside class="toc-rail">{{ partial "toc.html" . }}</aside>
+      <aside class="toc-rail">{{ partial "toc.html" (dict "page" .) }}</aside>
       <article class="prose-content reading-prose">
         {{ .Content }}
       </article>

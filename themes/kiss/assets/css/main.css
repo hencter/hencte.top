@@ -14,6 +14,11 @@
 @import "./font.css";
 @plugin "@tailwindcss/typography";
 
+/* 类名暗色变体：主题是把 `.dark` 挂在 <html> 上，而 Tailwind v4 的 `dark:` 默认跟随
+ * prefers-color-scheme。没有这一行，每处暗色都得手写 `.dark .foo`——这正是之前各轮
+ * 不断堆叠手写覆盖的原因。加上它之后，模板与组件里直接写 `dark:bg-…` 即可。 */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Class sources. Automatic content detection does not cover the template trees
  * in this project, so utilities used only in a template would otherwise appear
  * one build late — hugo_stats.json is written by the Hugo run that *follows*
@@ -142,14 +147,16 @@
 }
 
 /* ── Obsidian callouts ──────────────────────────────────────────────────────
- * Markup comes from layouts/_markup/render-blockquote.html and uses the same
- * class names as the Astro site (src/styles/post.css) so both render alike. */
+ * Markup comes from layouts/_markup/render-blockquote.html and the `note` shortcode.
+ * A callout is an ordinary card: the same utilities every other card uses.
+ * Type shows up only in the title tone — the old 4px rainbow left border read as a
+ * tag rather than a card, so it is gone. */
 @layer components {
   .callout {
-    @apply my-6 overflow-hidden rounded-xl border border-gray-200 bg-gray-50;
+    @apply my-6 overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-[#302a21] dark:bg-[#1c1813];
   }
   .callout-header {
-    @apply flex cursor-pointer items-center gap-2 border-b border-gray-200 px-4 py-2 text-sm;
+    @apply flex cursor-pointer items-center gap-2 border-b border-gray-200 px-4 py-2 text-sm text-gray-600 dark:border-[#302a21] dark:text-[#c4bbaa];
   }
   .callout-title {
     @apply font-bold;
@@ -173,35 +180,18 @@
     display: none;
   }
 
-  .callout-note      { border-left: 4px solid #448aff; }
-  .callout-info      { border-left: 4px solid #00b8d4; }
-  .callout-tip       { border-left: 4px solid #00bfa5; }
-  .callout-success   { border-left: 4px solid #4caf50; }
-  .callout-question  { border-left: 4px solid #64b5f6; }
-  .callout-warning   { border-left: 4px solid #ff9800; }
-  .callout-danger    { border-left: 4px solid #f44336; }
-  .callout-failure   { border-left: 4px solid #f44336; }
-  .callout-bug       { border-left: 4px solid #e91e63; }
-  .callout-example   { border-left: 4px solid #9c27b0; }
-  .callout-quote     { border-left: 4px solid #9e9e9e; }
-  .callout-abstract  { border-left: 4px solid #00acc1; }
-  .callout-todo      { border-left: 4px solid #2196f3; }
-  .callout-important { border-left: 4px solid #e040fb; }
-
-  .callout-note      > .callout-header { color: #448aff; }
-  .callout-info      > .callout-header { color: #00b8d4; }
-  .callout-tip       > .callout-header { color: #00bfa5; }
-  .callout-success   > .callout-header { color: #4caf50; }
-  .callout-question  > .callout-header { color: #64b5f6; }
-  .callout-warning   > .callout-header { color: #ff9800; }
-  .callout-danger    > .callout-header { color: #f44336; }
-  .callout-failure   > .callout-header { color: #f44336; }
-  .callout-bug       > .callout-header { color: #e91e63; }
-  .callout-example   > .callout-header { color: #9c27b0; }
-  .callout-quote     > .callout-header { color: #9e9e9e; }
-  .callout-abstract  > .callout-header { color: #00acc1; }
-  .callout-todo      > .callout-header { color: #2196f3; }
-  .callout-important > .callout-header { color: #e040fb; }
+  /* 警示类 → 朱红；引用类 → 暖灰；其余 → 默认暖墨（继承 .callout-header） */
+  .callout-warning > .callout-header,
+  .callout-danger > .callout-header,
+  .callout-failure > .callout-header,
+  .callout-bug > .callout-header,
+  .callout-important > .callout-header {
+    @apply text-rose-700 dark:text-accent;
+  }
+  .callout-quote > .callout-header,
+  .callout-abstract > .callout-header {
+    @apply text-gray-500 dark:text-[#9d9483];
+  }
 
   .callout > .callout-header .callout-icon::before { content: "🗒"; }
   .callout-note      > .callout-header .callout-icon::before { content: "🗒"; }
@@ -622,21 +612,9 @@ summary::-webkit-details-marker {
 .dark .prose-content {
   @apply prose-invert;
 }
-/* Callouts keep their per-type accent (border-left, set in the components layer)
- * in dark mode: overriding the shorthand `border-color` here flattened all 14
- * variants to the same gray. */
-.dark .callout {
-  border-top-color: #302a21;
-  border-right-color: #302a21;
-  border-bottom-color: #302a21;
-  background-color: #1c1813;
-}
 .dark .toc {
   border-color: #302a21;
   background-color: #1c1813;
-}
-.dark .callout-header {
-  border-color: #302a21;
 }
 .dark #TableOfContents a {
   color: #ddd4c6;
@@ -855,82 +833,11 @@ select {
   background-color: #221e18;
 }
 
-/* Callouts: 14 Material hues condensed to four warm ones (celadon / moss / amber /
- * cinnabar), so the accent family stays within the brand instead of importing a
- * second colour system. Light-mode header colours measure 4.5–7.7:1 on paper. */
-.callout-note,
-.callout-info,
-.callout-todo,
-.callout-question,
-.callout-abstract {
-  border-left-color: #5f8f86;
-}
-.callout-note > .callout-header,
-.callout-info > .callout-header,
-.callout-todo > .callout-header,
-.callout-question > .callout-header,
-.callout-abstract > .callout-header {
-  color: #45736b;
-}
-.callout-tip,
-.callout-success {
-  border-left-color: #7d9a6a;
-}
-.callout-tip > .callout-header,
-.callout-success > .callout-header {
-  color: #56713f;
-}
-.callout-warning,
-.callout-important {
-  border-left-color: #c07a2c;
-}
-.callout-warning > .callout-header,
-.callout-important > .callout-header {
-  color: #96581a;
-}
-.callout-danger,
-.callout-failure,
-.callout-bug {
-  border-left-color: #ad3729;
-}
-.callout-danger > .callout-header,
-.callout-failure > .callout-header,
-.callout-bug > .callout-header {
-  color: #94301f;
-}
-.callout-example,
-.callout-quote {
-  border-left-color: #a49a89;
-}
-.callout-example > .callout-header,
-.callout-quote > .callout-header {
-  color: #6b6252;
-}
-/* Dark mode needs the lighter end of each hue to clear 4.5:1 on #1c1813. */
-.dark .callout-note > .callout-header,
-.dark .callout-info > .callout-header,
-.dark .callout-todo > .callout-header,
-.dark .callout-question > .callout-header,
-.dark .callout-abstract > .callout-header {
-  color: #8fbdb3;
-}
-.dark .callout-tip > .callout-header,
-.dark .callout-success > .callout-header {
-  color: #a9c48f;
-}
-.dark .callout-warning > .callout-header,
-.dark .callout-important > .callout-header {
-  color: #e0a95f;
-}
-.dark .callout-danger > .callout-header,
-.dark .callout-failure > .callout-header,
-.dark .callout-bug > .callout-header {
-  color: #e58a76;
-}
-.dark .callout-example > .callout-header,
-.dark .callout-quote > .callout-header {
-  color: #bdb3a1;
-}
+/* Callout 的颜色统一在文件顶部的 @layer components 里（Tailwind 的 @apply +
+ * dark: 变体），那里是唯一来源。此处曾有一份「四家族暖色」的覆盖块：它用未分层
+ * 的 border-left-color + color 直接给 14 种类型上色，既压过了组件层，也让 callout
+ * 看起来像标签条而不是卡片。已删除，改由 `note` 短代码的 type 参数在组件层决定
+ * 标题语气色（默认暖墨 / 警示类朱红 / 引用类暖灰）。 */
 
 /* The audit found the rail 12rem wide with 7 links, 2 of which wrapped. */
 .reading-shell {
@@ -1394,189 +1301,39 @@ h3,
   }
 }
 
-/* ── Elegance pass, wave 12: shortcodes ─────────────────────────────────────
- * Styles for layouts/shortcodes/{pic,chapter,seal,verse,tabs}.html .
- * All of them use the site tokens (warm paper, cinnabar, warm grays) and carry a
- * dark variant, so a shortcode never introduces a colour the palette does not own.
- * No JavaScript: tab switching is `input:checked + label + .tab-panel`. */
-
-/* pic — 插图 + 图注（图片本身由 _partials/img.html 输出，这里只管版式） */
-.pic {
-  margin: 2rem 0;
-}
-.pic-img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-.pic-caption {
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--color-gray-500);
-  text-align: center;
-}
-.pic.narrow {
-  max-width: 32rem;
-  margin-inline: auto;
-}
-
-/* chapter — 行内章节引用 */
-.chapter-ref {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-}
-.chapter-ref--missing {
-  color: var(--color-gray-500);
-}
-
-/* seal — 朱红印记（正文内联，竖排文字） */
-.seal {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-  padding: 0.35em 0.25em;
-  margin-inline: 0.35em;
-  border: 2px solid var(--color-rose-600);
-  border-radius: 3px;
-  color: var(--color-rose-700);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  line-height: 1;
-  vertical-align: middle;
-}
-.seal--sm { font-size: 0.8rem; }
-.seal--md { font-size: 1rem; }
-.seal--lg { font-size: 1.35rem; }
-.seal--round {
-  border-radius: 50%;
-  padding: 0.5em 0.45em;
-}
-.dark .seal {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-}
-
-/* verse — 诗 / 古文引文，默认竖排 */
-.verse {
-  margin: 2rem 0;
-}
-.verse-body {
-  white-space: pre-line;
-}
-.verse--vertical {
-  display: flex;
-  justify-content: center;
-}
-.verse--vertical .verse-body {
-  writing-mode: vertical-rl;
-  max-height: 22rem;
-  overflow-x: auto;
-  padding: 1.5rem 1.25rem;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 14px;
-  background: var(--color-white);
-  font-size: 1.125rem;
-  line-height: 2;
-  letter-spacing: 0.08em;
-}
-.verse--horizontal .verse-body {
-  font-size: 1.125rem;
-  line-height: 2.1;
-  text-align: center;
-}
-.verse-cite {
-  margin-top: 0.75rem;
-  text-align: right;
-  font-size: 0.875rem;
-  color: var(--color-gray-500);
-}
-.dark .verse--vertical .verse-body {
-  border-color: #302a21;
-  background-color: #1c1813;
-}
-@media (max-width: 767px) {
-  /* 竖排在窄屏回落横排：手机上竖向文本必然要靠横向拖拽，不划算 */
-  .verse--vertical .verse-body {
-    writing-mode: horizontal-tb;
-    max-height: none;
-    text-align: center;
+/* ── Shortcode components ───────────────────────────────────────────────────
+ * 短代码的样式写在 layouts/shortcodes/*.html 的原子类里——这样样式跟着模板走、
+ * 可迁移，也不必再维护第二套手写 CSS。这里只留原子类表达不了的部分：
+ * tab 的状态机（复合的 `input:checked + label + panel` 选择器）。
+ * 暗色一律用 `dark:` 变体（见文件顶部的 @custom-variant）。 */
+@layer components {
+  .tabs {
+    @apply my-8 flex flex-wrap gap-1 rounded-2xl border border-gray-200 bg-white p-3 dark:border-[#302a21] dark:bg-[#1c1813];
   }
-}
-
-/* tabs — 纯 CSS 标签页 */
-.tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  margin: 2rem 0;
-  padding: 0.75rem;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 14px;
-  background: var(--color-white);
-}
-.tab-input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-.tab-label {
-  cursor: pointer;
-  padding: 0.375rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.875rem;
-  color: var(--color-gray-600);
-  transition:
-    background-color 180ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    color 180ms cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.tab-label:hover {
-  background: var(--color-gray-100);
-}
-.tab-input:checked + .tab-label {
-  background: var(--color-gray-100);
-  color: var(--color-gray-900);
-  font-weight: 600;
-}
-.tab-input:focus-visible + .tab-label {
-  outline: 2px solid var(--color-rose-700);
-  outline-offset: 2px;
-}
-.tab-panel {
-  display: none;
-  flex-basis: 100%;
-  width: 100%;
-}
-.tab-input:checked + .tab-label + .tab-panel {
-  display: block;
-}
-.tab-panel > :first-child {
-  margin-top: 0.5rem;
-}
-.tab-panel > :last-child {
-  margin-bottom: 0;
-}
-.dark .tabs {
-  border-color: #302a21;
-  background-color: #1c1813;
-}
-.dark .tab-label:hover,
-.dark .tab-input:checked + .tab-label {
-  background: #26201a;
-}
-/* 暗色文字必须逐条覆盖：这里用的 --color-gray-5xx/9xx 是浅色模式的值，
- * 站点只在 .dark 下重映射了 text-gray-* 这类工具类，管不到裸变量。
- * 实测漏掉时的对比度：.tab-label 1.04、.pic-caption / .verse-cite 3.54。 */
-.dark .pic-caption,
-.dark .verse-cite {
-  color: #9d9483;
-}
-.dark .tab-label {
-  color: #c4bbaa;
-}
-.dark .tab-input:checked + .tab-label {
-  color: #f2ece1;
+  .tab-input {
+    @apply sr-only;
+  }
+  .tab-label {
+    @apply cursor-pointer rounded-lg px-3 py-1.5 text-sm text-gray-600 transition-colors hover:bg-gray-100 dark:text-[#c4bbaa] dark:hover:bg-[#26201a];
+  }
+  .tab-panel {
+    @apply hidden w-full basis-full;
+  }
+  /* peer 变体在这里用不了：`~` 会把前面所有 radio 都算作 peer，多个面板会一起显示，
+   * 所以面板必须跟在自己的 label 之后（相邻选择器）。 */
+  .tab-input:checked + .tab-label {
+    @apply bg-gray-100 font-semibold text-gray-900 dark:bg-[#26201a] dark:text-[#f2ece1];
+  }
+  .tab-input:checked + .tab-label + .tab-panel {
+    @apply block;
+  }
+  .tab-input:focus-visible + .tab-label {
+    @apply outline outline-2 outline-offset-2 outline-rose-700;
+  }
+  .tab-panel > :first-child {
+    margin-top: 0.5rem;
+  }
+  .tab-panel > :last-child {
+    margin-bottom: 0;
+  }
 }

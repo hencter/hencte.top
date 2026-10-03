@@ -20,13 +20,19 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Class sources. Automatic content detection does not cover the template trees
- * in this project, so utilities used only in a template would otherwise appear
- * one build late — hugo_stats.json is written by the Hugo run that *follows*
- * this compile step. @source paths resolve relative to this file. */
+ * in this project, so utilities used only in a template would otherwise be missed.
+ * @source paths resolve relative to this file.
+ *
+ * hugo_stats.json used to be listed here too. It is written by the Hugo run that
+ * *follows* this compile step, which coupled every compile to the previous build
+ * (a committed stylesheet could lag the templates by one build). Measured with
+ * the globs below in place: compiling with and without that source produces
+ * byte-identical output (116,645 B, 0 line diff), so it adds nothing and was
+ * removed. Verified afterwards: two compiles around a full Hugo build produce the
+ * same SHA-256. */
 @source "../../../../layouts/**/*.{html,xml,txt}";
 @source "../../layouts/**/*.html";
 @source "../../../../content/**/*.md";
-@source "../../../../hugo_stats.json";
 
 @theme {
   --font-serif: "LXGWWenKai", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;

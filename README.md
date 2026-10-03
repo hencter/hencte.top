@@ -93,6 +93,25 @@ python scripts/verify_urls.py                                  # 验收
 离线一次性完成，**构建期不做转码**（这是 CI 时长与上传量的关键取舍）。历史图片由 `scripts/*` 之外的一次性脚本处理过，
 原图仍可在 git 历史里找回。
 
+## 短代码（`layouts/shortcodes/`）
+
+六个自带短代码，共同约定：**零 JavaScript、断网可构建、只用主题已有的颜色 token**（宣纸 / 朱红 / 暖灰），因此暗色自动跟随。
+完整示例见草稿页 `content/zh/shortcodes.md`（`draft = true`，`hugo server -D` 可见，不会发布）。
+
+| 短代码 | 用途 | 写法 |
+| --- | --- | --- |
+| `note` | 提示框，与 Obsidian callout 同一套类名 | `{{</* note type="tip" title="小技巧" fold="true" open="true" */>}}…{{</* /note */>}}` |
+| `pic` | 插图 + 图注，走 `_partials/img.html`（页包 → assets） | `{{</* pic src="/img/projects/nova.webp" alt="封面" caption="图注" */>}}` |
+| `chapter` | 按 `novel`+`chapter` 查找章节，自动取标题与链接 | `{{</* chapter 12 */>}}`、`{{</* chapter novel="sky-tax" n="12" */>}}` |
+| `seal` | 朱红印章（正文内联，竖排） | `{{</* seal size="sm" shape="round" */>}}幸{{</* /seal */>}}` |
+| `verse` | 诗/古文，默认竖排、窄屏自动回落横排 | `{{</* verse cite="陆游《游山西村》" */>}}…{{</* /verse */>}}` |
+| `tabs` + `tab` | 纯 CSS 标签页（`input:checked + label + .tab-panel`） | `{{</* tabs */>}}{{</* tab name="bash" */>}}…{{</* /tab */>}}{{</* /tabs */>}}` |
+
+写内容时的两条硬约束（都会让**整站**构建失败，围栏代码块也不豁免）：
+
+1. 短代码语法示例必须转义成 `{{</* name */>}}`；
+2. 正文里不得出现短代码占位符的字面串（要展示时在中间插零宽字符：`H&#xfeff;AHAHUGOSHORTCODE`，实体写在代码 span 之外）。
+
 ## 抓取与引用政策（Cite vs Protect）
 
 - **Cite 轨**：博客 `/log` `/tech` `/ancient`、品牌页（首页/关于/项目/友链/博客索引）可索引、可引用。

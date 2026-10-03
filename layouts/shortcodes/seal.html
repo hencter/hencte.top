@@ -1,0 +1,18 @@
+{{/*
+  seal — 朱红印章。站点的强调色本来就是「宣纸上的朱红印记」（见 main.css 顶部的
+  palette 注释），这个短代码让正文里也能直接盖一枚印。
+
+  用法：
+    {{< seal >}}亦幸{{< /seal >}}         ← 两字竖排，最像真印
+    {{< seal size="sm" >}}阁{{< /seal >}}
+    {{< seal shape="round" >}}幸{{< /seal >}}
+
+  参数：size（sm / md / lg）、shape（square 默认 / round）。
+  无障碍：输出 role="img" + aria-label，读屏会念「印：亦幸」。
+*/}}
+{{- $text := .Inner | plainify | strings.TrimSpace -}}
+{{- $size := .Get "size" | default "md" -}}
+{{- $shape := .Get "shape" | default "square" -}}
+{{- with $text -}}
+  <span class="seal seal--{{ $size }} seal--{{ $shape }}" role="img" aria-label="印：{{ . }}">{{ . }}</span>
+{{- end -}}

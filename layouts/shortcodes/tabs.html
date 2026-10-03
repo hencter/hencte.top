@@ -1,0 +1,22 @@
+{{/*
+  tabs — 纯 CSS 标签页（无 JS、无网络）。子级用 {{< tab >}}。
+
+  用法：
+    {{< tabs >}}
+    {{< tab name="PowerShell" >}}
+    ```powershell
+    Get-ChildItem
+    ```
+    {{< /tab >}}
+    {{< tab name="bash" >}}
+    ```bash
+    ls -la
+    ```
+    {{< /tab >}}
+    {{< /tabs >}}
+
+  实现：每个 tab 输出「input + label + panel」三连，CSS 用相邻兄弟选择器
+  （`input:checked + label + .tab-panel`）显示对应面板——不需要 JS，也不需要为
+  每个下标写一条规则。单选组的 name 取自父级 .Ordinal，所以同页多组标签页互不干扰。
+*/}}
+<div class="tabs">{{ .Inner }}</div>

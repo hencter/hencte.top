@@ -1,0 +1,14 @@
+{{/*
+  tab — tabs 里的一页。子级短代码，请勿单独使用。
+
+  位置参数或 name 参数即标签文字；内容支持 Markdown。
+  每页输出三条相邻元素（input / label / panel），CSS 依据相邻关系切换，
+  因此这一层不需要 id 也能工作；id 仍然给出，便于 label 关联与无障碍点击。
+  面板内容用 markdownify，所以代码块、列表、链接都能正常渲染。
+*/}}
+{{- $name := .Get "name" | default (.Get 0) | default "Tab" -}}
+{{- $gid := printf "tabs-%d" .Parent.Ordinal -}}
+{{- $iid := printf "%s-tab-%d" $gid .Ordinal -}}
+<input type="radio" class="tab-input" name="{{ $gid }}" id="{{ $iid }}"{{ if eq .Ordinal 0 }} checked{{ end }}>
+<label class="tab-label" for="{{ $iid }}">{{ $name }}</label>
+<div class="tab-panel">{{ .Inner | markdownify }}</div>

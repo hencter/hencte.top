@@ -1,0 +1,32 @@
+{{/*
+  note — 正文提示框（与 Obsidian callout 同一套类名，因此配色、暗色、折叠行为完全一致）。
+
+  用法：
+    {{< note >}}正文，支持 **Markdown**{{< /note >}}
+    {{< note type="tip" title="小技巧" >}}…{{< /note >}}
+    {{< note type="warning" fold="true" open="true" >}}…{{< /note >}}
+
+  参数：type（note/info/tip/success/question/warning/danger/bug/example/quote/abstract/todo/failure/important）、
+        title（缺省用类型的英文名，与 render-blockquote.html 的行为保持一致）、
+        fold（true 时输出 <details>）、open（配合 fold 默认展开）。
+
+  说明：标题故意不回退到中文——站点上已有的 Obsidian callout 都是英文标题，
+  这里必须与它们一致；要中文化需要给 i18n/*.toml 加键（见 README「短代码」一节）。
+*/}}
+{{- $type := lower (.Get "type" | default "note") -}}
+{{- $known := slice "note" "info" "tip" "success" "question" "warning" "danger" "bug" "example" "quote" "abstract" "todo" "failure" "important" -}}
+{{- if not (in $known $type) -}}{{- $type = "note" -}}{{- end -}}
+{{- $title := .Get "title" | default (title $type) -}}
+{{- $body := .Inner | markdownify -}}
+{{- if .Get "fold" -}}
+  {{- $open := .Get "open" -}}
+  <details class="callout callout-{{ $type }}"{{ if $open }} open{{ end }}>
+    <summary class="callout-header"><span class="callout-icon"></span><strong class="callout-title">{{ $title }}</strong></summary>
+    <div class="callout-body">{{ $body }}</div>
+  </details>
+{{- else -}}
+  <div class="callout callout-{{ $type }}">
+    <div class="callout-header"><span class="callout-icon"></span><strong class="callout-title">{{ $title }}</strong></div>
+    <div class="callout-body">{{ $body }}</div>
+  </div>
+{{- end -}}

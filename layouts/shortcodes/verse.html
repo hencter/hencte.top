@@ -1,0 +1,27 @@
+{{/*
+  verse — 诗 / 古文引文，默认竖排（与 /ancient/ 竖排阅读同一套想法）。
+
+  竖排用 writing-mode: vertical-rl，行由原文换行决定（white-space: pre-line），
+  所以**内容按行写**，不要写 Markdown——竖排里的 <p> 会变成一列一列。
+  窄屏自动回落成横排，避免手机上横向拖拽。
+
+  用法：
+    {{< verse >}}
+    山重水复疑无路
+    柳暗花明又一村
+    {{< /verse >}}
+
+    {{< verse mode="horizontal" cite="陆游《游山西村》" >}}
+    山重水复疑无路
+    柳暗花明又一村
+    {{< /verse >}}
+
+  参数：mode（vertical 默认 / horizontal）、cite（出处，可省）、lang（默认 zh-Hant）。
+*/}}
+{{- $mode := .Get "mode" | default "vertical" -}}
+{{- $cite := .Get "cite" -}}
+{{- $lang := .Get "lang" | default "zh-Hant" -}}
+<div class="verse verse--{{ $mode }}">
+  <div class="verse-body" lang="{{ $lang }}">{{ .Inner | htmlEscape | safeHTML }}</div>
+  {{- with $cite }}<p class="verse-cite">—— {{ . | markdownify }}</p>{{ end -}}
+</div>

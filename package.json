@@ -11,6 +11,8 @@
 		"generate": "pnpm variants && pnpm css",
 		"check": "python scripts/verify_urls.py",
 		"check:templates": "hugo --ignoreCache --printUnusedTemplates --printPathWarnings --printI18nWarnings",
+		"projects": "node scripts/fetch-projects.mjs",
+		"projects:check": "node scripts/fetch-projects.mjs --check",
 		"audit:visual": "node scripts/visual_audit.mjs",
 		"list": "hugo list all",
 		"format": "prettier --write .",

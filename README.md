@@ -64,6 +64,7 @@ content/hk/   繁體（香港，→ /hk/，生成）
 | `scripts/verify_urls.py` | 用 `public/` 产物验收：live URL 覆盖、别名、已发布页面、图片引用、小说章节归属 |
 | `scripts/asset_audit.py` | 按页面统计第三方资源加载面（MathJax/mermaid/Heti/CSS） |
 | `scripts/visual_audit.mjs` | Playwright 真机渲染审计：截图 + 控制台错误/破图/横向溢出/字号层级/暗色模式（`pnpm audit:visual`） |
+| `scripts/fetch-projects.mjs` | 用 `gh` 取公开仓库元数据 → `data/projects/live.json`（星标/最近推送/语言/topics/归档/许可证）：`pnpm projects` 生成、`pnpm projects:check` 只读对账 |
 
 迁移脚本保留下来做对照与幂等复核（迁移本身已完成，日常不需要再跑）：
 
@@ -235,6 +236,14 @@ Astro 侧的状态：`hencter/astro.hencte.top` 仓库描述已标注「旧版�
 要么是 `web_fetch` 实测 200 的线上地址 —— 没有封面图就用无图版式，**不要伪造图片 URL**。
 模板只用既有原语（`.card`/`.chip`）与语义 token，无新颜色；四语由 `pnpm variants` 同步，
 `themes/kiss/layouts/page.html` 只多一行 partial 调用。
+
+GitHub 侧的客观字段（星标、最近推送、语言、topics、是否归档、许可证）由 `pnpm projects`
+生成到 `data/projects/live.json`。**构建期不调用 GitHub API**：匿名只有 60 次/小时且 Cloudflare
+构建 IP 共享；`pnpm build` 带 `--ignoreCache`，实测每次构建都会真打一次；更要命的是失败时
+`resources.GetRemote` 返回 `nil` 却不置 `.Err`（实测），页面会静默少内容而构建照样绿。
+`live.json` 只放语言无关的字段（**私有仓库与 fork 永不入库**），条目文案仍在
+`content/{zh,en}/projects.md` 的 front matter；`pnpm projects:check` 与 GitHub 对账，
+不一致就 exit 1，并顺带报出：站点引用但查不到的仓库、已归档的、GitHub 认不出许可证的。
 
 ## GitHub 仓库 About 维护（gh）
 

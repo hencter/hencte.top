@@ -1,26 +1,37 @@
 # hencte.top
 
-Hugo 站点源码（`https://hencte.top`）。内容从 Astro 站
-[`hencter/astro.hencte.top`](https://github.com/hencter/astro.hencte.top) 迁移而来：
-blog 文章、中英文品牌页、小说专区（中英双语 + 插图）、繁体（/tw、/hk）镜像。
+亦幸小阁的站点源码（<https://hencte.top>）：**Hugo 0.167 + Tailwind v4** 构建的**四语**静态站 ——
+简体（`/`）、英文（`/en/`）、繁體台灣（`/tw/`）、繁體香港（`/hk/`），当前构建产出 **569 页**
+（ZH 221 / EN 46 / TW 151 / HK 151），无客户端框架、无运行时后端。
+
+**Astro → Hugo 迁移已全部完成**（2026-10）：blog 文章、四语品牌页、原创小说专区（中英双语 + 插图）、
+Cite/Protect 抓取政策与机器可读出口都在本仓库维护。Astro 站
+[`hencter/astro.hencte.top`](https://github.com/hencter/astro.hencte.top) 已标注为旧版；
+`scripts/migrate_astro.py` 保留下来做对照与幂等复核，日常构建不需要它。
 
 ## 构建
 
 ```bash
 pnpm install
-pnpm build      # variants → css → hugo（严格构建，含 --panicOnWarning）
+pnpm generate   # variants + css：刷新两个「构建输入」（产物提交入库）
+pnpm build      # hugo：严格构建站点（--panicOnWarning 等）
 pnpm dev        # 本地预览（hugo server -D）
+pnpm check      # python scripts/verify_urls.py：用 public/ 产物做 URL/别名/图片验收
 ```
 
-`pnpm build` 依次执行四步，缺一不可：
+`pnpm build` **只跑 `hugo`**；两个「构建输入」由 `pnpm generate` 刷新：
 
 | 步骤 | 命令 | 产物 | 说明 |
 | --- | --- | --- | --- |
 | 繁体变体 | `pnpm variants` | `content/{tw,hk}/`、`i18n/{tw,hk}.toml` | 由 `content/zh` 经 OpenCC 生成，范围与 Astro 站一致（品牌页 + 书架） |
 | Tailwind | `pnpm css` | `assets/css/tailwind.css` | Tailwind CSS CLI 编译主题入口 `themes/kiss/assets/css/main.css` |
-| 站点 | `hugo` | `public/` | 读取前三步的产物 |
+| 站点 | `hugo` | `public/` | 读取前两步的产物 |
 
-前两步的产物**不入库**（见 `.gitignore`）。原因是 Hugo 无法可靠地自行启动 Tailwind：
+这两个生成物**都提交入库**（`.gitignore` 末尾的注释写明了原因）：Cloudflare Workers Builds 只跑构建命令，
+面板里执行的就是纯 `hugo`，所以 `content/{tw,hk}` 与 `assets/css/tailwind.css` 必须保持仓库内的最新状态。
+改动 `content/zh` 的品牌页或模板类名后，先 `pnpm generate` 再提交。
+
+Tailwind 不能交给 Hugo 自己启动，原因是 Hugo 无法可靠地启动它：
 它通过解析 `node_modules/.bin/tailwindcss(.cmd)` 寻找 Node 入口，而 pnpm 的 Windows shim
 在文件开头写入的 `NODE_PATH` 会被该解析器误匹配，构建直接失败
 （`binary "tailwindcss" is not a Node.js script`）。把编译显式放在 Hugo 之前同时解决了
@@ -40,8 +51,9 @@ content/tw/   繁體（台灣，→ /tw/，生成）
 content/hk/   繁體（香港，→ /hk/，生成）
 ```
 
-博客文章按栏目存放（`log/`、`tech/`、`ancient/`），URL 与 Astro 站一一对应；
+博客文章按栏目存放（`log/`、`tech/`、`ancient/`）；URL 与迁移前的 Astro 站逐条比对过，
 旧 Hugo 路径以 `aliases` 形式保留重定向（例：`/tech/hugo/markdown/` → `/tech/hugo/markdown-cheatsheet/`）。
+`content/{tw,hk}` 由 `pnpm variants` 生成，**不要手改**（会被覆盖），只改 `content/zh`。
 
 ## 脚本
 
@@ -53,7 +65,7 @@ content/hk/   繁體（香港，→ /hk/，生成）
 | `scripts/asset_audit.py` | 按页面统计第三方资源加载面（MathJax/mermaid/Heti/CSS） |
 | `scripts/visual_audit.mjs` | Playwright 真机渲染审计：截图 + 控制台错误/破图/横向溢出/字号层级/暗色模式（`pnpm audit:visual`） |
 
-迁移可重复执行（幂等）：
+迁移脚本保留下来做对照与幂等复核（迁移本身已完成，日常不需要再跑）：
 
 ```bash
 git clone https://github.com/hencter/astro.hencte.top.git /tmp/astro
@@ -153,16 +165,77 @@ corepack pnpm css && hugo --ignoreCache --panicOnWarning   # 连续两轮 → �
 
 机器可读出口：`/llms.txt`、`/llm.txt`、`/llms-full.txt`、`/rss.xml`、`/sitemap.xml`
 （均由 `layouts/home.<format>.txt`、`layouts/rss.xml`、`layouts/robots.txt` 生成）。
+四语各自输出一份镜像，**根路径那份是权威版本**，非默认语言的同名文件里也写明了这一点。
 
-## 与 Astro 站的已知差异
+2026-10-04 校准：三份 txt 与 `robots.txt` 的口径已统一为「robots `Disallow` + 页面
+`noindex, noai, noimageai` + 不进 `sitemap.xml`/`rss.xml` + 正文不进 `llms-full.txt`」；
+语言声明改为实际的四语，技术栈改写为 Hugo + Tailwind v4，并补了一行实体消歧
+（GitHub 资料里的 `blog` 字段是 `hencter.top`，与本主站 `hencte.top` 不是同一域名）。
 
-- Hugo 以 `sitemapindex` 形式输出 `/sitemap.xml`（指向 `/zh/sitemap.xml`、`/en/sitemap.xml`），
+## 迁移状态：Astro → Hugo（已完成）
+
+内容、URL、别名、图片、短代码与 wiki 语法都已迁到本仓库，并用 `verify_urls.py` 与线上 sitemap 逐条比对过
+（报告在 `migration/`）。下面两点是**保留的结构差异**，不是待办：
+
+- Hugo 以 `sitemapindex` 形式输出 `/sitemap.xml`（指向 `/zh/sitemap.xml`、`/en/sitemap.xml` 等），
   Astro 站是单个扁平 sitemap；URL 集合本身一致。
-- `/en/llms.txt` 等英文镜像文件是 Hugo 输出格式的自然结果，Astro 站只有站点级一份。
+- `/en/llms.txt`、`/tw/llms.txt` 等镜像文件是 Hugo 多语言输出格式的自然结果，Astro 站只有站点级一份。
+
+Astro 侧的状态：`hencter/astro.hencte.top` 仓库描述已标注「旧版，已迁移」；
+个人主页 README（`hencter/hencter`）里的「用 Astro 建站」与网站徽章也已改成 Hugo。
 
 暗色模式用的是「集中式 `.dark` 覆盖层」（`main.css` 末尾，无 `@layer` 因而优先于 Tailwind 工具类），
 一处即可调全站配色；代码块无需处理——当前 `noClasses = true` + monokai 本身就是深色卡片，
 明暗两种模式下都是同一块深色代码块。
+
+## 文章信源（脚注）规范
+
+对外文章里可核查的事实、数据与引文一律带脚注。约定如下（`content/zh/log`、`content/zh/tech` 等已按此执行）：
+
+- 标记紧贴断言最后一个字、标点之前：`…零售渗透率达到 61.4%[^1]。`
+- 定义块放文末（署名行之后），**每条必须单行** —— Goldmark 的脚注续行需要 4 空格缩进，折行会渲染错：
+  `[^1]: 乘联会 2026 年 4 月汽车零售数据. <https://www.cpcaauto.com>（访问 2026-10-04）`
+- 编号按正文首次出现顺序；同一信源复用同一编号
+- 一手信源优先（官网 / 官方文档 / 论文原文 / 官方仓库）；热搜、快讯、聚合站只作线索，用到时在定义里标明性质
+- **无法核实的断言不硬加脚注**：写进验收报告的「未核实」清单并给出弱化或删除建议；
+  新找的来源必须 `web_fetch` 实际打开过（HTTP 200 且内容能支撑该断言）
+
+2026-10-04 现状：`content/zh` 与 `content/en` 的非小说共 **108 篇**逐篇评估，**24 篇**补/转脚注
+（新增定义 50 条、正文标记 69 处），并修掉 4 处「有标记无定义」的历史缺陷
+（`ai-token-carrier-pricing`、`changxin-chip-semiconductor`、`terminal`、`arch-linux`）。
+全站标记/定义交叉校验 0 违规；渲染级验证看 `public/**` 里的 `footnote-ref`、`id="fn:*"`、`footnote-backref`。
+评估中发现的「断言与来源不符」「数据无源」按来源原文改正，其余记入报告待决策。
+
+## 项目页：重点项目 + 更多公开项目
+
+`content/{zh,en}/projects.md` 的 front matter 驱动，两个数组分工明确：
+
+| 字段 | 渲染 | 内容 |
+| --- | --- | --- |
+| `featuredProjects` | `themes/kiss/layouts/_partials/projects.html` | 6 个重点项目，带封面图（`assets/img/projects/*`） |
+| `moreProjects` + `moreProjectsSection` | `themes/kiss/layouts/_partials/more-projects.html`（2026-10 新增） | 11 个公开项目，纯文字卡片；数组为空时整块不渲染 |
+
+两条约束：条目文案只能来自仓库 README / description（不许凭仓库名编造）；`url` 要么是真实存在的公开仓库，
+要么是 `web_fetch` 实测 200 的线上地址 —— 没有封面图就用无图版式，**不要伪造图片 URL**。
+模板只用既有原语（`.card`/`.chip`）与语义 token，无新颜色；四语由 `pnpm variants` 同步，
+`themes/kiss/layouts/page.html` 只多一行 partial 调用。
+
+## GitHub 仓库 About 维护（gh）
+
+站点与仓库的对外说明都以 `gh` 为准，不要浏览器里逐个点：
+
+```bash
+gh repo list hencter --limit 200 --json name,description,homepageUrl,repositoryTopics,visibility,isFork,isArchived,primaryLanguage,pushedAt
+gh api repos/hencter/<name> --jq '{description,homepage,topics,archived,fork,visibility}'
+gh api -X PATCH repos/hencter/<name> -f description='…' -f homepage='https://…'
+gh api -X PUT repos/hencter/<name>/topics --input topics.json      # {"names":["hugo","i18n"]}
+```
+
+2026-10-04 现状：**55 个公开非 fork 仓库全部补齐 description + topics**（本轮前 31 个无描述、
+45 个无 topics；现在逐仓库读回 55/55 与写入一致，topics 全为小写 ASCII）。分类口径与逐仓库证据：
+展示级 13 / 工具级 11 / 实验级 19 / 归档候选 4 / 占位 8。规则：无 README 或空壳仓库只写可证事实
+（例：「空仓库：无 README、无文件、无提交」）；`homepage` 只在实测 HTTP 200 时写入；
+**不 archive、不删除、不改 README / 代码 / release / visibility**。
 
 ## 评审（4 名评审员 + 自动审计）与修复
 
@@ -192,10 +265,15 @@ corepack pnpm css && hugo --ignoreCache --panicOnWarning   # 连续两轮 → �
 | MathJax 配置排在外链之后（缓存命中丢配置）、浮动大版本 | `math.html:1-11` | 配置前移 + 固定 `mathjax@3.2.2`（`hugo -D` 实测顺序正确） |
 | `_headers` 只覆盖根路径（`/en/llms.txt` 等无 charset） | impl 评审 | 补 `/*/llms*.txt` 与 `/css/*` immutable |
 
-未修、留待决策的项（评审 P1/P2，报告内有逐条证据与改法）：迁移脚本 `--apply` 无条件覆盖内容（建议 `--check`/备份）、
-无 CI 与聚合 `check` 脚本、`.pages.yml` 为 0 字节、图片缺 `width/height`（CLS）、文章页标签因 `disableKinds` 完全不显示、
-古文竖排 15888px 横向滚动缺可发现性、宽屏右侧 326–806px 空白（可改 sticky 目录侧栏）、卡片/间距/字号体系的多处不一致、
-`font.css` 无理由 `!important`、`hugo_stats.json` 被跟踪导致脏树、非默认语言 llms.txt 混排中文。
+未修、留待决策的项（截至 2026-10-04；逐条证据与改法在评审报告里）：迁移脚本 `--apply` 无条件覆盖内容
+（建议加 `--check`/备份）、**无 CI workflow**（`.github/workflows` 不存在）与**仓库无 LICENSE**、
+`.pages.yml` 为 0 字节、图片缺 `width/height`（CLS）、文章页标签因 `disableKinds` 完全不显示、
+古文竖排 15888px 横向滚动缺可发现性、宽屏右侧 326–806px 空白（可改 sticky 目录侧栏）、
+卡片/间距/字号体系的多处不一致、非默认语言 `llms*.txt` 正文仍是中文（根路径为权威版本）、
+仓库无 social preview 图、`hencter.top` 域名已无 A 记录但 GitHub profile 的 website 字段与
+`site` 仓库的 homepage 仍指向它（profile 需要 `gh auth refresh -h github.com -s user` 之后才能改）。
+
+已解决（原先列在此）：`hugo_stats.json` 不再被跟踪（见 `.gitignore`）；`font.css` 的 `!important` 已清理。
 
 ## 构建：`hugo` 一条命令
 
@@ -211,7 +289,8 @@ You must now install the Tailwind CSS CLI via npm."*），`hugo mod npm pack` �
 | `content/tw/`、`content/hk/` | OpenCC（`pnpm variants`） | 改动 `content/zh` 后 |
 | `static/fonts/LXGWWenKai-Novel.woff2` | fontTools 子集化（一次性，**580,884 B**；许可证文本在 `assets/fonts/`） | 小说用字超出子集时 |
 
-一键刷新：`pnpm generate`（= variants + lunar + css），然后照旧 `pnpm build`。
+一键刷新：`pnpm generate`（= `variants` + `css`；没有 lunar 步骤 —— `data/lunar_years.json` 是静态数据，
+换算在模板里做），然后照旧 `pnpm build`，生成物一并提交。
 Hugo 侧仍然做了全部该它做的事：`minify` + `fingerprint` + SRI、`images.Text` 画正文图、`.Process` 压缩、
 `resources.Get` 按需加载——**能从 Hugo 走的都在 Hugo 里**（`js.Build` 内置 esbuild，连打包器都不用装）。
 

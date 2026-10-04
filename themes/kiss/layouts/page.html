@@ -48,6 +48,10 @@
 
     {{ partial "projects.html" . }}
 
+    {{/* Secondary grid: `moreProjects` on a brand page (currently /projects/).
+         Renders only when the page carries the param. */}}
+    {{ partial "more-projects.html" . }}
+
     {{ with .Params.timeline }}
       <section class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
         {{ range . }}

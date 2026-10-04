@@ -101,7 +101,9 @@ function ghRepos() {
 const day = (iso) => (typeof iso === "string" ? iso.slice(0, 10) : "");
 const lang = (value) =>
 	typeof value === "string" ? value : (value?.name ?? "");
-const spdx = (value) => value?.spdxId ?? value?.key ?? "";
+/** `gh repo list` reports the SPDX id lowercased ("mit") while the REST license
+ *  endpoint returns "MIT"; normalise so the data file and any template agree. */
+const spdx = (value) => String(value?.spdxId ?? value?.key ?? "").toUpperCase();
 
 function buildLive(raw) {
 	const repos = {};

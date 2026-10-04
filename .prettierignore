@@ -1,0 +1,18 @@
+# 发布副本：这 13 个文件的字节要与 hugozh.cn 的 skill-manifest.json 对齐，
+# 任何格式化都会改哈希。校验命令见 AGENTS.md。
+.agents/skills/
+
+# 生成物：改由生成器（pnpm variants / pnpm css / hugo）负责，格式化只会制造来回 diff。
+content/tw/
+content/hk/
+i18n/tw.toml
+i18n/hk.toml
+assets/css/tailwind.css
+hugo_stats.json
+
+# 构建输出
+public/
+resources/
+
+# 锁文件
+pnpm-lock.yaml

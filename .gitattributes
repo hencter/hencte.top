@@ -1,0 +1,8 @@
+# 全仓库统一 LF。
+#
+# 两个理由：
+# 1. 跨平台一致，且避免把行尾差异混进内容 diff；
+# 2. `.agents/skills/hugo-static-site/` 是 hugozh.cn 的**发布副本**，按 manifest 里的
+#    sha256 逐文件校验（见 AGENTS.md）。core.autocrlf=true 时 git 会把工作区文件转成
+#    CRLF，哈希随即全部不匹配——校验命令会红，而文件"看起来"没变。
+* text=auto eol=lf

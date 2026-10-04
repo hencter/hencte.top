@@ -1,8 +1,12 @@
 # hugo-static-site
 
-A DSH skill for building, updating, and verifying Hugo static sites — theming and multi-theme
-layering, SEO head output and structured data, content in bulk — and for diagnosing the build
-failures that Hugo attributes to the wrong file.
+A skill for building, updating, and verifying Hugo static sites — theming and multi-theme
+layering, SEO head output and structured data, content in bulk, localized teaching-oriented
+documentation — and for diagnosing the build failures that Hugo attributes to the wrong file.
+
+It is written for agents in general, not for one product: the files are plain Markdown with no
+scripts, no dependencies and no absolute paths, and the install contract below is the same
+whatever loader you use.
 
 It exists because a 200-page Hugo site was built the hard way: the traps in
 [`references/gotchas.md`](references/gotchas.md) each cost a real debugging cycle, and one of them
@@ -14,17 +18,23 @@ It exists because a 200-page Hugo site was built the hard way: the traps in
 hugo-static-site/
 ├── SKILL.md                        # workflow + iron rules (loaded as the skill)
 ├── README.md                       # this file
+├── INSTALL-PROMPT.txt              # copy-paste install prompt (agent-agnostic; see Install)
 └── references/
     ├── commands.md                 # command notes: what the workflow uses (reference: `hugo gen doc`)
     ├── dates.md                    # date fields, time zones, localized formats, relative time
-    ├── gotchas.md                  # G1…G22: symptom → cause → fix
+    ├── gotchas.md                  # G1…G26: symptom → cause → fix
     ├── i18n.md                     # optional multilingual setup, switcher, i18n strings
     ├── seo.md                      # head tags, JSON-LD pitfall, sitemap/robots, performance
     ├── shortcodes.md               # authoring custom shortcodes: notation, methods, nesting
     ├── site-structure.md           # theme layers, front matter, navigation, i18n
+    ├── teaching-layer.md           # human/machine doc parity: front-matter contract, shared partials
     ├── versioning.md               # what to track, gitInfo, commit-backed "last updated"
     └── versions.md                 # version-keyed renames and defaults
 ```
+
+Thirteen files in total. A published mirror of this folder, with a machine-readable manifest
+(`path`, `bytes`, `sha256`, `url`, `rawUrl` per file), lives at <https://hugozh.cn/skill/> —
+`https://hugozh.cn/skill/skill-manifest.json`.
 
 **No scripts, and nothing transcribed that Hugo can generate.** Verification uses Hugo's own
 documented commands (`--printPathWarnings`, `--printUnusedTemplates`, `--printI18nWarnings`,
@@ -36,26 +46,41 @@ workflow prescribes; what cannot be generated (the trap catalogue, the workflow)
 
 ## Install
 
-Nothing is machine-specific: no scripts, no dependencies, no absolute paths.
+**Copy [INSTALL-PROMPT.txt](INSTALL-PROMPT.txt) into your agent and let it install itself.**
 
-**A. Put the folder where DSH already looks.** The natural place is a `skills` directory beside
-the profile data, e.g. `~/.dsh/skills/hugo-static-site/`.
+The prompt deliberately contains **no product-specific path** — no `.dsh`, no `.claude`, no
+`.cursor`. It cannot: every agent's skills/rules directory, loading mechanism and project-vs-user
+support differs, so any hard-coded directory silently fails for everyone else. (This skill's own
+docs got that wrong twice — first pinning `~/.dsh/skills/`, then treating `.dsh` as the default.)
 
-**B. Or point DSH at wherever you keep it.** Add a patch entry to
-`~/.dsh/profiles/<profile>/cordis.patch.yml`:
+What the prompt does fix is only what makes the install *checkable*; everything else is left to the
+agent, which knows its own convention better than this file does:
 
-```yaml
-- id: skill-filesystem
-  name: "@deepseek-ai/dsh-skill-filesystem"
-  config:
-    customSkillDirs:
-      - <absolute path of the directory that contains hugo-static-site>
-```
+| Fixed (otherwise unverifiable) | Left to the agent |
+| --- | --- |
+| the manifest's `path` and `sha256` for all files | which directory, and what it is called |
+| internal relative paths preserved (`references/` never flattened) | which loading/registration mechanism |
+| every file hash-verified after writing | project-level or user-level install |
+| the agent must state its identity and basis **before** acting | whether a session restart is needed |
 
-The skill catalog is built when a session starts, so restart DSH or open a new session — a
-freshly installed skill does not appear mid-session.
+The prompt also asks the agent to look for an existing project convention first
+(`AGENTS.md`, `CLAUDE.md`, `.cursor/rules`, `.<you>/`) and follow it rather than inventing a
+mechanism the project does not have.
 
-**C. No installation.** Read `SKILL.md` and follow it as plain documentation.
+**Materials.** The manifest at <https://hugozh.cn/skill/skill-manifest.json> lists each file's
+`path`, `bytes`, `sha256` plus two download locations (`url` site mirror, `rawUrl` repository).
+`sha256` matches the **published bytes** (UTF-8, no BOM, LF); it proves "identical to what was
+published", not "suitable for your project".
+
+**No skills mechanism?** These are thirteen plain Markdown files with no executable code. Read
+them into context as reference documentation, or distil the rules into whatever rules file the
+agent does support — there is nothing to install. You can also read the site mirror directly:
+<https://hugozh.cn/skill/SKILL.md>.
+
+**Fetching without a skills loader.** Either `git clone` the repository and copy the folder, or
+fetch each manifest `url` per file. Prefer the manifest route when hashes must match exactly:
+`git` rewrites line endings on some platforms (notably Windows), so a clone can hash differently
+while the content is identical.
 
 ## Use
 

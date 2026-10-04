@@ -65,6 +65,12 @@ $m.files | ForEach-Object {
   两个数组，条目可带 `repo`），GitHub 侧字段在 `data/projects/live.json`（`pnpm projects` 生成、
   `pnpm projects:check` 对账）。页面用 `projectSections` 开关决定渲染哪几块；两个 partial 对
   每个品牌页都会被调用，去掉开关就会到处长项目网格。
+- **content/ 里只放线上内容**：品牌页在语言根目录；文章在 `log/`、`tech/`、`ancient/`、`obsidian/`；
+  小说**每本书一个 section**（`shelf/<book>/_index.md` + `ch<NN>.md` → `/shelf/<book>/ch<NN>/`，
+  旧平铺 URL 由每章的 `aliases` 保留）。停用/草稿旧文放仓库根的 `content-archive/`——
+  **不要**用 `content/_xxx/` 存草稿：以 `_` 开头的目录 Hugo 照样构建（实测）。
+- **中英小说的相对路径必须一致**（`shelf/<book>/ch<NN>.md`）：项目没有显式 `translationKey`，
+  语言配对靠相对路径；路径一变，语言切换器就悄悄退回首页。
 - **Tailwind 必须在 Hugo 之前编译**：Hugo 无法可靠启动它（pnpm 的 Windows shim 会让
   `css.TailwindCSS` 报 `binary "tailwindcss" is not a Node.js script`）。不要"修好"这条顺序。
 - **`minify.minifyOutput` 写在 `hugo.toml`**，因为它不能依赖命令行标志（面板跑裸 `hugo`）。

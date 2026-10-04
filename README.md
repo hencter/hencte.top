@@ -45,12 +45,39 @@ Tailwind 不能交给 Hugo 自己启动，原因是 Hugo 无法可靠地启动�
 
 ## 内容结构
 
+内容按**类型**分区，四语各一套目录（`tw`/`hk` 是生成物）：
+
 ```
-content/zh/   简体（默认语言 → /）
-content/en/   英文（→ /en/）
-content/tw/   繁體（台灣，→ /tw/，生成）
-content/hk/   繁體（香港，→ /hk/，生成）
+content/zh/                简体（默认语言 → /）
+├── _index.md              首页
+├── about.md  blog.md  links.md  projects.md     品牌页（URL 冻结，见下）
+├── pages.md               品牌手记（旧站契约 URL）
+├── shortcodes.md          短代码速查（站点自身文档）
+├── log/                   日志：文章 + 叶子包（`log/<slug>/index.md` 与同目录的图）
+├── tech/                  技术：散文章 + 叶子包（`tech/<slug>/index.md`）+ 子分区
+│   ├── hugo/              Hugo 笔记（自带 `_index.md`）
+│   ├── road/              折腾之路
+│   └── tutorials/         教程
+├── ancient/               古文
+├── obsidian/              Obsidian 插件笔记
+└── shelf/                 书架 —— **每本书一个 section**
+    ├── _index.md          书架首页（列书）
+    ├── sky-tax/           `_index.md`（落地页）+ `ch01.md` … `ch26.md`
+    └── ai-counter-taming/ 同上（110 章）
+content/en/                英文（手写，结构与 zh 一致）
+content/{tw,hk}/           繁體（`pnpm variants` 生成，勿手改）
 ```
+
+**每本书一个 section**（2026-10 起）：章节 URL 是 `/shelf/<book>/ch<NN>/`；旧平铺 URL
+（`/shelf/<book>-ch<NN>/`，以及更早的 `/novel/…`）由每章的 `aliases` 保留跳转。章节页由
+`layouts/shelf/page.html` 渲染，书的落地页由 `layouts/shelf/section.html` →
+`_partials/novel-landing.html` 渲染——章节用 `weight` 排序，`.CurrentSection` 天然限定在本书内。
+**中英的 `shelf/<book>/ch<NN>.md` 相对路径必须一致**：项目没有显式 `translationKey`，
+语言配对靠相对路径，路径一变语言切换器就退回首页。
+
+**停用内容不进 `content/`**：迁移时统一标成草稿的旧文、Hugo quick-start 的 Lorem 演示页等，
+放在仓库根的 `content-archive/`（Hugo 不处理它），每条的去留建议与恢复方式见该目录的 README。
+注意**不能**用 `content/_xxx/` 存草稿：以 `_` 开头的目录 Hugo 照样构建（实测）。
 
 博客文章按栏目存放（`log/`、`tech/`、`ancient/`）；URL 与迁移前的 Astro 站逐条比对过，
 旧 Hugo 路径以 `aliases` 形式保留重定向（例：`/tech/hugo/markdown/` → `/tech/hugo/markdown-cheatsheet/`）。
@@ -288,7 +315,7 @@ gh api -X PUT repos/hencter/<name>/topics --input topics.json      # {"names":["
 | 强调色对比度不足：hero 徽章 4.12:1、暗色 rose-600 3.92–4.45 | 评审 2115 个文本元素逐像素实测 | 徽章 rose-700；补 `.dark .text-rose-600` |
 | `.dark .text-gray-300` 映射写反（分隔符暗 2.66/亮 1.41） | 同上 | 删除错误映射，面包屑分隔符改 `text-gray-500`（4.8:1） |
 | 无「跳到主内容」、`main` 无 id | 每页到正文前 11 个 Tab 站 | 加 skip link + `id="main"` |
-| 章节页「下一章」位于 97.7% 处、章节目录在正文之后 | `/shelf/sky-tax-ch01/` docH 7909 | 顶部加「下一章 →」、章节目录移到正文前；banner 去掉裁切 |
+| 章节页「下一章」位于 97.7% 处、章节目录在正文之后 | `/shelf/sky-tax/ch01/` docH 7909 | 顶部加「下一章 →」、章节目录移到正文前；banner 去掉裁切 |
 | `/obsidian/` 单篇栏目：卡片占 1/3 宽 + 整篇 Summary 塞进卡（含表格） | 卡片 358×2286 | 列数按页数降级 + `.Summary` 加 `line-clamp-6` |
 | MathJax 配置排在外链之后（缓存命中丢配置）、浮动大版本 | `math.html:1-11` | 配置前移 + 固定 `mathjax@3.2.2`（`hugo -D` 实测顺序正确） |
 | `_headers` 只覆盖根路径（`/en/llms.txt` 等无 charset） | impl 评审 | 补 `/*/llms*.txt` 与 `/css/*` immutable |
@@ -413,7 +440,7 @@ Hugo 会渲染——迁移时按 `PLACEHOLDER_BODY_RE` 丢弃这类短占位正�
 | 古文竖排 | `layouts/ancient/page.html` + `_partials/head/heti.html` | 内置 Heti（MIT，`assets/vendor/heti`）：`heti--vertical` + `autoSpacing()`，仅古文文章页加载 |
 | 暗色模式 | `_partials/head/theme-boot.html` + `_partials/theme-toggle.html` + `main.css` 的 `.dark` 层 | 与 Astro 同约定：`localStorage["theme"]`、`<html class="dark">`、`aria-pressed`；首屏前置脚本防闪烁 |
 | 404 | `layouts/404.html` | 走 baseof 渲染（带站点导航与暗色模式），列出博客/项目/友链/关于/书架入口 |
-| 小说导航 | `layouts/shelf/section.html`（书架）、`layouts/shelf/page.html`（落地页与章节页） | 落地页列**本系列**章节；章节页列章节 + 上一章/下一章，按 `weight`（= `chapter`）排序。系列用 `novel` 参数归组，落地页无此参数，故回退用文件名（见模板注释） |
+| 小说导航 | `layouts/shelf/section.html`（书架根 + 一本书的落地页）、`_partials/novel-landing.html`、`layouts/shelf/page.html`（章节页） | 书架根列 `.Sections`（每本书一个 section）；落地页列**本书**的 `RegularPages.ByWeight`；章节页列章节 + 上一章/下一章。每本书一个目录后，"只能列自己那本"是结构保证，不再需要靠 `novel` 参数过滤 |
 | 锚点偏移 | `main.css` 的 `:target { scroll-margin-top }` | 吸顶导航不再遮挡跳转目标 |
 
 Wiki 语法在迁移期处理（`scripts/migrate_astro.py`）：`[[页面]]` 有对应页面时转链接、否则降级为纯文本；

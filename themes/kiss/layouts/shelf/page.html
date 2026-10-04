@@ -1,152 +1,107 @@
 {{/*
-  One template for both shelf page kinds, matching how the Astro site's
-  lib/novel-page.ts branches:
-    - a chapter (front matter has `chapter`) gets series navigation, chapter
-      image, a chapter list and previous/next links;
-    - a series landing gets the cover, blurb and the chapter list.
-  Chapters are grouped by the `novel` key and ordered by `weight`.
+  Novel chapter — /shelf/<book>/ch<NN>/.
 
-  @context {page} a page in the shelf section
+  Chapters are grouped by the `novel` key and ordered by `weight`. The book is a
+  section, so `.CurrentSection` is that book: prev/next and the chapter index are
+  scoped to it instead of to one flat directory holding every series (which is also
+  why `.RegularPages` is filtered by `novel` below — the filter stays because the
+  `chapter` shortcode and the theme's landing logic both key off it).
+
+  The series landing is a section page now and lives in `shelf/section.html` →
+  `_partials/novel-landing.html`.
+
+  @context {page} a chapter page in the shelf section
 */}}
 {{ define "main" }}
   {{ $page := . }}
-  {{/* Series slug. Chapters carry it in `novel`; a landing page has no `novel`,
-       so fall back to its own file name (shelf/sky-tax.md -> "sky-tax"). Without
-       that fallback a landing compared `nil` with the other landings' `nil` and
-       listed the series themselves instead of their chapters. */}}
   {{ $series := .Params.novel }}
-  {{ if not $series }}{{ $series = .File.ContentBaseName }}{{ end }}
   {{ $shelf := .CurrentSection }}
   {{/* `where` on the section's page collection, not append-in-range: it keeps the
-       result a page collection (so .ByWeight works) and pages without the `novel`
-       param — the landings themselves — simply do not match. */}}
+       result a page collection (so .ByWeight works). */}}
   {{ $chapters := slice }}
   {{ with $shelf }}
     {{ $chapters = where .RegularPages "Params.novel" $series }}
     {{ $chapters = $chapters.ByWeight }}
   {{ end }}
 
-  {{ if .Params.chapter }}
-    {{/* ---------------------------- chapter ---------------------------- */}}
-    {{/* One reading column: the blocks used to be 1088 / 672 / 1088 wide, so the
-         banner, the chapter index and the reader edge did not line up. */}}
-    <div class="chapter-body">
-    {{ $prev := false }}
-    {{ $next := false }}
-    {{ $seen := false }}
-    {{ range $chapters }}
-      {{ if $seen }}
-        {{ if not $next }}{{ $next = . }}{{ end }}
-      {{ else if eq .RelPermalink $page.RelPermalink }}
-        {{ $seen = true }}
-      {{ else }}
-        {{ $prev = . }}
-      {{ end }}
-    {{ end }}
-
-    <nav class="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm" aria-label="{{ T "navChapterTop" }}">
-      <span>
-        <a href="{{ $shelf.RelPermalink }}" class="text-ink-muted hover:text-accent">← {{ T "backToShelf" }}</a>
-        {{ with $shelf }}<span class="mx-2 text-ink-faint">/</span><span class="text-ink-faint">{{ .Title }}</span>{{ end }}
-      </span>
-      {{/* The next-chapter link used to exist only at the very end of an ~8000px
-           chapter (y=8115 of 8291), so serial readers had no way forward from the
-           top of the page. */}}
-      {{ with $next }}
-        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} →</a>
-      {{ end }}
-    </nav>
-
-    {{/* Only when the body does not open with its own "# chapter title": an empty
-         header still drew its bottom border right against the banner. */}}
-    {{ $useCanvas := and site.Params.novelCanvas (eq site.Language.Lang "zh") }}
-    {{/* With the canvas the body heading is drawn inside the image, so the page must
-         own the <h1>; text chapters still suppress it to avoid a duplicate. */}}
-    {{ if or $useCanvas (not (strings.HasPrefix (strings.TrimSpace .RawContent) "# ")) }}
-      <header class="prose-header">
-        <h1>{{ .Title }}</h1>
-        {{/* The overview is the only text search engines and llms.txt get for a
-             chapter: the body itself is published as images. */}}
-        {{ with .Description }}<p class="mt-2 text-ink-muted">{{ . }}</p>{{ end }}
-      </header>
-    {{ end }}
-
-    {{ with .Params.chapterImage }}
-      {{/* Banner, not a full screen: unconstrained, a tall illustration pushed the
-           chapter text entirely below the fold on a reading page. `max-w-2xl` keeps
-           it modest without cropping (object-cover was cutting ~50% of the art). */}}
-      {{ partial "img.html" (dict "src" . "page" $page "alt" ($page.Params.imageAlt | default $page.Title) "class" "novel-banner mb-8 h-auto w-full max-w-2xl rounded-2xl" "eager" true "sizes" "(min-width: 768px) 672px, 92vw") }}
-    {{ end }}
-
-    {{ if $chapters }}
-      <details class="card chapter-index mb-8">
-        <summary class="cursor-pointer font-bold text-ink">{{ T "chapters" }}</summary>
-        <ol class="mt-4 space-y-1 text-sm">
-          {{ range $chapters }}
-            <li>
-              <a href="{{ .RelPermalink }}" class="hover:text-accent{{ if eq .RelPermalink $page.RelPermalink }} font-semibold text-accent{{ end }}">{{ .Title }}</a>
-            </li>
-          {{ end }}
-        </ol>
-      </details>
-    {{ end }}
-
-    {{/* Novel chapters render their text into <canvas> (see the partial); other
-         pages and languages keep the ordinary text body. */}}
-    {{ if and site.Params.novelCanvas (eq site.Language.Lang "zh") }}
-      {{ partial "novel-canvas.html" . }}
+  {{/* One reading column: the blocks used to be 1088 / 672 / 1088 wide, so the
+       banner, the chapter index and the reader edge did not line up. */}}
+  <div class="chapter-body">
+  {{ $prev := false }}
+  {{ $next := false }}
+  {{ $seen := false }}
+  {{ range $chapters }}
+    {{ if $seen }}
+      {{ if not $next }}{{ $next = . }}{{ end }}
+    {{ else if eq .RelPermalink $page.RelPermalink }}
+      {{ $seen = true }}
     {{ else }}
-      <article class="prose-content">{{ .Content }}</article>
-    {{ end }}
-
-    <nav class="mt-8 flex flex-wrap justify-between gap-4 text-sm" aria-label="{{ T "navChapterPager" }}">
-      {{ with $prev }}
-        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">← {{ T "prevChapter" }} · {{ .Title }}</a>
-      {{ else }}<span></span>{{ end }}
-      {{ with $next }}
-        <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} · {{ .Title }} →</a>
-      {{ end }}
-    </nav>
-    </div>
-  {{ else }}
-    {{/* ---------------------------- landing ---------------------------- */}}
-    <header class="prose-header">
-      <h1>{{ .Title }}</h1>
-      {{ with .Description }}<p class="text-ink-muted">{{ . }}</p>{{ end }}
-    </header>
-
-    <div class="mt-6 flex flex-col gap-8 sm:flex-row">
-      {{ with .Params.cover }}
-        {{ partial "img.html" (dict "src" . "page" $page "alt" ($page.Params.imageAlt | default $page.Title) "class" "novel-cover w-full rounded-2xl object-cover sm:w-56" "eager" true "sizes" "(min-width: 640px) 224px, 100vw") }}
-      {{ end }}
-      <div class="flex-1">
-        {{ with .Content }}<article class="prose-content">{{ . }}</article>{{ end }}
-        {{/* A single blurb left the whole right column empty; the chapter count and
-             a start-reading link make it useful. */}}
-        {{ if $chapters }}
-          <p class="meta mt-4">{{ T "chapters" }} · {{ len $chapters }}</p>
-          {{ with index $chapters 0 }}
-            <a href="{{ .RelPermalink }}" class="btn-primary mt-4">{{ T "startReading" }}</a>
-          {{ end }}
-        {{ end }}
-      </div>
-    </div>
-
-    {{ if $chapters }}
-      <section class="mt-12">
-        <h2 class="text-xl font-bold text-ink">{{ T "chapters" }}</h2>
-        {{/* Multi-column: 26 chapters in one column meant a very long scroll on a
-             page whose only job is to get you into chapter 1. */}}
-        <ol class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-          {{ range $chapters }}
-            <li class="border-b border-line pb-2">
-              <a href="{{ .RelPermalink }}" class="hover:text-accent">{{ .Title }}</a>
-            </li>
-          {{ end }}
-        </ol>
-      </section>
-    {{ else }}
-      <p class="mt-8 text-ink-muted">{{ T "comingSoon" }}</p>
+      {{ $prev = . }}
     {{ end }}
   {{ end }}
+
+  <nav class="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm" aria-label="{{ T "navChapterTop" }}">
+    <span>
+      <a href="{{ $shelf.RelPermalink }}" class="text-ink-muted hover:text-accent">← {{ T "backToShelf" }}</a>
+      {{ with $shelf }}<span class="mx-2 text-ink-faint">/</span><span class="text-ink-faint">{{ .Title }}</span>{{ end }}
+    </span>
+    {{/* The next-chapter link used to exist only at the very end of an ~8000px
+         chapter (y=8115 of 8291), so serial readers had no way forward from the
+         top of the page. */}}
+    {{ with $next }}
+      <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} →</a>
+    {{ end }}
+  </nav>
+
+  {{/* Only when the body does not open with its own "# chapter title": an empty
+       header still drew its bottom border right against the banner. */}}
+  {{ $useCanvas := and site.Params.novelCanvas (eq site.Language.Lang "zh") }}
+  {{/* With the canvas the body heading is drawn inside the image, so the page must
+       own the <h1>; text chapters still suppress it to avoid a duplicate. */}}
+  {{ if or $useCanvas (not (strings.HasPrefix (strings.TrimSpace .RawContent) "# ")) }}
+    <header class="prose-header">
+      <h1>{{ .Title }}</h1>
+      {{/* The overview is the only text search engines and llms.txt get for a
+           chapter: the body itself is published as images. */}}
+      {{ with .Description }}<p class="mt-2 text-ink-muted">{{ . }}</p>{{ end }}
+    </header>
+  {{ end }}
+
+  {{ with .Params.chapterImage }}
+    {{/* Banner, not a full screen: unconstrained, a tall illustration pushed the
+         chapter text entirely below the fold on a reading page. `max-w-2xl` keeps
+         it modest without cropping (object-cover was cutting ~50% of the art). */}}
+    {{ partial "img.html" (dict "src" . "page" $page "alt" ($page.Params.imageAlt | default $page.Title) "class" "novel-banner mb-8 h-auto w-full max-w-2xl rounded-2xl" "eager" true "sizes" "(min-width: 768px) 672px, 92vw") }}
+  {{ end }}
+
+  {{ if $chapters }}
+    <details class="card chapter-index mb-8">
+      <summary class="cursor-pointer font-bold text-ink">{{ T "chapters" }}</summary>
+      <ol class="mt-4 space-y-1 text-sm">
+        {{ range $chapters }}
+          <li>
+            <a href="{{ .RelPermalink }}" class="hover:text-accent{{ if eq .RelPermalink $page.RelPermalink }} font-semibold text-accent{{ end }}">{{ .Title }}</a>
+          </li>
+        {{ end }}
+      </ol>
+    </details>
+  {{ end }}
+
+  {{/* Novel chapters render their text into <canvas> (see the partial); other
+       pages and languages keep the ordinary text body. */}}
+  {{ if and site.Params.novelCanvas (eq site.Language.Lang "zh") }}
+    {{ partial "novel-canvas.html" . }}
+  {{ else }}
+    <article class="prose-content">{{ .Content }}</article>
+  {{ end }}
+
+  <nav class="mt-8 flex flex-wrap justify-between gap-4 text-sm" aria-label="{{ T "navChapterPager" }}">
+    {{ with $prev }}
+      <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">← {{ T "prevChapter" }} · {{ .Title }}</a>
+    {{ else }}<span></span>{{ end }}
+    {{ with $next }}
+      <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} · {{ .Title }} →</a>
+    {{ end }}
+  </nav>
+  </div>
 {{ end }}

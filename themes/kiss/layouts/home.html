@@ -54,25 +54,26 @@
     </section>
   {{ end }}
 
-  {{ $novels := where site.RegularPages "Section" "shelf" }}
+  {{/* Each novel is its own section under /shelf/ (2026-10), so the hub lists
+       subsections rather than filtering a flat page list by `chapter`. */}}
+  {{ $novels := slice }}
+  {{ with site.GetPage "/shelf" }}{{ $novels = .Sections }}{{ end }}
   {{ with .Params.novelSection }}
     <section id="hub-novel" class="mt-12">
       <h2 class="text-2xl font-bold text-ink">{{ .title }}</h2>
       {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
       <div class="mt-6 grid gap-6 sm:grid-cols-2">
         {{ range $novels }}
-          {{ if not .Params.chapter }}
-            {{ $novel := . }}
-            <a href="{{ .RelPermalink }}" class="card flex gap-4 p-4">
-              {{ with .Params.cover }}
-                {{ partial "img.html" (dict "src" . "page" $novel "alt" ($novel.Params.imageAlt | default $novel.Title) "class" "h-24 w-20 shrink-0 rounded-lg object-cover") }}
-              {{ end }}
-              <span>
-                <span class="block font-bold text-ink">{{ .Title }}</span>
-                <span class="mt-1 block text-sm text-ink-muted">{{ .Description }}</span>
-              </span>
-            </a>
-          {{ end }}
+          {{ $novel := . }}
+          <a href="{{ .RelPermalink }}" class="card flex gap-4 p-4">
+            {{ with .Params.cover }}
+              {{ partial "img.html" (dict "src" . "page" $novel "alt" ($novel.Params.imageAlt | default $novel.Title) "class" "h-24 w-20 shrink-0 rounded-lg object-cover") }}
+            {{ end }}
+            <span>
+              <span class="block font-bold text-ink">{{ .Title }}</span>
+              <span class="mt-1 block text-sm text-ink-muted">{{ .Description }}</span>
+            </span>
+          </a>
         {{ end }}
       </div>
     </section>

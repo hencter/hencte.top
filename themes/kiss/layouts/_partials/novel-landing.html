@@ -1,0 +1,51 @@
+{{/*
+  Novel landing — one book's section page, e.g. /shelf/sky-tax/.
+
+  The chapter list is the section's own `RegularPages` ordered by `weight`, so a book
+  can never list another book's chapters. The old flat layout compared landings
+  against each other and listed the wrong series (that bug is why
+  scripts/verify_urls.py check 5 exists); with one section per book the ownership is
+  structural instead of filtered.
+
+  @context {page} a book section page (kind = section, parent = the shelf)
+*/}}
+{{ $page := . }}
+{{ $chapters := .RegularPages.ByWeight }}
+<header class="prose-header">
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p class="text-ink-muted">{{ . }}</p>{{ end }}
+</header>
+
+<div class="mt-6 flex flex-col gap-8 sm:flex-row">
+  {{ with .Params.cover }}
+    {{ partial "img.html" (dict "src" . "page" $page "alt" ($page.Params.imageAlt | default $page.Title) "class" "novel-cover w-full rounded-2xl object-cover sm:w-56" "eager" true "sizes" "(min-width: 640px) 224px, 100vw") }}
+  {{ end }}
+  <div class="flex-1">
+    {{ with .Content }}<article class="prose-content">{{ . }}</article>{{ end }}
+    {{/* A single blurb left the whole right column empty; the chapter count and
+         a start-reading link make it useful. */}}
+    {{ if $chapters }}
+      <p class="meta mt-4">{{ T "chapters" }} · {{ len $chapters }}</p>
+      {{ with index $chapters 0 }}
+        <a href="{{ .RelPermalink }}" class="btn-primary mt-4">{{ T "startReading" }}</a>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+
+{{ if $chapters }}
+  <section class="mt-12">
+    <h2 class="text-xl font-bold text-ink">{{ T "chapters" }}</h2>
+    {{/* Multi-column: 26 chapters in one column meant a very long scroll on a
+         page whose only job is to get you into chapter 1. */}}
+    <ol class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+      {{ range $chapters }}
+        <li class="border-b border-line pb-2">
+          <a href="{{ .RelPermalink }}" class="hover:text-accent">{{ .Title }}</a>
+        </li>
+      {{ end }}
+    </ol>
+  </section>
+{{ else }}
+  <p class="mt-8 text-ink-muted">{{ T "comingSoon" }}</p>
+{{ end }}

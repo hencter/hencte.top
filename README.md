@@ -344,6 +344,7 @@ Hugo 会渲染——迁移时按 `PLACEHOLDER_BODY_RE` 丢弃这类短占位正�
 | EOGEE · 岳极技术 | `/static/pic/pwa-icon-192.png`（其方形 logo mark） | 站点声明的 `logo-large.png` 是 1056×211 字标，塞进 48px 圆里不可读 |
 | HU4NG's Digital Garden | `apple-touch-icon.png` 180×180 | 与线上字节一致，原本就是真图 |
 | SeaWave | `/touxiang.png` 320×320（其头像/图标，与 favicon 同图） | 该站除 favicon 外没有别的 brand 资源；这是 JPEG 数据套了 .png 后缀，已按 JPEG 重编码为 192×192（8.9 KB） |
+| KoiBunny · 锦鲤兔 | `/icons/koi-icons.svg#rabbit`（其页头品牌徽标用的像素兔） | 该站 `/favicon.svg` 是主题的 NEXUS 标记（`aria-label="NEXUS"`，走同一套渐变），`/favicon.ico` 内嵌图只有 16×16，两处都不是可辨的 KoiBunny 自有品牌图；故取它自己图标集里的像素兔，用同一配色（`#40251f` on `#fff1c7`）渲染成 192×192 方图（2.5 KB WebP） |
 
 注意资源归属：迁移脚本会从 Astro 的 `public/` 复制资源并**覆盖同名文件**（`eogee.png` 就是这样被字标覆盖回来的），
 所以自选品牌图用 Astro 不会写入的文件名（`eogee-mark.png`、`seawave.jpg`），并在

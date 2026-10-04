@@ -1,6 +1,6 @@
 +++
 description = '亦幸小閣的友鏈牆：值得互鏈、互相看見的站點。歡迎符合條件的朋友在 GitHub 上提一個 issue 交換友鏈。'
-friendLinks = [{ name = 'EOGEE · 嶽極技術', url = 'https://eogee.com/', avatar = '/img/friends/eogee-mark.png', description = 'AI 知識技術共享平台：Agent 智能體、MCP 協議、Claude Code 與 Codex 實戰、RAG 與大模型部署等中文教程。', tags = ['AI 教程', 'Agent', 'RAG'] }, { name = "HU4NG's Digital Garden", url = 'https://huanggaoxiang.com/', avatar = '/img/friends/huanggaoxiang.png', description = '記錄對抗遺忘。', tags = ['數字花園', '博客'] }, { name = 'SeaWave', url = 'https://seawave.top/', description = '個人技術博客，記錄 Java、Spring、Docker、Git 等實踐。', tags = ['技術博客', 'Java'], avatar = '/img/friends/seawave.jpg' }]
+friendLinks = [{ name = 'EOGEE · 嶽極技術', url = 'https://eogee.com/', avatar = '/img/friends/eogee-mark.png', description = 'AI 知識技術共享平台：Agent 智能體、MCP 協議、Claude Code 與 Codex 實戰、RAG 與大模型部署等中文教程。', tags = ['AI 教程', 'Agent', 'RAG'] }, { name = "HU4NG's Digital Garden", url = 'https://huanggaoxiang.com/', avatar = '/img/friends/huanggaoxiang.png', description = '記錄對抗遺忘。', tags = ['數字花園', '博客'] }, { name = 'SeaWave', url = 'https://seawave.top/', description = '個人技術博客，記錄 Java、Spring、Docker、Git 等實踐。', tags = ['技術博客', 'Java'], avatar = '/img/friends/seawave.jpg' }, { name = 'KoiBunny · 錦鯉兔', url = 'https://koibunny.cn/', avatar = '/img/friends/koibunny.png', description = 'AI 學習筆記庫：能復現的實驗、讀源碼後的結論與踩過的坑；不追熱點，把「為什麼」寫清楚。', tags = ['AI 筆記', 'Agent', '知識庫'] }]
 keywords = ['友鏈', '友情鏈接', '亦幸小閣', 'Hencter Lew', '交換友鏈']
 title = '友鏈 | 亦幸小閣'
 

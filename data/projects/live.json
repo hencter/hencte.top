@@ -1,6 +1,6 @@
 {
   "$comment": "由 scripts/fetch-projects.mjs 生成：只含 GitHub 侧客观字段（公开、非 fork）。站点文案在 data/projects/<lang>.toml，手改不会被本脚本覆盖。",
-  "generatedAt": "2026-10-04T16:23:59.610Z",
+  "generatedAt": "2026-10-04T18:01:30.153Z",
   "source": "gh repo list hencter --limit 300",
   "owner": "hencter",
   "repos": {
@@ -435,13 +435,13 @@
         "tailwindcss"
       ],
       "createdAt": "2024-06-29T10:07:55Z",
-      "pushedAt": "2026-10-04T16:14:21Z",
+      "pushedAt": "2026-10-04T18:00:21Z",
       "pushedOn": "2026-10-04",
       "archived": false,
       "template": false,
       "empty": false,
       "license": "",
-      "diskUsageKB": 211227
+      "diskUsageKB": 213139
     },
     "hencte.top.bak": {
       "fullName": "hencter/hencte.top.bak",
@@ -539,6 +539,61 @@
       "empty": false,
       "license": "",
       "diskUsageKB": 4
+    },
+    "hugo-scratch": {
+      "fullName": "hencter/hugo-scratch",
+      "url": "https://github.com/hencter/hugo-scratch",
+      "homepageUrl": "https://hencter.github.io/hugo-scratch/",
+      "description": "Hugo Scratch — a bilingual scratch Hugo site exercising the whole common feature set: semantic HTML, full SEO head, client-side search, light/dark themes, shortcodes, render hooks, and a Hugo Pipes + official Tailwind v4 pipeline. Theme is a separate repo wired in as a submodule; AGENTS.md is the agent contract.",
+      "stars": 0,
+      "forks": 0,
+      "language": "Go Template",
+      "topics": [
+        "bilingual",
+        "hugo",
+        "hugo-theme",
+        "i18n",
+        "render-hooks",
+        "seo",
+        "starter-template",
+        "static-site",
+        "tailwindcss"
+      ],
+      "createdAt": "2026-10-04T17:44:24Z",
+      "pushedAt": "2026-10-04T17:48:28Z",
+      "pushedOn": "2026-10-04",
+      "archived": false,
+      "template": true,
+      "empty": false,
+      "license": "other",
+      "diskUsageKB": 0
+    },
+    "hugo-scratch-theme": {
+      "fullName": "hencter/hugo-scratch-theme",
+      "url": "https://github.com/hencter/hugo-scratch-theme",
+      "homepageUrl": "https://github.com/hencter/hugo-scratch",
+      "description": "Hugo Scratch Theme — a batteries-included example Hugo theme: semantic HTML, complete SEO head, bilingual navigation, client-side search, flash-free light/dark, shortcode library, seven render hooks, and Hugo's official Tailwind CSS v4 integration.",
+      "stars": 0,
+      "forks": 0,
+      "language": "HTML",
+      "topics": [
+        "accessible",
+        "dark-mode",
+        "hugo",
+        "hugo-theme",
+        "multilingual",
+        "semantic-html",
+        "seo",
+        "tailwindcss"
+      ],
+      "createdAt": "2026-10-04T17:43:47Z",
+      "pushedAt": "2026-10-04T17:47:13Z",
+      "pushedOn": "2026-10-04",
+      "archived": false,
+      "template": false,
+      "empty": false,
+      "license": "mit",
+      "diskUsageKB": 0
     },
     "hugo-templates": {
       "fullName": "hencter/hugo-templates",
@@ -896,12 +951,12 @@
         "zettelkasten"
       ],
       "createdAt": "2026-07-06T08:24:25Z",
-      "pushedAt": "2026-08-26T08:09:12Z",
-      "pushedOn": "2026-08-26",
+      "pushedAt": "2026-10-04T18:01:16Z",
+      "pushedOn": "2026-10-04",
       "archived": false,
       "template": true,
       "empty": false,
-      "license": "",
+      "license": "mit",
       "diskUsageKB": 851
     },
     "nuxt-studio-starter": {
@@ -1380,7 +1435,7 @@
         "labor-rights"
       ],
       "createdAt": "2026-10-02T19:22:38Z",
-      "pushedAt": "2026-10-04T13:46:50Z",
+      "pushedAt": "2026-10-04T18:00:36Z",
       "pushedOn": "2026-10-04",
       "archived": false,
       "template": false,

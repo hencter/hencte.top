@@ -185,13 +185,22 @@ function report(repos, refs) {
 		console.log(`  ${day(r.createdAt)}  ${r.fullName.replace(`${OWNER}/`, "")}  ${r.description.slice(0, 46)}`);
 }
 
+/**
+ * Fields that drift on their own between two runs: our own pushes bump
+ * `pushedAt`, and `diskUsageKB` moves with every commit. Without this the check
+ * would report drift immediately after every deploy (observed).
+ */
+const VOLATILE = new Set(["pushedAt", "pushedOn", "diskUsageKB"]);
+
+const stable = (repo) =>
+	Object.fromEntries(Object.entries(repo).filter(([k]) => !VOLATILE.has(k)));
 function diffPayload(before, after) {
 	const changes = [];
 	for (const key of new Set([...Object.keys(before), ...Object.keys(after)])) {
 		if (!before[key]) changes.push(`+ ${after[key].fullName}`);
 		else if (!after[key]) changes.push(`- ${before[key].fullName}`);
-		else if (JSON.stringify(before[key]) !== JSON.stringify(after[key])) {
-			const fields = Object.keys(after[key]).filter(
+		else if (JSON.stringify(stable(before[key])) !== JSON.stringify(stable(after[key]))) {
+			const fields = Object.keys(stable(after[key])).filter(
 				(f) => JSON.stringify(before[key][f]) !== JSON.stringify(after[key][f]),
 			);
 			changes.push(`~ ${after[key].fullName}: ${fields.join(", ")}`);

@@ -101,9 +101,17 @@ function ghRepos() {
 const day = (iso) => (typeof iso === "string" ? iso.slice(0, 10) : "");
 const lang = (value) =>
 	typeof value === "string" ? value : (value?.name ?? "");
-/** `gh repo list` reports the SPDX id lowercased ("mit") while the REST license
- *  endpoint returns "MIT"; normalise so the data file and any template agree. */
-const spdx = (value) => String(value?.spdxId ?? value?.key ?? "").toUpperCase();
+/**
+ * `gh repo list` reports a real SPDX id lowercased ("mit") while the REST license
+ * endpoint returns "MIT" — normalise to upper case so the data file and templates
+ * agree. Repos without a detectable licence get "NOASSERTION" (what the REST
+ * endpoint reports) instead of GraphQL's `key: "other"`, so `report()` keeps
+ * flagging exactly the repos that have no licence a consumer can rely on.
+ */
+const spdx = (value) => {
+	const id = value?.spdxId;
+	return id ? String(id).toUpperCase() : "NOASSERTION";
+};
 
 function buildLive(raw) {
 	const repos = {};

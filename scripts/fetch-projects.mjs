@@ -109,8 +109,10 @@ const lang = (value) =>
  * flagging exactly the repos that have no licence a consumer can rely on.
  */
 const spdx = (value) => {
-	const id = value?.spdxId;
-	return id ? String(id).toUpperCase() : "NOASSERTION";
+	// `gh repo list` leaves spdxId empty for some repos and puts the id in `key`
+	// ("mit"); repos with no detectable licence come back as `key: "other"`.
+	const id = String(value?.spdxId ?? value?.key ?? "").toUpperCase();
+	return !id || id === "OTHER" ? "NOASSERTION" : id;
 };
 
 function buildLive(raw) {

@@ -1,6 +1,6 @@
 {
   "$comment": "由 scripts/fetch-projects.mjs 生成：只含 GitHub 侧客观字段（公开、非 fork）。站点文案在 data/projects/<lang>.toml，手改不会被本脚本覆盖。",
-  "generatedAt": "2026-10-04T18:03:23.745Z",
+  "generatedAt": "2026-10-04T18:03:56.907Z",
   "source": "gh repo list hencter --limit 300",
   "owner": "hencter",
   "repos": {
@@ -50,7 +50,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 56
     },
     "agency-os": {
@@ -77,7 +77,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 3619
     },
     "agent-gateway": {
@@ -128,7 +128,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 111
     },
     "api-moark-desktop": {
@@ -154,7 +154,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 33210
     },
     "astro.hencte.top": {
@@ -207,7 +207,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 4591
     },
     "claude-opus-5-5": {
@@ -334,7 +334,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 6
     },
     "effective-fiesta": {
@@ -361,7 +361,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 167
     },
     "git-learn": {
@@ -435,7 +435,7 @@
         "tailwindcss"
       ],
       "createdAt": "2024-06-29T10:07:55Z",
-      "pushedAt": "2026-10-04T18:03:00Z",
+      "pushedAt": "2026-10-04T18:03:36Z",
       "pushedOn": "2026-10-04",
       "archived": false,
       "template": false,
@@ -592,7 +592,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 0
     },
     "hugo-templates": {
@@ -771,7 +771,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 2070
     },
     "mimenote": {
@@ -825,7 +825,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 2105
     },
     "minenote": {
@@ -852,7 +852,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 1429
     },
     "monopoly-3d-ai": {
@@ -879,7 +879,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 22970
     },
     "monopoly-engine": {
@@ -904,7 +904,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 23
     },
     "newtab-home": {
@@ -956,7 +956,7 @@
       "archived": false,
       "template": true,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 851
     },
     "nuxt-studio-starter": {
@@ -1031,7 +1031,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "0BSD",
       "diskUsageKB": 10
     },
     "obsidian-hugo-plugin": {
@@ -1132,7 +1132,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "0BSD",
       "diskUsageKB": 83
     },
     "obsidian-mind": {
@@ -1181,7 +1181,7 @@
       "archived": false,
       "template": false,
       "empty": false,
-      "license": "NOASSERTION",
+      "license": "MIT",
       "diskUsageKB": 2630
     },
     "pelican-bicycle-3d": {

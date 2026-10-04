@@ -1,12 +1,25 @@
 {{/*
-  Project cards. Reads `featuredProjects` (used by the home and projects pages).
-  The home page records the outcome in `outcome`, the projects page in `result`,
-  so both are accepted. Internal hrefs stay in-tab, external ones open in a new
-  tab with noopener.
+  Project cards. The items live in data/projects/<lang>.toml (curated copy), so the
+  home page and /projects/ can no longer drift apart the way two front-matter copies
+  did; GitHub-side facts sit in data/projects/live.json (pnpm projects).
+
+  Opt-in: the page lists the grids it wants in `projectSections` (['featured'],
+  ['featured','more']). Without it nothing renders — page.html calls this partial on
+  every brand page.
+
+  Home vs /projects/: the home card carries the short line in `outcome`, /projects/
+  the longer one in `result`; only entries that HAVE `outcome` render on the home
+  page (the sixth featured project has no home card today). Internal hrefs stay
+  in-tab, external ones open in a new tab with noopener; `repo` adds a second link
+  when the product site and the repository are not the same address.
 
   @context {page} page
 */}}
-{{ with .Params.featuredProjects }}
+{{ $sections := .Params.projectSections | default slice }}
+{{ $items := slice }}
+{{ with index hugo.Data.projects site.Language.Lang }}{{ $items = .featured }}{{ end }}
+{{ if .IsHome }}{{ $items = where $items "outcome" "!=" nil }}{{ end }}
+{{ if and (in $sections "featured") $items }}
   {{/* Two anchors land here: the home hero's secondary CTA points at
        #hub-projects, while the four /projects/ pages link to #featured. The
        section carries the first and keeps a zero-height target for the second. */}}
@@ -22,7 +35,7 @@
       {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
     {{ end }}
     <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-      {{ range . }}
+      {{ range $items }}
         {{ $project := . }}
         {{ $note := .outcome | default .result }}
         {{ $external := hasPrefix (string .url) "http" }}
@@ -42,6 +55,9 @@
             {{ printf `</%s>` $cardLevel | safeHTML }}
             {{ with .description }}<p class="mt-2 flex-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}
             {{ with $note }}<p class="meta mt-3">{{ . }}</p>{{ end }}
+            {{ with .repo }}
+              <p class="meta mt-2"><a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:text-accent">{{ T "repoLink" }} ↗</a></p>
+            {{ end }}
             {{ with .tags }}
               <ul class="mt-4 flex flex-wrap gap-2">
                 {{ range . }}

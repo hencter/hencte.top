@@ -101,6 +101,10 @@ other = '开始阅读'
 [spoiler]
 other = '剧透警告'
 
+# 项目卡片上「产品站之外还有仓库」的那个链接（_partials/projects.html）。
+[repoLink]
+other = '仓库'
+
 [novelNeedsJS]
 other = '本页正文由浏览器绘制为图片，请开启 JavaScript。'
 

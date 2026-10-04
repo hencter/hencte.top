@@ -23,12 +23,13 @@ pnpm check      # python scripts/verify_urls.py：用 public/ 产物做 URL/别�
 
 | 步骤 | 命令 | 产物 | 说明 |
 | --- | --- | --- | --- |
-| 繁体变体 | `pnpm variants` | `content/{tw,hk}/`、`i18n/{tw,hk}.toml` | 由 `content/zh` 经 OpenCC 生成，范围与 Astro 站一致（品牌页 + 书架） |
+| 繁体变体 | `pnpm variants` | `content/{tw,hk}/`、`i18n/{tw,hk}.toml`、`data/projects/{tw,hk}.toml` | 由 `content/zh` 经 OpenCC 生成，范围与 Astro 站一致（品牌页 + 书架） |
 | Tailwind | `pnpm css` | `assets/css/tailwind.css` | Tailwind CSS CLI 编译主题入口 `themes/kiss/assets/css/main.css` |
 | 站点 | `hugo` | `public/` | 读取前两步的产物 |
 
-这两个生成物**都提交入库**（`.gitignore` 末尾的注释写明了原因）：Cloudflare Workers Builds 只跑构建命令，
-面板里执行的就是纯 `hugo`，所以 `content/{tw,hk}` 与 `assets/css/tailwind.css` 必须保持仓库内的最新状态。
+`pnpm generate` 的产物**全部提交入库**（`.gitignore` 末尾的注释写明了原因）：Cloudflare Workers Builds
+只跑构建命令，面板里执行的就是纯 `hugo`，所以 `content/{tw,hk}`、`i18n/{tw,hk}.toml`、
+`data/projects/{tw,hk}.toml` 与 `assets/css/tailwind.css` 必须保持仓库内的最新状态。
 改动 `content/zh` 的品牌页或模板类名后，先 `pnpm generate` 再提交。
 
 Tailwind 不能交给 Hugo 自己启动，原因是 Hugo 无法可靠地启动它：
@@ -225,24 +226,26 @@ Astro 侧的状态：`hencter/astro.hencte.top` 仓库描述已标注「旧版�
 
 ## 项目页：重点项目 + 更多公开项目
 
-`content/{zh,en}/projects.md` 的 front matter 驱动，两个数组分工明确：
+项目数据分两层：**文案在 `data/projects/<lang>.toml`**（手写唯一真源，tw/hk 由 `pnpm variants` 生成），
+**GitHub 侧客观字段在 `data/projects/live.json`**（`pnpm projects` 生成，语言无关）。
 
-| 字段 | 渲染 | 内容 |
+| 数组 | 渲染 | 内容 |
 | --- | --- | --- |
-| `featuredProjects` | `themes/kiss/layouts/_partials/projects.html` | 6 个重点项目，带封面图（`assets/img/projects/*`） |
-| `moreProjects` + `moreProjectsSection` | `themes/kiss/layouts/_partials/more-projects.html`（2026-10 新增） | 11 个公开项目，纯文字卡片；数组为空时整块不渲染 |
+| `featured` | `themes/kiss/layouts/_partials/projects.html` | 6 个重点项目，带封面图（`assets/img/projects/*`）；首页只渲染带 `outcome` 的（当前 5 个），项目页渲染全部并用 `result` |
+| `more` | `themes/kiss/layouts/_partials/more-projects.html` | 14 个公开项目，纯文字卡片；数组为空时整块不渲染 |
+
+页面用 `projectSections` 声明自己要哪几块（首页 `['featured']`，`/projects/` `['featured','more']`）——
+`page.html` 对每个品牌页都会调用这两个 partial，没有这个开关就会到处长出项目网格。
+条目可带 `repo`（产品站与仓库不同址时）：卡片会多一行「仓库 ↗」，文案走 i18n 的 `repoLink` 键。
 
 两条约束：条目文案只能来自仓库 README / description（不许凭仓库名编造）；`url` 要么是真实存在的公开仓库，
 要么是 `web_fetch` 实测 200 的线上地址 —— 没有封面图就用无图版式，**不要伪造图片 URL**。
-模板只用既有原语（`.card`/`.chip`）与语义 token，无新颜色；四语由 `pnpm variants` 同步，
-`themes/kiss/layouts/page.html` 只多一行 partial 调用。
+模板只用既有原语（`.card`/`.chip`）与语义 token，无新颜色。
 
-GitHub 侧的客观字段（星标、最近推送、语言、topics、是否归档、许可证）由 `pnpm projects`
-生成到 `data/projects/live.json`。**构建期不调用 GitHub API**：匿名只有 60 次/小时且 Cloudflare
-构建 IP 共享；`pnpm build` 带 `--ignoreCache`，实测每次构建都会真打一次；更要命的是失败时
-`resources.GetRemote` 返回 `nil` 却不置 `.Err`（实测），页面会静默少内容而构建照样绿。
-`live.json` 只放语言无关的字段（**私有仓库与 fork 永不入库**），条目文案仍在
-`content/{zh,en}/projects.md` 的 front matter；`pnpm projects:check` 与 GitHub 对账，
+**构建期不调用 GitHub API**：匿名只有 60 次/小时且 Cloudflare 构建 IP 共享；`pnpm build` 带
+`--ignoreCache`，实测每次构建都会真打一次；更要命的是失败时 `resources.GetRemote` 返回 `nil`
+却不置 `.Err`（实测），页面会静默少内容而构建照样绿。所以由 `pnpm projects` 在构建前生成
+`live.json`（只放语言无关字段，**私有仓库与 fork 永不入库**）；`pnpm projects:check` 与 GitHub 对账，
 不一致就 exit 1，并顺带报出：站点引用但查不到的仓库、已归档的、GitHub 认不出许可证的。
 
 ## GitHub 仓库 About 维护（gh）

@@ -20,6 +20,7 @@ import {
 	rmSync,
 	readdirSync,
 	statSync,
+	existsSync,
 } from "node:fs";
 import { join, relative, dirname, sep } from "node:path";
 
@@ -68,7 +69,22 @@ for (const variant of variants) {
 	const zhI18n = readFileSync(join(root, "i18n", "zh.toml"), "utf8");
 	writeFileSync(join(root, "i18n", `${variant.dir}.toml`), convert(zhI18n));
 
-	console.log(`content/${variant.dir}: ${count} page(s), i18n/${variant.dir}.toml`);
+	// Project copy: data/projects/zh.toml → data/projects/<variant>.toml. Same reason
+	// as the UI strings — a Traditional page must not fall back to Simplified copy —
+	// and the generated file is committed because Cloudflare only runs a bare `hugo`.
+	const zhProjects = join(root, "data", "projects", "zh.toml");
+	let projectsNote = "";
+	if (existsSync(zhProjects)) {
+		writeFileSync(
+			join(root, "data", "projects", `${variant.dir}.toml`),
+			convert(readFileSync(zhProjects, "utf8")),
+		);
+		projectsNote = `, data/projects/${variant.dir}.toml`;
+	}
+
+	console.log(
+		`content/${variant.dir}: ${count} page(s), i18n/${variant.dir}.toml${projectsNote}`,
+	);
 	total += count;
 }
 console.log(`variants: ${total} page(s) generated from content/zh`);

@@ -50,12 +50,16 @@ const FIELDS = [
 	"diskUsage",
 ].join(",");
 
-/** Curated pages that reference repositories, scanned for repo names. */
+/**
+ * Sources scanned for the repositories the site references. The project copy moved
+ * from front matter into data/projects/<lang>.toml (2026-10), so that is the primary
+ * source now; the brand pages stay listed in case a URL is written back there.
+ */
 const SOURCES = [
+	join("data", "projects", "zh.toml"),
+	join("data", "projects", "en.toml"),
 	join("content", "zh", "projects.md"),
-	join("content", "zh", "_index.md"),
 	join("content", "en", "projects.md"),
-	join("content", "en", "_index.md"),
 ];
 
 /**

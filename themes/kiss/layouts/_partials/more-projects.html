@@ -1,17 +1,22 @@
 {{/*
-  Secondary project grid. Reads `moreProjects` (an array of
-  {title, description, url, tags}) plus an optional `moreProjectsSection`
-  ({title, subtitle}) for the heading, and renders nothing when the array is
-  empty — so a page can opt in simply by carrying the param.
+  Secondary project grid. The items live in data/projects/<lang>.toml (`more`), the
+  heading still comes from the page's `moreProjectsSection` ({title, subtitle}).
 
-  These entries have no cover image, so the card is text-only rather than
-  reusing the featured card's cover slot (an absent image must not become a
-  placeholder or a guessed URL). Layout atoms mirror `projects.html`; colours
-  stay on the semantic tokens (card / chip / text-ink*).
+  Opt-in: the page must list "more" in `projectSections` — page.html calls this
+  partial on every brand page, so without the flag the grid would appear everywhere.
+
+  These entries have no cover image, so the card is text-only rather than reusing the
+  featured card's cover slot (an absent image must not become a placeholder or a
+  guessed URL). Layout atoms mirror `projects.html`; colours stay on the semantic
+  tokens (card / chip / text-ink*). `repo` adds a repository link when the product
+  site and the repository are not the same address.
 
   @context {page} page
 */}}
-{{ with .Params.moreProjects }}
+{{ $sections := .Params.projectSections | default slice }}
+{{ $items := slice }}
+{{ with index hugo.Data.projects site.Language.Lang }}{{ $items = .more }}{{ end }}
+{{ if and (in $sections "more") $items }}
   <section id="more-projects" class="mt-12 scroll-mt-24">
     {{/* On /projects/ the featured grid above carries no heading, so these
          cards are <h3> under this section's <h2>. */}}
@@ -20,14 +25,16 @@
       {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
     {{ end }}
     <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-      {{ range . }}
-        {{ $project := . }}
+      {{ range $items }}
         {{ $external := hasPrefix (string .url) "http" }}
         <article class="card flex flex-col p-5">
           <h3 class="text-lg font-bold text-ink">
             <a href="{{ .url }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="hover:text-accent">{{ .title }}</a>
           </h3>
           {{ with .description }}<p class="mt-2 flex-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}
+          {{ with .repo }}
+            <p class="meta mt-2"><a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:text-accent">{{ T "repoLink" }} ↗</a></p>
+          {{ end }}
           {{ with .tags }}
             <ul class="mt-4 flex flex-wrap gap-2">
               {{ range . }}<li class="chip">{{ . }}</li>{{ end }}

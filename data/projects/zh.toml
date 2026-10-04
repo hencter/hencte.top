@@ -1,0 +1,157 @@
+# 简体 project copy — 手写文案的唯一真源（tw/hk 由 pnpm variants 生成）。
+# 客观字段（星标 / 最近推送 / 语言 / topics / 归档 / 许可证）在 data/projects/live.json，由 pnpm projects 生成。
+# homepage 与仓库不同址时补 repo = 'https://github.com/…'，卡片会多一个「仓库」入口。
+[[featured]]
+stage = '开源模板'
+title = 'Nova · AI 自举知识库'
+description = '自举式知识库由 AI 代理持续维护：自动摄入、交叉链接、健康检查与自动提交。每个克隆者通过初始化问答获得「属于自己的 Nova」。'
+result = 'GitHub 模板仓库（Use this template），README 启动流程约 2 分钟；持续迭代中。'
+outcome = 'GitHub 模板仓库（Use this template），开箱即用，快速迭代中。'
+tags = ['AI Agent', 'Obsidian', 'Zettelkasten', 'Knowledge Vault']
+url = 'https://github.com/hencter/Nova'
+image = '/img/projects/nova.webp'
+imageAlt = 'Nova 知识库：墨纸底上的青瓷色笔记星图与柔和灯火'
+
+[[featured]]
+stage = '社区运营'
+title = '通天路 tongtianlu.cn'
+description = '邀请制中文社区（邀请码注册）：用 AI 做出属于自己的第一条内容。Rust + Axum + PostgreSQL 自建论坛，社区智能体参与内容整理与更新日志维护。'
+result = '含发现页、圈子、知识库、问答与需求看板。Slogan：每一步都算数。'
+outcome = '邀请码注册；人工管理 + 智能体辅助运营。'
+tags = ['Community', 'AI Creator', 'Invite-only']
+url = 'https://tongtianlu.cn'
+image = '/img/projects/tongtianlu.webp'
+imageAlt = '通天路：夜市山路灯火向上延伸，创作者并肩而行'
+
+[[featured]]
+stage = '开源游戏'
+title = '商业帝国 3D · AI 大富翁'
+description = 'Three.js 3D 大富翁：DeepSeek 对手、卡牌、行业景气与银行系统；支持 2–34 人同屏或回合制联机。配套零依赖的 monopoly-engine 无头规则引擎。'
+result = 'MIT 开源，持续迭代中。'
+outcome = 'MIT 开源，持续迭代。'
+tags = ['Three.js', 'AI', 'Multiplayer', 'WebSocket']
+url = 'https://github.com/hencter/monopoly-3d-ai'
+image = '/img/projects/monopoly-3d.webp'
+imageAlt = '商业帝国 3D：俯瞰三维城市棋盘与暖金路径'
+
+[[featured]]
+stage = '外站产品'
+title = 'AI.LinkTrust.Top'
+description = '面向公开用户的 AI 提示词学院：按场景组织 Prompt 模板、模型对比与学习路径。'
+result = '独立站点长期运行，含社区入口与更新日志。'
+outcome = '独立站点运行中，以真实访问驱动迭代。'
+tags = ['AI', 'Prompt Library', 'Web Product']
+url = 'https://ai.linktrust.top'
+image = '/img/projects/linktrust.webp'
+imageAlt = 'LinkTrust：青瓷与金色天平甄别可信链接网络'
+
+[[featured]]
+stage = '品牌主站'
+title = 'hencte.top'
+description = '个人品牌与博客主站：项目、技术文章与原创小说，统一对外入口。'
+result = 'Hugo + Tailwind 构建，简 / 繁（台 · 港）/ 英四语；内容自 Astro 站迁移而来。'
+outcome = 'Hugo + Tailwind 构建，简 / 繁（台 · 港）/ 英四语。'
+tags = ['Hugo', 'Multilingual', 'Personal Brand']
+url = '/'
+repo = 'https://github.com/hencter/hencte.top'
+image = '/img/projects/hencte-top.webp'
+imageAlt = '亦幸小阁：米白宣纸上朱红「亦」印、青瓷茶盏与毛笔'
+
+[[featured]]
+stage = '工具/插件'
+title = 'Obsidian 备忘录插件'
+description = '基于 CodeMirror 6 的 Obsidian 备忘录插件：快速新建与编辑，保存后自动关联当日日记。'
+result = '公开仓库 hencter/obsidian-memo-plugin，支持 Windows / macOS / Linux。'
+tags = ['Obsidian', 'TypeScript', 'Plugin']
+url = 'https://github.com/hencter/obsidian-memo-plugin'
+
+[[more]]
+title = 'Hugo 中文布道站'
+description = 'Hugo 官方文档简体中文翻译站，另附面向 AI 编码代理的技能包。'
+url = 'https://hugozh.cn/'
+repo = 'https://github.com/hencter/hugozh'
+tags = ['Hugo', 'Documentation', 'Translation']
+
+[[more]]
+title = 'TongTop Store'
+description = 'Windows 桌面应用商店：软件目录、AI 智能体一键装机与镜像源管理。'
+url = 'https://github.com/hencter/tongtop-store'
+tags = ['Tauri', 'React', 'Windows']
+
+[[more]]
+title = 'Mimenote'
+description = '本地优先的 Markdown 知识库桌面应用，笔记就是文件夹里的纯文本文件。'
+url = 'https://github.com/hencter/mimenote'
+tags = ['Markdown', 'Tauri', 'Local-first']
+
+[[more]]
+title = '拍板 PAIBAN'
+description = '拍板 PAIBAN：只做二选一的纯前端决策工具，计分透明且全无随机。'
+url = 'https://paiban-decide-now.app.workbuddy.host/'
+repo = 'https://github.com/hencter/paiban'
+tags = ['Decision', 'React', 'No-backend']
+
+[[more]]
+title = '劳动者的账本 workers-ledger'
+description = '中国大陆劳动权益与合规的循证指南：每条标注效力位阶、主张强度、举证难度与时效，依据只引官方一手文件并逐字核对。'
+url = 'https://workersledger.cn/'
+repo = 'https://github.com/hencter/workers-ledger'
+tags = ['Labor Law', 'Evidence-based', 'Hugo']
+
+[[more]]
+title = '拼豆工坊 Perler Beads'
+description = 'Three.js 3D 拼豆游戏：放豆、擦除、取色，导入图片转图案并导出图纸。'
+url = 'https://hencter.github.io/perler-beads/'
+repo = 'https://github.com/hencter/perler-beads'
+tags = ['Three.js', 'WebGL', 'Game']
+
+[[more]]
+title = '吃什么好呢 · 3D 美食星盘'
+description = '3D 美食星盘：转盘决定今天吃什么，可拍照加菜，内容全程序化生成。'
+url = 'https://hencter.github.io/chishenme-3d/'
+repo = 'https://github.com/hencter/chishenme-3d'
+tags = ['Three.js', 'Procedural', 'Mobile']
+
+[[more]]
+title = '3D Space War · F-35A 飞行模拟'
+description = '浏览器 3D 飞行战斗模拟：F-35A 风格座舱与 3v3 AI 机队对抗。'
+url = 'https://github.com/hencter/3d-space-war'
+tags = ['Three.js', 'cannon-es', 'Simulation']
+
+[[more]]
+title = '鹈鹕骑单车 Pelican Bicycle 3D'
+description = '鹈鹕骑单车：100% 程序化生成的 Three.js 实时 3D 环岛骑行。'
+url = 'https://hencter.github.io/pelican-bicycle-3d/'
+repo = 'https://github.com/hencter/pelican-bicycle-3d'
+tags = ['Three.js', 'Procedural', 'WebGL']
+
+[[more]]
+title = 'Agent Gateway'
+description = '多模型 API 网关：OpenAI 格式请求失败时自动切到备用模型。'
+url = 'https://github.com/hencter/agent-gateway'
+tags = ['LLM', 'Gateway', 'Failover']
+
+[[more]]
+title = 'monopoly-engine · 无头大富翁规则引擎'
+description = '无头大富翁规则引擎：零依赖纯逻辑，可驱动任意表现层与无头仿真。'
+url = 'https://github.com/hencter/monopoly-engine'
+tags = ['Game Engine', 'Zero-dependency', 'Node.js']
+
+[[more]]
+title = '链幸智能 · Hugo 多主题演示站'
+description = '一套引擎主题 + 五套外观主题的企业站演示：程序化美术与视差首页；源码私有，仅公开构建产物。'
+repo = 'https://github.com/hencter/lianxing-themes-demo'
+url = 'https://hencter.github.io/lianxing-themes-demo/'
+tags = ['Hugo', 'Multi-theme', 'Demo']
+
+[[more]]
+title = '通天路 VibeCoding 闪电赛 · 多代理评审'
+description = '闪电赛的多代理评审系统与完整可追溯计分记录：评委负责判断，计算器负责算分。'
+url = 'https://github.com/hencter/tongtianlu-vibecoding-judge'
+tags = ['Multi-agent', 'Audit Trail', 'JavaScript']
+
+[[more]]
+title = 'sync-rs · 分布式文件同步（设计阶段）'
+description = '受 Syncthing 启发的 Rust 点对点文件同步：目前公开的是架构与规则文档，尚无代码。'
+url = 'https://github.com/hencter/sync-rs'
+tags = ['Rust', 'P2P', 'Design Docs']

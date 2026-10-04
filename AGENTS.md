@@ -57,9 +57,14 @@ $m.files | ForEach-Object {
 
 ## 2. 本仓库既有的约定（别推翻，先读再改）
 
-- **两个生成物提交入库，勿手改**：`content/{tw,hk}/`（`pnpm variants`，来自 `content/zh`）
+- **`pnpm generate` 的产物提交入库，勿手改**：`content/{tw,hk}/`、`i18n/{tw,hk}.toml`、
+  `data/projects/{tw,hk}.toml`（`pnpm variants`，来自 `content/zh` 与 `data/projects/zh.toml`）
   与 `assets/css/tailwind.css`（`pnpm css`）。Cloudflare 面板只跑纯 `hugo`，所以它们必须是最新的。
-  改 `content/zh` 品牌页或模板类名后：`pnpm generate` 再提交。
+  改 `content/zh` 品牌页、`data/projects/zh.toml` 或模板类名后：`pnpm generate` 再提交。
+- **项目数据两处，别写回 front matter**：文案在 `data/projects/<lang>.toml`（`featured` / `more`
+  两个数组，条目可带 `repo`），GitHub 侧字段在 `data/projects/live.json`（`pnpm projects` 生成、
+  `pnpm projects:check` 对账）。页面用 `projectSections` 开关决定渲染哪几块；两个 partial 对
+  每个品牌页都会被调用，去掉开关就会到处长项目网格。
 - **Tailwind 必须在 Hugo 之前编译**：Hugo 无法可靠启动它（pnpm 的 Windows shim 会让
   `css.TailwindCSS` 报 `binary "tailwindcss" is not a Node.js script`）。不要"修好"这条顺序。
 - **`minify.minifyOutput` 写在 `hugo.toml`**，因为它不能依赖命令行标志（面板跑裸 `hugo`）。

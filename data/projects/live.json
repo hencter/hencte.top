@@ -1,6 +1,6 @@
 {
   "$comment": "由 scripts/fetch-projects.mjs 生成：只含 GitHub 侧客观字段（公开、非 fork）。站点文案在 data/projects/<lang>.toml，手改不会被本脚本覆盖。",
-  "generatedAt": "2026-10-04T16:10:25.966Z",
+  "generatedAt": "2026-10-04T16:23:59.610Z",
   "source": "gh repo list hencter --limit 300",
   "owner": "hencter",
   "repos": {
@@ -435,7 +435,7 @@
         "tailwindcss"
       ],
       "createdAt": "2024-06-29T10:07:55Z",
-      "pushedAt": "2026-10-04T14:45:07Z",
+      "pushedAt": "2026-10-04T16:14:21Z",
       "pushedOn": "2026-10-04",
       "archived": false,
       "template": false,
@@ -615,7 +615,7 @@
       "template": false,
       "empty": false,
       "license": "other",
-      "diskUsageKB": 5419
+      "diskUsageKB": 5459
     },
     "learn": {
       "fullName": "hencter/learn",

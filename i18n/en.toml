@@ -100,6 +100,10 @@ other = 'Start reading'
 [spoiler]
 other = 'Spoiler warning'
 
+# Repository link on a project card — see i18n/zh.toml.
+[repoLink]
+other = 'Repository'
+
 [novelNeedsJS]
 other = 'This chapter is drawn as images in your browser; please enable JavaScript.'
 

@@ -1,7 +1,9 @@
 +++
 categories = ['内容前置']
 date = '2023-04-12T23:41:51+08:00'
-draft = true
+description = 'Hugo 的 front matter（前置元数据）：YAML / TOML / JSON 三种格式、官方参考里的例子与默认变量，以及用户自定义字段。'
+lastmod = '2026-10-05T02:00:00+08:00'
+draft = false
 tags = ['Front Matter', 'Markdown']
 title = 'Front Matter'
 +++

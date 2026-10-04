@@ -1,8 +1,10 @@
 +++
 aliases = ['/tech/hugo/2025-10-02-hugo-npm/']
 date = '2025-10-02T20:02:39+08:00'
-draft = true
-title = 'Hugo Npm'
+description = 'Hugo 怎么处理 npm 依赖：hugo mod npm pack 与 package.hugo.json 的工作流、js.Build 对 node_modules 的解析，以及三种项目规模下的选型建议。'
+lastmod = '2026-10-05T02:00:00+08:00'
+draft = false
+title = 'Hugo 中的 npm 依赖处理'
 +++
 ## Hugo 中的 npm 依赖处理
 

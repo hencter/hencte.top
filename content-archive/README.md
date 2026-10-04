@@ -13,14 +13,14 @@
 
 | 原路径 | 建议 |
 | --- | --- |
-| `tech/hugo/hugo-npm.md` | **发布**（内容最完整，2025-10 写的） |
-| `tech/hugo/front-matter.md` | **发布**（系统讲 front matter 三种格式） |
+| `tech/hugo/hugo-npm.md` | ✅ 已发布（2026-10-05，改名为 `npm-dependencies.md`） |
+| `tech/hugo/front-matter.md` | ✅ 已发布（2026-10-05） |
 | `tech/hugo/hugo-cli-convert-front-matter-to-yaml.md` | **发布**（CLI 实操） |
-| `tech/hugo/shortcode.md` | **发布**（可回链已发布的 `/shortcodes/`） |
+| `tech/hugo/shortcode.md` | ✅ 已发布（2026-10-05） |
 | `tech/hugo/content-types.md` | **发布**，或并入已发布的 `content-formats.md` |
 | `tech/hugo/menu-params-version.md` | **发布** |
 | `tech/hugo/post-bundle-archetype-template.md` | **发布** |
-| `tech/hugo/config/_index.md` + `hugo-markup-config.md` | 发布（成对：分区页 + 数学公式配置），否则整对留在这里 |
+| `tech/hugo/config/hugo-markup-config.md` | ✅ 已发布（2026-10-05；分区页本就因契约保留在 content/） |
 | `log/vim-or-neovim.md` | **发布** |
 | `tech/editor/_index.md` + `lazy-nvim.md` | **合并**成一篇「编辑器配置」后发布 |
 | `tech/editor/keyboard-shortcuts.md` | **合并**（含 1 处 TODO；正文用 `<kbd>`） |

@@ -83,14 +83,22 @@ def main() -> int:
     # Rendered <img> tags must resolve inside public/: the Astro site kept some
     # images in src/assets (bundled at build) rather than public/, so a content
     # reference can point at a file that no copy step picked up.
+    # NOTE: the site minifies HTML, and Hugo's minifier strips the quotes from
+    # single-token attribute values (`src=/img/x.webp`), so the pattern has to
+    # accept both forms — the quoted-only version matched 0 images and passed
+    # vacuously for months.
     print("\n== 4. images referenced by rendered pages ==")
-    img_re = re.compile(r'<img[^>]+src="(/[^"]+)"')
+    img_re = re.compile(r'<img[^>]+src=(?:"([^"]+)"|([^ >]+))')
     missing_img: dict[str, set[str]] = {}
     total_img = 0
     for html in public.rglob("*.html"):
         for m in img_re.finditer(html.read_text(encoding="utf-8", errors="ignore")):
+            src = unquote(m.group(1) or m.group(2))
+            # Remote/data URLs cannot be resolved against public/ — `_partials/img.html`
+            # keeps them verbatim on purpose (external hosts, CDNs, inline data).
+            if src.startswith(("http://", "https://", "//", "data:")):
+                continue
             total_img += 1
-            src = unquote(m.group(1))
             if not (public / src.lstrip("/")).exists():
                 missing_img.setdefault(src, set()).add(
                     html.relative_to(public).as_posix())

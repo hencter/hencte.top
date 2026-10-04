@@ -1,7 +1,9 @@
 +++
 aliases = ['/tech/hugo/config/markup/']
 date = '2025-09-27T19:19:56+08:00'
-draft = true
+description = 'Hugo 的 markup 配置示例：开启 Goldmark 的 passthrough 扩展后，行内与块级 LaTeX 公式的写法与渲染验证。'
+lastmod = '2026-10-05T02:00:00+08:00'
+draft = false
 math = true
 title = 'Hugo Markup Config'
 +++

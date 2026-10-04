@@ -1,7 +1,9 @@
 +++
 categories = ['简码', '演示']
 date = '2023-04-13T00:09:30+08:00'
-draft = true
+description = '短代码（shortcode）用于在 Markdown 里扩展它本身不支持的语法：内置简码的用法，以及自己写一个简码的步骤。'
+lastmod = '2026-10-05T02:00:00+08:00'
+draft = false
 tags = ['Shortcode']
 title = 'Shortcode'
 +++

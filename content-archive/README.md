@@ -15,18 +15,18 @@
 | --- | --- |
 | `tech/hugo/hugo-npm.md` | ✅ 已发布（2026-10-05，改名为 `npm-dependencies.md`） |
 | `tech/hugo/front-matter.md` | ✅ 已发布（2026-10-05） |
-| `tech/hugo/hugo-cli-convert-front-matter-to-yaml.md` | **发布**（CLI 实操） |
+| `tech/hugo/hugo-cli-convert-front-matter-to-yaml.md` | ✅ 已发布（2026-10-05） |
 | `tech/hugo/shortcode.md` | ✅ 已发布（2026-10-05） |
-| `tech/hugo/content-types.md` | **发布**，或并入已发布的 `content-formats.md` |
-| `tech/hugo/menu-params-version.md` | **发布** |
-| `tech/hugo/post-bundle-archetype-template.md` | **发布** |
+| `tech/hugo/content-types.md` | ✅ 已发布（2026-10-05） |
+| `tech/hugo/menu-params-version.md` | ✅ 已发布（2026-10-05） |
+| `tech/hugo/post-bundle-archetype-template.md` | ✅ 已发布（2026-10-05） |
 | `tech/hugo/config/hugo-markup-config.md` | ✅ 已发布（2026-10-05；分区页本就因契约保留在 content/） |
-| `log/vim-or-neovim.md` | **发布** |
-| `tech/editor/_index.md` + `lazy-nvim.md` | **合并**成一篇「编辑器配置」后发布 |
-| `tech/editor/keyboard-shortcuts.md` | **合并**（含 1 处 TODO；正文用 `<kbd>`） |
-| `tech/vsc/_index.md` + `git.md` | **发布**（成对）或整对留在这里 |
-| `tech/tools.md` | **合并**（只有 bat 一条）到 `log/terminal.md` 或 `log/software.md` |
-| `log/software.md` | **合并**（含未完成的 csv TODO） |
+| `log/vim-or-neovim.md` | ✅ 已发布（2026-10-05） |
+| `tech/editor/_index.md` + `lazy-nvim.md` | ✅ 已发布（2026-10-05，分区 + 文章） |
+| `tech/editor/keyboard-shortcuts.md` | ⏸ 仍停用：正文含 `TODO···`，等写完 Vim 部分（或并入 `lazy-nvim`）再发 |
+| `tech/vsc/_index.md` + `git.md` | ✅ 已发布（2026-10-05，分区 + 文章） |
+| `tech/tools.md` | ⏸ 仍停用：只有 bat 一条，建议与 `software.md` 合并成一篇清单后再发 |
+| `log/software.md` | ⏸ 仍停用：含未完成的 csv TODO，同上 |
 | `log/2025-08-04-hugo-test.md` | **删除**（正文只有「## 测试」） |
 | `log/2025-08-15-hugo-obsidian-plugin-dev.md` | **删除**（正文「本次开发采用 Trae Solo 模式」「测试更新」） |
 | `log/2024-04-11-table-rowspan-and-coilspan.md` | **删除**（正文「现在想写点什么呢？」+ 半个表格） |

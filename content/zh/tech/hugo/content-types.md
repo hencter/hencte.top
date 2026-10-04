@@ -1,9 +1,11 @@
 +++
 categories = ['内容管理']
 date = '2023-04-13T14:05:22+08:00'
-draft = true
+description = 'Hugo 的内容类型（type）：怎么在 front matter 里设置 type，模板目录又是怎么命中的。'
+lastmod = '2026-10-05T02:30:00+08:00'
+draft = false
 tags = ['Hugo', 'Content']
-title = '内容类型'
+title = '内容类型与模板查找'
 +++
 ## 什么是内容类型？
 

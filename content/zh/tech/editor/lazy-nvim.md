@@ -2,10 +2,11 @@
 aliases = ['/tech/lazy-nvim/']
 categories = ['文本编辑器']
 date = '2023-03-20T13:08:45+08:00'
-description = '关于 lazy-nvim 的一份备份记录'
-draft = true
+description = '为什么从 Packer.nvim 换到 LazyVim：上手成本、Keymaps 与加载速度的实际体感。'
+lastmod = '2026-10-05T02:30:00+08:00'
+draft = false
 tags = ['Neovim']
-title = 'Lazy NeoVim'
+title = '从 Packer 迁到 LazyVim'
 +++
 生命诚可贵，时间价更高
 

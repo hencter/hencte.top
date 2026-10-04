@@ -2,9 +2,11 @@
 aliases = ['/log/2022-10-03-neovim/']
 categories = ['文本编辑器', '编辑器']
 date = '2022-10-03T15:42:56+08:00'
-draft = true
+description = 'Vim / Neovim 的中文资料与配置入口：vimcdoc 中文帮助、Neovim Lua 教程与配置目录笔记。'
+lastmod = '2026-10-05T02:30:00+08:00'
+draft = false
 tags = ['vim', 'neovim', 'nvim', 'Editor', 'code']
-title = 'Vim / Neovim'
+title = 'Vim / Neovim 资料索引'
 +++
 ## vim help 中文文档
 

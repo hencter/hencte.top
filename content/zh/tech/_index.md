@@ -11,6 +11,8 @@ title = '技术'
 - **[折腾之路](/tech/road)**：工具与方法论的入门与选型
 - **[Hugo](/tech/hugo)**：静态站点生成器相关笔记（主站已由 Astro 迁移至 Hugo）
 - **[教程](/tech/tutorials)**：写给零基础的两篇长文
+- **[编辑器](/tech/editor)**：Neovim / LazyVim 与快捷键
+- **[Visual Studio Code](/tech/vsc)**：VS Code 与 Git 使用笔记
 
 ## 阅读建议
 

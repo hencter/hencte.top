@@ -1,7 +1,9 @@
 +++
 date = '2023-04-14T02:35:39+08:00'
-draft = true
-title = 'Menu Params version'
+description = '菜单条目怎么读页面参数：用 `version` 参数在菜单名旁渲染版本号，并用 with / if 处理外链条目与缺参数的情况。'
+lastmod = '2026-10-05T02:30:00+08:00'
+draft = false
+title = '菜单条目的页面参数'
 +++
 无论您如何定义菜单条目，与页面关联的条目都可以访问页面变量和方法。
 

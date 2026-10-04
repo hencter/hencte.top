@@ -1,8 +1,10 @@
 +++
 aliases = ['/tech/hugo/hugo-cli-convert-toYAML/']
 date = '2025-05-06T16:53:11+08:00'
-draft = true
-title = 'Hugo Cli Convert ToYAML'
+description = '把旧笔记的 TOML front matter 批量转成 YAML：`hugo convert` 的可用子命令与迁移时的注意点。'
+lastmod = '2026-10-05T02:30:00+08:00'
+draft = false
+title = '用 hugo convert 转换 front matter'
 +++
 由于之前很多的笔记的 front-matter 都是 TOML 格式的，可很多情况下发文都是很胖大的
 

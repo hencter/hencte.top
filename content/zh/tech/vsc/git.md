@@ -2,10 +2,11 @@
 aliases = ['/tech/git/']
 categories = ['版本控制']
 date = '2023-03-20T21:05:35+08:00'
-description = '记录 Git 的问题和学习记录'
-draft = true
+description = '规范 git commit message 的动机与做法，附参考链接。'
+lastmod = '2026-10-05T02:30:00+08:00'
+draft = false
 tags = ['Git']
-title = 'Git'
+title = 'Git commit 规范'
 +++
 ## 规范 git commit[^参考]
 

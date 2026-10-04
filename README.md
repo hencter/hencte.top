@@ -107,22 +107,38 @@ python scripts/verify_urls.py                                  # 验收
 
 ## 短代码（`layouts/shortcodes/`）
 
-六个自带短代码，共同约定：**零 JavaScript、断网可构建、只用主题已有的颜色 token**（宣纸 / 朱红 / 暖灰），因此暗色自动跟随。
-完整示例见草稿页 `content/zh/shortcodes.md`（`draft = true`，`hugo server -D` 可见，不会发布）。
+**10 个自带短代码**，共同约定：**零 JavaScript、断网可构建、只用主题已有的颜色 token**（宣纸 / 朱红 / 暖灰），因此暗色自动跟随。
+完整示例见已发布页面 <https://hencte.top/shortcodes/>（源码 `content/zh/shortcodes.md`）；那一页还列了本站可直接用的 **6 个 Hugo 内置短代码**
+（`ref`/`relref`、`highlight`、`param`、`qr` 有实况示例，`figure` 与 `youtube` 附了实测后的不用理由）。
+
+新增短代码用到**新的工具类**时，先 `pnpm css` 再构建：Tailwind 的 `@source` 覆盖了 `layouts/`，但需要重新编译 `assets/css/tailwind.css`。
 
 | 短代码 | 用途 | 写法 |
 | --- | --- | --- |
 | `note` | 提示框，与 Obsidian callout 同一套类名 | `{{</* note type="tip" title="小技巧" fold="true" open="true" */>}}…{{</* /note */>}}` |
 | `pic` | 插图 + 图注，走 `_partials/img.html`（页包 → assets） | `{{</* pic src="/img/projects/nova.webp" alt="封面" caption="图注" */>}}` |
+| `gallery` | 多图网格，一行一张 `路径\|图注`，图片复用同一个解析器 | `{{</* gallery cols="3" */>}}/img/a.webp\|图注{{</* /gallery */>}}` |
 | `chapter` | 按 `novel`+`chapter` 查找章节，自动取标题与链接 | `{{</* chapter 12 */>}}`、`{{</* chapter novel="sky-tax" n="12" */>}}` |
 | `seal` | 朱红印章（正文内联，竖排） | `{{</* seal size="sm" shape="round" */>}}幸{{</* /seal */>}}` |
 | `verse` | 诗/古文，默认竖排、窄屏自动回落横排 | `{{</* verse cite="陆游《游山西村》" */>}}…{{</* /verse */>}}` |
+| `spoiler` | 剧透折叠，默认收起；标题缺省取 i18n 的 `spoiler` 键 | `{{</* spoiler label="剧透警告" */>}}…{{</* /spoiler */>}}` |
 | `tabs` + `tab` | 纯 CSS 标签页（`input:checked + label + .tab-panel`） | `{{</* tabs */>}}{{</* tab name="bash" */>}}…{{</* /tab */>}}{{</* /tabs */>}}` |
+| `filetree` | 目录树，原样转义、窄屏横向滚动不折行 | `{{</* filetree title="仓库结构" */>}}content/{{</* /filetree */>}}` |
+| `timeline` | 时间线，一行 `时间\|标题\|说明`，输出语义化 `<ol>` | `{{</* timeline */>}}2026-10\|标题{{</* /timeline */>}}` |
 
 写内容时的两条硬约束（都会让**整站**构建失败，围栏代码块也不豁免）：
-
 1. 短代码语法示例必须转义成 `{{</* name */>}}`；
 2. 正文里不得出现短代码占位符的字面串（要展示时在中间插零宽字符：`H&#xfeff;AHAHUGOSHORTCODE`，实体写在代码 span 之外）。
+
+### 图表：`goat` 围栏（不需要短代码）
+
+写 ```` ```goat ```` 围栏，Hugo 在构建期用 GoAT 把 ASCII 图变成 SVG：零 JS、断网可构建、
+线条用 `currentColor` 因此自动跟随暗色。`themes/kiss/layouts/_markup/render-codeblock-goat.html`
+在 Hugo 内建钩子之上补了**图注**（围栏属性 `caption`）与响应式包装——内建钩子会忽略 `caption`（实测 `figcaption` 数为 0）。
+
+**中文不要放进图里**：GoAT 逐字符排到 8px 网格上（实测相邻汉字 x=152/160/168/176），
+全角汉字约 13–16px 宽，必然重叠。图里用 ASCII 标签，中文说明写进 `caption`。
+同理，**目录树不要改成 GoAT**：那会把可复制、可搜索的等宽文本拆成逐字 SVG（`layouts/shortcodes/filetree.html`）。
 
 ## 样式架构（组件化约定）
 

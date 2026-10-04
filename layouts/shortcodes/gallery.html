@@ -1,0 +1,42 @@
+{{/*
+  gallery — 多图网格。一行一张图，写作 `路径|图注`（图注可省）。
+
+  用法：
+    {{< gallery cols="3" >}}
+    /img/projects/nova.webp|Nova 知识库封面
+    /img/projects/linktrust.webp
+    {{< /gallery >}}
+
+  参数：cols（2 / 3（默认）/ 4）、eager（true 时全部 eager 加载，默认逐图 lazy）。
+
+  说明：
+  - 图片仍走 `_partials/img.html`：页包 → assets 两级解析、自动补 width/height，不留 CLS 空洞；
+  - 排版只用 grid 原子类，零 JS；窄屏单列、平板两列、桌面按 cols 分列；
+  - 图注是纯文本且同时用作 alt，所以**不要写 Markdown**，也不要在图注里用 `|`；
+  - 内容为空时 warnf —— 本站构建带 --panicOnWarning，写空会当场失败，不留一个空网格。
+*/}}
+{{- $cols := .Get "cols" | default "3" -}}
+{{- $colClass := "sm:grid-cols-2 lg:grid-cols-3" -}}
+{{- if eq $cols "2" }}{{ $colClass = "sm:grid-cols-2" }}{{ else if eq $cols "4" }}{{ $colClass = "sm:grid-cols-2 lg:grid-cols-4" }}{{ end -}}
+{{- $lines := split (strings.TrimSpace .Inner) "\n" -}}
+{{- $count := 0 -}}
+{{- range $lines -}}{{ if strings.TrimSpace . }}{{ $count = add $count 1 }}{{ end }}{{ end -}}
+{{- if gt $count 0 -}}
+<div class="my-8 grid grid-cols-1 gap-4 {{ $colClass }}">
+  {{- range $lines -}}
+    {{- $line := strings.TrimSpace . -}}
+    {{- if $line -}}
+      {{- $parts := split $line "|" -}}
+      {{- $src := strings.TrimSpace (index $parts 0) -}}
+      {{- $caption := "" -}}
+      {{- if gt (len $parts) 1 }}{{ $caption = strings.TrimSpace (index $parts 1) }}{{ end -}}
+      <figure class="m-0">
+        {{- partial "img.html" (dict "src" $src "page" $.Page "alt" $caption "class" "h-auto w-full rounded-lg" "eager" ($.Get "eager")) -}}
+        {{- with $caption }}<figcaption class="meta mt-2 text-center">{{ . }}</figcaption>{{ end -}}
+      </figure>
+    {{- end -}}
+  {{- end -}}
+</div>
+{{- else -}}
+  {{- warnf "shortcode gallery: 内容为空（页面 %s）" .Page.File.Path -}}
+{{- end -}}

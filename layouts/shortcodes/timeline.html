@@ -1,0 +1,40 @@
+{{/*
+  timeline — 时间线。一行一件事：`时间|标题|说明`，后两段可省。
+
+  用法：
+    {{< timeline >}}
+    2026-10|站点迁移到 Hugo|Astro → Hugo，URL 与旧站逐条对齐
+    2026-03|写作流水线成型
+    {{< /timeline >}}
+
+  参数：无——样式全部取主题 token，自动跟随暗色。
+
+  说明：输出语义化 <ol>，零 JS；左侧竖线用 border，节点圆点用绝对定位挂在线上，
+  不依赖伪元素，因此不需要往 main.css 里加复合选择器。
+  说明段支持 Markdown；一段里用 `|` 会多切一段，需要竖线就写全角 `｜`。
+*/}}
+{{- $lines := split (strings.TrimSpace .Inner) "\n" -}}
+{{- $items := slice -}}
+{{- range $lines -}}
+  {{- if strings.TrimSpace . }}{{ $items = $items | append (strings.TrimSpace .) }}{{ end -}}
+{{- end -}}
+{{- if $items -}}
+<ol class="my-8 list-none space-y-5 border-l border-line pl-6">
+  {{- range $items -}}
+    {{- $parts := split . "|" -}}
+    {{- $when := strings.TrimSpace (index $parts 0) -}}
+    {{- $title := "" -}}
+    {{- if gt (len $parts) 1 }}{{ $title = strings.TrimSpace (index $parts 1) }}{{ end -}}
+    {{- $note := "" -}}
+    {{- if gt (len $parts) 2 }}{{ $note = strings.TrimSpace (index $parts 2) }}{{ end -}}
+  <li class="relative">
+    <span class="absolute -left-[1.75rem] top-[0.45rem] h-2 w-2 rounded-full bg-accent" aria-hidden="true"></span>
+    {{- with $when }}<p class="m-0 text-sm text-ink-muted">{{ . }}</p>{{ end -}}
+    {{- with $title }}<p class="m-0 font-medium text-ink">{{ . }}</p>{{ end -}}
+    {{- with $note }}<div class="text-ink-muted">{{ . | markdownify }}</div>{{ end -}}
+  </li>
+  {{- end -}}
+</ol>
+{{- else -}}
+  {{- warnf "shortcode timeline: 内容为空（页面 %s）" .Page.File.Path -}}
+{{- end -}}

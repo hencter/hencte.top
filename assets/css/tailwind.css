@@ -257,8 +257,14 @@
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
+  .top-\[0\.45rem\] {
+    top: 0.45rem;
+  }
   .right-0 {
     right: calc(var(--spacing) * 0);
+  }
+  .-left-\[1\.75rem\] {
+    left: calc(1.75rem * -1);
   }
   .isolate {
     isolation: isolate;
@@ -283,6 +289,9 @@
     @media (width >= 96rem) {
       max-width: 96rem;
     }
+  }
+  .m-0 {
+    margin: calc(var(--spacing) * 0);
   }
   .mx-2 {
     margin-inline: calc(var(--spacing) * 2);
@@ -1202,6 +1211,9 @@
   .table {
     display: table;
   }
+  .h-2 {
+    height: calc(var(--spacing) * 2);
+  }
   .h-9 {
     height: calc(var(--spacing) * 9);
   }
@@ -1225,6 +1237,9 @@
   }
   .min-h-screen {
     min-height: 100vh;
+  }
+  .w-2 {
+    width: calc(var(--spacing) * 2);
   }
   .w-9 {
     width: calc(var(--spacing) * 9);
@@ -1252,6 +1267,9 @@
   }
   .max-w-\[100rem\] {
     max-width: 100rem;
+  }
+  .max-w-full {
+    max-width: 100%;
   }
   .max-w-md {
     max-width: var(--container-md);
@@ -1337,6 +1355,13 @@
       --tw-space-y-reverse: 0;
       margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-5 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 5) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 5) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
   .gap-x-3 {
@@ -1465,6 +1490,9 @@
   .border-rose-600 {
     border-color: var(--color-rose-600);
   }
+  .bg-accent {
+    background-color: var(--color-accent);
+  }
   .bg-rose-50 {
     background-color: var(--color-rose-50);
   }
@@ -1575,6 +1603,9 @@
   }
   .pl-5 {
     padding-left: calc(var(--spacing) * 5);
+  }
+  .pl-6 {
+    padding-left: calc(var(--spacing) * 6);
   }
   .text-center {
     text-align: center;
@@ -1780,6 +1811,10 @@
     --tw-duration: 200ms;
     transition-duration: 200ms;
   }
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
+  }
   .\[text-orientation\:upright\] {
     text-orientation: upright;
   }
@@ -1957,6 +1992,11 @@
   .lg\:grid-cols-3 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .lg\:grid-cols-4 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
   .lg\:px-8 {

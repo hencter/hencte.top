@@ -9,7 +9,7 @@ title = 'AI 安全护栏正在把谁推向开源模型'
 
 你没看错。不是为了拦坏人——坏人在拦之前就走了。拦住的，是那些愿意守规矩的人。
 
-![封面](ai-guardrail-cover.webp)
+{{< pic src="ai-guardrail-cover.webp" alt="AI 安全护栏正在把谁推向开源模型" caption="拦住的不是坏人，是那些愿意守规矩的人。" >}}
 
 ## 护栏打在谁身上
 

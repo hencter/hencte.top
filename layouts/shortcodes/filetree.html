@@ -1,0 +1,37 @@
+{{/*
+  filetree — 目录树，等价于 `tree` 的输出。保留原文缩进与制表符，等宽显示。
+
+  用法：
+    {{< filetree title="仓库结构" >}}
+    content/
+    ├── zh/
+    │   └── blog.md
+    └── en/
+    {{< /filetree >}}
+
+  参数：title（可选标题条；省略就只有树本身）。
+
+  说明：
+  - 内容按原样转义输出（htmlEscape），所以 `<`、`&`、`|` 都不会被当成 HTML 或 Markdown；
+  - 缩进用空格或制表符都行，但同一棵树里要统一，否则层级会错位；
+  - 窄屏横向滚动而不是折行——折行会让父子层级失真，这正是用树而不是用列表的原因；
+  - 内容为空时 warnf，避免留下一个空框。
+
+  为什么不用 GoAT 渲染成 SVG（实测，Hugo 0.167）：GoAT 把每个字符排到 8px 的网格上
+  （实测相邻汉字 x=152/160/168/176），而全角汉字约 13–16px 宽，**必然互相重叠**；
+  同一段树里它还只识别出 2 条 path，等于把文本拆成逐字 SVG，既丢可复制/可搜索，也更难读。
+  目录树就该是等宽文本；真正的图（方框 / 箭头 / 流程）才交给 ```` ```goat ```` 围栏，见
+  `themes/kiss/layouts/_markup/render-codeblock-goat.html`。
+*/}}
+{{- $title := .Get "title" -}}
+{{- $body := strings.TrimSpace .Inner -}}
+{{- if $body -}}
+<figure class="my-8 overflow-hidden rounded-lg border border-line">
+  {{- with $title -}}
+    <figcaption class="border-b border-line bg-surface-soft px-4 py-2 text-sm font-medium text-ink">{{ . }}</figcaption>
+  {{- end -}}
+  <pre class="m-0 overflow-x-auto px-4 py-3 text-sm leading-relaxed"><code>{{ $body | htmlEscape | safeHTML }}</code></pre>
+</figure>
+{{- else -}}
+  {{- warnf "shortcode filetree: 内容为空（页面 %s）" .Page.File.Path -}}
+{{- end -}}

@@ -10,6 +10,13 @@ title = '一次的 Linux 全盘数据丢失经历'
 事情发生 2020 年 4 月 6 日：
 一次惨痛的 Linux 装机记录 -
 
+{{< timeline >}}
+2020-04-04|Linux QQ 更新|看到 Linux QQ 更新了直接上手，顺手用 VirtualBox 里的钉钉代替网课
+2020-04-05|迁移文件到 ext4|晚上开始迁移，设了定时关机；11:30 偷偷起来看界面没了，直接 `shutdown now`
+2020-04-06|数据全丢|PE 里没有镜像；DiskGenius 能看到 ext4，但把镜像拷进 U 盘失败
+2020-04-07|回到 Windows|Win7 部署阶段缺 USB3.0 驱动，最终改用 Windows 10 镜像收场
+{{< /timeline >}}
+
 时间：2020 年 4 月 4 日
 
 OMG！那天在和耗子聊天的过程中康到 [Linux-qq](https://im.qq.com/linuxqq/index.html "从心出发·趣无止境") 更新了，我靠直接莽上去！

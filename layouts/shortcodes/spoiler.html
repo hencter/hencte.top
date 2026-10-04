@@ -1,0 +1,20 @@
+{{/*
+  spoiler — 剧透折叠。小说、书评、评测里用来把情节藏起来，点开才显示。
+
+  用法：
+    {{< spoiler >}}正文，支持 **Markdown**{{< /spoiler >}}
+    {{< spoiler label="剧透警告：第 12 章" open="true" >}}…{{< /spoiler >}}
+
+  参数：label（缺省取 i18n 的 spoiler 键，四语各自成句）、open（true 则默认展开）。
+
+  说明：折叠本体是原生 <details>，零 JS、断网可用，键盘与读屏原生支持。
+  与 note 的 fold="true" 的差别：spoiler 默认收起，且标题刻意弱化为次要色——
+  「有内容被藏起来」不该和「这段内容被标注了」长得一样，所以它不套 Obsidian callout 的类名体系。
+*/}}
+{{- $label := .Get "label" -}}
+{{- if not $label }}{{ $label = i18n "spoiler" }}{{ end -}}
+{{- if not $label }}{{ $label = "剧透警告" }}{{ end -}}
+<details class="my-6 rounded-lg border border-line bg-surface-soft px-4 py-3"{{ if .Get "open" }} open{{ end }}>
+  <summary class="cursor-pointer select-none text-sm text-ink-muted">{{ $label }}</summary>
+  <div class="prose prose-sm mt-3">{{ .Inner | markdownify }}</div>
+</details>

@@ -96,6 +96,10 @@ other = 'Copy'
 [startReading]
 other = 'Start reading'
 
+# Default summary for the spoiler shortcode — see i18n/zh.toml.
+[spoiler]
+other = 'Spoiler warning'
+
 [novelNeedsJS]
 other = 'This chapter is drawn as images in your browser; please enable JavaScript.'
 

@@ -97,6 +97,10 @@ other = '複製'
 [startReading]
 other = '開始閱讀'
 
+# 劇透摺疊的預設標題（shortcode spoiler）。四語各自成句；tw/hk 由 pnpm variants 生成。
+[spoiler]
+other = '劇透警告'
+
 [novelNeedsJS]
 other = '本頁正文由瀏覽器繪製為圖片，請開啟 JavaScript。'
 

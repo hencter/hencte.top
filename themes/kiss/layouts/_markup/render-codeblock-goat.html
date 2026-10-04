@@ -1,0 +1,38 @@
+{{/*
+  goat — ```` ```goat ```` 围栏 → 构建期生成的 SVG（GoAT）。
+
+  Hugo 自带这个代码块钩子（embedded render-codeblock-goat.html），所以**不写这个文件也能用**；
+  这里只为补上两件内建钩子不做的事（实测：内建输出里 figcaption 数量为 0）：
+
+    1. 图注（围栏属性 caption）；
+    2. 跟随主题的响应式包装（max-w-full + h-auto，宽图在窄屏等比缩放不溢出）。
+
+  用法（围栏属性写在语言标签后面）：
+    ```goat {caption="图 1：本站构建链"}
+    .------.     .------.     .------.
+    | zh   +---->| Hugo +---->| html |
+    '------'     '------'     '------'
+    ```
+
+  零 JS、断网可构建；SVG 里的线条用 stroke="currentColor"，所以自动跟随暗色。
+
+  两条实测边界（Hugo 0.167）：
+  1. **不是图形也会渲染**——GoAT 把文本逐字符排到网格上（8px 步进）。中文句子因此会被挤到互相重叠
+     （实测相邻汉字 x=152/160/168/176）。这是本站 `filetree` 不用 GoAT 的原因：目录树用等宽文本
+     （`layouts/shortcodes/filetree.html`），GoAT 只用来画真正的图（方框 / 箭头 / 流程）。
+  2. **空输入不会报错**：`diagrams.Goat ""` 仍返回一张非零尺寸的空图（实测 Width>0），
+     所以守卫必须查输入是否为空，不能查输出尺寸——否则空围栏会静默渲染成一个空框。
+*/}}
+{{- $markup := trim .Inner "\n\r" -}}
+{{- $caption := .Attributes.caption | default "" -}}
+{{- $class := .Attributes.class | default "diagram" -}}
+{{- if $markup -}}
+  {{- with diagrams.Goat $markup -}}
+<figure class="my-8">
+  <svg class="{{ $class }} h-auto max-w-full text-ink" width="{{ .Width }}" height="{{ .Height }}" xmlns="http://www.w3.org/2000/svg" version="1.1" role="img"{{ with $caption }} aria-label="{{ . }}"{{ end }}>{{ .Inner }}</svg>
+  {{- with $caption }}<figcaption class="meta mt-3 text-center leading-relaxed">{{ . }}</figcaption>{{ end -}}
+</figure>
+  {{- end -}}
+{{- else -}}
+  {{- warnf "render-codeblock-goat: 图形为空（页面 %s）" .Page.File.Path -}}
+{{- end -}}

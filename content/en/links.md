@@ -30,7 +30,7 @@ title = 'Linked Sites'
 
 [ownSite]
 avatar = '/img/avatar.jpg'
-description = 'Personal brand and tech blog: projects, build notes, and original fiction.'
+description = 'Personal brand and tech blog: projects, build notes, and original fiction; Simplified, Traditional (TW/HK), and English.'
 name = '亦幸小阁 (Hencter Lew)'
 url = 'https://hencte.top/'
 +++

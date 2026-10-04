@@ -30,7 +30,7 @@ title = '已收录站点'
 
 [ownSite]
 avatar = '/img/avatar.jpg'
-description = '个人品牌与技术博客：项目展示、构建笔记与原创小说。'
+description = '个人品牌与技术博客：项目展示、构建笔记与原创小说；简 / 繁（台 · 港）/ 英四语。'
 name = '亦幸小阁'
 url = 'https://hencte.top/'
 +++

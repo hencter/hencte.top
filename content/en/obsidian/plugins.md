@@ -25,7 +25,7 @@ Source: `.obsidian/core-plugins.json` (core plugins). No community plugins were 
 
 | Plugin | Notes |
 | --- | --- |
-| File Explorer (`file-explorer`) | Browse and manage the file tree, move/rename notes and folders. |
+| File Explorer (`file-explorer`) | Browse and manage the file tree, move/rename notes and folders.[^1] |
 | Search (`global-search`) | Full-text search across the vault. |
 | Quick Switcher (`switcher`) | Fast open/switch notes (like `Ctrl+O`). |
 | Graph View (`graph`) | Explore the link graph to understand structure and relationships. |
@@ -61,3 +61,5 @@ Source: `.obsidian/core-plugins.json` (core plugins). No community plugins were 
 | Workspaces (`workspaces`) | Save/restore pane layouts. |
 | Publish (`publish`) | Obsidian Publish toggle. |
 | Web Viewer (`webviewer`) | Built-in web viewer/embedded browsing. |
+
+[^1]: Obsidian Help, “Core plugins” (the official core-plugin list in the `obsidianmd/obsidian-help` repo; each plugin ID comes from its own page in the same directory; published at https://help.obsidian.md/plugins). <https://github.com/obsidianmd/obsidian-help/blob/master/en/Plugins/Core%20plugins.md> (accessed 2026-10-04)

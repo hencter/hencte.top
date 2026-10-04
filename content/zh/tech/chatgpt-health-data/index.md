@@ -5,7 +5,7 @@ description = 'OpenAI 发布『Health in ChatGPT』：ChatGPT 可连接 Apple He
 tags = ['技术', '观点']
 title = 'ChatGPT 开始接入健康数据，但真正值钱的不是医疗问答'
 +++
-2026年7月23日，OpenAI 发布了一项更新：ChatGPT 可以连接你的 Apple Health 和医疗记录了。它叫 "Health in ChatGPT"。
+2026年7月23日，OpenAI 发布了一项更新：ChatGPT 可以连接你的 Apple Health 和医疗记录了[^1]。它叫 "Health in ChatGPT"。
 
 但这篇文章不会沿着"AI 看病"那条路走。
 
@@ -15,7 +15,7 @@ title = 'ChatGPT 开始接入健康数据，但真正值钱的不是医疗问答
 
 ## 3 亿人已经在问了
 
-每周有超过3亿人用 ChatGPT 问健康问题。——这是 OpenAI 官方公告里的数字。
+每周有超过3亿人用 ChatGPT 问健康问题[^1]。——这是 OpenAI 官方公告里的数字。
 
 不是"能看化验单吗"，而是已经在看。不是"会不会用"，而是已经用了。用户在没有任何健康数据接入的情况下，自发地把 ChatGPT 当作健康咨询入口，从理解化验结果到准备就诊问题，从解释医生说的话到制定更健康的日常习惯。
 
@@ -25,7 +25,7 @@ title = 'ChatGPT 开始接入健康数据，但真正值钱的不是医疗问答
 
 Health in ChatGPT 做的事情，说白了就是把这些信息连起来。
 
-你可以连接 Apple Health、美国医院系统的电子病历，以及 One Medical（美国连锁会员制诊所）和 Function Health（第三方健康检测平台）。连接后，ChatGPT 能帮你对比新旧化验结果、总结上次就诊以来的变化、分析睡眠和活动之间的关系。更激进的是——它不再要求你进入一个专门的"健康模式"才能用。早期测试数据显示，超过70%的健康对话发生在专用健康空间之外。用户在规划饮食时会希望 ChatGPT 考虑食物过敏，在安排周末活动时想让 AI 知道最近受过伤。
+你可以连接 Apple Health、美国医院系统的电子病历，以及 One Medical（美国连锁会员制诊所）和 Function Health（第三方健康检测平台）。连接后，ChatGPT 能帮你对比新旧化验结果、总结上次就诊以来的变化、分析睡眠和活动之间的关系。更激进的是——它不再要求你进入一个专门的"健康模式"才能用。早期测试数据显示，超过70%的健康对话发生在专用健康空间之外[^1]。用户在规划饮食时会希望 ChatGPT 考虑食物过敏，在安排周末活动时想让 AI 知道最近受过伤。
 
 OpenAI 的决定是：把健康数据接入所有对话，而不是锁在一个独立入口里。
 
@@ -39,7 +39,7 @@ OpenAI 的决定是：把健康数据接入所有对话，而不是锁在一个�
 
 几个事实：
 
-1. **健康数据不用于训练基础模型。** 不管你选了什么模型训练设置，Apple Health 和医疗记录里的数据，以及用到这些数据的对话，都不参与训练、不用于广告。
+1. **健康数据不用于训练基础模型。** 不管你选了什么模型训练设置，Apple Health 和医疗记录里的数据，以及用到这些数据的对话，都不参与训练、不用于广告[^1]。
 2. **默认授权。** ChatGPT 每次使用健康数据前，需要你同意。你也可以设为"始终允许"，但关闭这个提示意味着不再逐次确认。
 3. **断开即删除。** 断开连接后，数据在 OpenAI 系统内最多保留30天，之后删除。但——对话中已经包含的健康信息，保留到你手动删除那些对话。
 4. **记忆系统隔离。** ChatGPT 的 Memory 功能可能从健康对话中形成偏好记忆，但不会直接从连接的医疗记录中提取。
@@ -48,7 +48,7 @@ OpenAI 的决定是：把健康数据接入所有对话，而不是锁在一个�
 
 这六条，放到一起，比功能本身更值得琢磨。
 
-Apple 那一边也一样。Apple Health 的数据只能用密码、Face ID 或 Touch ID 访问，全量加密。App Store 审核明确规定：健康、健身和医疗数据不能用于广告营销，不能拿去挖掘用户行为，不能卖给数据中间商。
+Apple 那一边也一样。Apple Health 的数据只能用密码、Face ID 或 Touch ID 访问，全量加密[^2]。App Store 审核明确规定：健康、健身和医疗数据不能用于广告营销，不能拿去挖掘用户行为，不能卖给数据中间商[^3]。
 
 说白了，这不是两家公司在比谁的回答更准，而是两个平台正在共同定义一套"健康数据的信任基础设施"。
 
@@ -114,7 +114,8 @@ ChatGPT 会知道你上一周的平均入睡时间是凌晨1:42，深度睡眠�
 
 *幸知 / 2026-07-24 /*
 
-**信源：**
-- OpenAI, "Launching Health in ChatGPT", openai.com/index/health-in-chatgpt (2026-07-23)
-- Apple Developer, "Health and fitness apps", developer.apple.com/health-fitness
-- Apple, "Privacy", apple.com/privacy
+[^1]: OpenAI, "Launching Health in ChatGPT"（2026-07-23）. <https://openai.com/index/health-in-chatgpt/>（访问 2026-10-04）
+
+[^2]: Apple Developer, "Health and fitness apps". developer.apple.com/health-fitness（作者随文标注，本轮未打开，可达性未核实）
+
+[^3]: Apple, "Privacy". apple.com/privacy（作者随文标注，本轮未打开，可达性未核实）

@@ -112,6 +112,39 @@ python scripts/verify_urls.py                                  # 验收
 1. 短代码语法示例必须转义成 `{{</* name */>}}`；
 2. 正文里不得出现短代码占位符的字面串（要展示时在中间插零宽字符：`H&#xfeff;AHAHUGOSHORTCODE`，实体写在代码 span 之外）。
 
+## 样式架构（组件化约定）
+
+样式分三层，**新样式按顺序落到第一层能表达的地方**：
+
+| 层 | 放什么 | 位置 |
+| --- | --- | --- |
+| **语义 token** | 颜色：`bg-surface` `bg-surface-soft` `border-line` `border-line-strong` `text-ink` `text-ink-soft` `text-ink-muted` `text-ink-faint` | `@theme` 定义，`.dark` 里整体翻转 |
+| **原语组件** | `.card` `.btn` `.btn-primary` `.btn-secondary` `.chip` `.meta`，以及 `.callout` `.tabs` `.toc` `.code-block` `.prose*` | `@layer components`（`@apply` + token） |
+| **页面专属规则** | 表达不了的部分 | **层外**（未分层），必须写注释说明为什么不能分层 |
+
+三条硬规矩：
+
+1. **颜色只写 token，不写 `dark:` 变体**——token 在 `.dark` 里整体翻转。也不要再写
+   `.dark .text-gray-600 {}` 这类逐工具类映射（已删除 24 条）。
+2. **原语优先**：模板里重复出现的组合先进 `@layer components`，再把模板改成组件名
+   （`.card` 已经把"圆角 + 发丝边 + 纸面 + 阴影悬停"这组 14 处重复收拢）。
+3. **会与原子类竞争的规则必须留在层外**：未分层规则压过所有 Tailwind 层。实测把这类规则
+   搬进 `@layer components` 会让原子类反超——整批搬迁导致 `/tech/` 高度 3415→2803px、
+   `/blog/` 4313→3656px、`/shelf/` 暗色 71% 像素变化，并新增 1 处对比度不达标（已整批回退）。
+   逐条二分后迁移了确证零差异的 3 条；`.pager-link` / `.hero-subtitle` 这类"元素上同时挂着
+   原子类"的规则属于承载性规则，保持层外。
+
+**改样式后的验证流程**（只跑构建发现不了层序变化）：
+
+```bash
+corepack pnpm css && hugo --ignoreCache --panicOnWarning   # 连续两轮 → 构建不动点
+# 12 页 × 明暗（light/dark）全页截图做像素对比：期望 0.0000% 差异
+# 全站对比度扫描 + 390px CLS/溢出扫描
+```
+
+`hugo_stats.json` 曾是 Tailwind 的 `@source`，而它由**后续**那次 Hugo 构建写出 ——
+会让提交的样式表比模板滞后一轮，已删除（实测带与不带产出字节相同）。
+
 ## 抓取与引用政策（Cite vs Protect）
 
 - **Cite 轨**：博客 `/log` `/tech` `/ancient`、品牌页（首页/关于/项目/友链/博客索引）可索引、可引用。

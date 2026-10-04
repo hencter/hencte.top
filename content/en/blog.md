@@ -1,7 +1,7 @@
 +++
 description = """
 Public build notes and technical writing by Hencter Lew.
-Posts are organized into Log, Tech, and Ancient sections for long-term reading.
+Posts are organized into Log, Tech, Ancient, and Shelf sections for long-term reading.
 """
 keywords = ['blog', 'technical notes', 'build in public', 'Hencter Lew']
 latestTitle = 'Latest posts'
@@ -15,6 +15,6 @@ badge = 'Personal Blog'
 headline = 'Blog'
 subtitle = """
 Public build notes and technical articles from product work, tooling, and knowledge systems.
-Most posts are written in Chinese; site pages for projects and about are available in English.
+Articles are written in Chinese; brand pages are also available in Traditional Chinese (TW/HK) and English.
 """
 +++

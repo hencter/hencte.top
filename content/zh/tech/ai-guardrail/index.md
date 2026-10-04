@@ -5,7 +5,7 @@ description = 'TechCrunch 报道多位安全研究者抱怨 OpenAI 与 Anthropic
 tags = ['技术', '观点']
 title = 'AI 安全护栏正在把谁推向开源模型'
 +++
-2026 年 7 月 23 日，TechCrunch 登了一篇报道。标题不算耸人听闻，但里面的声音值得你花五分钟读完：多位安全研究者说，OpenAI 和 Anthropic 的安全护栏正在阻碍他们的合法工作。
+2026 年 7 月 23 日，TechCrunch 登了一篇报道[^1]。标题不算耸人听闻，但里面的声音值得你花五分钟读完：多位安全研究者说，OpenAI 和 Anthropic 的安全护栏正在阻碍他们的合法工作。
 
 你没看错。不是为了拦坏人——坏人在拦之前就走了。拦住的，是那些愿意守规矩的人。
 
@@ -17,7 +17,7 @@ Mark Dowd 是安全圈里你绕不开的名字。他做了几十年漏洞挖掘�
 
 不是反对护栏。是反对"任意"。 ^9e69f3
 
-Chris Anley，安全咨询巨头 NCC Group 的首席科学家，给出了一个更具体的场景：让 AI 模型尝试利用一个已发现的 bug，是确认它是否构成真实威胁的关键步骤。但护栏一旦触发，模型直接拒绝回答——而这个拒绝，恰恰堵住了防御者确认漏洞的路径。
+Chris Anley，安全咨询巨头 NCC Group 的首席科学家，给出了一个更具体的场景：让 AI 模型尝试利用一个已发现的 bug，是确认它是否构成真实威胁的关键步骤。但护栏一旦触发，模型直接拒绝回答——而这个拒绝，恰恰堵住了防御者确认漏洞的路径[^1]。
 
 他说得很直白："让它修代码这个提示词，既是防御的基本动作，也是找到关键漏洞的路线图。同一工具同时是进攻工具也是防御工具，你拆不开。"
 
@@ -29,9 +29,9 @@ Chris Anley，安全咨询巨头 NCC Group 的首席科学家，给出了一个�
 
 目前两家最大的前沿模型公司都建了自己的"审核通道"。
 
-OpenAI 在 2026 年 2 月推出了 Trusted Access for Cyber（TAC），用户要到 chatgpt.com/cyber 验证身份；企业通过销售代表申请。4 月又推出 GPT-5.4-Cyber，一个专门为网络安全微调、降低了拒答门槛的模型——但只对"经过审查的安全供应商、组织和研究者"开放，且限制零数据留存。
+OpenAI 在 2026 年 2 月推出了 Trusted Access for Cyber（TAC），用户要到 chatgpt.com/cyber 验证身份；企业通过销售代表申请。4 月又推出 GPT-5.4-Cyber，一个专门为网络安全微调、降低了拒答门槛的模型——但只对"经过审查的安全供应商、组织和研究者"开放，且限制零数据留存[^2]。
 
-Anthropic 这边是 Cyber Verification Program（CVP），把请求分成两类：禁止用途（勒索软件、大规模数据窃取等，一律永封）和双用途高风险（漏洞利用、攻击工具开发等，默认拦截但可申请解除）。审核承诺 2 个工作日内回复。
+Anthropic 这边是 Cyber Verification Program（CVP），把请求分成两类：禁止用途（勒索软件、大规模数据窃取等，一律永封）和双用途高风险（漏洞利用、攻击工具开发等，默认拦截但可申请解除）。审核承诺 2 个工作日内回复[^3]。
 
 听起来很合理。但三个细节暴露了问题。
 
@@ -51,7 +51,7 @@ Anthropic 这边是 Cyber Verification Program（CVP），把请求分成两类�
 
 Sam Altman 当时在播客里的评价是："这明显是极好的营销——'我们造了一颗炸弹。我们本来要把它砸你头上的。现在给你卖个防空洞，1 亿美元。'"
 
-Altman 这话有酸味。但 6 月 12 日发生的事证明他的直觉不是全错：美国政府以国家安全为由，直接命令 Anthropic 关闭 Fable 5 和 Mythos 5 的全部访问——不只是外国用户，是全世界所有人。
+Altman 这话有酸味。但 6 月 12 日发生的事证明他的直觉不是全错：美国政府以国家安全为由，直接命令 Anthropic 关闭 Fable 5 和 Mythos 5 的全部访问——不只是外国用户，是全世界所有人[^4]。
 
 事后出口管制已解除。Fable 5 于 7 月 1 日恢复公开访问。但 Mythos 5 至今只对美国境内的受审查机构开放。
 
@@ -121,4 +121,12 @@ Thompson 在采访最后给了一个方向：不是收紧，是放开——开�
 
 这个安全生态到底是变得更安全了，还是更危险了？
 
-*幸知 / 2026-07-24 / TechCrunch (2026-07-23, 2026-06-12, 2026-04-07, 2026-04-09), OpenAI TAC 官方博客 (2026-02-05, 2026-04-14), Anthropic CVP 帮助页面*
+*幸知 / 2026-07-24*
+
+[^1]: TechCrunch, How AI guardrails are impeding the work of offensive cybersecurity researchers（作者随文标注 2026-07-23、2026-06-12、2026-04-07、2026-04-09 四篇报道，本次核对的是 2026-07-23 那篇）. <https://techcrunch.com/2026/07/23/how-ai-guardrails-are-impeding-the-work-of-offensive-cybersecurity-researchers/>（访问 2026-10-04；页面可达，正文抓取被截断，引语未逐句比对）
+
+[^2]: OpenAI, Trusted access for the next era of cyber defense（含 GPT-5.4-Cyber，2026-04-14；作者另标注 2026-02-05 发布 TAC）. <https://openai.com/index/scaling-trusted-access-for-cyber-defense/>（访问 2026-10-04）
+
+[^3]: Anthropic Cyber Verification Program（CVP）帮助页面（作者随文标注，未给链接；本轮未定位到一手页面）
+
+[^4]: Anthropic, Statement on the US government directive to suspend access to Fable 5 and Mythos 5（2026-06-12）. <https://www.anthropic.com/news/fable-mythos-access>（访问 2026-10-04）

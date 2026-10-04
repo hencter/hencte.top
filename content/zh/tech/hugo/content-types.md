@@ -9,9 +9,9 @@ title = '内容类型'
 
 官方给出的回答：
 
-> Hugo is built around content organized in sections.
+> Hugo assumes that the same structure that works to organize your source content is used to organize the rendered site.
 
-简单翻译一下：Hugo 是围绕 sections 构建组织内容的。
+简单翻译一下：Hugo 假设「用来组织源内容的结构」同样用来组织渲染出的站点[^1]。
 
 内容类型是一种组织内容的方式。
 
@@ -31,3 +31,5 @@ type = "blog"
 ```
 
 那么在模版中如果有 `layout/blog/目录`
+
+[^1]: Hugo Documentation, Content organization. <https://gohugo.io/content-management/organization/>（访问 2026-10-04）

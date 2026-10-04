@@ -1,9 +1,9 @@
 +++
 description = """
 這裏彙總了我公開記錄的構建過程與技術文章。
-文章按「日誌 / 技術 / 古文」整理，便於長期閲讀與檢索。
+文章按「日誌 / 技術 / 古文 / 書架」整理，便於長期閲讀與檢索。
 """
-keywords = ['博客', '技術日誌', 'Hugo 遷移', '個人博客']
+keywords = ['博客', '技術日誌', '技術寫作', 'Hugo', '個人博客']
 latestTitle = '最新文章'
 sections = [{ key = 'log', label = '日誌', description = '日常折騰記錄與階段性復盤。', href = '/log' }, { key = 'tech', label = '技術', description = '工具鏈、實踐筆記、實現細節與經驗總結。', href = '/tech' }, { key = 'novel', label = '書架', description = '作品庫：原創小説，開源教程將陸續上架。', href = '/shelf' }, { key = 'ancient', label = '古文', description = '古籍摘錄與中文排版實驗（Heti + 農曆）。', href = '/ancient' }]
 title = '博客 | 亦幸小閣'
@@ -15,7 +15,7 @@ badge = 'Personal Blog'
 headline = '博客'
 subtitle = """
 這裏彙總了我公開記錄的構建過程與技術文章。
-文章按「日誌 / 技術 / 古文 / 小説」整理，便於長期閲讀與檢索。
-英文站頁（項目、關於）見右上角 EN 切換。
+文章按「日誌 / 技術 / 古文 / 書架」整理，便於長期閲讀與檢索。
+品牌頁另有繁體（台 / 港）與英文版本，可用右上角切換。
 """
 +++

@@ -334,3 +334,5 @@ go env -w GOPROXY=https://goproxy.cn,direct
 ```
 
 参考：<https://goproxy.cn/>
+
+[^3]: ArchWiki — mkinitcpio：Troubleshooting「Possibly missing firmware for module XXXX」说明 `mkinitcpio -P` 重建 initramfs 时的固件缺失警告，可安装 AUR 元包 mkinitcpio-firmware 消除. <https://wiki.archlinux.org/title/Mkinitcpio#Possibly_missing_firmware_for_module_XXXX>（访问 2026-10-04）

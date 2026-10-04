@@ -13,7 +13,7 @@ toc = true
 
 ## SEO 与 GEO 的核心差异
 
-在 ChatGPT、Perplexity 等 AI 搜索兴起后，传统的 SEO（搜索引擎优化）正在被 GEO（生成式引擎优化）补充：
+在 ChatGPT、Perplexity 等 AI 搜索兴起后，传统的 SEO（搜索引擎优化）正在被 GEO（生成式引擎优化）补充[^1]：
 
 | 维度 | 传统 SEO | 生成式引擎优化（GEO） |
 |------|---------|---------------------|
@@ -102,7 +102,7 @@ JSON-LD 是 GEO 时代的核心武器——它不是锦上添花，而是机器�
 
 ## llm.txt：大模型的专属站点地图
 
-llm.txt 是一个放置在网站根目录的纯文本文件，用结构化方式描述网站核心信息。它让大模型在不抓取全部页面的情况下，快速理解网站是什么、有哪些关键内容。
+llm.txt 是一个放置在网站根目录的纯文本文件，用结构化方式描述网站核心信息[^2]。它让大模型在不抓取全部页面的情况下，快速理解网站是什么、有哪些关键内容。
 
 格式示例：
 
@@ -126,7 +126,7 @@ FAQ_A: 个人技术博客，分享 AI 工程实践与开发经验。
 LAST_UPDATED: 2026-04-25
 ```
 
-与 robots.txt 协同：在 robots.txt 中添加注释告知 AI 爬虫 llm.txt 的存在。
+与 robots.txt 协同：在 robots.txt 中添加注释告知 AI 爬虫 llm.txt 的存在[^2]。
 
 ## 实施优先级建议
 
@@ -143,3 +143,7 @@ LAST_UPDATED: 2026-04-25
 - **速度是基础**：网站加载速度影响 AI 爬虫的抓取深度和频率
 - **安全隐私**：敏感信息在 robots.txt 中明确禁止 AI 爬虫抓取
 - **一致性**：JSON-LD 与页面内容、llm.txt 之间保持完全一致
+
+[^1]: Aggarwal et al. GEO: Generative Engine Optimization. KDD 2024. arXiv:2311.09735. <https://arxiv.org/abs/2311.09735>（访问 2026-10-04）
+
+[^2]: Jeremy Howard, The /llms.txt file（2024-09-03 提出；规范文件名为 llms.txt，本文写作时用了 llm.txt 的写法）. <https://llmstxt.org/>（访问 2026-10-04）

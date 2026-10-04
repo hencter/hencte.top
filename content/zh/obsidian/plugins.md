@@ -25,7 +25,7 @@ subtitle = """
 
 | 插件 | 说明 |
 | --- | --- |
-| 文件浏览器（`file-explorer`） | 管理文件树、移动/重命名笔记与目录。 |
+| 文件浏览器（`file-explorer`） | 管理文件树、移动/重命名笔记与目录。[^1] |
 | 全局搜索（`global-search`） | 跨笔记全文搜索，用于快速定位信息。 |
 | 快速切换（`switcher`） | 类似 `Ctrl+O` 的快速打开/切换笔记入口。 |
 | 图谱（`graph`） | 观察链接网络，用于探索与复盘结构。 |
@@ -61,3 +61,5 @@ subtitle = """
 | 工作区（`workspaces`） | 保存/恢复布局与面板组合。 |
 | Publish（`publish`） | Obsidian Publish 发布服务开关。 |
 | Webviewer（`webviewer`） | 内置网页浏览/嵌入页面能力。 |
+
+[^1]: Obsidian 官方核心插件清单（`obsidianmd/obsidian-help` 仓库 `en/Plugins/Core plugins.md`，发布页 https://help.obsidian.md/plugins ；表内各插件 ID 取自同目录下各插件页）. <https://github.com/obsidianmd/obsidian-help/blob/master/en/Plugins/Core%20plugins.md>（访问 2026-10-04）

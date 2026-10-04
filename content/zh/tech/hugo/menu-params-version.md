@@ -6,7 +6,7 @@ title = 'Menu Params version'
 无论您如何定义菜单条目，与页面关联的条目都可以访问页面变量和方法。
 
 这个简单的示例在每个条目的名称旁边呈现一个名为 version 的页面参数。
-代码防御性地使用 with 或 if 来处理条目，其中 (a) 条目指向外部资源，或 (b) 未定义版本参数。
+代码防御性地使用 with 或 if 来处理条目，其中 (a) 条目指向外部资源，或 (b) 未定义版本参数[^1]。
 
 ##
 
@@ -24,3 +24,5 @@ title = 'Menu Params version'
   </a>
 {{- end }}
 ```
+
+[^1]: Hugo Documentation, Menus（菜单条目 .Params.version 示例）. <https://gohugo.io/content-management/menus/>（访问 2026-10-04）

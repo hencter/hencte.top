@@ -9,4 +9,6 @@ title = 'Page Resources'
 +++
 ## 什么是页面资源？
 
-页面资源——图像、其他页面、文档等——有页面相关的 URL 和它们自己的元数据。
+页面资源——图像、其他页面、文档等——有页面相关的 URL 和它们自己的元数据[^1]。
+
+[^1]: Hugo Documentation, Page resources. <https://gohugo.io/content-management/page-resources/>（访问 2026-10-04）

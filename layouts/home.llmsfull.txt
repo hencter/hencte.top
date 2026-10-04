@@ -1,19 +1,28 @@
 {{/*
   /llms-full.txt — full text of the Cite-track articles, so an agent can read the
-  site without crawling it. The Protect track (/shelf/) is excluded: only its
-  bibliographic metadata appears, never chapter bodies.
-*/}}
-# {{ site.Title }} — 全文索引 (llms-full.txt)
+  site without crawling it. The Protect track (/shelf/ and the legacy /novel/
+  redirects) is excluded: only its bibliographic metadata appears, never chapter
+  bodies.
 
-> {{ site.Params.description }}作者：{{ site.Params.author }}。
-> Cite 轨全文见下；Protect 轨（/shelf/、旧路径 /novel/）正文不在此文件中，仅列书目元数据。
+  Site-level facts (author, languages, Cite/Protect policy) are language-neutral on
+  purpose, so the /en/ /tw/ /hk/ mirrors describe the same four-language site.
+  The language list is written out rather than counted: site.Languages is
+  deprecated in Hugo v0.156.0 and this project builds with --panicOnWarning.
+*/}}
+# {{ site.Title }} — 全文索引（llms-full.txt）
+
+> {{ site.Params.description }}
+> 作者：亦幸（{{ site.Params.author }}）　联系：hencter@linktrust.top　ORCID：https://orcid.org/0009-0007-7990-0106
+> 本文件只收录 Cite 轨文章的全文；Protect 轨（`/shelf/` 及旧路径 `/novel/`）的章节正文不在本文件中，只列书目元数据。
 
 ## 站点信息
 
 - 站点：{{ site.Title }} — {{ site.BaseURL }}
-- 语言：zh-CN（默认）、en-US
+- 语言（4 种）：zh-CN 简体（默认）{{ "/" | absURL }} · en-US 英文 {{ "en/" | absURL }} · zh-TW 繁體（台灣）{{ "tw/" | absURL }} · zh-HK 繁體（香港）{{ "hk/" | absURL }}
+- 技术栈：Hugo 静态站点 + Tailwind CSS v4
 - 联系：hencter@linktrust.top　ORCID：https://orcid.org/0009-0007-7990-0106
 - 索引文件：{{ "llms.txt" | absURL }} · {{ "llm.txt" | absURL }} · {{ "sitemap.xml" | absURL }} · {{ "rss.xml" | absURL }}
+- 抓取政策：Cite 轨（`/log` `/tech` `/ancient` 与品牌页）可索引、可引用；Protect 轨（`/shelf/`、`/novel/`）由 robots.txt Disallow，页面输出 `noindex, noai, noimageai`，不进入 sitemap 与 RSS。
 
 {{- $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient") }}
 {{- range $posts.ByDate.Reverse }}
@@ -41,6 +50,6 @@
 - 《{{ .Title }}》 — {{ .Permalink }} — {{ .Description }}
 {{- end }}
 
-> Protect 轨：以上作品正文受版权保护，禁止抓取、转载与模型训练。引用仅限本段书目元数据。
+> Protect 轨：以上作品的书目元数据可引用；章节正文受版权保护，禁止抓取、转载与模型训练（robots.txt Disallow + `noindex, noai, noimageai`，且不进入 sitemap 与 RSS）。
 
 Last updated: {{ now | time.Format "2006-01-02" }}

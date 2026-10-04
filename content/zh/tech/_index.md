@@ -1,7 +1,7 @@
 +++
-description = '工具链、实践笔记、实现细节与经验总结：Hugo/Astro、编辑器、AI 工程与方法论。'
+description = '工具链、实践笔记、实现细节与经验总结：Hugo、编辑器、AI 工程与方法论。'
 draft = false
-keywords = ['技术笔记', '工具链', 'AI 工程', 'Hugo', 'Astro']
+keywords = ['技术笔记', '工具链', 'AI 工程', 'Hugo']
 title = '技术'
 +++
 技术栏目收录**可复用的实践笔记**——偏向「怎么做」与「为什么这样选」，而不是一次性新闻摘要。
@@ -9,7 +9,7 @@ title = '技术'
 ## 子栏目概览
 
 - **[折腾之路](/tech/road)**：工具与方法论的入门与选型
-- **[Hugo](/tech/hugo)**：静态站点生成器相关笔记（历史归档，主站已迁移至 Astro）
+- **[Hugo](/tech/hugo)**：静态站点生成器相关笔记（主站已由 Astro 迁移至 Hugo）
 - **[编辑器](/tech/editor)**：Neovim、快捷键与写作环境配置
 
 ## 阅读建议

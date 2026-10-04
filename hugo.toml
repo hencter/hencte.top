@@ -40,12 +40,15 @@ disableKinds = ['taxonomy', 'term']
   # Draw novel chapter text into <canvas> in the browser (no build-time images).
   novelCanvas = true
 
-  applicationName      = 'Hencter Studio'
+  applicationName      = '亦幸小阁'
   author               = 'Hencter Lew'
   bingSiteVerification = 'DE3B203227A8CF344D0A0F8E02B192CB'
   defaultImage         = '/og-image.png'
-  description          = '亦幸（Hencter Lew）的公开项目与博客：产品实践、知识管理与技术写作。'
-  twitterSite          = '@hencter'
+  description          = '亦幸（Hencter Lew）的公开项目与博客：产品实践、知识管理与技术写作；Hugo 构建，简 / 繁（台 · 港）/ 英四语。'
+  # The author's X handle is @hencte: GitHub reports twitter_username=hencte and
+  # the profile README links https://x.com/hencte. The previous '@hencter' value
+  # pointed twitter:site at a different account.
+  twitterSite          = '@hencte'
 
 # The migration rewrote every content file, so git commit dates would report
 # "updated 2026-10-03" for the whole site. Prefer an explicit lastmod, then the

@@ -1,7 +1,16 @@
 {{/*
-  RSS feed at /rss.xml (see [outputFormats.RSS] in hugo.toml). Based on Hugo's
-  embedded template, with the Protect track excluded: /shelf/ pages never appear
-  in the feed, matching the Astro site's feed and its noindex policy.
+  RSS feed at /rss.xml (see [outputFormats.RSS] in hugo.toml — baseName "rss",
+  so the feed is /rss.xml rather than Hugo's default /index.xml).
+
+  Protect track excluded: /shelf/ pages are noindex, noai, noimageai and never
+  appear here (they are also absent from /sitemap.xml), matching the policy stated
+  in /llms.txt, /llm.txt, /llms-full.txt and layouts/robots.txt.
+
+  channel title/description come from the site config (site.Title and
+  params.description) — do not hardcode them here, so hugo.toml stays the single
+  source. Title is already per-language ([languages.tw] / [languages.hk] set it);
+  the description is currently project-wide and therefore Chinese in every
+  language feed — a per-language params.description in hugo.toml would localize it.
 */}}
 {{- $pages := where site.RegularPages "Section" "ne" "shelf" -}}
 {{- $pages = $pages.ByDate.Reverse -}}

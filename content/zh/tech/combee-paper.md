@@ -10,13 +10,13 @@ toc = true
 +++
 ## 一句话定位
 
-Combee 是一个解决"上下文过载"的分布式提示学习框架，让多个 AI Agent 能并行学习经验而不丢失关键知识，实现 **17 倍加速**且质量不降。
+Combee 是一个解决"上下文过载"的分布式提示学习框架，让多个 AI Agent 能并行学习经验而不丢失关键知识，实现 **17 倍加速**且质量不降[^1]。
 
 命名来源于蜂群隐喻——多 Agent 协同工作与蜂群 Boids Protocol 本质相同。
 
 ## 核心问题：上下文过载
 
-当增加并行 batch size 来加速学习时，聚合器需要一次性处理大量 reflection（反思），导致严重的信息丢失：
+当增加并行 batch size 来加速学习时，聚合器需要一次性处理大量 reflection（反思），导致严重的信息丢失[^1]：
 
 | 指标 | batch=1 | batch=100 | 变化 |
 |------|---------|-----------|------|
@@ -68,9 +68,9 @@ Combee 设计：
 | Naive | 40 | 5min | 55.7 |
 | **Combee** | **40** | **7min** | **65.8** |
 
-Combee 用 7 分钟达到 65.8% 准确率——12 倍加速的同时，质量**反超**了 86 分钟的慢速基线。
+Combee 用 7 分钟达到 65.8% 准确率——12 倍加速的同时，质量**反超**了 86 分钟的慢速基线[^1]。
 
-在金融基准（FiNER 和 Formula）上，Combee 始终位于 Pareto 前沿——用更少时间达到更高准确率。
+在金融基准（FiNER 和 Formula）上，Combee 始终位于 Pareto 前沿[^1]——用更少时间达到更高准确率。
 
 ## 核心洞见
 
@@ -106,4 +106,6 @@ Combee 的核心价值不是 17 倍加速（这是工程优化），而是**识�
 
 ---
 
-论文信息：arXiv 2604.04247v1，UC Berkeley + Stanford + Tensormesh + Gradient Network 联合发布。
+论文信息：arXiv 2604.04247v1[^1]，UC Berkeley + Stanford + Tensormesh + Gradient Network 联合发布。
+
+[^1]: Combee: Scaling Parallel Prompt Learning for Self-Improving LLM Agents（COLM 2026；v1 标题为 Scaling Prompt Learning for Self-Improving Language Model Agents）. arXiv:2604.04247. <https://arxiv.org/abs/2604.04247>（访问 2026-10-04）

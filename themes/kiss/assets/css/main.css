@@ -1,5 +1,24 @@
 /* Tailwind CSS entry point for the kiss theme.
  *
+ * 样式架构（写新样式前按顺序问这四条）：
+ *   1. 颜色一律用语义 token：bg-surface / bg-surface-soft / border-line /
+ *      border-line-strong / text-ink / text-ink-soft / text-ink-muted / text-ink-faint。
+ *      它们在 .dark 里整体翻转，所以**不需要** dark: 变体，也不要再写
+ *      `.dark .text-gray-600 {}` 这类逐工具类映射（批次 1 删掉 24 条）。
+ *   2. 通用 UI 用原语：.card / .btn / .btn-primary / .btn-secondary / .chip / .meta，
+ *      以及既有的 .callout / .tabs / .toc / .code-block / .prose*（都在 @layer components）。
+ *   3. 上面两条都表达不了才写规则；写完要问它会不会和模板原子类竞争。会竞争的
+ *      （例如要盖住 typography 插件的韵律）**必须留在层外**并注释原因——未分层规则
+ *      压过所有 Tailwind 层。
+ *   4. 实测教训：把承载性规则搬进 @layer components 会让原子类反超。批次 3 整批搬迁时
+ *      /tech/ 高度 3415→2803px、/blog/ 4313→3656px、/shelf/ 暗色 71% 像素变化，并新增
+ *      1 处对比度不达标 → 整批回退。逐条二分后：.chapter-body / .novel-banner /
+ *      .novel-cover 迁入组件层后 8/8 张截图 0.0000% 差异（已迁移）；.pager-link /
+ *      .hero-subtitle 属于承载性规则，保持层外。
+ *
+ * 验证流程（只跑构建发现不了层序变化）：构建推到不动点（pnpm css → hugo 连续两轮）→
+ * 12 页 × 明暗全页截图做像素对比 → 全站对比度 + 390px CLS/溢出回归。
+ *
  * Compiled to assets/css/tailwind.css by the Tailwind CSS CLI *before* Hugo runs:
  *   pnpm css        (pnpm build runs it automatically)
  *
@@ -665,11 +684,15 @@ summary::-webkit-details-marker {
  * CLS 0.370 and a chapter page 0.173 (both "poor"): the only shifting elements
  * were these two <img>, which had no intrinsic size. The ratio matches the real
  * files exactly, so the rendered size is unchanged — nothing crops or moves. */
+@layer components {
 .novel-banner {
   aspect-ratio: 3 / 2;
 }
+}
+@layer components {
 .novel-cover {
   aspect-ratio: 2 / 3;
+}
 }
 
 /* A list card prints .Summary, which carries the article's footnote markers but
@@ -1059,9 +1082,11 @@ h3,
  * chapter index and the reader each started at the container edge with different
  * right edges, so the page read as three unrelated widths. One reading column,
  * the same measure the article pages use. */
+@layer components {
 .chapter-body {
   max-width: var(--read-col, 48rem);
   margin-inline: auto;
+}
 }
 
 /* The chapter index is a <details> whose closed state looked like an empty card

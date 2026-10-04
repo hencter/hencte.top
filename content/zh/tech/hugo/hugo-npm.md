@@ -10,7 +10,7 @@ title = 'Hugo Npm'
 
 Hugo 提供了一个实验性功能来处理 npm 依赖，主要通过以下机制：
 
-#### `hugo mod npm pack` 命令[^2]
+#### `hugo mod npm pack` 命令[^1]
 
 - **功能**: 为项目准备和编写复合的 `package.json` 文件
 - **工作原理**:
@@ -18,7 +18,7 @@ Hugo 提供了一个实验性功能来处理 npm 依赖，主要通过以下机�
   - 这个文件作为基础依赖集的模板文件
   - 会合并依赖树中找到的所有 `package.hugo.json` 文件，选择最接近项目的版本
 
-#### `package.hugo.json` 文件[^1]
+#### `package.hugo.json` 文件[^2]
 
 - **用途**: 定义主题或模块的 npm 依赖
 - **工作流程**:
@@ -78,8 +78,8 @@ Hugo 模块系统支持：
 
 ## 参考资料
 
-[^1]: [How should I use package.hugo.json? - Hugo Community](https://discourse.gohugo.io/t/how-should-i-use-package-hugo-json/43055)
-[^2]: [hugo mod npm pack - Hugo Documentation](https://gohugo.io/commands/hugo_mod_npm_pack/)
+[^1]: [hugo mod npm pack - Hugo Documentation](https://gohugo.io/commands/hugo_mod_npm_pack/)
+[^2]: [How should I use package.hugo.json? - Hugo Community](https://discourse.gohugo.io/t/how-should-i-use-package-hugo-json/43055)
 [^3]: [js.Build - Hugo Documentation](https://gohugo.io/functions/js/build/)
 [^4]: [Proper way to set up theme with node dependencies - Hugo Community](https://discourse.gohugo.io/t/proper-way-to-set-up-theme-with-node-dependencies/27827)
 [^5]: [Use Hugo Modules - Hugo Documentation](https://gohugo.io/hugo-modules/use-modules/)

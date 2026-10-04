@@ -81,7 +81,7 @@ P(A|B) = P(B|A) × P(A) / P(B)
 
 ## 与《对赌》思维的呼应
 
-安妮·杜克的《对赌》思维与贝叶斯定理高度一致：
+安妮·杜克的《对赌》思维与贝叶斯定理高度一致[^1]：
 
 | 《对赌》概念 | 贝叶斯对应 |
 |------------|-----------|
@@ -105,3 +105,5 @@ P(A|B) = P(B|A) × P(A) / P(B)
 **贝叶斯就是：不要固执，根据事实调整判断。**
 
 如果你能养成这个习惯，你的决策质量会显著提升——不是因为每次都对，而是因为在每次新信息出现后，你能更快地接近真相。
+
+[^1]: Annie Duke, Thinking in Bets: Making Smarter Decisions When You Don't Have All the Facts（中文版《对赌》）. Penguin Random House. <https://www.penguinrandomhouse.ca/books/552885/thinking-in-bets-by-annie-duke/9780735216372>（访问 2026-10-04）

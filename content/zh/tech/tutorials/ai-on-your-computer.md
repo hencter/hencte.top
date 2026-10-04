@@ -94,7 +94,7 @@ Git 是版本管理工具，AI 工具靠它追踪文件的改动。不装的话�
 3. 下载安装：一路 Next
 
 > [!note] 版本要求
-> DeepSeek 官方文档建议 OpenCode 版本 >= v1.14.24。如果已装旧版，在终端执行 `opencode upgrade` 升级。
+> DeepSeek 官方文档建议 OpenCode 版本 >= v1.14.24[^1]。如果已装旧版，在终端执行 `opencode upgrade` 升级。
 
 ### 2.3 创建项目
 
@@ -371,7 +371,7 @@ npm config set registry https://registry.npmmirror.com
 ```
 
 > [!warning] Skill 安全
-> 网上有 9 万+ 个 Skill，约 30% 有安全风险。装之前可以让 AI 先评估：「这个 Skill 有哪些可能的风险？」
+> 网上有 9 万+ 个 Skill[^2]，但多数是干净的——一份覆盖 9.7 万个 Skill 的安全扫描显示 92.1% 完全无风险[^2]，真正出问题的集中在低门槛的第三方注册表。装之前可以让 AI 先评估：「这个 Skill 有哪些可能的风险？」
 
 ---
 
@@ -472,7 +472,7 @@ Cursor 是一款内置 AI 的代码编辑器（基于 VS Code 改的），内置
 | **Teams** | $40/用户/月 | 团队协作功能 |
 
 > [!tip] 免费版先试
-> Hobby 免费版不用信用卡就能用，有限额度但足够体验。觉得值再升级 Pro。
+> Hobby 免费版不用信用卡就能用[^3]，有限额度但足够体验。觉得值再升级 Pro。
 
 ### 8.3 和本教程其他路线的对比
 
@@ -526,3 +526,9 @@ Cursor 是一款内置 AI 的代码编辑器（基于 VS Code 改的），内置
 - [写给小白：翻墙、代理、Tun 模式到底是什么](/tech/tutorials/proxy-tun-mode-explained) — 完整版的前置条件
 - [LTSC 安装教程](/log/windows-daily) — 系统层面的配置
 - [环境配置 SOP](/tech/ai-engineering-practices) — 技术向的环境配置
+
+[^1]: DeepSeek API 文档《接入 OpenCode》（官方当前建议版本 >= v1.18.30，文章写作时为 v1.14.24）. <https://api-docs.deepseek.com/zh-cn/quick_start/agent_integrations/opencode>（访问 2026-10-04）
+
+[^2]: ClaudSkills, We scanned 97,000 Claude Code skills for security risks（2026-06-12；该扫描覆盖 97,000 个 Skill，结论是 92.1% 完全干净）. <https://claudskills.com/learn/claude-skill-security-scan/>（访问 2026-10-04）
+
+[^3]: Cursor Pricing（Hobby $0 / Individual $20 每月 / Teams $40 每用户每月）. <https://cursor.com/pricing>（访问 2026-10-04）

@@ -30,9 +30,9 @@ toc = true
 
 无论是 MCP 还是 SKILL，本质都是告诉 AI"你可以用什么工具"。
 
-MCP 是 Agent 与工具交互的标准协议，可以理解为 AI 的"USB 接口"。而 CLI 是更轻量的调用方式——直接通过命令行调用工具，省去了复杂的协议层。
+MCP 是 Agent 与工具交互的标准协议，可以理解为 AI 的"USB 接口"[^1]。而 CLI 是更轻量的调用方式——直接通过命令行调用工具，省去了复杂的协议层。
 
-A2A（Agent to Agent）协议正在成为 Agent 间通信的标准。未来多个 Agent 协同工作时，A2A 将扮演类似 HTTP 在 Web 中的角色。
+A2A（Agent to Agent）协议正在成为 Agent 间通信的标准[^2]。未来多个 Agent 协同工作时，A2A 将扮演类似 HTTP 在 Web 中的角色。
 
 ## AI 不会降低开发门槛，会拉大差距
 
@@ -44,7 +44,7 @@ OpenClaw 等 Agent 框架分五层，最核心的第二层"工具层"需要极�
 
 ## Claude Code 源码泄露的启示
 
-约 51 万行 TypeScript 代码泄露（非黑客攻击，而是 Anthropic 打包失误），其中几个关键发现：
+约 51 万行 TypeScript 代码泄露（非黑客攻击，而是 Anthropic 打包失误）[^3]，其中几个关键发现：
 
 - **Prompt 顺序影响输出质量**：先定义再解释，效果显著优于先解释再定义
 - **安全键移除不会让模型更强**，反而更不可控
@@ -67,3 +67,9 @@ OpenClaw 等 Agent 框架分五层，最核心的第二层"工具层"需要极�
 - 构建中间调度层是 AI 应用企业化的关键
 - 从免费/低价模型开始验证需求，确认后再升级
 - 控制 Token 消耗的关键是需求对齐——先拆解为细颗粒度文档，再执行
+
+[^1]: Model Context Protocol Specification（2026-07-28）. <https://modelcontextprotocol.io/specification/2026-07-28>（访问 2026-10-04）
+
+[^2]: Agent2Agent (A2A) Protocol 官网（Google 发起，已捐赠给 Linux Foundation）. <https://a2a-protocol.org/latest/>（访问 2026-10-04）
+
+[^3]: 界面新闻《Anthropic 再次遭遇源代码大规模泄露，逾 51 万行代码"裸奔"》（2026-04-01，二手转述；原始披露者 FuzzLand 研究员 Chaofan Shou，Anthropic 发言人证实属打包失误）. <https://www.stcn.com/article/detail/3720224.html>（访问 2026-10-04）

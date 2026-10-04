@@ -19,6 +19,7 @@
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-500: oklch(55.1% 0.027 264.364);
+    --color-gray-600: oklch(44.6% 0.03 256.802);
     --color-neutral-50: oklch(98.5% 0 0);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -1690,6 +1691,9 @@
   .text-gray-500 {
     color: var(--color-gray-500);
   }
+  .text-gray-600 {
+    color: var(--color-gray-600);
+  }
   .text-ink {
     color: var(--color-ink);
   }
@@ -3217,11 +3221,15 @@ summary::-webkit-details-marker {
 .dark .theme-toggle .icon-moon {
   display: block;
 }
-.novel-banner {
-  aspect-ratio: 3 / 2;
+@layer components {
+  .novel-banner {
+    aspect-ratio: 3 / 2;
+  }
 }
-.novel-cover {
-  aspect-ratio: 2 / 3;
+@layer components {
+  .novel-cover {
+    aspect-ratio: 2 / 3;
+  }
 }
 .summary-excerpt .footnote-ref {
   display: none;
@@ -3438,9 +3446,11 @@ h1, h2, h3, .card-title {
 .prose-content p, .prose p, .hero-subtitle {
   text-wrap: pretty;
 }
-.chapter-body {
-  max-width: var(--read-col, 48rem);
-  margin-inline: auto;
+@layer components {
+  .chapter-body {
+    max-width: var(--read-col, 48rem);
+    margin-inline: auto;
+  }
 }
 .chapter-index {
   padding: 0.875rem 1.25rem;

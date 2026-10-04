@@ -3,19 +3,29 @@
   Generated from the content itself so it cannot drift from what is published:
   articles come from the site's own page collection, and the protected novels
   contribute metadata only, never chapter bodies.
+
+  The facts below are site-level (author, languages, Cite/Protect policy), so the
+  root file is canonical: the /en/ /tw/ /hk/ mirrors Hugo emits from this same
+  template describe the same four-language site instead of claiming one language.
+  Do not introduce a language count here — site.Languages is deprecated in Hugo
+  v0.156.0 and this project builds with --panicOnWarning.
 */}}
 # {{ site.Title }}
 
 > {{ site.Params.description }}
-> 作者：亦幸（Hencter Lew）　语言：zh-CN（默认）、en-US　联系：hencter@linktrust.top　ORCID：https://orcid.org/0009-0007-7990-0106
+> 作者：亦幸（{{ site.Params.author }}）　联系：hencter@linktrust.top　ORCID：https://orcid.org/0009-0007-7990-0106
+> 语言（4 种）：简体中文 zh-CN（默认）{{ "/" | absURL }} ・ 英文 en-US（{{ "en/" | absURL }}）・ 繁體中文（台灣）zh-TW（{{ "tw/" | absURL }}）・ 繁體中文（香港）zh-HK（{{ "hk/" | absURL }}）
+> 技术栈：Hugo 静态站点 + Tailwind CSS v4（无客户端框架、无运行时后端）。
+> 站点级政策以根路径 {{ "llms.txt" | absURL }} 为准；`/en/`、`/tw/`、`/hk/` 下的同名文件是 Hugo 多语言镜像，描述同一站点。
 
 ## 引用与爬取政策（Cite vs Protect）
 
-- **Cite 轨（可索引 / 可引用）**：博客 `/log` `/tech` `/ancient`、品牌页（首页、关于、项目、友链、博客索引）、
-  {{ "llms.txt" | absURL }}、{{ "llms-full.txt" | absURL }}、{{ "llm.txt" | absURL }}、{{ "rss.xml" | absURL }}、{{ "sitemap.xml" | absURL }}。
-- **Protect 轨（禁止训练与抓取正文）**：`/shelf/` 及旧路径 `/novel/`。`robots.txt` Disallow；页面 `noindex, noai, noimageai`；不进入 sitemap。
-  书目元数据仅见下文，不含章节正文。
-- **引用建议**：优先使用文章 canonical URL + 标题；站点级事实以本文件与 [llm.txt]({{ "llm.txt" | absURL }}) 为准。
+- **Cite 轨（可索引、可引用）**：博客文章 `/log` `/tech` `/ancient`，以及品牌页（首页、关于、项目、友链、博客索引）。
+- **Protect 轨（禁止抓取正文、禁止模型训练）**：原创小说 `/shelf/`（旧路径 `/novel/` 永久重定向至 `/shelf/`）。
+  保护范围为四语路径 `/shelf/` `/en/shelf/` `/tw/shelf/` `/hk/shelf/` 及对应的 `/novel/` 旧路径：`robots.txt` 对全部 UA（含 AI 抓取 UA）`Disallow`；
+  页面输出 `<meta name="robots" content="noindex, noai, noimageai">`；不进入 `/sitemap.xml` 与 `/rss.xml`；章节正文不进入 `/llms-full.txt`。
+- **书目元数据豁免**：本文件与 `/llms-full.txt` 只收录作品的书目元数据（标题、作者、体裁、章节数、入口 URL），不含章节正文。
+- **引用建议**：引用文章请使用其 canonical URL 与标题；站点级事实以本文件与 [llm.txt]({{ "llm.txt" | absURL }}) 为准。
 
 ## 关键实体
 
@@ -31,7 +41,7 @@
 {{- range where site.RegularPages "Section" "" }}
 - [{{ .Title }}]({{ .Permalink }}){{ with .Description }}：{{ . }}{{ end }}
 {{- end }}
-{{- range site.Sections }}
+{{- range where site.Sections "Section" "ne" "shelf" }}
 - [{{ .Title }}]({{ .Permalink }}){{ with .Description }}：{{ . }}{{ end }}
 {{- end }}
 
@@ -45,8 +55,8 @@
 ## 原创小说（书目元数据）
 
 > **Protect 轨 / AI 训练政策**：`/shelf/`（旧路径 `/novel/` 永久重定向至此）下的小说为版权保护原创内容，仅供人类读者在线阅读。
-> robots.txt 对所有 UA（含 GPTBot / ClaudeBot 等）Disallow `/shelf/` 与 `/novel/`；章节页标记 noindex/noai；且不进入 sitemap。
-> 本节仅提供书目元数据（标题、作者、体裁、章节数、入口 URL），不含正文。
+> `robots.txt` 对全部 UA（含 GPTBot / ClaudeBot 等）`Disallow` `/shelf/` 与 `/novel/`；页面输出 `noindex, noai, noimageai`；不进入 sitemap 与 RSS。
+> 本节只提供书目元数据（标题、作者、体裁、章节数、入口 URL），不含正文。
 
 {{- $series := slice }}
 {{- range where site.RegularPages "Section" "shelf" }}
@@ -54,10 +64,10 @@
 {{- end }}
 {{- range $series }}
 ### {{ .Title }}
-- 作者: {{ site.Params.author }} (Hencter Lew)
+- 作者: {{ site.Params.author }}（亦幸）
 - 简介: {{ .Description }}
 - 入口: [{{ .Title }}]({{ .Permalink }})
-- 插图: 系列封面及章节头图，见 landing / chapter 页面；章节仍为 noindex/noai
+- 插图: 系列封面及章节头图，见 landing / chapter 页面；章节仍为 noindex, noai, noimageai
 {{- end }}
 {{- if not $series }}
 （当前语言暂无上架作品）
@@ -65,16 +75,19 @@
 
 ## 作者资产
 
-- [GitHub (@hencter)](https://github.com/hencter): 开源项目与代码
-- [ORCID](https://orcid.org/0009-0007-7990-0106): 作者持久标识
-- [Nova](https://github.com/hencter/Nova): AI 自举知识库模板
-- [通天路社区](https://tongtianlu.cn): AI 创作者互助社区
+- 主站：[hencte.top]({{ "/" | absURL }})：本文件所属站点。
+- [GitHub @hencter](https://github.com/hencter)：开源项目与代码。
+- [ORCID 0009-0007-7990-0106](https://orcid.org/0009-0007-7990-0106)：作者持久标识。
+- [Nova](https://github.com/hencter/Nova)：自举式 AI 知识库模板（Obsidian + OpenCode + Zettelkasten），GitHub template repository。
+- [通天路社区](https://tongtianlu.cn)：邀请制 AI 创作者社区。
+- 实体消歧：作者 GitHub 个人资料的 `blog` 字段登记为 https://hencter.top，与本主站 {{ "/" | absURL }} 是**不同域名**，请勿混用。
 
 ## Optional
 
-- [llms-full.txt]({{ "llms-full.txt" | absURL }}): 博客文章全文索引（不含 /shelf/ 版权小说正文）
+- [llms-full.txt]({{ "llms-full.txt" | absURL }}): Cite 轨文章全文索引（不含 `/shelf/` 版权小说正文）
 - [llm.txt]({{ "llm.txt" | absURL }}): 站点实体与 FAQ 摘要（KEY:VALUE 格式）
-- [sitemap.xml]({{ "sitemap.xml" | absURL }}): Cite 轨 URL 清单（不含 /shelf/、/novel/）
-- [robots.txt]({{ "robots.txt" | absURL }}): 爬虫策略（AI UA 与 Protect Disallow）
+- [sitemap.xml]({{ "sitemap.xml" | absURL }}): 站点 URL 清单（`sitemapindex`，聚合各语言 sitemap；不含 `/shelf/`、`/novel/`）
+- [rss.xml]({{ "rss.xml" | absURL }}): 最新文章订阅源（不含 `/shelf/`）
+- [robots.txt]({{ "robots.txt" | absURL }}): 爬虫策略（Cite 轨开放，Protect 轨对全部 UA 关闭）
 
 Last updated: {{ now | time.Format "2006-01-02" }}

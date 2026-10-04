@@ -19,3 +19,5 @@ title = '终端模拟器'
 ### 图形化配置
 
 - 打开 Windows 终端，`Ctrl` + `,` 进入终端 GUI 配置
+
+[^1]: Windows Terminal 官方文档 · Appearance profile settings：图标文件可放在 `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\RoamingState`，并用 `ms-appdata:///Roaming/` URI 引用；图标建议 32x32 的 PNG/GIF/ICO. <https://learn.microsoft.com/en-us/windows/terminal/customize-settings/profile-appearance>（访问 2026-10-04）

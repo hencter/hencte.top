@@ -8,7 +8,12 @@ packages:
 # `allowBuilds`. Leaving a dependency undecided makes `pnpm install` — and so
 # every `pnpm run`, which verifies deps first — exit non-zero.
 # @tailwindcss/oxide ships Tailwind CSS v4's native engine; @parcel/watcher backs
-# Tailwind's --watch mode.
+# Tailwind's --watch mode. esbuild + workerd come from wrangler (deploy command
+# runs `pnpm run deploy` from node_modules instead of `npx wrangler`, which used
+# to re-download wrangler on every build); both postinstalls only locate the
+# platform binary already shipped via optionalDependencies.
 allowBuilds:
   '@parcel/watcher': true
   '@tailwindcss/oxide': true
+  esbuild: true
+  workerd: true

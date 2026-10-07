@@ -2,7 +2,9 @@
   // Static-assets-only Worker: the build command runs `hugo`, which writes to
   // ./public (see .agents/CLOUDFLARE.md). `not_found_handling: "404-page"` serves the
   // generated 404.html for unknown paths. The site needs no Worker script.
-  "name": "hencte-top",
+  // Must equal the Worker name registered in the Cloudflare dashboard ("hencte"):
+  // Workers Builds fails / overrides on a mismatch and would open a PR otherwise.
+  "name": "hencte",
   "compatibility_date": "2026-10-03",
   "assets": {
     "directory": "./public",

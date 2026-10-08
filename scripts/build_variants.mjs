@@ -1,5 +1,6 @@
 /**
- * Generate the traditional-Chinese variants of the site from content/zh.
+ * Generate the traditional-Chinese variants of the site from the default
+ * language content root.
  *
  * The Astro site serves /tw and /hk from OpenCC conversions of the Simplified
  * source (src/lib/opencc.ts + connect-mirror.ts), covering the brand pages and
@@ -7,7 +8,7 @@
  * reproduces that scope with opencc-js, and converts the UI strings too so
  * i18n/tw.toml and i18n/hk.toml match i18n/zh.toml.
  *
- * Output: content/tw/**, content/hk/**, i18n/tw.toml, i18n/hk.toml — committed to the
+ * Output: content/*.tw.md, content/*.hk.md, i18n/tw.toml, i18n/hk.toml — committed to the
  * generated (git-ignored) and rebuilt by `pnpm variants` before `pnpm build`.
  *
  *   node scripts/build_variants.mjs
@@ -16,20 +17,20 @@ import { Converter } from "opencc-js";
 import {
 	readFileSync,
 	writeFileSync,
-	mkdirSync,
-	rmSync,
+	unlinkSync,
 	readdirSync,
 	statSync,
 	existsSync,
 } from "node:fs";
-import { join, relative, dirname, sep } from "node:path";
+import { join, relative, sep } from "node:path";
 
 const root = process.cwd();
-const zhDir = join(root, "content", "zh");
+const contentDir = join(root, "content");
+const generatedSuffixes = ["hk", "tw"];
 
 const variants = [
-	{ dir: "tw", to: "twp" }, // 台灣正體（含慣用詞轉換）
-	{ dir: "hk", to: "hk" }, // 香港繁體
+	{ suffix: "tw", to: "twp" }, // 台灣正體（含慣用詞轉換）
+	{ suffix: "hk", to: "hk" }, // 香港繁體
 ];
 
 /** Mirrored paths — the same shape the Astro site generates for /tw and /hk. */
@@ -49,25 +50,22 @@ function* walk(dir) {
 let total = 0;
 for (const variant of variants) {
 	const convert = Converter({ from: "cn", to: variant.to });
-	const outDir = join(root, "content", variant.dir);
-	rmSync(outDir, { recursive: true, force: true });
-
 	let count = 0;
-	for (const file of walk(zhDir)) {
-		const rel = relative(zhDir, file);
+	for (const file of walk(contentDir)) {
+		if (file.endsWith(`.${variant.suffix}.md`)) unlinkSync(file);
+	}
+	for (const file of walk(contentDir)) {
+		const rel = relative(contentDir, file);
+		if (generatedSuffixes.some((suffix) => rel.endsWith(`.${suffix}.md`))) continue;
+		if (rel.endsWith('.en.md')) continue;
 		if (!mirrored(rel)) continue;
-		const out = join(outDir, rel);
-		mkdirSync(dirname(out), { recursive: true });
+		const out = join(contentDir, rel.replace(/\.md$/, `.${variant.suffix}.md`));
 		writeFileSync(out, convert(readFileSync(file, "utf8")));
 		count += 1;
 	}
 
-	// Keep the directory in the tree so a bare `hugo` run does not fail on a
-	// missing contentDir (the .md files themselves are generated).
-	writeFileSync(join(outDir, ".gitkeep"), "");
-
 	const zhI18n = readFileSync(join(root, "i18n", "zh.toml"), "utf8");
-	writeFileSync(join(root, "i18n", `${variant.dir}.toml`), convert(zhI18n));
+	writeFileSync(join(root, "i18n", `${variant.suffix}.toml`), convert(zhI18n));
 
 	// Project copy: data/projects/zh.toml → data/projects/<variant>.toml. Same reason
 	// as the UI strings — a Traditional page must not fall back to Simplified copy —
@@ -76,15 +74,15 @@ for (const variant of variants) {
 	let projectsNote = "";
 	if (existsSync(zhProjects)) {
 		writeFileSync(
-			join(root, "data", "projects", `${variant.dir}.toml`),
+			join(root, "data", "projects", `${variant.suffix}.toml`),
 			convert(readFileSync(zhProjects, "utf8")),
 		);
-		projectsNote = `, data/projects/${variant.dir}.toml`;
+		projectsNote = `, data/projects/${variant.suffix}.toml`;
 	}
 
 	console.log(
-		`content/${variant.dir}: ${count} page(s), i18n/${variant.dir}.toml${projectsNote}`,
+		`content/*.${variant.suffix}.md: ${count} page(s), i18n/${variant.suffix}.toml${projectsNote}`,
 	);
 	total += count;
 }
-console.log(`variants: ${total} page(s) generated from content/zh`);
+console.log(`variants: ${total} page(s) generated from the default content root`);

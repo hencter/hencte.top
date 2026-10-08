@@ -23,14 +23,14 @@ pnpm check      # python scripts/verify_urls.py：用 public/ 产物做 URL/别�
 
 | 步骤 | 命令 | 产物 | 说明 |
 | --- | --- | --- | --- |
-| 繁体变体 | `pnpm variants` | `content/{tw,hk}/`、`i18n/{tw,hk}.toml`、`data/projects/{tw,hk}.toml` | 由 `content/zh` 经 OpenCC 生成，范围与 Astro 站一致（品牌页 + 书架） |
+| 繁体变体 | `pnpm variants` | `content/*.tw.md`、`content/*.hk.md`、`i18n/{tw,hk}.toml`、`data/projects/{tw,hk}.toml` | 由默认语言内容根目录经 OpenCC 生成，范围与 Astro 站一致（品牌页 + 书架） |
 | Tailwind | `pnpm css` | `assets/css/tailwind.css` | Tailwind CSS CLI 编译主题入口 `themes/kiss/assets/css/main.css` |
 | 站点 | `hugo` | `public/` | 读取前两步的产物 |
 
 `pnpm generate` 的产物**全部提交入库**（`.gitignore` 末尾的注释写明了原因）：Cloudflare Workers Builds
-只跑构建命令，面板里执行的就是纯 `hugo`，所以 `content/{tw,hk}`、`i18n/{tw,hk}.toml`、
+只跑构建命令，面板里执行的就是纯 `hugo`，所以 `content/*.tw.md`、`content/*.hk.md`、`i18n/{tw,hk}.toml`、
 `data/projects/{tw,hk}.toml` 与 `assets/css/tailwind.css` 必须保持仓库内的最新状态。
-改动 `content/zh` 的品牌页或模板类名后，先 `pnpm generate` 再提交。
+改动默认语言内容根目录的品牌页或模板类名后，先 `pnpm generate` 再提交。
 
 Tailwind 不能交给 Hugo 自己启动，原因是 Hugo 无法可靠地启动它：
 它通过解析 `node_modules/.bin/tailwindcss(.cmd)` 寻找 Node 入口，而 pnpm 的 Windows shim
@@ -48,7 +48,7 @@ Tailwind 不能交给 Hugo 自己启动，原因是 Hugo 无法可靠地启动�
 内容按**类型**分区，四语各一套目录（`tw`/`hk` 是生成物）：
 
 ```
-content/zh/                简体（默认语言 → /）
+content/                  简体（默认语言 → /）
 ├── _index.md              首页
 ├── about.md  blog.md  links.md  projects.md     品牌页（URL 冻结，见下）
 ├── pages.md               品牌手记（旧站契约 URL）
@@ -62,13 +62,13 @@ content/zh/                简体（默认语言 → /）
 ├── obsidian/              Obsidian 插件笔记
 └── shelf/                 书架 —— **每本书一个 section**
     ├── _index.md          书架首页（列书）
-    ├── sky-tax/           `_index.md`（落地页）+ `ch01.md` … `ch26.md`
-    └── ai-counter-taming/ 同上（110 章）
-content/en/                英文（手写，结构与 zh 一致）
-content/{tw,hk}/           繁體（`pnpm variants` 生成，勿手改）
+    ├── sky-tax/           `_index.md`（落地页）+ `ch01-铜级人生.md` … `ch26-星星落在哪里.md`
+    └── ai-counter-taming/ 同上（110 章；英文版用同 slug 的 `.en.md` 后缀）
+*.en.md                    英文（手写，与简体文件共用目录和 slug）
+*.{tw,hk}.md               繁體（`pnpm variants` 生成，勿手改）
 ```
 
-**每本书一个 section**（2026-10 起）：章节 URL 是 `/shelf/<book>/ch<NN>/`；旧平铺 URL
+**每本书一个 section**（2026-10 起）：章节 URL 是 `/shelf/<book>/ch<NN>-<slug>/`；旧平铺 URL
 （`/shelf/<book>-ch<NN>/`，以及更早的 `/novel/…`）由每章的 `aliases` 保留跳转。章节页由
 `layouts/shelf/page.html` 渲染，书的落地页由 `layouts/shelf/section.html` →
 `_partials/novel-landing.html` 渲染——章节用 `weight` 排序，`.CurrentSection` 天然限定在本书内。
@@ -81,14 +81,14 @@ content/{tw,hk}/           繁體（`pnpm variants` 生成，勿手改）
 
 博客文章按栏目存放（`log/`、`tech/`、`ancient/`）；URL 与迁移前的 Astro 站逐条比对过，
 旧 Hugo 路径以 `aliases` 形式保留重定向（例：`/tech/hugo/markdown/` → `/tech/hugo/markdown-cheatsheet/`）。
-`content/{tw,hk}` 由 `pnpm variants` 生成，**不要手改**（会被覆盖），只改 `content/zh`。
+`content/*.tw.md`、`content/*.hk.md` 由 `pnpm variants` 生成，**不要手改**（会被覆盖），只改无语言后缀的简体源文件。
 
 ## 脚本
 
 | 脚本 | 用途 |
 | --- | --- |
 | `scripts/migrate_astro.py` | Astro → Hugo 迁移（YAML→TOML、路径/URL 映射、aliases、短代码转义、图片、wiki 语法） |
-| `scripts/build_variants.mjs` | 由 `content/zh` 生成 `/tw`、`/hk` 繁体镜像 |
+| `scripts/build_variants.mjs` | 由 `content/` 根目录的默认语言内容生成 `/tw`、`/hk` 繁体镜像 |
 | `scripts/verify_urls.py` | 用 `public/` 产物验收：live URL 覆盖、别名、已发布页面、图片引用、小说章节归属 |
 | `scripts/asset_audit.py` | 按页面统计第三方资源加载面（MathJax/mermaid/Heti/CSS） |
 | `scripts/visual_audit.mjs` | Playwright 真机渲染审计：截图 + 控制台错误/破图/横向溢出/字号层级/暗色模式（`pnpm audit:visual`） |
@@ -114,7 +114,7 @@ python scripts/verify_urls.py                                  # 验收
    单篇文章专属的图放在文章目录里：
 
    ```
-   content/zh/tech/ai-guardrail/
+   content/tech/ai-guardrail/
      index.md            # 原 ai-guardrail.md，URL 不变
      ai-guardrail-cover.webp
    ```
@@ -137,7 +137,7 @@ python scripts/verify_urls.py                                  # 验收
 ## 短代码（`layouts/shortcodes/`）
 
 **10 个自带短代码**，共同约定：**零 JavaScript、断网可构建、只用主题已有的颜色 token**（宣纸 / 朱红 / 暖灰），因此暗色自动跟随。
-完整示例见已发布页面 <https://hencte.top/shortcodes/>（源码 `content/zh/shortcodes.md`）；那一页还列了本站可直接用的 **6 个 Hugo 内置短代码**
+完整示例见已发布页面 <https://hencte.top/shortcodes/>（源码 `content/shortcodes.md`）；那一页还列了本站可直接用的 **6 个 Hugo 内置短代码**
 （`ref`/`relref`、`highlight`、`param`、`qr` 有实况示例，`figure` 与 `youtube` 附了实测后的不用理由）。
 
 新增短代码用到**新的工具类**时，先 `pnpm css` 再构建：Tailwind 的 `@source` 覆盖了 `layouts/`，但需要重新编译 `assets/css/tailwind.css`。
@@ -235,7 +235,7 @@ Astro 侧的状态：`hencter/astro.hencte.top` 仓库描述已标注「旧版�
 
 ## 文章信源（脚注）规范
 
-对外文章里可核查的事实、数据与引文一律带脚注。约定如下（`content/zh/log`、`content/zh/tech` 等已按此执行）：
+对外文章里可核查的事实、数据与引文一律带脚注。约定如下（`content/log`、`content/tech` 等已按此执行）：
 
 - 标记紧贴断言最后一个字、标点之前：`…零售渗透率达到 61.4%[^1]。`
 - 定义块放文末（署名行之后），**每条必须单行** —— Goldmark 的脚注续行需要 4 空格缩进，折行会渲染错：
@@ -245,7 +245,7 @@ Astro 侧的状态：`hencter/astro.hencte.top` 仓库描述已标注「旧版�
 - **无法核实的断言不硬加脚注**：写进验收报告的「未核实」清单并给出弱化或删除建议；
   新找的来源必须 `web_fetch` 实际打开过（HTTP 200 且内容能支撑该断言）
 
-2026-10-04 现状：`content/zh` 与 `content/en` 的非小说共 **108 篇**逐篇评估，**24 篇**补/转脚注
+2026-10-04 现状：默认语言内容与 `.en.md` 文件中的非小说共 **108 篇**逐篇评估，**24 篇**补/转脚注
 （新增定义 50 条、正文标记 69 处），并修掉 4 处「有标记无定义」的历史缺陷
 （`ai-token-carrier-pricing`、`changxin-chip-semiconductor`、`terminal`、`arch-linux`）。
 全站标记/定义交叉校验 0 违规；渲染级验证看 `public/**` 里的 `footnote-ref`、`id="fn:*"`、`footnote-backref`。
@@ -341,7 +341,7 @@ You must now install the Tailwind CSS CLI via npm."*），`hugo mod npm pack` �
 | 生成物 | 由谁生成 | 何时重跑 |
 | --- | --- | --- |
 | `assets/css/tailwind.css` | Tailwind CLI（`pnpm css`） | 改动类名/主题样式后 |
-| `content/tw/`、`content/hk/` | OpenCC（`pnpm variants`） | 改动 `content/zh` 后 |
+| `content/*.tw.md`、`content/*.hk.md` | OpenCC（`pnpm variants`） | 改动无语言后缀的 `content/` 简体源文件后 |
 | `static/fonts/LXGWWenKai-Novel.woff2` | fontTools 子集化（一次性，**580,884 B**；许可证文本在 `assets/fonts/`） | 小说用字超出子集时 |
 
 一键刷新：`pnpm generate`（= `variants` + `css`；没有 lunar 步骤 —— `data/lunar_years.json` 是静态数据，

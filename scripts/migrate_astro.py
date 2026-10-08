@@ -10,7 +10,7 @@ alias so old links keep working.
                                      (section index pages -> <id>/_index.md)
   src/content/{zh,en}/<page>.md   -> content/<lang>/<page>.md
   src/content/novel/{zh-CN,en}/** -> content/<lang>/shelf/**.md
-  src/pages/pages.md              -> content/zh/pages.md
+  src/pages/pages.md              -> content/pages.md
 
 Brand pages (home/about/projects/links/blog/obsidian) keep their content in
 front matter: the Astro site renders it with components, the body is a
@@ -622,7 +622,7 @@ def main() -> int:
         # Preserve Hugo-only content by moving it under the default language dir.
         for rel in extra["keep"]:
             old = hugo / "content" / rel
-            new = hugo / "content/zh" / rel
+            new = hugo / "content" / rel
             if old.exists() and not new.exists():
                 new.parent.mkdir(parents=True, exist_ok=True)
                 shutil.move(str(old), str(new))
@@ -686,7 +686,7 @@ def main() -> int:
            ""]
     md += [f"- `content/{rel}`  ({entry.kind})"
            for rel, entry in sorted(extra["superseded"].values())] + [""]
-    md += ["## Hugo-only content kept (moved under content/zh/)", "",
+    md += ["## Hugo-only content kept (moved under content/)", "",
            f"{len(extra['keep'])} file(s):", ""]
     md += [f"- `content/{p}`" for p in extra["keep"]] + [""]
     md += ["## Assets", "",

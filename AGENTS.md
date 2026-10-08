@@ -52,21 +52,21 @@ $m.files | ForEach-Object {
 2. 内容里不得出现字面串 `HAHAHUGOSHORTCODE`（Hugo 短代码占位符前缀）。
 3. `hugo.toml` 里所有顶层标量必须在**第一个 `[table]` 之前**；表之后的裸键会静默并入该表。
 
-注意：`content/zh/shortcodes.md`（已发布：<https://hencte.top/shortcodes/>）里有 43 处 `{{<`/`{{%` 是**演示页的真实调用**，不是违规；
+注意：`content/shortcodes.md`（已发布：<https://hencte.top/shortcodes/>）里有 43 处 `{{<`/`{{%` 是**演示页的真实调用**，不是违规；
 那一页同时登记了 6 个 Hugo 内置短代码的实测结论（`figure` 不解析 `assets/`、`qr` 必须自闭合或配对）。
 
 ## 2. 本仓库既有的约定（别推翻，先读再改）
 
-- **`pnpm generate` 的产物提交入库，勿手改**：`content/{tw,hk}/`、`i18n/{tw,hk}.toml`、
-  `data/projects/{tw,hk}.toml`（`pnpm variants`，来自 `content/zh` 与 `data/projects/zh.toml`）
+- **`pnpm generate` 的产物提交入库，勿手改**：`content/*.tw.md`、`content/*.hk.md`、`i18n/{tw,hk}.toml`、
+  `data/projects/{tw,hk}.toml`（`pnpm variants`，来自默认语言 `content/` 根目录与 `data/projects/zh.toml`）
   与 `assets/css/tailwind.css`（`pnpm css`）。Cloudflare 面板只跑纯 `hugo`，所以它们必须是最新的。
-  改 `content/zh` 品牌页、`data/projects/zh.toml` 或模板类名后：`pnpm generate` 再提交。
+  改默认语言 `content/` 根目录品牌页、`data/projects/zh.toml` 或模板类名后：`pnpm generate` 再提交。
 - **项目数据两处，别写回 front matter**：文案在 `data/projects/<lang>.toml`（`featured` / `more`
   两个数组，条目可带 `repo`），GitHub 侧字段在 `data/projects/live.json`（`pnpm projects` 生成、
   `pnpm projects:check` 对账）。页面用 `projectSections` 开关决定渲染哪几块；两个 partial 对
   每个品牌页都会被调用，去掉开关就会到处长项目网格。
 - **content/ 里只放线上内容**：品牌页在语言根目录；文章在 `log/`、`tech/`、`ancient/`、`obsidian/`；
-  小说**每本书一个 section**（`shelf/<book>/_index.md` + `ch<NN>.md` → `/shelf/<book>/ch<NN>/`，
+  小说**每本书一个 section**（`shelf/<book>/_index.md` + `ch<NN>-<slug>.md` → `/shelf/<book>/ch<NN>-<slug>/`，
   旧平铺 URL 由每章的 `aliases` 保留）。停用/草稿旧文放仓库根的 `content-archive/`——
   **不要**用 `content/_xxx/` 存草稿：以 `_` 开头的目录 Hugo 照样构建（实测）。
 - **中英小说的相对路径必须一致**（`shelf/<book>/ch<NN>.md`）：项目没有显式 `translationKey`，

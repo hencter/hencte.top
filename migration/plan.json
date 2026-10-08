@@ -801,10 +801,10 @@
   {
    "kind": "blog",
    "source": "src/content/blog/tech/tutorials/proxy-tun-mode-explained.md",
-   "target": "content/zh/tech/tutorials/proxy-tun-mode-explained.md",
+   "target": "content/tech/tutorials/2026-07-09-proxy-tun-mode-explained.md",
    "url": "/tech/tutorials/proxy-tun-mode-explained/",
    "lang": "zh",
-   "draft": false,
+   "draft": true,
    "aliases": [],
    "skip": ""
   },
@@ -2142,8 +2142,7 @@
    "/tech/road/getting-start/",
    "/tech/road/lean/",
    "/tech/seo-geo-architecture/",
-   "/tech/tutorials/ai-on-your-computer/",
-   "/tech/tutorials/proxy-tun-mode-explained/"
+   "/tech/tutorials/ai-on-your-computer/"
   ],
   "live": [
    "/",
@@ -2218,7 +2217,6 @@
    "/tech/road/lean/",
    "/tech/seo-geo-architecture/",
    "/tech/tutorials/ai-on-your-computer/",
-   "/tech/tutorials/proxy-tun-mode-explained/",
    "/tw/",
    "/tw/about/",
    "/tw/blog/",

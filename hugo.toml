@@ -83,11 +83,11 @@ disableKinds = ['taxonomy', 'term']
 [outputs]
   home = ['HTML', 'RSS', 'llms', 'llm', 'llmsfull']
 
-# One content directory per language keeps content/zh mapped to / and the other
-# languages to their subdirectory prefixes (/en/…).
+# The default language uses the content root; other languages keep their own
+# subdirectories (/en/…, /tw/…, /hk/…).
 [languages]
   [languages.zh]
-    contentDir = 'content/zh'
+    contentDir = 'content'
     label      = '简体'
     locale     = 'zh-CN'
     weight     = 0
@@ -118,7 +118,7 @@ disableKinds = ['taxonomy', 'term']
       weight = 50
 
   [languages.en]
-    contentDir = 'content/en'
+    contentDir = 'content'
     label      = 'EN'
     locale     = 'en-US'
     weight     = 1
@@ -143,11 +143,12 @@ disableKinds = ['taxonomy', 'term']
       url    = '/en/about/#contact'
       weight = 50
 
-  # Traditional-Chinese mirrors, generated from content/zh by scripts/build_variants.mjs
+  # Traditional-Chinese mirrors, generated from the default content root by
+  # scripts/build_variants.mjs
   # (`pnpm variants`): brand pages and the shelf, matching the Astro site's
   # src/pages/{tw,hk}/ route set. Labels follow getNavLinks() there.
   [languages.tw]
-    contentDir = 'content/tw'
+    contentDir = 'content'
     # Per-language site name: without it the header logo and <title> suffix stayed
     # simplified on the traditional pages ("關於 | 亦幸小閣 | 亦幸小阁").
     title      = '亦幸小閣'
@@ -176,7 +177,7 @@ disableKinds = ['taxonomy', 'term']
       weight = 50
 
   [languages.hk]
-    contentDir = 'content/hk'
+    contentDir = 'content'
     title      = '亦幸小閣'
     label      = '繁體（香港）'
     locale     = 'zh-HK'

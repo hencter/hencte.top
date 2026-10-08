@@ -27,7 +27,7 @@ import sys
 from pathlib import Path
 
 NOVEL_SLUG = "ai-counter-taming"
-DEST_DIR = Path("content/zh/shelf")
+DEST_DIR = Path("content/shelf")
 DEFAULT_SOURCE = Path(
     os.environ.get(
         "NOVEL_VAULT",

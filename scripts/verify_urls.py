@@ -109,7 +109,7 @@ def main() -> int:
     failures += sum(len(p) for p in missing_img.values())
 
     # Novel landing pages must list their OWN chapters. Since 2026-10 each book is a
-    # section, so chapters live at /shelf/<book>/ch<NN>/ and a landing may only link
+    # section, so chapters live at /shelf/<book>/ch<NN>-<slug>/ and a landing may only link
     # its own slug. (Before that, chapters were flat /shelf/<book>-ch<NN>.md and the
     # first version of this check compared landings against each other, which listed
     # the other series' titles and no chapters at all.)
@@ -119,7 +119,7 @@ def main() -> int:
         # their canonical points at the new chapter URL, so a slug comparison would
         # flag them as "listing another series"; a real chapter never sits directly
         # under /shelf/ either.
-        if re.search(r"ch\d+$", p.parent.name):
+        if re.search(r"^ch\d+(?:-|$)", p.parent.name):
             return False
         head = p.read_text(encoding="utf-8", errors="ignore")[:800].lower()
         return not ("http-equiv" in head and "refresh" in head)
@@ -128,8 +128,8 @@ def main() -> int:
     for landing in landings:
         slug = landing.parent.name
         html = landing.read_text(encoding="utf-8", errors="ignore")
-        series = set(re.findall(r"/shelf/([\w-]+)/ch\d+/", html))
-        chapters = set(re.findall(r"/shelf/[\w-]+/ch\d+/", html))
+        series = set(re.findall(r"/shelf/([\w-]+)/ch\d+(?:-[^/]+)?/", html))
+        chapters = set(re.findall(r"/shelf/[\w-]+/ch\d+(?:-[^/]+)?/", html))
         foreign = sorted(s for s in series if s != slug)
         rel = landing.relative_to(public).as_posix()
         if foreign:

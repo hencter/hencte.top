@@ -4,7 +4,7 @@
   两种资源来源，按顺序解析：
 
     1. 页包（page bundle）——`src` 是相对文件名时，先查当前页的 `.Resources`。
-       `content/zh/tech/foo/index.md` 旁边的 `cover.webp` 就是这一页的专属资源。
+       `content/tech/foo/index.md` 旁边的 `cover.webp` 就是这一页的专属资源。
     2. 公共资源（assets/）——跨页/跨语言共用的图放 `assets/img/…`，Hugo 能读到尺寸并可发布。
        绝对路径 `/img/x.png` 会依次尝试 `img/x.png` 与 `img/x.webp`：文件已离线优化为
        WebP，因此**内容里的路径无需改动**。

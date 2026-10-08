@@ -9,6 +9,24 @@ other = 'Latest writing'
 [allArticles]
 other = 'All articles'
 
+[blogDirectory]
+other = 'Reading entry points'
+
+[continueBySection]
+other = 'Continue by section'
+
+[sectionDirectoryIntro]
+other = 'Choose a direction, then start with the section overview and its article list.'
+
+[enterSection]
+other = 'Open section'
+
+[latestArticles]
+other = 'Latest posts'
+
+[recentUpdates]
+other = 'Recent updates'
+
 [sectionLog]
 other = 'Log'
 
@@ -17,6 +35,36 @@ other = 'Tech'
 
 [sectionAncient]
 other = 'Classics'
+
+[sectionObsidian]
+other = 'Obsidian'
+
+[sectionLabel]
+other = 'Section'
+
+[subsections]
+other = 'Subsections'
+
+[browseByTopic]
+other = 'Browse by topic'
+
+[articleList]
+other = 'Article list'
+
+[articleCount]
+other = '%d posts'
+
+[articleNavigation]
+other = 'Article navigation'
+
+[previousArticle]
+other = 'Previous article'
+
+[nextArticle]
+other = 'Next article'
+
+[continueReading]
+other = 'Continue reading'
 
 [sectionPosts]
 other = 'Posts'
@@ -71,6 +119,9 @@ other = 'Skip to content'
 
 [toc]
 other = 'On this page'
+
+[tocCount]
+other = '%d sections'
 
 [toggleTheme]
 other = 'Toggle dark mode'

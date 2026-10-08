@@ -10,6 +10,24 @@ other = '最新写作'
 [allArticles]
 other = '全部文章'
 
+[blogDirectory]
+other = '阅读入口'
+
+[continueBySection]
+other = '按栏目继续'
+
+[sectionDirectoryIntro]
+other = '先选一个你关心的方向，再从栏目页的介绍和文章列表开始。'
+
+[enterSection]
+other = '进入栏目'
+
+[latestArticles]
+other = '最新文章'
+
+[recentUpdates]
+other = '最近更新'
+
 [sectionLog]
 other = '日志'
 
@@ -18,6 +36,36 @@ other = '技术'
 
 [sectionAncient]
 other = '古文'
+
+[sectionObsidian]
+other = 'Obsidian'
+
+[sectionLabel]
+other = '专栏'
+
+[subsections]
+other = '子栏目'
+
+[browseByTopic]
+other = '继续按主题浏览'
+
+[articleList]
+other = '文章列表'
+
+[articleCount]
+other = '%d 篇'
+
+[articleNavigation]
+other = '文章导航'
+
+[previousArticle]
+other = '上一篇'
+
+[nextArticle]
+other = '下一篇'
+
+[continueReading]
+other = '继续阅读'
 
 [sectionPosts]
 other = '文章'
@@ -72,6 +120,9 @@ other = '跳转到主内容'
 
 [toc]
 other = '目录'
+
+[tocCount]
+other = '%d 节'
 
 [toggleTheme]
 other = '切换深色模式'

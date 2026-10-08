@@ -33,7 +33,7 @@
 {{- if and $toc (ge (len $ids) 2) -}}
   <details class="toc mb-8 rounded-2xl border border-line bg-surface-soft p-4 text-sm{{ if $compact }} [&_li]:break-inside-avoid sm:[&_ul]:columns-2 sm:[&_ul]:gap-x-8{{ end }}">
     <summary class="cursor-pointer list-none font-bold text-ink">
-      {{ T "toc" }}<span class="ml-2 font-normal text-ink-faint">{{ len $ids }} 节</span>
+      {{ T "toc" }}<span class="ml-2 font-normal text-ink-faint">{{ printf (T "tocCount") (len $ids) }}</span>
     </summary>
     <div class="mt-3 [&_ul]:space-y-1 [&_ul_ul]:mt-1 [&_ul_ul]:pl-4 [&_li]:leading-relaxed">{{ $toc }}</div>
   </details>

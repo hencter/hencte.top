@@ -131,7 +131,9 @@
             {{ partial "img.html" (dict "src" . "page" $ "alt" ($.Params.imageAlt | default $.Title) "class" "h-auto w-full rounded-2xl" "eager" true "sizes" "(min-width: 768px) 672px, 92vw") }}
           </figure>
         {{- end }}
-        <p class="meta mb-3 uppercase tracking-[0.16em]">{{ .CurrentSection.LinkTitle }}</p>
+        {{ $sectionLabels := dict "log" "sectionLog" "tech" "sectionTech" "ancient" "sectionAncient" "obsidian" "sectionObsidian" "shelf" "shelf" }}
+        {{ $sectionLabel := index $sectionLabels .Section }}
+        <p class="meta mb-3 uppercase tracking-[0.16em]">{{ with $sectionLabel }}{{ T . }}{{ else }}{{ T "sectionLabel" }}{{ end }}</p>
         <h1>{{ .Title }}</h1>
         <div class="meta mt-4 flex flex-wrap gap-x-4 gap-y-1">
           {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
@@ -150,12 +152,12 @@
       </article>
       <footer class="reading-foot">
         {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
-        <nav class="mt-8 grid gap-3 border-t border-line pt-6 sm:grid-cols-2" aria-label="文章导航">
-          {{ with .PrevInSection }}<a href="{{ .RelPermalink }}" class="rounded-panel border border-line p-4 hover:border-line-strong"><span class="meta block">上一篇</span><span class="mt-1 block font-semibold text-ink">{{ .LinkTitle }}</span></a>{{ end }}
-          {{ with .NextInSection }}<a href="{{ .RelPermalink }}" class="rounded-panel border border-line p-4 text-right hover:border-line-strong"><span class="meta block">下一篇</span><span class="mt-1 block font-semibold text-ink">{{ .LinkTitle }}</span></a>{{ end }}
+        <nav class="mt-8 grid gap-3 border-t border-line pt-6 sm:grid-cols-2" aria-label="{{ T "articleNavigation" }}">
+          {{ with .PrevInSection }}<a href="{{ .RelPermalink }}" class="rounded-panel border border-line p-4 hover:border-line-strong"><span class="meta block">{{ T "previousArticle" }}</span><span class="mt-1 block font-semibold text-ink">{{ .LinkTitle }}</span></a>{{ end }}
+          {{ with .NextInSection }}<a href="{{ .RelPermalink }}" class="rounded-panel border border-line p-4 text-right hover:border-line-strong"><span class="meta block">{{ T "nextArticle" }}</span><span class="mt-1 block font-semibold text-ink">{{ .LinkTitle }}</span></a>{{ end }}
         </nav>
         {{ $related := first 3 (.Site.RegularPages.Related .) }}
-        {{ with $related }}<section class="mt-10" aria-labelledby="related-title"><h2 id="related-title" class="text-lg font-bold text-ink">继续阅读</h2><ul class="mt-3 space-y-3">{{ range . }}<li><a href="{{ .RelPermalink }}" class="font-medium text-ink hover:text-accent">{{ .LinkTitle }}</a><span class="meta ml-2">{{ .CurrentSection.LinkTitle }}</span></li>{{ end }}</ul></section>{{ end }}
+        {{ with $related }}<section class="mt-10" aria-labelledby="related-title"><h2 id="related-title" class="text-lg font-bold text-ink">{{ T "continueReading" }}</h2><ul class="mt-3 space-y-3">{{ range . }}{{ $relatedSection := index $sectionLabels .Section }}<li><a href="{{ .RelPermalink }}" class="font-medium text-ink hover:text-accent">{{ .LinkTitle }}</a><span class="meta ml-2">{{ with $relatedSection }}{{ T . }}{{ else }}{{ T "sectionLabel" }}{{ end }}</span></li>{{ end }}</ul></section>{{ end }}
       </footer>
     </div>
   {{ end }}

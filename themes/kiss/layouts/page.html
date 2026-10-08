@@ -136,11 +136,11 @@
         <p class="meta mb-3 uppercase tracking-[0.16em]">{{ with $sectionLabel }}{{ T . }}{{ else }}{{ T "sectionLabel" }}{{ end }}</p>
         <h1>{{ .Title }}</h1>
         <div class="meta mt-4 flex flex-wrap gap-x-4 gap-y-1">
-          {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
+          {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ partial "friendly-date.html" .Date }}</time>{{ end }}
           {{ if gt .ReadingTime 0 }}<span>{{ printf (T "readingTime") .ReadingTime }}</span>{{ end }}
         {{ with .Lastmod }}
           {{ if and (not .IsZero) (ne (.Format "2006-01-02") ($.Date.Format "2006-01-02")) }}
-            <span>{{ T "updated" }} {{ .Format "2006-01-02" }}</span>
+            <span>{{ T "updated" }} {{ partial "friendly-date.html" . }}</span>
           {{ end }}
         {{ end }}
         </div>

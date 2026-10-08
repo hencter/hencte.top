@@ -1,0 +1,8 @@
+{{- $date := . -}}
+{{- if not $date.IsZero -}}
+  {{- if eq site.Language.Lang "en" -}}
+    {{- $date.Format "January 2, 2006" -}}
+  {{- else -}}
+    {{- printf "%d年%d月%d日" $date.Year $date.Month $date.Day -}}
+  {{- end -}}
+{{- end -}}

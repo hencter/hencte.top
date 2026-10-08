@@ -32,7 +32,7 @@
       {{ range first 18 ($posts.ByDate.Reverse) }}
         {{ $section := .Section }}
         <li class="grid gap-2 py-5 sm:grid-cols-[7.5rem_7rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-4">
-          <time datetime="{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02T15:04:05-07:00" }}{{ end }}" class="meta whitespace-nowrap">{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ end }}</time>
+          <time datetime="{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02T15:04:05-07:00" }}{{ end }}" class="meta whitespace-nowrap">{{ if not .Date.IsZero }}{{ partial "friendly-date.html" .Date }}{{ end }}</time>
           <span class="text-xs font-semibold uppercase tracking-[0.12em] text-section-{{ $section }}">{{ T (index $labels $section) }}</span>
           <span><a href="{{ .RelPermalink }}" class="font-semibold text-ink hover:text-accent">{{ .LinkTitle }}</a>{{ with .Description }}<span class="mt-1 block text-sm leading-6 text-ink-muted">{{ . }}</span>{{ end }}</span>
           <span class="text-sm font-medium text-accent sm:justify-self-end">{{ T "readMore" }} →</span>

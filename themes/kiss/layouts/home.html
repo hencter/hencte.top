@@ -46,7 +46,7 @@
         {{ range $posts }}
           <li class="flex items-baseline justify-between gap-4 py-3">
             <a href="{{ .RelPermalink }}" class="font-medium text-ink hover:text-accent">{{ .LinkTitle }}</a>
-            <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="meta shrink-0">{{ .Date.Format "2006-01-02" }}</time>
+            <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="meta shrink-0">{{ partial "friendly-date.html" .Date }}</time>
           </li>
         {{ end }}
       </ul>

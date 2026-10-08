@@ -1,7 +1,7 @@
 +++
 aliases = ['/tech/geo-two-years/', '/tech/geo-two-years-en/']
 date = '2026-09-02'
-description = '16 个一手信源核查后关于 GEO（生成式引擎优化）的深度复盘：论文底子、流量数据、平台口径、证据分级、噪声经济解剖、中国市场与 315 投毒案。'
+description = '核查 16 个一手信源后的 GEO 复盘：把论文、流量数据、平台口径与 315 投毒案放在同一张证据表里，分开真实问题与营销神话。'
 draft = false
 keywords = ['GEO', '生成式引擎优化', 'AI搜索', 'SEO', '315', 'llms.txt', 'Pew']
 publishDate = '2026-09-02'

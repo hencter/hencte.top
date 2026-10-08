@@ -1,7 +1,7 @@
 +++
 aliases = ['/log/2022-04-21-first-post/', '/log/first-post-again/']
 date = '2022-04-21T22:54:36+08:00'
-description = '博客重开的第一篇文章：坦承之前因自觉水平不足而弃坑，这次决定卷土重来、坚持写作，并用几段示例标题做了简单的排版测试。'
+description = '博客重开的第一篇文章：承认曾因自觉不足而弃坑，也记录这次重新写作时做的第一轮排版测试。'
 draft = false
 publishDate = '2022-05-23T03:18:57.373Z'
 tags = ['Log', 'Error']

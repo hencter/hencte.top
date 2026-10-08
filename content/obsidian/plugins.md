@@ -1,6 +1,6 @@
 +++
 aliases = ['/obsidian/plugins/']
-description = '我在 Obsidian 中启用/安装的插件清单（核心插件为主），以及每个插件的用途说明。'
+description = '本库启用的 Obsidian 插件清单：按用途说明它们解决的问题，方便从配置现状继续选择。'
 keywords = ['Obsidian', '插件', '知识管理', 'Obsidian 工作流']
 title = 'Obsidian 插件 | 亦幸小阁'
 

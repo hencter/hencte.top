@@ -131,22 +131,32 @@
             {{ partial "img.html" (dict "src" . "page" $ "alt" ($.Params.imageAlt | default $.Title) "class" "h-auto w-full rounded-2xl" "eager" true "sizes" "(min-width: 768px) 672px, 92vw") }}
           </figure>
         {{- end }}
+        <p class="meta mb-3 uppercase tracking-[0.16em]">{{ .CurrentSection.LinkTitle }}</p>
         <h1>{{ .Title }}</h1>
-        {{ if not .Date.IsZero }}
-          <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "2006-01-02" }}</time>
-        {{ end }}
-        {{ if gt .ReadingTime 0 }}<span class="ml-3">{{ printf (T "readingTime") .ReadingTime }}</span>{{ end }}
+        <div class="meta mt-4 flex flex-wrap gap-x-4 gap-y-1">
+          {{ if not .Date.IsZero }}<time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "2006-01-02" }}</time>{{ end }}
+          {{ if gt .ReadingTime 0 }}<span>{{ printf (T "readingTime") .ReadingTime }}</span>{{ end }}
         {{ with .Lastmod }}
           {{ if and (not .IsZero) (ne (.Format "2006-01-02") ($.Date.Format "2006-01-02")) }}
-            <span class="ml-3">{{ T "updated" }} {{ .Format "2006-01-02" }}</span>
+            <span>{{ T "updated" }} {{ .Format "2006-01-02" }}</span>
           {{ end }}
         {{ end }}
+        </div>
+        {{ with .Description }}<p class="mt-5 max-w-2xl text-base leading-7 text-ink-muted">{{ . }}</p>{{ end }}
       </header>
       <aside class="toc-rail">{{ partial "toc.html" (dict "page" .) }}</aside>
       <article class="prose-content reading-prose">
         {{ .Content }}
       </article>
-      <div class="reading-foot">{{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}</div>
+      <footer class="reading-foot">
+        {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+        <nav class="mt-8 grid gap-3 border-t border-line pt-6 sm:grid-cols-2" aria-label="文章导航">
+          {{ with .PrevInSection }}<a href="{{ .RelPermalink }}" class="rounded-panel border border-line p-4 hover:border-line-strong"><span class="meta block">上一篇</span><span class="mt-1 block font-semibold text-ink">{{ .LinkTitle }}</span></a>{{ end }}
+          {{ with .NextInSection }}<a href="{{ .RelPermalink }}" class="rounded-panel border border-line p-4 text-right hover:border-line-strong"><span class="meta block">下一篇</span><span class="mt-1 block font-semibold text-ink">{{ .LinkTitle }}</span></a>{{ end }}
+        </nav>
+        {{ $related := first 3 (.Site.RegularPages.Related .) }}
+        {{ with $related }}<section class="mt-10" aria-labelledby="related-title"><h2 id="related-title" class="text-lg font-bold text-ink">继续阅读</h2><ul class="mt-3 space-y-3">{{ range . }}<li><a href="{{ .RelPermalink }}" class="font-medium text-ink hover:text-accent">{{ .LinkTitle }}</a><span class="meta ml-2">{{ .CurrentSection.LinkTitle }}</span></li>{{ end }}</ul></section>{{ end }}
+      </footer>
     </div>
   {{ end }}
 {{ end }}

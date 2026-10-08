@@ -1,52 +1,39 @@
-{{/*
-  /blog/ — article index. The Astro site builds this from src/pages/blog/index.astro
-  over every routed post; here the articles live in the log/tech/ancient sections,
-  so list them grouped by section.
-
-  Pages reach this template through `type = "blog"` (set by the migration for the
-  connect `blog` page).
-
-  @context {page} the blog index page
-*/}}
+{{/* Magazine directory: a short route map followed by a chronological reading list. */}}
 {{ define "main" }}
   {{ partial "hero.html" . }}
-
-  {{ if not .Params.hero }}
-    <header class="prose-header">
-      <h1>{{ .Title }}</h1>
-      {{ with .Description }}<p class="text-ink-muted">{{ . }}</p>{{ end }}
-    </header>
-  {{ end }}
-
-  {{ with .Content }}<article class="prose-content">{{ . }}</article>{{ end }}
-
-  {{ $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient") }}
-  {{ range $key := slice "tech" "log" "ancient" }}
-    {{ $inSection := where $posts "Section" $key }}
-    {{ with $inSection.ByDate.Reverse }}
-      {{/* One narrow column left ~430px of empty gutter on either side of a
-           1600px screen. Two balanced columns use the width while keeping each
-           line inside the readable measure; below `sm` it stays one column. */}}
-      <section class="mt-12 max-w-6xl">
-        <h2 class="text-xl font-bold text-ink">{{ T (printf "section%s" (title $key)) }}</h2>
-        {{/* A real grid, not CSS multi-column: multicol fills column by column, so
-             the two sides never lined up (row heights measured 93/113/177px). */}}
-        <ul class="mt-4 sm:grid sm:grid-cols-2 sm:gap-x-12">
-          {{ range . }}
-            <li class="border-b border-line py-3">
-              {{/* flex-wrap + nowrap keeps the date from breaking mid-value ("2026-" /
-                   "09-02") when a long title fills the measure. */}}
-              <div class="flex flex-wrap items-baseline gap-x-3">
-                <a href="{{ .RelPermalink }}" class="font-medium text-ink hover:text-accent">{{ .LinkTitle }}</a>
-                {{ if not .Date.IsZero }}
-                  <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}" class="meta whitespace-nowrap">{{ .Date.Format "2006-01-02" }}</time>
-                {{ end }}
-              </div>
-              {{ with .Description }}<p class="mt-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}
-            </li>
-          {{ end }}
-        </ul>
-      </section>
-    {{ end }}
-  {{ end }}
+  {{ with .Content }}<article class="prose-content max-w-3xl">{{ . }}</article>{{ end }}
+  <section class="mt-14" aria-labelledby="blog-sections-title">
+    <div class="flex flex-wrap items-end justify-between gap-3 border-b border-line pb-4">
+      <div><p class="meta uppercase tracking-[0.16em]">阅读入口</p><h2 id="blog-sections-title" class="mt-1 text-2xl font-bold text-ink">按栏目继续</h2></div>
+      <p class="max-w-md text-sm text-ink-muted">先选一个你关心的方向，再从栏目页的介绍和文章列表开始。</p>
+    </div>
+    <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {{ range .Params.sections }}
+        {{ $accent := "text-section-log" }}
+        {{ if eq .key "tech" }}{{ $accent = "text-section-tech" }}{{ end }}
+        {{ if eq .key "ancient" }}{{ $accent = "text-section-ancient" }}{{ end }}
+        <a href="{{ .href | relLangURL }}" class="group rounded-panel border border-line bg-surface-raised p-5 shadow-shell transition-shadow hover:shadow-md">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] {{ $accent }}">{{ .label }}</p>
+          <p class="mt-2 text-sm leading-6 text-ink-muted">{{ .description }}</p>
+          <span class="mt-4 inline-block text-sm font-semibold text-accent group-hover:underline">进入栏目 →</span>
+        </a>
+      {{ end }}
+    </div>
+  </section>
+  {{ $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient" "obsidian") }}
+  {{ $labels := dict "log" "日志" "tech" "技术" "ancient" "古文" "obsidian" "Obsidian" }}
+  <section class="mt-16 max-w-5xl" aria-labelledby="latest-articles-title">
+    <div class="border-b border-line pb-4"><p class="meta uppercase tracking-[0.16em]">{{ .Params.latestTitle | default "最新文章" }}</p><h2 id="latest-articles-title" class="mt-1 text-2xl font-bold text-ink">最近更新</h2></div>
+    <ol class="mt-2 divide-y divide-line">
+      {{ range first 18 ($posts.ByDate.Reverse) }}
+        {{ $section := .Section }}
+        <li class="grid gap-2 py-5 sm:grid-cols-[7.5rem_7rem_minmax(0,1fr)_auto] sm:items-baseline sm:gap-4">
+          <time datetime="{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02T15:04:05-07:00" }}{{ end }}" class="meta whitespace-nowrap">{{ if not .Date.IsZero }}{{ .Date.Format "2006-01-02" }}{{ end }}</time>
+          <span class="text-xs font-semibold uppercase tracking-[0.12em] text-section-{{ $section }}">{{ index $labels $section }}</span>
+          <span><a href="{{ .RelPermalink }}" class="font-semibold text-ink hover:text-accent">{{ .LinkTitle }}</a>{{ with .Description }}<span class="mt-1 block text-sm leading-6 text-ink-muted">{{ . }}</span>{{ end }}</span>
+          <span class="text-sm font-medium text-accent sm:justify-self-end">阅读 →</span>
+        </li>
+      {{ end }}
+    </ol>
+  </section>
 {{ end }}

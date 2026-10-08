@@ -4,7 +4,7 @@
   {{ with .Content }}<div class="prose-content">{{ . }}</div>{{ end }}
 
   {{ with .Params.focusSection }}
-    <section class="mt-12">
+    <section class="mt-16 border-t border-line pt-12">
       <h2 class="text-2xl font-bold text-ink">{{ .title }}</h2>
       {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
       <div class="mt-6 grid gap-6 sm:grid-cols-3">
@@ -22,7 +22,7 @@
   {{ partial "projects.html" . }}
 
   {{ with .Params.buildSection }}
-    <section class="mt-12">
+    <section class="mt-16 border-t border-line pt-12">
       <h2 class="text-2xl font-bold text-ink">{{ .title }}</h2>
       {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
       <ol class="mt-6 grid gap-4 sm:grid-cols-3">
@@ -39,7 +39,7 @@
   {{ $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient") }}
   {{ $posts = $posts.ByDate.Reverse | first 8 }}
   {{ with .Params.latestSection }}
-    <section id="hub-writing" class="mt-12">
+    <section id="hub-writing" class="mt-20 scroll-mt-24 border-t border-line pt-12">
       <h2 class="text-2xl font-bold text-ink">{{ .title }}</h2>
       {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
       <ul class="mt-6 divide-y divide-line">
@@ -59,7 +59,7 @@
   {{ $novels := slice }}
   {{ with site.GetPage "/shelf" }}{{ $novels = .Sections }}{{ end }}
   {{ with .Params.novelSection }}
-    <section id="hub-novel" class="mt-12">
+    <section id="hub-novel" class="mt-20 scroll-mt-24 border-t border-line pt-12">
       <h2 class="text-2xl font-bold text-ink">{{ .title }}</h2>
       {{ with .subtitle }}<p class="mt-1 text-ink-muted">{{ . }}</p>{{ end }}
       <div class="mt-6 grid gap-6 sm:grid-cols-2">

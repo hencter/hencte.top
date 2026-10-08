@@ -4,7 +4,7 @@
 [[featured]]
 stage = '開源模板'
 title = 'Nova · AI 自舉知識庫'
-description = '自舉式知識庫由 AI 代理持續維護：自動攝入、交叉連結、健康檢查與自動提交。每個克隆者通過初始化問答獲得「屬於自己的 Nova」。'
+description = '讓 AI 代理持續維護知識庫：自動攝入、交叉連結、健康檢查與提交；每次克隆都從初始化問答開始，生成屬於自己的 Nova。'
 result = 'GitHub 模板倉庫（Use this template），README 啟動流程約 2 分鐘；持續迭代中。'
 outcome = 'GitHub 模板倉庫（Use this template），開箱即用，快速迭代中。'
 tags = ['AI Agent', 'Obsidian', 'Zettelkasten', 'Knowledge Vault']
@@ -15,7 +15,7 @@ imageAlt = 'Nova 知識庫：墨紙底上的青瓷色筆記星圖與柔和燈火
 [[featured]]
 stage = '社群運營'
 title = '通天路 tongtianlu.cn'
-description = '邀請制中文社群（邀請碼註冊）：用 AI 做出屬於自己的第一條內容。Rust + Axum + PostgreSQL 自建論壇，社群智慧體參與內容整理與更新日誌維護。'
+description = '邀請制中文社群：用 AI 做出屬於自己的第一條內容。Rust + Axum + PostgreSQL 自建論壇，社群智慧體參與整理內容與維護更新日誌。'
 result = '含發現頁、圈子、知識庫、問答與需求看板。Slogan：每一步都算數。'
 outcome = '邀請碼註冊；人工管理 + 智慧體輔助運營。'
 tags = ['Community', 'AI Creator', 'Invite-only']
@@ -26,7 +26,7 @@ imageAlt = '通天路：夜市山路燈火向上延伸，創作者並肩而行'
 [[featured]]
 stage = '開源遊戲'
 title = '商業帝國 3D · AI 大富翁'
-description = 'Three.js 3D 大富翁：DeepSeek 對手、卡牌、行業景氣與銀行系統；支援 2–34 人同屏或回合制聯機。配套零依賴的 monopoly-engine 無頭規則引擎。'
+description = 'Three.js 3D 大富翁，加入 DeepSeek 對手、卡牌、行業景氣與銀行系統；支援 2–34 人同屏或回合制聯機，並配套零依賴規則引擎。'
 result = 'MIT 開源，持續迭代中。'
 outcome = 'MIT 開源，持續迭代。'
 tags = ['Three.js', 'AI', 'Multiplayer', 'WebSocket']
@@ -37,7 +37,7 @@ imageAlt = '商業帝國 3D：俯瞰三維城市棋盤與暖金路徑'
 [[featured]]
 stage = '外站產品'
 title = 'AI.LinkTrust.Top'
-description = '面向公開使用者的 AI 提示詞學院：按場景組織 Prompt 模板、模型對比與學習路徑。'
+description = '面向公開使用者的 AI 提示詞學院：按場景整理 Prompt 模板、模型對比與學習路徑，幫助創作者從一次嘗試走向可複用的方法。'
 result = '獨立站點長期執行，含社群入口與更新日誌。'
 outcome = '獨立站點執行中，以真實訪問驅動迭代。'
 tags = ['AI', 'Prompt Library', 'Web Product']
@@ -48,7 +48,7 @@ imageAlt = 'LinkTrust：青瓷與金色天平甄別可信連結網路'
 [[featured]]
 stage = '品牌主站'
 title = 'hencte.top'
-description = '個人品牌與部落格主站：專案、技術文章與原創小說，統一對外入口。'
+description = '個人品牌與部落格主站：把專案、技術文章與原創小說放進同一個對外入口，持續記錄從構想到上線的完整過程。'
 result = 'Hugo + Tailwind 構建，簡 / 繁（臺 · 港）/ 英四語；內容自 Astro 站遷移而來。'
 outcome = 'Hugo + Tailwind 構建，簡 / 繁（臺 · 港）/ 英四語。'
 tags = ['Hugo', 'Multilingual', 'Personal Brand']
@@ -60,7 +60,7 @@ imageAlt = '亦幸小閣：米白宣紙上硃紅「亦」印、青瓷茶盞與�
 [[featured]]
 stage = '工具/外掛'
 title = 'Obsidian 備忘錄外掛'
-description = '基於 CodeMirror 6 的 Obsidian 備忘錄外掛：快速新建與編輯，儲存後自動關聯當日日記。'
+description = '基於 CodeMirror 6 的 Obsidian 備忘錄外掛：快速新建與編輯，儲存後自動關聯當日日記，讓臨時記錄自然回到每日工作流。'
 result = '公開倉庫 hencter/obsidian-memo-plugin，支援 Windows / macOS / Linux。'
 tags = ['Obsidian', 'TypeScript', 'Plugin']
 url = 'https://github.com/hencter/obsidian-memo-plugin'

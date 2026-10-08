@@ -39,9 +39,13 @@
         {{ $project := . }}
         {{ $note := .outcome | default .result }}
         {{ $external := hasPrefix (string .url) "http" }}
-        <article class="card flex flex-col overflow-hidden">
+        <article class="card flex flex-col overflow-hidden border border-accent/20 shadow-sm">
           {{ with .image }}
             {{ partial "img.html" (dict "src" . "page" $ "alt" ($project.imageAlt | default $project.title) "class" "project-cover w-full object-cover" "sizes" "(min-width: 1280px) 360px, (min-width: 640px) 45vw, 92vw") }}
+          {{ else }}
+            <div class="project-placeholder project-cover flex items-end bg-surface-soft p-5" role="img" aria-label="{{ $project.title }}">
+              <span class="text-sm font-semibold uppercase tracking-[0.16em] text-ink-muted">{{ .stage | default "Project" }}</span>
+            </div>
           {{ end }}
           <div class="flex flex-1 flex-col p-5">
             {{ with .stage }}
@@ -51,13 +55,12 @@
                  a literal `<` that sits in front of an action (it read `<{{ … }}`
                  as text), so `<{{ $cardLevel }}>` came out as `&lt;h2`. */}}
             {{ printf `<%s class="mt-1 text-lg font-bold text-ink">` $cardLevel | safeHTML }}
-              <a href="{{ .url }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="hover:text-accent">{{ .title }}</a>
+              {{ .title }}
             {{ printf `</%s>` $cardLevel | safeHTML }}
             {{ with .description }}<p class="mt-2 flex-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}
             {{ with $note }}<p class="meta mt-3">{{ . }}</p>{{ end }}
-            {{ with .repo }}
-              <p class="meta mt-2"><a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:text-accent">{{ T "repoLink" }} ↗</a></p>
-            {{ end }}
+            <p class="mt-4"><a href="{{ .url }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="text-sm font-semibold text-accent hover:underline">{{ T "productLink" }} →</a></p>
+            {{ partial "project-github.html" . }}
             {{ with .tags }}
               <ul class="mt-4 flex flex-wrap gap-2">
                 {{ range . }}

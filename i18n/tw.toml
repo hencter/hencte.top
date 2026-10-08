@@ -105,6 +105,9 @@ other = '劇透警告'
 [repoLink]
 other = '倉庫'
 
+[productLink]
+other = '訪問產品'
+
 [novelNeedsJS]
 other = '本頁正文由瀏覽器繪製為圖片，請開啟 JavaScript。'
 

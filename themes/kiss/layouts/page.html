@@ -46,11 +46,13 @@
       </section>
     {{ end }}
 
-    {{ partial "projects.html" . }}
+    <div class="project-workbench">
+      {{ partial "projects.html" . }}
 
-    {{/* Secondary grid: `moreProjects` on a brand page (currently /projects/).
-         Renders only when the page carries the param. */}}
-    {{ partial "more-projects.html" . }}
+      {{/* Secondary grid: `moreProjects` on a brand page (currently /projects/).
+           Renders only when the page carries the param. */}}
+      {{ partial "more-projects.html" . }}
+    </div>
 
     {{ with .Params.timeline }}
       <section class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
@@ -117,6 +119,18 @@
          same collapsed <details> above the prose as before. */}}
     <div class="reading-shell">
       <header class="prose-header reading-header">
+        {{- $banner := "" -}}
+        {{- with .Params.images }}{{ $banner = index . 0 }}{{ end -}}
+        {{- if not $banner -}}
+          {{- with site.GetPage (printf "/%s" .Section) -}}
+            {{- with .Params.banner }}{{ $banner = . }}{{ end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- with $banner }}
+          <figure class="article-banner mb-6">
+            {{ partial "img.html" (dict "src" . "page" $ "alt" ($.Params.imageAlt | default $.Title) "class" "h-auto w-full rounded-2xl" "eager" true "sizes" "(min-width: 768px) 672px, 92vw") }}
+          </figure>
+        {{- end }}
         <h1>{{ .Title }}</h1>
         {{ if not .Date.IsZero }}
           <time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "2006-01-02" }}</time>

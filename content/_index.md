@@ -20,18 +20,18 @@ subtitle = '写得清楚、做得出来、持续迭代。'
 title = '我在长期做的三件事'
 
 [hero]
-actions = { primary = { label = '开始阅读', href = '#hub-writing' }, secondary = { label = '查看项目', href = '#hub-projects' } }
-badge = 'Products × Notes × Systems'
-headline = '亦幸（Hencter Lew）'
+actions = { primary = { label = '读最近写作', href = '#hub-writing' }, secondary = { label = '看现在做的项目', href = '#hub-projects' } }
+badge = '产品 · 知识 · 系统'
+headline = '把想法做成可访问的长期资产'
+current = { label = '现在在做', text = '开源 Nova、运营「通天路」，并把产品决策与技术细节持续写下来。' }
 subtitle = """
-把产品做成可访问的长期资产，用 Obsidian 沉淀知识，再公开记录真实过程。
-主要使用 TypeScript / Lua / Python；最新动作：开源 Nova，创办「通天路」。
-主站为 Hugo + Tailwind 的四语站点（简 / 繁台 / 繁港 / 英）。
+我做公开产品，用 Obsidian 让知识持续复利，再用写作把真实过程留下来。
+主要使用 TypeScript / Lua / Python；这里是项目、文章与原创小说的共同入口。
 """
 
 [latestSection]
 subtitle = '技术笔记、产品复盘，以及正在连载的原创小说。'
-title = '最新写作'
+title = '最近写作'
 
 [novelSection]
 subtitle = '《我被AI反向驯化了》—— 当AI开始反向驯化人类，谁才是那个被驯服的对象？'
@@ -39,5 +39,5 @@ title = '原创小说'
 
 [projectsSection]
 subtitle = '对外可访问、可验证、可持续迭代。'
-title = '重点项目'
+title = '现在可访问的项目'
 +++

@@ -104,6 +104,9 @@ other = 'Spoiler warning'
 [repoLink]
 other = 'Repository'
 
+[productLink]
+other = 'Visit product'
+
 [novelNeedsJS]
 other = 'This chapter is drawn as images in your browser; please enable JavaScript.'
 

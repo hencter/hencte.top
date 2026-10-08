@@ -27,14 +27,12 @@
     <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {{ range $items }}
         {{ $external := hasPrefix (string .url) "http" }}
-        <article class="card flex flex-col p-5">
+        <article class="card flex flex-col border border-line bg-surface-soft/40 p-5 shadow-none">
           <h3 class="text-lg font-bold text-ink">
             <a href="{{ .url }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="hover:text-accent">{{ .title }}</a>
           </h3>
           {{ with .description }}<p class="mt-2 flex-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}
-          {{ with .repo }}
-            <p class="meta mt-2"><a href="{{ . }}" target="_blank" rel="noopener noreferrer" class="hover:text-accent">{{ T "repoLink" }} ↗</a></p>
-          {{ end }}
+          {{ partial "project-github.html" . }}
           {{ with .tags }}
             <ul class="mt-4 flex flex-wrap gap-2">
               {{ range . }}<li class="chip">{{ . }}</li>{{ end }}

@@ -1,0 +1,29 @@
+{{/*
+  GitHub facts for a project card. The curated project copy lives in
+  data/projects/<lang>.toml; this partial joins it to data/projects/live.json
+  using the repository name, so generated facts never need to be copied into
+  translated front matter.
+
+  @context {map} one project entry from the curated data file
+*/}}
+{{- $repo := .repo | default "" -}}
+{{- if not $repo -}}
+  {{- if hasPrefix (string .url) "https://github.com/" }}{{ $repo = .url }}{{ end -}}
+{{- end -}}
+{{- if hasPrefix (string $repo) "https://github.com/" -}}
+    {{- $name := replaceRE "^https://github.com/[^/]+/" "" $repo | strings.TrimSuffix "/" | strings.ToLower -}}
+    {{- with index hugo.Data.projects.live.repos $name -}}
+    <div class="project-github-meta" aria-label="GitHub repository facts">
+      <a href="{{ $repo }}" target="_blank" rel="noopener noreferrer" class="project-github-link">
+        <span class="project-github-mark" aria-hidden="true">GH</span>
+        <span>{{ T "repoLink" }}</span>
+      </a>
+      {{ with .language }}<span class="project-fact"><span class="project-language-dot" aria-hidden="true"></span>{{ . }}</span>{{ end }}
+      {{ if isset . "stars" }}<span class="project-fact" title="GitHub stars">★ {{ int .stars }}</span>{{ end }}
+      {{ with .pushedOn }}<span class="project-fact">{{ . }}</span>{{ end }}
+      {{ with .license }}{{ if ne . "NOASSERTION" }}<span class="project-fact">{{ . }}</span>{{ end }}{{ end }}
+    </div>
+  {{ else }}
+    <p class="meta mt-2"><a href="{{ $repo }}" target="_blank" rel="noopener noreferrer" class="hover:text-accent">{{ T "repoLink" }} ↗</a></p>
+  {{ end -}}
+{{- end -}}

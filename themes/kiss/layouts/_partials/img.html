@@ -49,7 +49,7 @@
 {{- end -}}
 
 {{- if $res -}}
-<img src="{{ $res.RelPermalink }}"{{ with $res.Width }} width="{{ . }}"{{ end }}{{ with $res.Height }} height="{{ . }}"{{ end }} alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }}{{ with $class }} class="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="async"{{ with $sizes }} sizes="{{ . }}"{{ end }}>
+<img src="{{ $res.RelPermalink }}"{{ if ne $res.MediaType.SubType "svg" }}{{ with $res.Width }} width="{{ . }}"{{ end }}{{ with $res.Height }} height="{{ . }}"{{ end }}{{ end }} alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }}{{ with $class }} class="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="async"{{ with $sizes }} sizes="{{ . }}"{{ end }}>
 {{- else -}}
 <img src="{{ $src | safeURL }}" alt="{{ $alt }}"{{ with $title }} title="{{ . }}"{{ end }}{{ with $class }} class="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="async"{{ with $sizes }} sizes="{{ . }}"{{ end }}>
 {{- end -}}

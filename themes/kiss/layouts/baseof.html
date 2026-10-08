@@ -31,18 +31,18 @@
   {{ end }}
 </head>
 
-<body class="min-h-screen bg-gradient-to-br from-neutral-50 to-white text-ink antialiased flex flex-col">
+<body class="min-h-screen bg-surface text-ink antialiased flex flex-col">
   <!-- Skip link: keyboard users reached the article only after ~11 tab stops. -->
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-rose-600 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white">{{ T "skipToContent" }}</a>
   <!-- Header -->
-  <header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-line/50 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+  <header class="site-header sticky top-0 z-50 border-b border-line/70 bg-surface/90 shadow-shell backdrop-blur-md">
+    <div class="mx-auto max-w-6xl px-4 py-3 sm:px-6 lg:px-8">
       {{ partial "header.html" . }}
     </div>
   </header>
 
   <!-- Main Content -->
-  <main id="main" class="flex-1">
+  <main id="main" class="site-main flex-1">
     {{/* Article pages with a TOC get a wider container so the reading shell's right
          gutter can hold the TOC rail; everything else keeps the 6xl measure. */}}
     {{ $wide := and .IsPage (ge (len .Fragments.Identifiers) 5) }}
@@ -52,8 +52,8 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-surface-soft border-t border-line">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <footer class="site-footer border-t border-line bg-surface-soft">
+    <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       <div class="text-center text-ink-muted">
         {{ partial "footer.html" . }}
       </div>

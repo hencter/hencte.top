@@ -1,10 +1,10 @@
 {{/* The footer was two lines in every language and a 133px empty band (audit 2 #3).
      Reusing the existing main menu gives it navigation — already localised, so no
      new copy — and the site's own rhythm. */}}
-<nav aria-label="{{ T "navSiteLinks" }}">
+<nav class="site-footer__nav" aria-label="{{ T "navSiteLinks" }}">
   <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
     {{ range site.Menus.main }}
-      <li><a href="{{ .URL }}" class="text-ink-muted transition-colors hover:text-accent">{{ .Name }}</a></li>
+      <li><a href="{{ .URL }}" class="inline-flex min-h-10 items-center text-ink-muted transition-colors hover:text-accent">{{ .Name }}</a></li>
     {{ end }}
   </ul>
 </nav>

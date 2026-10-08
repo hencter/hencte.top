@@ -15,10 +15,10 @@
 {{- $page := . -}}
 {{- $sites := hugo.Sites -}}
 {{- if gt (len $sites) 1 -}}
-  <label class="lang-switch inline-flex items-center">
+  <label class="lang-switch inline-flex min-h-10 items-center">
     <span class="sr-only">{{ T "language" }}</span>
     <select
-     class="lang-select rounded-md border border-line bg-transparent px-2 py-1 text-sm text-ink-soft transition-colors hover:text-accent"
+     class="lang-select min-h-10 rounded-control border border-line bg-transparent px-2.5 py-1 text-sm text-ink-soft transition-colors hover:border-line-strong hover:text-accent"
       aria-label="{{ T "language" }}"
     >
       {{- range $sites }}

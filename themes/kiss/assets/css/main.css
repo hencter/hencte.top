@@ -74,8 +74,14 @@
    * 换皮、迁移、暗色都只动这一处。 */
   --color-surface: #fffdf8; /* 卡片 / 面板底 */
   --color-surface-soft: #f6f1e6; /* 次级底：callout、表头、chip */
+  --color-surface-raised: #ffffff; /* 浮起的交互面板 / 下拉层 */
   --color-line: #e2d8c4; /* 发丝边框 / 分隔线 */
   --color-line-strong: #cfc2a9; /* 需要更明显的边（次要按钮） */
+  --color-focus: var(--color-rose-700); /* 键盘焦点环 */
+  --color-section-log: #8a3f2d;
+  --color-section-tech: #28606b;
+  --color-section-ancient: #76552a;
+  --color-section-obsidian: #665080;
   --color-ink: #211d17; /* 标题与强调文字 */
   --color-ink-soft: #433c32; /* 次强文字 */
   --color-ink-muted: #5d5446; /* 次要文字 */
@@ -125,6 +131,15 @@
   --color-rose-500: #c04a37;
   --color-rose-600: #ad3729;
   --color-rose-700: #94301f;
+}
+
+/* Shared geometry tokens keep the shell and later page tracks on one rhythm. */
+@theme {
+  --radius-control: 0.625rem;
+  --radius-panel: 0.875rem;
+  --shadow-shell: 0 1px 2px rgb(33 29 23 / 0.04), 0 12px 32px -24px rgb(33 29 23 / 0.18);
+  --spacing-shell: 1rem;
+  --spacing-section: 2rem;
 }
 
 /* ── 原语组件 ───────────────────────────────────────────────────────────────
@@ -214,6 +229,16 @@
   }
   .prose-header p {
     @apply mt-2 text-ink-muted;
+  }
+
+  .section-banner,
+  .article-banner {
+    @apply overflow-hidden rounded-2xl border border-line bg-surface-soft shadow-sm;
+  }
+
+  .section-banner img,
+  .article-banner img {
+    @apply block aspect-[3/1] w-full object-cover;
   }
 }
 
@@ -616,8 +641,14 @@ summary::-webkit-details-marker {
   /* 语义 token 的暗色端：模板里的 bg-surface / text-ink-* 自动跟着变。 */
   --color-surface: #1c1813;
   --color-surface-soft: #221e18;
+  --color-surface-raised: #282119;
   --color-line: #302a21;
   --color-line-strong: #453c2f;
+  --color-focus: #f0a08b;
+  --color-section-log: #f09b83;
+  --color-section-tech: #83c8d0;
+  --color-section-ancient: #e4b878;
+  --color-section-obsidian: #c5a9e4;
   --color-ink: #f2ece1;
   --color-ink-soft: #ddd4c6;
   --color-ink-muted: #c4bbaa;
@@ -714,7 +745,7 @@ summary::-webkit-details-marker {
 /* One keyboard focus ring for the whole site. `:where()` keeps specificity at 0,
  * so component rules still win, and --color-accent already flips for dark mode. */
 :where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
   /* The ring used to fade in from currentColor while `transition-colors` ran. */
   transition: none;
@@ -1144,6 +1175,24 @@ h3,
  * whole picture. */
 .project-cover {
   aspect-ratio: 3 / 2;
+}
+
+/* GitHub projects get a compact facts row so the repository's current state is
+ * visible without turning the curated description into a second data source. */
+.project-github-meta {
+  @apply mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-line pt-3 text-xs text-ink-muted;
+}
+.project-github-link {
+  @apply inline-flex items-center gap-1.5 font-semibold text-ink hover:text-accent;
+}
+.project-github-mark {
+  @apply inline-flex h-5 min-w-5 items-center justify-center rounded bg-ink px-1 text-[0.6rem] font-bold leading-none text-surface;
+}
+.project-fact {
+  @apply inline-flex items-center gap-1 whitespace-nowrap;
+}
+.project-language-dot {
+  @apply h-2 w-2 rounded-full bg-accent;
 }
 
 /* ── Elegance pass, wave 8 (article rhythm on the grid) ────────────────── */

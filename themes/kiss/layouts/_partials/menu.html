@@ -10,8 +10,8 @@
 {{- $page := .page }}
 {{- $menuID := .menuID }}
 {{- $vertical := .vertical | default false }}
-{{- $listClass := cond $vertical "flex flex-col gap-2" "flex gap-6" }}
-{{- $childClass := cond $vertical "flex flex-col gap-1 ml-4 mt-1" "flex space-x-6 ml-6" }}
+{{- $listClass := cond $vertical "flex flex-col gap-1" "flex gap-4 lg:gap-6" }}
+{{- $childClass := cond $vertical "ml-4 mt-1 flex flex-col gap-1 border-l border-line pl-3" "ml-6 flex gap-4" }}
 
 {{- with index site.Menus $menuID }}
   <nav aria-label="{{ T "navMain" }}">

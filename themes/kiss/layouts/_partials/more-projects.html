@@ -27,11 +27,20 @@
     <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
       {{ range $items }}
         {{ $external := hasPrefix (string .url) "http" }}
+        {{ $repoURL := .repo | default "" }}
+        {{ if not $repoURL }}
+          {{ if hasPrefix (string .url) "https://github.com/" }}{{ $repoURL = .url }}{{ end }}
+        {{ end }}
+        {{ $productURL := .url }}
+        {{ if not $external }}{{ $productURL = relLangURL .url }}{{ end }}
         <article class="card flex flex-col border border-line bg-surface-soft/40 p-5 shadow-none">
           <h3 class="text-lg font-bold text-ink">
-            <a href="{{ .url }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="hover:text-accent">{{ .title }}</a>
+            {{ .title }}
           </h3>
           {{ with .description }}<p class="mt-2 flex-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}
+          {{ if ne (string .url) (string $repoURL) }}
+            <p class="mt-4"><a href="{{ $productURL }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="text-sm font-semibold text-accent hover:underline">{{ T "productLink" }} →</a></p>
+          {{ end }}
           {{ partial "project-github.html" . }}
           {{ with .tags }}
             <ul class="mt-4 flex flex-wrap gap-2">

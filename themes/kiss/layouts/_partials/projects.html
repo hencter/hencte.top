@@ -39,6 +39,12 @@
         {{ $project := . }}
         {{ $note := .outcome | default .result }}
         {{ $external := hasPrefix (string .url) "http" }}
+        {{ $repoURL := .repo | default "" }}
+        {{ if not $repoURL }}
+          {{ if hasPrefix (string .url) "https://github.com/" }}{{ $repoURL = .url }}{{ end }}
+        {{ end }}
+        {{ $productURL := .url }}
+        {{ if not $external }}{{ $productURL = relLangURL .url }}{{ end }}
         <article class="card flex flex-col overflow-hidden border border-accent/20 shadow-sm">
           {{ with .image }}
             {{ partial "img.html" (dict "src" . "page" $ "alt" ($project.imageAlt | default $project.title) "class" "project-cover w-full object-cover" "sizes" "(min-width: 1280px) 360px, (min-width: 640px) 45vw, 92vw") }}
@@ -59,7 +65,9 @@
             {{ printf `</%s>` $cardLevel | safeHTML }}
             {{ with .description }}<p class="mt-2 flex-1 text-sm text-ink-muted">{{ . }}</p>{{ end }}
             {{ with $note }}<p class="meta mt-3">{{ . }}</p>{{ end }}
-            <p class="mt-4"><a href="{{ .url }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="text-sm font-semibold text-accent hover:underline">{{ T "productLink" }} →</a></p>
+            {{ if ne (string .url) (string $repoURL) }}
+              <p class="mt-4"><a href="{{ $productURL }}"{{ if $external }} target="_blank" rel="noopener noreferrer"{{ end }} class="text-sm font-semibold text-accent hover:underline">{{ T "productLink" }} →</a></p>
+            {{ end }}
             {{ partial "project-github.html" . }}
             {{ with .tags }}
               <ul class="mt-4 flex flex-wrap gap-2">

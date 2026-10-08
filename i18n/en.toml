@@ -107,6 +107,12 @@ other = 'Repository'
 [productLink]
 other = 'Visit product'
 
+[githubFacts]
+other = 'GitHub repository facts'
+
+[githubStars]
+other = 'GitHub stars'
+
 [novelNeedsJS]
 other = 'This chapter is drawn as images in your browser; please enable JavaScript.'
 

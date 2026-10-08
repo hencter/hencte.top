@@ -108,6 +108,12 @@ other = '倉庫'
 [productLink]
 other = '訪問產品'
 
+[githubFacts]
+other = 'GitHub 倉庫信息'
+
+[githubStars]
+other = 'GitHub 星標數'
+
 [novelNeedsJS]
 other = '本頁正文由瀏覽器繪製為圖片，請開啓 JavaScript。'
 

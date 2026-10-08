@@ -10,4 +10,4 @@ title = 'Tamed by AI'
 [sitemap]
 disable = true
 +++
-The English edition is in progress. [Read the complete 简体中文 edition](/shelf/ai-counter-taming).
+The English edition is in progress. [Read the complete Chinese edition](/shelf/ai-counter-taming).

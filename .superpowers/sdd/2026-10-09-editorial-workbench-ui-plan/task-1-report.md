@@ -40,3 +40,24 @@ This report is the follow-up documentation commit for the Task 1 deliverable.
 - The repository contained unrelated pre-existing modifications and untracked files; they remain unstaged and uncommitted.
 - No browser screenshot pass was run; responsive/visual screenshot regression is assigned to Task 5.
 - No push was performed.
+
+## Review fix report — 2026-10-09
+
+### Fixes applied
+
+- Updated `themes/kiss/layouts/_partials/menu.html` with a shared `inline-flex min-h-10 items-center` link base applied to normal, active, parent-active, desktop, mobile, and nested menu links. Existing active border, accent, font, and `aria-current` attributes remain unchanged.
+- Added a dark-mode `--shadow-shell` override in `themes/kiss/assets/css/main.css` beside the existing dark semantic tokens, using a darker neutral shadow suitable for the dark surface.
+
+### Review-fix checks
+
+- `pnpm css` → exit 0, Tailwind CSS `v4.1.11`.
+- `hugo --ignoreCache --panicOnWarning --printPathWarnings --printI18nWarnings` → exit 0, no warnings; pages EN/TW/HK/ZH: `51/153/153/241`.
+- `pnpm build` → exit 0, no warnings; pages EN/TW/HK/ZH: `51/153/153/241`.
+- `pnpm check` → exit 0: 77/77 live URLs, 92/92 aliases, 129/129 published pages, 193/193 images, novel-track checks passed, and 552 language-switcher pages resolved.
+- `git diff --check` → no whitespace errors; the only warnings concern pre-existing CRLF normalization in unrelated content files.
+- Rendered `public/index.html` inspection confirmed every header/mobile menu anchor has `min-h-10`; the dark and light `shadow-shell` declarations are both present in source and compiled CSS.
+
+### Concerns
+
+- Unrelated pre-existing worktree changes remain untouched, unstaged, and uncommitted.
+- No push or browser screenshot pass was performed.

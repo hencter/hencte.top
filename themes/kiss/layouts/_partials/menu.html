@@ -12,11 +12,12 @@
 {{- $vertical := .vertical | default false }}
 {{- $listClass := cond $vertical "flex flex-col gap-1" "flex gap-4 lg:gap-6" }}
 {{- $childClass := cond $vertical "ml-4 mt-1 flex flex-col gap-1 border-l border-line pl-3" "ml-6 flex gap-4" }}
+{{- $linkBase := "inline-flex min-h-10 items-center" }}
 
 {{- with index site.Menus $menuID }}
   <nav aria-label="{{ T "navMain" }}">
     <ul class="{{ $listClass }}">
-      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" . "listClass" $listClass "childClass" $childClass) }}
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" . "listClass" $listClass "childClass" $childClass "linkBase" $linkBase) }}
     </ul>
   </nav>
 {{- end }}
@@ -25,14 +26,15 @@
   {{- $page := .page }}
   {{- $listClass := .listClass }}
   {{- $childClass := .childClass }}
+  {{- $linkBase := .linkBase }}
   {{- range .menuEntries }}
     {{- $attrs := dict "href" .URL }}
     {{- if $page.IsMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "text-accent font-medium border-b-2 border-accent pb-1" "aria-current" "page") }}
+      {{- $attrs = merge $attrs (dict "class" (printf "%s text-accent font-medium border-b-2 border-accent pb-1" $linkBase) "aria-current" "page") }}
     {{- else if $page.HasMenuCurrent .Menu .}}
-      {{- $attrs = merge $attrs (dict "class" "text-accent font-medium" "aria-current" "true") }}
+      {{- $attrs = merge $attrs (dict "class" (printf "%s text-accent font-medium" $linkBase) "aria-current" "true") }}
     {{- else }}
-      {{- $attrs = merge $attrs (dict "class" "text-ink-soft hover:text-accent transition-colors duration-200 font-medium") }}
+      {{- $attrs = merge $attrs (dict "class" (printf "%s text-ink-soft hover:text-accent transition-colors duration-200 font-medium" $linkBase)) }}
     {{- end }}
     {{- $name := .Name }}
     {{- with .Identifier }}
@@ -50,7 +52,7 @@
       >{{ $name }}</a>
       {{- with .Children }}
         <ul class="{{ $childClass }}">
-          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" . "listClass" $listClass "childClass" $childClass) }}
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" . "listClass" $listClass "childClass" $childClass "linkBase" $linkBase) }}
         </ul>
       {{- end }}
     </li>

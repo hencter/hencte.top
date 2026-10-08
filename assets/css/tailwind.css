@@ -3233,6 +3233,7 @@ summary::-webkit-details-marker {
   --color-surface-raised: #282119;
   --color-line: #302a21;
   --color-line-strong: #453c2f;
+  --shadow-shell: 0 1px 2px rgb(0 0 0 / 0.16), 0 12px 32px -24px rgb(0 0 0 / 0.48);
   --color-focus: #f0a08b;
   --color-section-log: #f09b83;
   --color-section-tech: #83c8d0;

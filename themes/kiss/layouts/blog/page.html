@@ -13,7 +13,10 @@
         {{ if eq .key "tech" }}{{ $accent = "text-section-tech" }}{{ end }}
         {{ if eq .key "ancient" }}{{ $accent = "text-section-ancient" }}{{ end }}
         {{ if eq .key "obsidian" }}{{ $accent = "text-section-obsidian" }}{{ end }}
-        <a href="{{ .href | relLangURL }}" class="group rounded-panel border border-line bg-surface-raised p-5 shadow-shell transition-shadow hover:shadow-md">
+        {{ $sectionPage := site.GetPage (printf "/%s" .key) }}
+        {{ $sectionHref := .href }}
+        {{ with $sectionPage }}{{ $sectionHref = .RelPermalink }}{{ end }}
+        <a href="{{ $sectionHref }}" class="group rounded-panel border border-line bg-surface-raised p-5 shadow-shell transition-shadow hover:shadow-md">
           <p class="text-xs font-semibold uppercase tracking-[0.16em] {{ $accent }}">{{ .label }}</p>
           <p class="mt-2 text-sm leading-6 text-ink-muted">{{ .description }}</p>
           <span class="mt-4 inline-block text-sm font-semibold text-accent group-hover:underline">{{ T "enterSection" }} →</span>

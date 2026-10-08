@@ -12,36 +12,42 @@
 {{ $page := . }}
 {{ $chapters := .RegularPages.ByWeight }}
 <header class="prose-header">
+  <p class="eyebrow">{{ T "fiction" }}</p>
   <h1>{{ .Title }}</h1>
-  {{ with .Description }}<p class="text-ink-muted">{{ . }}</p>{{ end }}
+  {{ with .Description }}<p class="max-w-2xl text-ink-muted">{{ . }}</p>{{ end }}
 </header>
 
-<div class="mt-6 flex flex-col gap-8 sm:flex-row">
-  {{ with .Params.cover }}
-    {{ partial "img.html" (dict "src" . "page" $page "alt" ($page.Params.imageAlt | default $page.Title) "class" "novel-cover w-full rounded-2xl object-cover sm:w-56" "eager" true "sizes" "(min-width: 640px) 224px, 100vw") }}
-  {{ end }}
-  <div class="flex-1">
+<div class="mt-8 grid gap-8 sm:grid-cols-[14rem_1fr] sm:items-start">
+  <div>
+    {{ with .Params.cover }}
+      {{ partial "img.html" (dict "src" . "page" $page "alt" ($page.Params.imageAlt | default $page.Title) "class" "novel-cover w-full rounded-2xl object-cover" "eager" true "sizes" "(min-width: 640px) 224px, 100vw") }}
+    {{ else }}
+      <div class="flex aspect-[2/3] items-center justify-center rounded-2xl bg-surface-muted text-sm text-ink-faint">{{ T "shelf" }}</div>
+    {{ end }}
+  </div>
+  <div class="min-w-0">
     {{ with .Content }}<article class="prose-content">{{ . }}</article>{{ end }}
-    {{/* A single blurb left the whole right column empty; the chapter count and
-         a start-reading link make it useful. */}}
     {{ if $chapters }}
-      <p class="meta mt-4">{{ T "chapters" }} · {{ len $chapters }}</p>
-      {{ with index $chapters 0 }}
-        <a href="{{ .RelPermalink }}" class="btn-primary mt-4">{{ T "startReading" }}</a>
-      {{ end }}
+      <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 border-y border-line py-4 text-sm">
+        <span class="text-ink-muted"><strong class="text-ink">{{ len $chapters }}</strong> · {{ T "chapters" }}</span>
+        {{ with index $chapters 0 }}<a href="{{ .RelPermalink }}" class="btn-primary">{{ T "startReading" }} <span aria-hidden="true">→</span></a>{{ end }}
+      </div>
     {{ end }}
   </div>
 </div>
 
 {{ if $chapters }}
   <section class="mt-12">
-    <h2 class="text-xl font-bold text-ink">{{ T "chapters" }}</h2>
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 class="text-xl font-bold text-ink">{{ T "chapters" }}</h2>
+      <span class="text-sm text-ink-faint">{{ len $chapters }}</span>
+    </div>
     {{/* Multi-column: 26 chapters in one column meant a very long scroll on a
          page whose only job is to get you into chapter 1. */}}
     <ol class="mt-4 grid gap-x-8 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
       {{ range $chapters }}
-        <li class="border-b border-line pb-2">
-          <a href="{{ .RelPermalink }}" class="hover:text-accent">{{ .Title }}</a>
+      <li class="border-b border-line pb-2">
+        <a href="{{ .RelPermalink }}" class="hover:text-accent">{{ .Title }}</a>
         </li>
       {{ end }}
     </ol>

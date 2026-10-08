@@ -1,10 +1,10 @@
 +++
 aliases = ['/novel/']
-description = 'Hencter’s personal library — fiction now, open tutorials next.'
+description = 'A shelf for Yi Xing’s original fiction. Read the stories in progress; open tutorials come next.'
 draft = false
 title = 'Shelf'
 
 [sitemap]
 disable = true
 +++
-Yi Xing’s shelf: original fiction today; open-source guides to come.
+Yi Xing’s shelf: original fiction first, open-source guides next.

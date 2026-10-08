@@ -40,16 +40,16 @@
     {{ end }}
   {{ end }}
 
-  <nav class="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm" aria-label="{{ T "navChapterTop" }}">
-    <span>
-      <a href="{{ $shelf.RelPermalink }}" class="text-ink-muted hover:text-accent">← {{ T "backToShelf" }}</a>
-      {{ with $shelf }}<span class="mx-2 text-ink-faint">/</span><span class="text-ink-faint">{{ .Title }}</span>{{ end }}
+  <nav class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-line pb-4 text-sm" aria-label="{{ T "navChapterTop" }}">
+    <span class="flex min-w-0 items-center gap-2">
+      <a href="{{ $shelf.RelPermalink }}" class="shrink-0 text-ink-muted hover:text-accent">← {{ T "backToShelf" }}</a>
+      {{ with $shelf }}<span class="text-ink-faint" aria-hidden="true">/</span><span class="truncate text-ink-faint">{{ .Title }}</span>{{ end }}
     </span>
     {{/* The next-chapter link used to exist only at the very end of an ~8000px
          chapter (y=8115 of 8291), so serial readers had no way forward from the
          top of the page. */}}
     {{ with $next }}
-      <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} →</a>
+      <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} <span aria-hidden="true">→</span></a>
     {{ end }}
   </nav>
 
@@ -75,8 +75,8 @@
   {{ end }}
 
   {{ if $chapters }}
-    <details class="card chapter-index mb-8">
-      <summary class="cursor-pointer font-bold text-ink">{{ T "chapters" }}</summary>
+    <details class="card chapter-index mb-10">
+      <summary class="cursor-pointer font-bold text-ink"><span>{{ T "chapters" }}</span><span class="text-sm font-normal text-ink-faint">{{ len $chapters }}</span></summary>
       <ol class="mt-4 space-y-1 text-sm">
         {{ range $chapters }}
           <li>
@@ -95,12 +95,12 @@
     <article class="prose-content">{{ .Content }}</article>
   {{ end }}
 
-  <nav class="mt-8 flex flex-wrap justify-between gap-4 text-sm" aria-label="{{ T "navChapterPager" }}">
+  <nav class="mt-12 flex flex-wrap justify-between gap-4 border-t border-line pt-6 text-sm" aria-label="{{ T "navChapterPager" }}">
     {{ with $prev }}
-      <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">← {{ T "prevChapter" }} · {{ .Title }}</a>
+      <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent"><span aria-hidden="true">←</span> {{ T "prevChapter" }} · {{ .Title }}</a>
     {{ else }}<span></span>{{ end }}
     {{ with $next }}
-      <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} · {{ .Title }} →</a>
+      <a href="{{ .RelPermalink }}" class="pager-link rounded-lg border border-line-strong px-4 py-2 hover:border-rose-300 hover:text-accent">{{ T "nextChapter" }} · {{ .Title }} <span aria-hidden="true">→</span></a>
     {{ end }}
   </nav>
   </div>

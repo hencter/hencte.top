@@ -2,7 +2,7 @@
 title: "编译过了，界面还得靠猜——Agent 驱动下我暂时放下 GPUI Kit"
 date: 2026-10-15T17:44:12+08:00
 slug: "compile-passed-ui-still-guesswork"
-draft: true
+draft: false
 tags:
   - Rust
   - GPUI

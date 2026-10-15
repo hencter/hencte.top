@@ -1,3 +1,6 @@
+# =============================================================================
+# 站点顶层标量（必须全部写在第一个 [table] 之前；表之后的裸键会静默并入该表）
+# =============================================================================
 baseURL                = 'https://hencte.top/'
 title                  = '亦幸小阁'
 defaultContentLanguage = 'zh'
@@ -7,23 +10,25 @@ enableGitInfo          = true
 enableRobotsTXT        = true
 hasCJKLanguage         = true
 summaryLength          = 200
-# The live Astro site has no tag/category routes; keeping the default taxonomies
-# would publish a set of thin term pages that are not part of the site's URL set.
+# 线上站点无 tag/category 路由；保留默认 taxonomy 会产出一批不在 URL 集合里的薄页。
 disableKinds = ['taxonomy', 'term']
 
-# Minify HTML/XML output. Hugo ≥ 0.150 removed the old top-level `minify` key
-# (it now errors: "project config minify was deprecated… use minify.minifyOutput"),
-# so the supported switch is the table below. It lives in config rather than in the
-# build command because Cloudflare Workers Builds runs plain `hugo` from its panel,
-# which this repository cannot change. Measured: HTML 21.2 MB -> 16.2 MB, same build time.
+# -----------------------------------------------------------------------------
+# 输出压缩
+# Hugo ≥ 0.150 移除了顶层 minify 键（会报 deprecated）；改用下方表项。
+# 写在配置而非构建命令里：Cloudflare Workers Builds 面板只跑裸 hugo，仓库改不了。
+# 实测：HTML 21.2 MB → 16.2 MB，构建耗时不变。
+# -----------------------------------------------------------------------------
 [minify]
   minifyOutput = true
 
+# -----------------------------------------------------------------------------
+# Markdown / 目录
+# -----------------------------------------------------------------------------
 [markup]
   [markup.goldmark]
-    # The Astro site renders raw HTML embedded in Markdown (remark allows it),
-    # and its content uses some (<mark>, <div>…). Without unsafe the HTML is
-    # stripped and replaced by a comment, so rendered output would differ.
+    # 旧 Astro 站允许 Markdown 内嵌原始 HTML（<mark>、<div> 等）；
+    # 不开 unsafe 会被剥掉并换成注释，渲染结果会不一致。
     [markup.goldmark.renderer]
       unsafe = true
     [markup.goldmark.extensions]
@@ -36,8 +41,11 @@ disableKinds = ['taxonomy', 'term']
     startLevel = 2
     endLevel   = 3
 
+# -----------------------------------------------------------------------------
+# 站点参数（模板 / SEO / 社交）
+# -----------------------------------------------------------------------------
 [params]
-  # Draw novel chapter text into <canvas> in the browser (no build-time images).
+  # 小说正文在浏览器用 <canvas> 绘制（非构建期出图）。
   novelCanvas = true
 
   applicationName      = '亦幸小阁'
@@ -45,25 +53,29 @@ disableKinds = ['taxonomy', 'term']
   bingSiteVerification = 'DE3B203227A8CF344D0A0F8E02B192CB'
   defaultImage         = '/og-image.png'
   description          = '亦幸（Hencter Lew）的公开项目与博客：产品实践、知识管理与技术写作；Hugo 构建，简 / 繁（台 · 港）/ 英四语。'
-  # The author's X handle is @hencte: GitHub reports twitter_username=hencte and
-  # the profile README links https://x.com/hencte. The previous '@hencter' value
-  # pointed twitter:site at a different account.
+  # 作者 X 账号是 @hencte（GitHub twitter_username=hencte，主页 README 链 x.com/hencte）。
+  # 旧值 @hencter 会让 twitter:site 指向别人的账号。
   twitterSite          = '@hencte'
 
-# The migration rewrote every content file, so git commit dates would report
-# "updated 2026-10-03" for the whole site. Prefer an explicit lastmod, then the
-# article's own date. https://gohugo.io/getting-started/configuration/#frontmatter
+# -----------------------------------------------------------------------------
+# front matter 日期
+# 迁移曾重写全部内容文件，若用 git 提交日会整站显示「更新于 2026-10-03」。
+# 优先显式 lastmod，其次文章自身 date。
+# https://gohugo.io/getting-started/configuration/#frontmatter
+# -----------------------------------------------------------------------------
 [frontmatter]
   lastmod = ['lastmod', 'date']
 
-# The live site serves its feed at /rss.xml, not Hugo's default /index.xml.
+# -----------------------------------------------------------------------------
+# 自定义输出格式
+# 线上订阅源路径是 /rss.xml，不是 Hugo 默认的 /index.xml。
+# -----------------------------------------------------------------------------
 [outputFormats.RSS]
   baseName  = 'rss'
   mediaType = 'application/rss+xml'
 
-# Machine-readable, citation-oriented indexes for agents. Templates live in
-# layouts/home.<format>.txt; the Cite/Protect policy they describe matches
-# layouts/robots.txt.
+# 面向代理的机器可读索引（Cite/Protect 策略与 layouts/robots.txt 一致）。
+# 模板：layouts/home.<format>.txt
 [outputFormats.llms]
   baseName       = 'llms'
   isPlainText    = true
@@ -83,16 +95,17 @@ disableKinds = ['taxonomy', 'term']
 [outputs]
   home = ['HTML', 'RSS', 'llms', 'llm', 'llmsfull']
 
-# The default language uses the content root; other languages keep their own
-# subdirectories (/en/…, /tw/…, /hk/…).
+# -----------------------------------------------------------------------------
+# 多语言
+# 默认语种用 content 根目录；其余语种各自子路径（/en/…、/tw/…、/hk/…）。
+# -----------------------------------------------------------------------------
 [languages]
   [languages.zh]
     contentDir = 'content'
     label      = '简体'
     locale     = 'zh-CN'
     weight     = 0
-    # Navigation mirrors the Astro site's getNavLinks(): the logo is home, so
-    # there is no redundant "home" entry.
+    # 导航对齐旧 Astro getNavLinks()：Logo 即首页，不再单独放「首页」项。
     [[languages.zh.menus.main]]
       name    = '项目'
       pageRef = '/projects'
@@ -111,9 +124,8 @@ disableKinds = ['taxonomy', 'term']
       weight  = 40
     [[languages.zh.menus.main]]
       name   = '联系'
-      # `#contact` on its own was dead on 524 of 536 pages: only home/about/links
-      # carry that id. Menu URLs render verbatim (see _partials/menu.html), so the
-      # target is spelled out per language rather than relying on a resolver.
+      # 裸 `#contact` 在 536 页里有 524 页无效：只有 home/about/links 带该 id。
+      # 菜单 URL 按字面输出（见 _partials/menu.html），故按语种写全路径。
       url    = '/about/#contact'
       weight = 50
 
@@ -143,14 +155,12 @@ disableKinds = ['taxonomy', 'term']
       url    = '/en/about/#contact'
       weight = 50
 
-  # Traditional-Chinese mirrors, generated from the default content root by
-  # scripts/build_variants.mjs
-  # (`pnpm variants`): brand pages and the shelf, matching the Astro site's
-  # src/pages/{tw,hk}/ route set. Labels follow getNavLinks() there.
+  # 繁体镜像由 scripts/build_variants.mjs（`pnpm variants`）从默认 content 根生成：
+  # 品牌页与 shelf，对齐旧 Astro src/pages/{tw,hk}/；标签文案同源 getNavLinks()。
   [languages.tw]
     contentDir = 'content'
-    # Per-language site name: without it the header logo and <title> suffix stayed
-    # simplified on the traditional pages ("關於 | 亦幸小閣 | 亦幸小阁").
+    # 不设语种 title 时，页头 Logo 与 <title> 后缀会残留简体
+    # （「關於 | 亦幸小閣 | 亦幸小阁」）。
     title      = '亦幸小閣'
     label      = '繁體（台灣）'
     locale     = 'zh-TW'
@@ -203,9 +213,12 @@ disableKinds = ['taxonomy', 'term']
       url    = '/hk/about/#contact'
       weight = 50
 
+# -----------------------------------------------------------------------------
+# 构建统计
+# hugo_stats.json（仓库根）供 Tailwind CLI 扫描类名清单。
+# Tailwind 由 `pnpm css` 在 Hugo 之前编译，不用 Hugo 的 css.TailwindCSS transform
+# （见 themes/kiss/assets/css/main.css 与 package.json）。
+# -----------------------------------------------------------------------------
 [build]
-  # hugo_stats.json (project root) is the class inventory scanned by the Tailwind
-  # CSS CLI. Tailwind is compiled by `pnpm css` before Hugo runs, not by Hugo's
-  # css.TailwindCSS transform — see themes/kiss/assets/css/main.css and package.json.
   [build.buildStats]
     enable = true

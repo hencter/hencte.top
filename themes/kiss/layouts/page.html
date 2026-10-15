@@ -131,7 +131,7 @@
             {{ partial "img.html" (dict "src" . "page" $ "alt" ($.Params.imageAlt | default $.Title) "class" "h-auto w-full rounded-2xl" "eager" true "sizes" "(min-width: 768px) 672px, 92vw") }}
           </figure>
         {{- end }}
-        {{ $sectionLabels := dict "log" "sectionLog" "tech" "sectionTech" "ancient" "sectionAncient" "obsidian" "sectionObsidian" "shelf" "shelf" }}
+        {{ $sectionLabels := dict "log" "sectionLog" "tech" "sectionTech" "xingzhi" "sectionXingzhi" "ancient" "sectionAncient" "obsidian" "sectionObsidian" "shelf" "shelf" }}
         {{ $sectionLabel := index $sectionLabels .Section }}
         <p class="meta mb-3 uppercase tracking-[0.16em]">{{ with $sectionLabel }}{{ T . }}{{ else }}{{ T "sectionLabel" }}{{ end }}</p>
         <h1>{{ .Title }}</h1>

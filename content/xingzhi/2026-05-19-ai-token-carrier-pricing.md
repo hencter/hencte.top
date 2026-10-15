@@ -1,9 +1,11 @@
 +++
-aliases = ['/log/ai-token-carrier-pricing/']
+aliases = ['/log/ai-token-carrier-pricing/', '/log/2026-05-19-ai-token-carrier-pricing/']
 date = '2026-05-19'
 tags = ['技术', '观点', 'AI商业化', '运营商']
 title = "当AI变成新话费：运营商正在重新定义'谁给AI定价'"
-+++> 2026-05-19 | 运营商推Token套餐不是卖新产品，是在重新定义"谁给AI定价"。
++++
+
+> 2026-05-19 | 运营商推Token套餐不是卖新产品，是在重新定义"谁给AI定价"。
 
 ---
 

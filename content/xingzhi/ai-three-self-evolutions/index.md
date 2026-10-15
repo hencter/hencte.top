@@ -1,4 +1,5 @@
 +++
+aliases = ['/tech/ai-three-self-evolutions/']
 date = '2026-05-13'
 description = '李彦宏说自我进化，OpenAI接管了耳朵，一个26M的小模型在手机上跑函数调用——这三件事讲的是同一个故事的不同章节。'
 draft = false

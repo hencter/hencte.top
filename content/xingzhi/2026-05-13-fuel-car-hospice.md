@@ -1,5 +1,5 @@
 +++
-aliases = ['/log/fuel-car-hospice/']
+aliases = ['/log/fuel-car-hospice/', '/log/2026-05-13-fuel-car-hospice/']
 date = '2026-05-13'
 description = '不是"新能源是不是趋势"，是"最后一台燃油车什么时候停售"。渗透率61.4%意味着什么，以及为什么燃油车的回光返照可能比预想的更长。'
 draft = false

@@ -33,6 +33,9 @@ other = 'Log'
 [sectionTech]
 other = 'Tech'
 
+[sectionXingzhi]
+other = 'Xingzhi'
+
 [sectionAncient]
 other = 'Classics'
 

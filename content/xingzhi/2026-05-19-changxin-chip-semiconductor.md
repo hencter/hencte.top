@@ -1,9 +1,11 @@
 +++
-aliases = ['/log/changxin-chip-semiconductor/']
+aliases = ['/log/changxin-chip-semiconductor/', '/log/2026-05-19-changxin-chip-semiconductor/']
 date = '2026-05-19'
 tags = ['技术', '观点', '半导体', '芯片']
 title = '长鑫一天赚3.6亿，三星前总裁却说要降价——中国芯片的冰火两重天'
 +++
+
+
 > 2026-05-19 | 国产芯片在狂欢，产业老兵在泼冷水。两个信号指向相反方向——信哪个？
 
 

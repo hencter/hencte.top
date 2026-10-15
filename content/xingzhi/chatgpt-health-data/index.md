@@ -1,5 +1,5 @@
 +++
-aliases = ['/chatgpt-health-data/']
+aliases = ['/chatgpt-health-data/', '/tech/chatgpt-health-data/']
 date = '2026-07-24'
 description = 'OpenAI 发布『Health in ChatGPT』：ChatGPT 可连接 Apple Health 与医疗记录。本文不聊 AI 看病，而是聚焦更新条款里真正值钱的部分——3 亿用户的健康数据入口意味着什么。'
 tags = ['技术', '观点']

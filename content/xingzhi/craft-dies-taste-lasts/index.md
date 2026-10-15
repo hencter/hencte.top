@@ -1,4 +1,5 @@
 +++
+aliases = ['/log/craft-dies-taste-lasts/']
 date = '2026-09-17'
 description = '一位算子工程师宣布把才华埋葬在昨天。这篇不评论他，解剖我们自己：手艺与判断力是两样东西，机甲驾驶员是候车室，出题人才是终局岗——但出题人的席位远少于执行者。'
 draft = false

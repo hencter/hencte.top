@@ -1,5 +1,5 @@
 +++
-aliases = ['/ai-memory-bottleneck/']
+aliases = ['/ai-memory-bottleneck/', '/tech/ai-memory-bottleneck/']
 date = '2026-07-24'
 description = '美团 LongCat 团队为 56 个虚拟人配置平均 4.3 年的 AI 助理互动测试：模型接上记忆后不少场景得分不升反降，Claude 家族主动提问场景从 46.0 跌至 27.4——AI 会做事但记不住一个会变的人。'
 tags = ['技术', '观点']

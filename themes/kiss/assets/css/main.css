@@ -80,6 +80,7 @@
   --color-focus: var(--color-rose-700); /* 键盘焦点环 */
   --color-section-log: #8a3f2d;
   --color-section-tech: #28606b;
+  --color-section-xingzhi: #6b3a4a;
   --color-section-ancient: #76552a;
   --color-section-obsidian: #665080;
   --color-ink: #211d17; /* 标题与强调文字 */
@@ -436,8 +437,8 @@
  * <details> above the prose (assets/js/site.js opens it only when it floats). */
 .reading-shell {
   --read-col: 48rem;
-  --rail-w: 12rem;
   --rail-gap: 1.75rem;
+  --rail-pad-end: clamp(1rem, 2.5vw, 2rem);
   --rail-line: #e8dfcd;
 }
 .dark .reading-shell {
@@ -469,6 +470,7 @@
     grid-row: 1 / span 3;
     align-self: stretch;
     min-width: 0;
+    width: 100%;
   }
   /* `margin-inline: auto` (base rule) turns off grid stretching, so these items
    * are sized fit-content — whose lower bound is min-content. A table with a
@@ -483,20 +485,91 @@
     grid-column: 2;
     grid-row: 3;
   }
-  /* Bare editorial rail, not the card the narrow layout uses. */
+  /* Bare editorial rail: fill the right gutter; only pad the viewport edge. */
   .toc-rail .toc {
     position: sticky;
     top: 5.5rem;
-    max-width: var(--rail-w);
-    max-height: calc(100vh - 8rem);
+    box-sizing: border-box;
+    width: 100%;
+    max-width: none;
+    max-height: calc(100vh - 7rem);
     margin: 0;
+    overflow-x: hidden;
     overflow-y: auto;
+    overscroll-behavior: contain;
     border: 0;
     border-left: 2px solid var(--rail-line);
     border-radius: 0;
     background: transparent;
-    padding: 0 0 0 1rem;
+    padding: 0.15rem var(--rail-pad-end) 1.25rem 0.9rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     transition: opacity 260ms ease, transform 360ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .toc-rail .toc::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  /* Rail is always open via site.js — read as a quiet label, not a disclosure. */
+  .toc-rail .toc > summary {
+    margin: 0 0 0.65rem;
+    padding: 0;
+    list-style: none;
+    cursor: default;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+  .toc-rail .toc > summary::-webkit-details-marker,
+  .toc-rail .toc > summary::marker {
+    display: none;
+    content: "";
+  }
+  .toc-rail .toc > summary > span {
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .toc-rail .toc > div {
+    margin-top: 0;
+  }
+  .toc-rail #TableOfContents ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .toc-rail #TableOfContents ul ul {
+    margin: 0.1rem 0 0.35rem;
+    padding-left: 0.7rem;
+    border-left: 1px solid color-mix(in srgb, var(--rail-line) 85%, transparent);
+  }
+  .toc-rail #TableOfContents li {
+    margin: 0;
+    padding: 0;
+  }
+  .toc-rail #TableOfContents a {
+    display: block;
+    padding: 0.3rem 0.15rem 0.3rem 0;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    border-radius: 0.2rem;
+    transition: color 140ms ease;
+  }
+  .toc-rail #TableOfContents a:hover,
+  .toc-rail #TableOfContents a:focus-visible {
+    color: var(--color-accent);
+  }
+  .toc-rail #TableOfContents ul ul a {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--color-ink-faint);
+  }
+  .toc-rail #TableOfContents ul ul a:hover,
+  .toc-rail #TableOfContents ul ul a:focus-visible {
+    color: var(--color-accent);
   }
   /* Reading focus: the rail fades with the header but stays in tab order, and
      hovering the gutter (or focusing into it) brings it back — the chrome itself
@@ -648,6 +721,7 @@ summary::-webkit-details-marker {
   --color-focus: #f0a08b;
   --color-section-log: #f09b83;
   --color-section-tech: #83c8d0;
+  --color-section-xingzhi: #d89aab;
   --color-section-ancient: #e4b878;
   --color-section-obsidian: #c5a9e4;
   --color-ink: #f2ece1;
@@ -696,6 +770,25 @@ summary::-webkit-details-marker {
 }
 .dark #TableOfContents a {
   color: #ddd4c6;
+}
+@media (min-width: 1280px) {
+  .dark .toc-rail .toc {
+    background: transparent;
+    border-color: transparent;
+    border-left-color: var(--rail-line);
+  }
+  .dark .toc-rail #TableOfContents a {
+    color: var(--color-ink-muted);
+  }
+  .dark .toc-rail #TableOfContents ul ul a {
+    color: var(--color-ink-faint);
+  }
+  .dark .toc-rail #TableOfContents a:hover,
+  .dark .toc-rail #TableOfContents a:focus-visible,
+  .dark .toc-rail #TableOfContents ul ul a:hover,
+  .dark .toc-rail #TableOfContents ul ul a:focus-visible {
+    color: var(--color-accent);
+  }
 }
 /* Sun/moon toggle: show the icon for the mode you would switch to. */
 .theme-toggle .icon-moon {
@@ -921,11 +1014,6 @@ select {
  * 看起来像标签条而不是卡片。已删除，改由 `note` 短代码的 type 参数在组件层决定
  * 标题语气色（默认暖墨 / 警示类朱红 / 引用类暖灰）。 */
 
-/* The audit found the rail 12rem wide with 7 links, 2 of which wrapped. */
-.reading-shell {
-  --rail-w: 15rem;
-}
-
 /* Reduced motion was not honoured at all (header still slid 360ms, the page still
  * smooth-scrolled). This is the one place `!important` is the right tool: it has
  * to win over every component rule, present and future. */
@@ -1065,10 +1153,15 @@ main section.grid > *,
   }
 }
 
-/* 1920px left 384px on each side of the 1152px list container and 576px beside the
- * 1600px article shell. One measure for both: wider for lists, tighter for reading. */
+/* List / brand pages stay on a 76rem measure at xl+. Article pages with a TOC
+ * rail use `.reading-wide` so the right gutter can actually hold the directory
+ * (76rem left only ~10rem after the 48rem column — titles wrapped every line). */
+.reading-wide {
+  width: 100%;
+  max-width: 100rem;
+}
 @media (min-width: 1536px) {
-  main > div {
+  main > div:not(.reading-wide) {
     max-width: 76rem;
   }
 }

@@ -1,5 +1,5 @@
 +++
-aliases = ['/log/whose-ai-are-you/']
+aliases = ['/log/whose-ai-are-you/', '/log/2026-05-04-whose-ai-are-you/']
 date = '2026-05-04'
 description = '五四这天，一个青年和他的AI安静地聊了三句话。关于AI主权、工具内化与青年选择。'
 draft = false

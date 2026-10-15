@@ -44,9 +44,11 @@
   <!-- Main Content -->
   <main id="main" class="site-main flex-1">
     {{/* Article pages with a TOC get a wider container so the reading shell's right
-         gutter can hold the TOC rail; everything else keeps the 6xl measure. */}}
+         gutter can hold the TOC rail; everything else keeps the 6xl measure.
+         Use `.reading-wide` (not an arbitrary Tailwind max-w) so the unlayered
+         `main > div { max-width: 76rem }` clamp in main.css cannot win the cascade. */}}
     {{ $wide := and .IsPage (ge (len .Fragments.Identifiers) 5) }}
-    <div class="mx-auto px-4 sm:px-6 lg:px-8 py-8 {{ if $wide }}max-w-[100rem]{{ else }}max-w-6xl{{ end }}">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 py-8 {{ if $wide }}reading-wide{{ else }}max-w-6xl{{ end }}">
       {{ block "main" . }}{{ end }}
     </div>
   </main>

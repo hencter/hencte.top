@@ -1,10 +1,12 @@
 {{ define "main" }}
   {{ $sectionKey := .Section }}
-  {{ $sectionLabels := dict "log" "sectionLog" "tech" "sectionTech" "ancient" "sectionAncient" "obsidian" "sectionObsidian" }}
+  {{ $sectionLabels := dict "log" "sectionLog" "tech" "sectionTech" "xingzhi" "sectionXingzhi" "ancient" "sectionAncient" "obsidian" "sectionObsidian" }}
   {{ $accent := "text-section-log" }}
   {{ $border := "section-log" }}
   {{ if eq $sectionKey "tech" }}{{ $accent = "text-section-tech" }}{{ end }}
   {{ if eq $sectionKey "tech" }}{{ $border = "section-tech" }}{{ end }}
+  {{ if eq $sectionKey "xingzhi" }}{{ $accent = "text-section-xingzhi" }}{{ end }}
+  {{ if eq $sectionKey "xingzhi" }}{{ $border = "section-xingzhi" }}{{ end }}
   {{ if eq $sectionKey "ancient" }}{{ $accent = "text-section-ancient" }}{{ end }}
   {{ if eq $sectionKey "ancient" }}{{ $border = "section-ancient" }}{{ end }}
   {{ if eq $sectionKey "obsidian" }}{{ $accent = "text-section-obsidian" }}{{ end }}

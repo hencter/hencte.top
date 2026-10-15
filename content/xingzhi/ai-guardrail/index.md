@@ -1,5 +1,5 @@
 +++
-aliases = ['/ai-guardrail/']
+aliases = ['/ai-guardrail/', '/tech/ai-guardrail/']
 date = '2026-07-24'
 description = 'TechCrunch 报道多位安全研究者抱怨 OpenAI 与 Anthropic 的安全护栏阻碍合法工作——拦住的是守规矩的人而非坏人。从漏洞挖掘者 Mark Dowd 的公开批评出发，分析过度护栏如何把研究者推向开源模型。'
 tags = ['技术', '观点']

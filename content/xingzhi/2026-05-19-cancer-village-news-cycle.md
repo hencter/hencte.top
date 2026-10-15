@@ -1,5 +1,5 @@
 +++
-aliases = ['/log/cancer-village-news-cycle/']
+aliases = ['/log/cancer-village-news-cycle/', '/log/2026-05-19-cancer-village-news-cycle/']
 date = '2026-05-19'
 tags = ['观点', '传播学', '社会']
 title = '一个村庄62人患癌，4年举报无果——这条新闻为什么今天才爆？'

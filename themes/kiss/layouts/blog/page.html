@@ -11,6 +11,7 @@
       {{ range .Params.sections }}
         {{ $accent := "text-section-log" }}
         {{ if eq .key "tech" }}{{ $accent = "text-section-tech" }}{{ end }}
+        {{ if eq .key "xingzhi" }}{{ $accent = "text-section-xingzhi" }}{{ end }}
         {{ if eq .key "ancient" }}{{ $accent = "text-section-ancient" }}{{ end }}
         {{ if eq .key "obsidian" }}{{ $accent = "text-section-obsidian" }}{{ end }}
         {{ $sectionPage := site.GetPage (printf "/%s" .key) }}
@@ -24,8 +25,8 @@
       {{ end }}
     </div>
   </section>
-  {{ $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient" "obsidian") }}
-  {{ $labels := dict "log" "sectionLog" "tech" "sectionTech" "ancient" "sectionAncient" "obsidian" "sectionObsidian" }}
+  {{ $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "xingzhi" "ancient" "obsidian") }}
+  {{ $labels := dict "log" "sectionLog" "tech" "sectionTech" "xingzhi" "sectionXingzhi" "ancient" "sectionAncient" "obsidian" "sectionObsidian" }}
   <section class="mt-16 max-w-5xl" aria-labelledby="latest-articles-title">
     <div class="border-b border-line pb-4"><p class="meta uppercase tracking-[0.16em]">{{ .Params.latestTitle | default (T "latestArticles") }}</p><h2 id="latest-articles-title" class="mt-1 text-2xl font-bold text-ink">{{ T "recentUpdates" }}</h2></div>
     <ol class="mt-2 divide-y divide-line">

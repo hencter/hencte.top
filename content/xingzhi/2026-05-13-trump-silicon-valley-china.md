@@ -1,5 +1,5 @@
 +++
-aliases = ['/log/trump-silicon-valley-china/']
+aliases = ['/log/trump-silicon-valley-china/', '/log/2026-05-13-trump-silicon-valley-china/']
 date = '2026-05-13'
 description = '一张访华随行名单，比一百份白宫政策文件更能说明中美科技关系的真实状态。马斯克、库克、黄仁勋同在一架飞机上。'
 draft = false

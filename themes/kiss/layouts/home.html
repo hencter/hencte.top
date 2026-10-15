@@ -36,7 +36,7 @@
     </section>
   {{ end }}
 
-  {{ $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "ancient") }}
+  {{ $posts := where site.RegularPages "Section" "in" (slice "log" "tech" "xingzhi" "ancient") }}
   {{ $posts = $posts.ByDate.Reverse | first 8 }}
   {{ with .Params.latestSection }}
     <section id="hub-writing" class="mt-20 scroll-mt-24 border-t border-line pt-12">

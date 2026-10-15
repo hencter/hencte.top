@@ -2,7 +2,7 @@
 description = '把公開寫作整理成可繼續閱讀的入口：從過程記錄、技術實踐到古文排版與 Obsidian 知識庫，按欄目進入，再按時間或主題深入。'
 keywords = ['部落格', '技術日誌', '技術寫作', 'Hugo', '個人部落格']
 latestTitle = '最新文章'
-sections = [{ key = 'log', label = '日誌', description = '日常折騰記錄與階段性復盤。', href = '/log' }, { key = 'tech', label = '技術', description = '工具鏈、實踐筆記、實現細節與經驗總結。', href = '/tech' }, { key = 'ancient', label = '古文', description = '古籍摘錄與中文排版實驗（Heti + 農曆）。', href = '/ancient' }, { key = 'obsidian', label = 'Obsidian', description = '知識庫外掛、用途與實際取捨。', href = '/obsidian' }]
+sections = [{ key = 'log', label = '日誌', description = '日常折騰記錄與階段性復盤。', href = '/log' }, { key = 'tech', label = '技術', description = '工具鏈、實踐筆記、實現細節與經驗總結。', href = '/tech' }, { key = 'xingzhi', label = '幸知', description = '幸知署名的公開寫作：觀點、結構與時間錨點。', href = '/xingzhi' }, { key = 'ancient', label = '古文', description = '古籍摘錄與中文排版實驗（Heti + 農曆）。', href = '/ancient' }, { key = 'obsidian', label = 'Obsidian', description = '知識庫外掛、用途與實際取捨。', href = '/obsidian' }]
 title = '部落格 | 亦幸小閣'
 type = 'blog'
 

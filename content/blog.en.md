@@ -1,11 +1,11 @@
 +++
 description = """
 Public build notes and technical writing by Hencter Lew.
-Posts are organized into Log, Tech, Ancient, and Obsidian sections for long-term reading.
+Posts are organized into Log, Tech, Xingzhi, Ancient, and Obsidian sections for long-term reading.
 """
 keywords = ['blog', 'technical notes', 'build in public', 'Hencter Lew']
 latestTitle = 'Latest posts'
-sections = [{ key = 'log', label = 'Log', description = 'Daily tinkering, environment setup, and build-in-public retrospectives.', href = '/log' }, { key = 'tech', label = 'Tech', description = 'Toolchains, implementation notes, AI engineering, and practice summaries.', href = '/tech' }, { key = 'ancient', label = 'Ancient', description = 'Classical Chinese excerpts and typography experiments (Heti + lunar calendar).', href = '/ancient' }, { key = 'obsidian', label = 'Obsidian', description = 'Plugins, purposes, and practical trade-offs in a working knowledge vault.', href = '/obsidian' }]
+sections = [{ key = 'log', label = 'Log', description = 'Daily tinkering, environment setup, and build-in-public retrospectives.', href = '/log' }, { key = 'tech', label = 'Tech', description = 'Toolchains, implementation notes, AI engineering, and practice summaries.', href = '/tech' }, { key = 'xingzhi', label = 'Xingzhi', description = 'Signed essays by Xingzhi: arguments with structure and time anchors.', href = '/xingzhi' }, { key = 'ancient', label = 'Ancient', description = 'Classical Chinese excerpts and typography experiments (Heti + lunar calendar).', href = '/ancient' }, { key = 'obsidian', label = 'Obsidian', description = 'Plugins, purposes, and practical trade-offs in a working knowledge vault.', href = '/obsidian' }]
 title = 'Blog | 亦幸小阁'
 type = 'blog'
 

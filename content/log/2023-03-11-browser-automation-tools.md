@@ -2,54 +2,63 @@
 aliases = ['/log/2023-03-11-browser-automation-tools/', '/log/browser-automation-tools/']
 categories = ['自动化', '测试']
 date = '2023-03-11T23:44:25+08:00'
-description = '对比 Selenium、Playwright、Cypress 三款浏览器自动化测试工具的特点与适用场景，讲解 Chrome 与 ChromeDriver 的安装及版本对应要点，并附 Python Selenium 打开网页、定位元素、模拟输入的示例代码。'
+description = 'Selenium、Playwright 与 Cypress 的定位比较；更新 Selenium Manager 驱动管理说明，并提供带显式等待与资源释放的 Python 示例。'
 draft = false
-tags = ['Test', 'End to End Testing']
-title = '浏览器自动化测试工具和库'
+lastmod = '2026-11-23T00:00:00+08:00'
+tags = ['Test', 'End to End Testing', 'Selenium', 'Playwright']
+title = '浏览器自动化测试：Selenium、Playwright 与 Cypress 怎么选'
 +++
-自动化测试是软件开发的一个重要环节，可以提高软件的质量和开发效率。而浏览器自动化测试是其中一个重要的领域，可以用于测试网站的前端功能和用户体验。Selenium 是一个流行的浏览器自动化测试库，它支持多种编程语言，包括 Python。
 
-除了 Selenium，还有一些类似的工具，例如 Playwright[^Playwright] 和 Cypress[^Cypress]。它们都提供了比 Selenium 更加现代化和高效的 API 和功能。
+> **修订说明（2026 年 11 月）**：本文最初写于 2023 年。旧版教程强调手动下载与浏览器版本匹配的 ChromeDriver；Selenium 4.6 及更新版本内置 Selenium Manager，普通场景下可自动管理匹配的驱动。因此更新了安装步骤和示例，但保留当初的三款工具比较。
 
-Playwright 是由 Microsoft 开发的一个跨浏览器自动化测试库，它支持 Chrome、Firefox 和 Safari 等多种浏览器，并提供了比 Selenium 更加简洁和高效的 API，支持异步操作和多个浏览器实例的管理。
+浏览器自动化能帮助我们验证登录、表单、页面导航等用户操作；它也可以用于重复性的浏览器任务。不过，能打开网页不等于已经有了可靠的端到端测试：断言、稳定的元素定位、等待条件和测试环境同样重要。
 
-Cypress 是另一个流行的浏览器自动化测试工具，它提供了一套完整的测试框架，可以用于测试 Web 应用的前端功能和性能。它支持实时重新加载和调试，并提供了一套易于使用的 API 和命令行界面。
+## 三款工具的定位
 
-在使用 Selenium 进行浏览器自动化测试之前，需要安装 Chrome[^Chrome] 浏览器和 ChromeDriver。ChromeDriver 是一个开源的 WebDriver 实现，可以用于控制 Chrome 浏览器进行自动化测试。要保证 Chrome 浏览器和 ChromeDriver 版本相对应，可以通过 Chrome 浏览器的版本信息来确定需要下载的 ChromeDriver[^Chromedriver] 版本。
+| 工具 | 更适合的场景 | 需要注意 |
+| --- | --- | --- |
+| [Selenium](https://www.selenium.dev/documentation/) | 跨语言的 WebDriver 自动化、现有测试框架集成 | 测试组织、等待和断言通常需要自行组合 |
+| [Playwright](https://playwright.dev/) | 多浏览器端到端测试、自动等待、追踪与调试 | 要根据项目选用对应的语言绑定和测试运行器 |
+| [Cypress](https://docs.cypress.io/) | 以前端开发工作流为核心的端到端与组件测试 | 运行模式及跨浏览器覆盖应按项目需求核对 |
 
-在 Python 中使用 Selenium，可以通过 pip[^Config_PyPI] 安装 `selenium` 包。然后可以使用 `webdriver` 模块创建 `WebDriver` 对象，指定要使用的浏览器驱动（例如 ChromeDriver），并调用 `get` 方法打开指定的网址。使用 `find_element` 方法可以查找页面中的元素，然后使用 `send_keys` 方法输入内容并模拟按键操作，例如回车键，参考下方[简单示例](#selenium-示例)。
+这里不按“谁最先进”排序。已有 Java/Python 自动化体系，可以先看 Selenium；新建 Web 端到端测试项目，可以重点评估 Playwright 和 Cypress，比较调试体验、CI 成本与团队熟悉程度。
 
-总之，浏览器自动化测试是一个重要的测试领域，Selenium 是一个流行的测试库，而 Playwright 和 Cypress 等工具则提供了更加现代化和高效的 API 和功能，可以根据具体的需求选择使用。
+## 使用 Selenium 运行一个最小示例
 
-Selenium 官方文档：<https://www.selenium.dev/zh-cn/documentation/>
+准备 Python 环境和可用的 Chrome 浏览器，然后安装近期版本的 Selenium：
 
-## 安装 Chrome 和 ChromeDriver
+```bash
+python -m pip install --upgrade selenium
+```
 
-[^Chrome]: Chrome 下载地址 <https://www.google.cn/chrome/index.html>
-
-[^Chromedriver]: Chromedriver 下载地址（注意：最好与你的 Chrome 主机对应）<https://chromedriver.storage.googleapis.com/index.html>
-
-[^Playwright]: Playwright 官网 https://playwright.dev/
-
-[^Cypress]: Cypress 官网 https://www.cypress.io/
-
-Chrome 与 ChromeDriver 版本要对应
-[^Config_PyPI]: https://mirror.tuna.tsinghua.edu.cn/help/pypi/
-
-## Selenium 示例
+以下示例访问公开的演示页面，等待标题出现并检查页面内容：
 
 ```python
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
-# 创建 WebDriver 对象，指明相应浏览器驱动，这里使用 chromedriver
-# wd = webdriver.Chrome(r'D:\DevEnv\WebDrivers\chromedriver\chromedriver.exe')
-wd = webdriver.Chrome()
+with webdriver.Chrome() as driver:
+    driver.get("https://example.com/")
 
-# 调用WebDriver 对象的get方法 可以让浏览器打开指定网址
-wd.get('https://www.baidu.com')
-
-element = wd.find_element(By.ID, 'kw')
-
-element.send_keys("你好\n")
+    heading = WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.CSS_SELECTOR, "h1"))
+    )
+    assert heading.text == "Example Domain"
 ```
+
+`with` 结束时会关闭 WebDriver 会话，避免测试运行后留下浏览器进程。显式等待也比随意加入固定的 `sleep` 更适合处理页面加载的时间差。
+
+Selenium Manager 在一般联网环境中会查找并管理所需的驱动；离线环境、指定浏览器版本或公司内网可能需要额外配置。**因此不再把“手动下载 ChromeDriver”作为所有人的必做步骤**。
+
+## 写成真实测试前，还要考虑什么？
+
+- **稳定的定位方式**：尽量选择明确的 ID 或测试专用属性，避免依赖易变的页面结构。
+- **有意义的断言**：不只检查网页能打开，还要验证操作后的预期状态。
+- **等待条件**：等待元素出现、可点击或状态变化，不要用任意秒数掩盖竞态。
+- **可重复环境**：尽可能使用受控测试数据，减少第三方页面改版带来的失败。
+
+这段代码是一个入门冒烟测试，不是完整的测试框架；实际业务应在测试项目中运行并收集失败信息。
+
+参考资料：[Selenium Manager](https://www.selenium.dev/documentation/selenium_manager/) · [Selenium Python API](https://www.selenium.dev/selenium/docs/api/py/) · [Playwright](https://playwright.dev/) · [Cypress](https://docs.cypress.io/)
